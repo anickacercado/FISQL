@@ -15,62 +15,62 @@ public class analizador implements analizadorConstants {
 
   final public void LISTA_SENTENCIA_GLOBAL() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case T_CREAR:{
+    case TOKEN_CREAR:{
       CREAR();
       break;
       }
-    case T_USAR:{
+    case TOKEN_USAR:{
       USAR_BD();
       break;
       }
-    case T_ALTERAR:{
+    case TOKEN_ALTERAR:{
       ALTERAR();
       break;
       }
-    case T_ELIMINAR:{
+    case TOKEN_ELIMINAR:{
       ELIMINAR();
       break;
       }
-    case T_INSERTAR:{
+    case TOKEN_INSERTAR:{
       INSERTAR();
       break;
       }
-    case T_ACTUALIZAR:{
+    case TOKEN_ACTUALIZAR:{
       ACTUALIZAR();
       break;
       }
-    case T_BORRAR:{
+    case TOKEN_BORRAR:{
       BORRAR();
       break;
       }
-    case T_SELECCIONAR:{
+    case TOKEN_SELECCIONAR:{
       SELECCIONAR();
-      jj_consume_token(PCOMA);
+      jj_consume_token(PYCOMA);
       break;
       }
-    case T_OTORGAR:{
+    case TOKEN_OTORGAR:{
       OTORGAR();
       break;
       }
-    case T_DENEGAR:{
+    case TOKEN_DENEGAR:{
       DENEGAR();
       break;
       }
-    case T_DECLARAR:{
+    case TOKEN_DECLARAR:{
       DECLARAR();
       break;
       }
-    case T_BACKUP_USQL:
-    case T_BACKUP_COMPLETO:{
+    case TOKEN_BACKUP_USQL:
+    case TOKEN_BACKUP_COMPLETO:{
       BACKUP();
       break;
       }
-    case T_RESTAURAR_USQL:
-    case T_RESTAURAR_COMPLETO:{
+    case TOKEN_RESTAURAR_USQL:
+    case TOKEN_RESTAURAR_COMPLETO:{
       RESTAURAR();
       break;
       }
-    case T_IMPRIMIR:
+    case TOKEN_IMPRIMIR:
     case ID:{
       LLAMADA_METODO_FUNCION();
       break;
@@ -81,22 +81,22 @@ public class analizador implements analizadorConstants {
       throw new ParseException();
     }
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case T_CREAR:
-    case T_USAR:
-    case T_ALTERAR:
-    case T_ELIMINAR:
-    case T_INSERTAR:
-    case T_ACTUALIZAR:
-    case T_BORRAR:
-    case T_SELECCIONAR:
-    case T_OTORGAR:
-    case T_DENEGAR:
-    case T_DECLARAR:
-    case T_IMPRIMIR:
-    case T_BACKUP_USQL:
-    case T_BACKUP_COMPLETO:
-    case T_RESTAURAR_USQL:
-    case T_RESTAURAR_COMPLETO:
+    case TOKEN_CREAR:
+    case TOKEN_USAR:
+    case TOKEN_ALTERAR:
+    case TOKEN_ELIMINAR:
+    case TOKEN_INSERTAR:
+    case TOKEN_ACTUALIZAR:
+    case TOKEN_BORRAR:
+    case TOKEN_SELECCIONAR:
+    case TOKEN_OTORGAR:
+    case TOKEN_DENEGAR:
+    case TOKEN_DECLARAR:
+    case TOKEN_IMPRIMIR:
+    case TOKEN_BACKUP_USQL:
+    case TOKEN_BACKUP_COMPLETO:
+    case TOKEN_RESTAURAR_USQL:
+    case TOKEN_RESTAURAR_COMPLETO:
     case ID:{
       LISTA_SENTENCIA_GLOBAL();
       break;
@@ -109,28 +109,28 @@ public class analizador implements analizadorConstants {
 
   final public void LISTA_SENTENCIA_LOCAL() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case T_RETORNO:{
+    case TOKEN_RETORNO:{
       RETORNO();
       break;
       }
-    case T_INSERTAR:{
+    case TOKEN_INSERTAR:{
       INSERTAR();
       break;
       }
-    case T_ACTUALIZAR:{
+    case TOKEN_ACTUALIZAR:{
       ACTUALIZAR();
       break;
       }
-    case T_BORRAR:{
+    case TOKEN_BORRAR:{
       BORRAR();
       break;
       }
-    case T_SELECCIONAR:{
+    case TOKEN_SELECCIONAR:{
       SELECCIONAR();
-      jj_consume_token(PCOMA);
+      jj_consume_token(PYCOMA);
       break;
       }
-    case T_DECLARAR:{
+    case TOKEN_DECLARAR:{
       DECLARAR();
       break;
       }
@@ -138,27 +138,27 @@ public class analizador implements analizadorConstants {
       ASIGNAR();
       break;
       }
-    case T_SI:{
+    case TOKEN_SI:{
       SI();
       break;
       }
-    case T_SELECCIONA:{
+    case TOKEN_SELECCIONA:{
       SELECCIONA();
       break;
       }
-    case T_PARA:{
+    case TOKEN_PARA:{
       PARA();
       break;
       }
-    case T_MIENTRAS:{
+    case TOKEN_MIENTRAS:{
       MIENTRAS();
       break;
       }
-    case T_DETENER:{
+    case TOKEN_DETENER:{
       DETENER();
       break;
       }
-    case T_IMPRIMIR:
+    case TOKEN_IMPRIMIR:
     case ID:{
       LLAMADA_METODO_FUNCION();
       break;
@@ -169,18 +169,18 @@ public class analizador implements analizadorConstants {
       throw new ParseException();
     }
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case T_RETORNO:
-    case T_INSERTAR:
-    case T_ACTUALIZAR:
-    case T_BORRAR:
-    case T_SELECCIONAR:
-    case T_DECLARAR:
-    case T_SI:
-    case T_SELECCIONA:
-    case T_PARA:
-    case T_MIENTRAS:
-    case T_DETENER:
-    case T_IMPRIMIR:
+    case TOKEN_RETORNO:
+    case TOKEN_INSERTAR:
+    case TOKEN_ACTUALIZAR:
+    case TOKEN_BORRAR:
+    case TOKEN_SELECCIONAR:
+    case TOKEN_DECLARAR:
+    case TOKEN_SI:
+    case TOKEN_SELECCIONA:
+    case TOKEN_PARA:
+    case TOKEN_MIENTRAS:
+    case TOKEN_DETENER:
+    case TOKEN_IMPRIMIR:
     case ID:
     case VARIABLE:{
       LISTA_SENTENCIA_LOCAL();
@@ -193,29 +193,29 @@ public class analizador implements analizadorConstants {
   }
 
   final public void CREAR() throws ParseException {
-    jj_consume_token(T_CREAR);
+    jj_consume_token(TOKEN_CREAR);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case T_BASE_DATOS:{
+    case TOKEN_BASE_DATOS:{
       CREAR_BD();
       break;
       }
-    case T_TABLA:{
+    case TOKEN_TABLA:{
       CREAR_TABLA();
       break;
       }
-    case T_OBJETO:{
+    case TOKEN_OBJETO:{
       CREAR_OBJETO();
       break;
       }
-    case T_FUNCION:{
+    case TOKEN_FUNCION:{
       CREAR_FUNCION();
       break;
       }
-    case T_PROCEDIMIENTO:{
+    case TOKEN_PROCEDIMIENTO:{
       CREAR_PROCEDIMIENTO();
       break;
       }
-    case T_USUARIO:{
+    case TOKEN_USUARIO:{
       CREAR_USUARIO();
       break;
       }
@@ -227,18 +227,18 @@ public class analizador implements analizadorConstants {
   }
 
   final public void CREAR_BD() throws ParseException {
-    jj_consume_token(T_BASE_DATOS);
+    jj_consume_token(TOKEN_BASE_DATOS);
     jj_consume_token(ID);
-    jj_consume_token(PCOMA);
+    jj_consume_token(PYCOMA);
   }
 
   final public void CREAR_TABLA() throws ParseException {
-    jj_consume_token(T_TABLA);
+    jj_consume_token(TOKEN_TABLA);
     jj_consume_token(ID);
-    jj_consume_token(PAR_IZQ);
+    jj_consume_token(PAR_ABRE);
     LISTA_PARAMETRO_TABLA();
-    jj_consume_token(PAR_DER);
-    jj_consume_token(PCOMA);
+    jj_consume_token(PAR_CIERRA);
+    jj_consume_token(PYCOMA);
   }
 
   final public void LISTA_PARAMETRO_TABLA() throws ParseException {
@@ -259,11 +259,11 @@ public class analizador implements analizadorConstants {
     TIPO_DATO();
     jj_consume_token(ID);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case T_NULO:
-    case T_NO_NULO:
-    case T_AUTOINCREMETABLE:
-    case T_LLAVE_PRIMARIA:
-    case T_LLAVE_FORANEA:{
+    case TOKEN_NULO:
+    case TOKEN_NO_NULO:
+    case TOKEN_AUTOINCREMETABLE:
+    case TOKEN_LLAVE_PRIMARIA:
+    case TOKEN_LLAVE_FORANEA:{
       LISTA_COMPLEMENTO_PARAMETRO_TABLA();
       break;
       }
@@ -276,11 +276,11 @@ public class analizador implements analizadorConstants {
   final public void LISTA_COMPLEMENTO_PARAMETRO_TABLA() throws ParseException {
     COMPLEMENTO_PARAMETRO_TABLA();
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case T_NULO:
-    case T_NO_NULO:
-    case T_AUTOINCREMETABLE:
-    case T_LLAVE_PRIMARIA:
-    case T_LLAVE_FORANEA:{
+    case TOKEN_NULO:
+    case TOKEN_NO_NULO:
+    case TOKEN_AUTOINCREMETABLE:
+    case TOKEN_LLAVE_PRIMARIA:
+    case TOKEN_LLAVE_FORANEA:{
       LISTA_COMPLEMENTO_PARAMETRO_TABLA();
       break;
       }
@@ -292,24 +292,24 @@ public class analizador implements analizadorConstants {
 
   final public void COMPLEMENTO_PARAMETRO_TABLA() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case T_NULO:{
-      jj_consume_token(T_NULO);
+    case TOKEN_NULO:{
+      jj_consume_token(TOKEN_NULO);
       break;
       }
-    case T_NO_NULO:{
-      jj_consume_token(T_NO_NULO);
+    case TOKEN_NO_NULO:{
+      jj_consume_token(TOKEN_NO_NULO);
       break;
       }
-    case T_AUTOINCREMETABLE:{
-      jj_consume_token(T_AUTOINCREMETABLE);
+    case TOKEN_AUTOINCREMETABLE:{
+      jj_consume_token(TOKEN_AUTOINCREMETABLE);
       break;
       }
-    case T_LLAVE_PRIMARIA:{
-      jj_consume_token(T_LLAVE_PRIMARIA);
+    case TOKEN_LLAVE_PRIMARIA:{
+      jj_consume_token(TOKEN_LLAVE_PRIMARIA);
       break;
       }
-    case T_LLAVE_FORANEA:{
-      jj_consume_token(T_LLAVE_FORANEA);
+    case TOKEN_LLAVE_FORANEA:{
+      jj_consume_token(TOKEN_LLAVE_FORANEA);
       jj_consume_token(ID);
       break;
       }
@@ -322,28 +322,28 @@ public class analizador implements analizadorConstants {
 
   final public void TIPO_DATO() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case T_TEXT:{
-      jj_consume_token(T_TEXT);
+    case TOKEN_TEXT:{
+      jj_consume_token(TOKEN_TEXT);
       break;
       }
-    case T_INTEGER:{
-      jj_consume_token(T_INTEGER);
+    case TOKEN_INTEGER:{
+      jj_consume_token(TOKEN_INTEGER);
       break;
       }
-    case T_DOUBLE:{
-      jj_consume_token(T_DOUBLE);
+    case TOKEN_DOUBLE:{
+      jj_consume_token(TOKEN_DOUBLE);
       break;
       }
-    case T_BOOL:{
-      jj_consume_token(T_BOOL);
+    case TOKEN_BOOL:{
+      jj_consume_token(TOKEN_BOOL);
       break;
       }
-    case T_DATE:{
-      jj_consume_token(T_DATE);
+    case TOKEN_DATE:{
+      jj_consume_token(TOKEN_DATE);
       break;
       }
-    case T_DATETIME:{
-      jj_consume_token(T_DATETIME);
+    case TOKEN_DATETIME:{
+      jj_consume_token(TOKEN_DATETIME);
       break;
       }
     case ID:{
@@ -358,12 +358,12 @@ public class analizador implements analizadorConstants {
   }
 
   final public void CREAR_OBJETO() throws ParseException {
-    jj_consume_token(T_OBJETO);
+    jj_consume_token(TOKEN_OBJETO);
     jj_consume_token(ID);
-    jj_consume_token(PAR_IZQ);
+    jj_consume_token(PAR_ABRE);
     LISTA_PARAMETRO();
-    jj_consume_token(PAR_DER);
-    jj_consume_token(PCOMA);
+    jj_consume_token(PAR_CIERRA);
+    jj_consume_token(PYCOMA);
   }
 
   final public void LISTA_PARAMETRO() throws ParseException {
@@ -382,16 +382,16 @@ public class analizador implements analizadorConstants {
   }
 
   final public void CREAR_FUNCION() throws ParseException {
-    jj_consume_token(T_FUNCION);
+    jj_consume_token(TOKEN_FUNCION);
     jj_consume_token(ID);
-    jj_consume_token(PAR_IZQ);
+    jj_consume_token(PAR_ABRE);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case T_TEXT:
-    case T_INTEGER:
-    case T_DOUBLE:
-    case T_BOOL:
-    case T_DATE:
-    case T_DATETIME:
+    case TOKEN_TEXT:
+    case TOKEN_INTEGER:
+    case TOKEN_DOUBLE:
+    case TOKEN_BOOL:
+    case TOKEN_DATE:
+    case TOKEN_DATETIME:
     case ID:{
       LISTA_PARAMETRO_PROC_FUN();
       break;
@@ -400,11 +400,11 @@ public class analizador implements analizadorConstants {
       jj_la1[11] = jj_gen;
       ;
     }
-    jj_consume_token(PAR_DER);
+    jj_consume_token(PAR_CIERRA);
     TIPO_DATO();
-    jj_consume_token(LLAVE_IZQ);
+    jj_consume_token(LLAVE_ABRE);
     LISTA_SENTENCIA_LOCAL();
-    jj_consume_token(LLAVE_DER);
+    jj_consume_token(LLAVE_CIERRA);
   }
 
   final public void LISTA_PARAMETRO_PROC_FUN() throws ParseException {
@@ -423,16 +423,16 @@ public class analizador implements analizadorConstants {
   }
 
   final public void CREAR_PROCEDIMIENTO() throws ParseException {
-    jj_consume_token(T_PROCEDIMIENTO);
+    jj_consume_token(TOKEN_PROCEDIMIENTO);
     jj_consume_token(ID);
-    jj_consume_token(PAR_IZQ);
+    jj_consume_token(PAR_ABRE);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case T_TEXT:
-    case T_INTEGER:
-    case T_DOUBLE:
-    case T_BOOL:
-    case T_DATE:
-    case T_DATETIME:
+    case TOKEN_TEXT:
+    case TOKEN_INTEGER:
+    case TOKEN_DOUBLE:
+    case TOKEN_BOOL:
+    case TOKEN_DATE:
+    case TOKEN_DATETIME:
     case ID:{
       LISTA_PARAMETRO_PROC_FUN();
       break;
@@ -441,26 +441,26 @@ public class analizador implements analizadorConstants {
       jj_la1[13] = jj_gen;
       ;
     }
-    jj_consume_token(PAR_DER);
-    jj_consume_token(LLAVE_IZQ);
+    jj_consume_token(PAR_CIERRA);
+    jj_consume_token(LLAVE_ABRE);
     LISTA_SENTENCIA_LOCAL();
-    jj_consume_token(LLAVE_DER);
+    jj_consume_token(LLAVE_CIERRA);
   }
 
   final public void CREAR_USUARIO() throws ParseException {
-    jj_consume_token(T_USUARIO);
+    jj_consume_token(TOKEN_USUARIO);
     jj_consume_token(ID);
-    jj_consume_token(T_COLOCAR);
-    jj_consume_token(T_PASSWORD);
+    jj_consume_token(TOKEN_COLOCAR);
+    jj_consume_token(TOKEN_PASSWORD);
     jj_consume_token(IGUAL);
     jj_consume_token(CADENA);
-    jj_consume_token(PCOMA);
+    jj_consume_token(PYCOMA);
   }
 
   final public void RETORNO() throws ParseException {
-    jj_consume_token(T_RETORNO);
+    jj_consume_token(TOKEN_RETORNO);
     CONDICION();
-    jj_consume_token(PCOMA);
+    jj_consume_token(PYCOMA);
   }
 
   final public void LISTA_COND() throws ParseException {
@@ -478,23 +478,23 @@ public class analizador implements analizadorConstants {
   }
 
   final public void USAR_BD() throws ParseException {
-    jj_consume_token(T_USAR);
+    jj_consume_token(TOKEN_USAR);
     jj_consume_token(ID);
-    jj_consume_token(PCOMA);
+    jj_consume_token(PYCOMA);
   }
 
   final public void ALTERAR() throws ParseException {
-    jj_consume_token(T_ALTERAR);
+    jj_consume_token(TOKEN_ALTERAR);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case T_TABLA:{
+    case TOKEN_TABLA:{
       ALTERAR_TABLA();
       break;
       }
-    case T_OBJETO:{
+    case TOKEN_OBJETO:{
       ALTERAR_OBJETO();
       break;
       }
-    case T_USUARIO:{
+    case TOKEN_USUARIO:{
       ALTERAR_USUARIO();
       break;
       }
@@ -520,18 +520,18 @@ public class analizador implements analizadorConstants {
   }
 
   final public void ALTERAR_TABLA() throws ParseException {
-    jj_consume_token(T_TABLA);
+    jj_consume_token(TOKEN_TABLA);
     jj_consume_token(ID);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case T_AGREGAR:{
-      jj_consume_token(T_AGREGAR);
-      jj_consume_token(PAR_IZQ);
+    case TOKEN_AGREGAR:{
+      jj_consume_token(TOKEN_AGREGAR);
+      jj_consume_token(PAR_ABRE);
       LISTA_PARAMETRO_TABLA();
-      jj_consume_token(PAR_DER);
+      jj_consume_token(PAR_CIERRA);
       break;
       }
-    case T_QUITAR:{
-      jj_consume_token(T_QUITAR);
+    case TOKEN_QUITAR:{
+      jj_consume_token(TOKEN_QUITAR);
       LISTA_ID();
       break;
       }
@@ -540,22 +540,22 @@ public class analizador implements analizadorConstants {
       jj_consume_token(-1);
       throw new ParseException();
     }
-    jj_consume_token(PCOMA);
+    jj_consume_token(PYCOMA);
   }
 
   final public void ALTERAR_OBJETO() throws ParseException {
-    jj_consume_token(T_OBJETO);
+    jj_consume_token(TOKEN_OBJETO);
     jj_consume_token(ID);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case T_AGREGAR:{
-      jj_consume_token(T_AGREGAR);
-      jj_consume_token(PAR_IZQ);
+    case TOKEN_AGREGAR:{
+      jj_consume_token(TOKEN_AGREGAR);
+      jj_consume_token(PAR_ABRE);
       LISTA_PARAMETRO();
-      jj_consume_token(PAR_DER);
+      jj_consume_token(PAR_CIERRA);
       break;
       }
-    case T_QUITAR:{
-      jj_consume_token(T_QUITAR);
+    case TOKEN_QUITAR:{
+      jj_consume_token(TOKEN_QUITAR);
       LISTA_ID();
       break;
       }
@@ -564,36 +564,36 @@ public class analizador implements analizadorConstants {
       jj_consume_token(-1);
       throw new ParseException();
     }
-    jj_consume_token(PCOMA);
+    jj_consume_token(PYCOMA);
   }
 
   final public void ALTERAR_USUARIO() throws ParseException {
-    jj_consume_token(T_USUARIO);
+    jj_consume_token(TOKEN_USUARIO);
     jj_consume_token(ID);
-    jj_consume_token(T_CAMBIAR);
-    jj_consume_token(T_PASSWORD);
+    jj_consume_token(TOKEN_CAMBIAR);
+    jj_consume_token(TOKEN_PASSWORD);
     jj_consume_token(IGUAL);
     jj_consume_token(CADENA);
-    jj_consume_token(PCOMA);
+    jj_consume_token(PYCOMA);
   }
 
   final public void ELIMINAR() throws ParseException {
-    jj_consume_token(T_ELIMINAR);
+    jj_consume_token(TOKEN_ELIMINAR);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case T_TABLA:{
-      jj_consume_token(T_TABLA);
+    case TOKEN_TABLA:{
+      jj_consume_token(TOKEN_TABLA);
       break;
       }
-    case T_BASE_DATOS:{
-      jj_consume_token(T_BASE_DATOS);
+    case TOKEN_BASE_DATOS:{
+      jj_consume_token(TOKEN_BASE_DATOS);
       break;
       }
-    case T_OBJETO:{
-      jj_consume_token(T_OBJETO);
+    case TOKEN_OBJETO:{
+      jj_consume_token(TOKEN_OBJETO);
       break;
       }
-    case T_USUARIO:{
-      jj_consume_token(T_USUARIO);
+    case TOKEN_USUARIO:{
+      jj_consume_token(TOKEN_USUARIO);
       break;
       }
     default:
@@ -602,20 +602,20 @@ public class analizador implements analizadorConstants {
       throw new ParseException();
     }
     jj_consume_token(ID);
-    jj_consume_token(PCOMA);
+    jj_consume_token(PYCOMA);
   }
 
   final public void INSERTAR() throws ParseException {
-    jj_consume_token(T_INSERTAR);
-    jj_consume_token(T_TABLA);
+    jj_consume_token(TOKEN_INSERTAR);
+    jj_consume_token(TOKEN_TABLA);
     jj_consume_token(ID);
-    jj_consume_token(PAR_IZQ);
+    jj_consume_token(PAR_ABRE);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case ID:{
       LISTA_ID();
-      jj_consume_token(PAR_DER);
-      jj_consume_token(T_VALORES);
-      jj_consume_token(PAR_IZQ);
+      jj_consume_token(PAR_CIERRA);
+      jj_consume_token(TOKEN_VALORES);
+      jj_consume_token(PAR_ABRE);
       break;
       }
     default:
@@ -623,24 +623,24 @@ public class analizador implements analizadorConstants {
       ;
     }
     LISTA_COND();
-    jj_consume_token(PAR_DER);
-    jj_consume_token(PCOMA);
+    jj_consume_token(PAR_CIERRA);
+    jj_consume_token(PYCOMA);
   }
 
   final public void ACTUALIZAR() throws ParseException {
-    jj_consume_token(T_ACTUALIZAR);
-    jj_consume_token(T_TABLA);
+    jj_consume_token(TOKEN_ACTUALIZAR);
+    jj_consume_token(TOKEN_TABLA);
     jj_consume_token(ID);
-    jj_consume_token(PAR_IZQ);
+    jj_consume_token(PAR_ABRE);
     LISTA_ID();
-    jj_consume_token(PAR_DER);
-    jj_consume_token(T_VALORES);
-    jj_consume_token(PAR_IZQ);
+    jj_consume_token(PAR_CIERRA);
+    jj_consume_token(TOKEN_VALORES);
+    jj_consume_token(PAR_ABRE);
     LISTA_COND();
-    jj_consume_token(PAR_DER);
+    jj_consume_token(PAR_CIERRA);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case T_DONDE:{
-      jj_consume_token(T_DONDE);
+    case TOKEN_DONDE:{
+      jj_consume_token(TOKEN_DONDE);
       CONDICION();
       break;
       }
@@ -648,16 +648,16 @@ public class analizador implements analizadorConstants {
       jj_la1[21] = jj_gen;
       ;
     }
-    jj_consume_token(PCOMA);
+    jj_consume_token(PYCOMA);
   }
 
   final public void BORRAR() throws ParseException {
-    jj_consume_token(T_BORRAR);
-    jj_consume_token(T_TABLA);
+    jj_consume_token(TOKEN_BORRAR);
+    jj_consume_token(TOKEN_TABLA);
     jj_consume_token(ID);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case T_DONDE:{
-      jj_consume_token(T_DONDE);
+    case TOKEN_DONDE:{
+      jj_consume_token(TOKEN_DONDE);
       CONDICION();
       break;
       }
@@ -665,11 +665,11 @@ public class analizador implements analizadorConstants {
       jj_la1[22] = jj_gen;
       ;
     }
-    jj_consume_token(PCOMA);
+    jj_consume_token(PYCOMA);
   }
 
   final public void SELECCIONAR() throws ParseException {
-    jj_consume_token(T_SELECCIONAR);
+    jj_consume_token(TOKEN_SELECCIONAR);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case ID:{
       LISTA_ID();
@@ -684,11 +684,11 @@ public class analizador implements analizadorConstants {
       jj_consume_token(-1);
       throw new ParseException();
     }
-    jj_consume_token(T_DE);
+    jj_consume_token(TOKEN_DE);
     LISTA_ID();
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case T_DONDE:{
-      jj_consume_token(T_DONDE);
+    case TOKEN_DONDE:{
+      jj_consume_token(TOKEN_DONDE);
       CONDICION();
       break;
       }
@@ -697,16 +697,16 @@ public class analizador implements analizadorConstants {
       ;
     }
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case T_ORDENAR:{
-      jj_consume_token(T_ORDENAR);
+    case TOKEN_ORDENAR:{
+      jj_consume_token(TOKEN_ORDENAR);
       jj_consume_token(ID);
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-      case T_ASC:{
-        jj_consume_token(T_ASC);
+      case TOKEN_ASC:{
+        jj_consume_token(TOKEN_ASC);
         break;
         }
-      case T_DESC:{
-        jj_consume_token(T_DESC);
+      case TOKEN_DESC:{
+        jj_consume_token(TOKEN_DESC);
         break;
         }
       default:
@@ -723,7 +723,7 @@ public class analizador implements analizadorConstants {
   }
 
   final public void OTORGAR() throws ParseException {
-    jj_consume_token(T_OTORGAR);
+    jj_consume_token(TOKEN_OTORGAR);
     LISTA_ID();
     jj_consume_token(ID);
     jj_consume_token(PUNTO);
@@ -741,11 +741,11 @@ public class analizador implements analizadorConstants {
       jj_consume_token(-1);
       throw new ParseException();
     }
-    jj_consume_token(PCOMA);
+    jj_consume_token(PYCOMA);
   }
 
   final public void DENEGAR() throws ParseException {
-    jj_consume_token(T_DENEGAR);
+    jj_consume_token(TOKEN_DENEGAR);
     LISTA_ID();
     jj_consume_token(ID);
     jj_consume_token(PUNTO);
@@ -763,19 +763,19 @@ public class analizador implements analizadorConstants {
       jj_consume_token(-1);
       throw new ParseException();
     }
-    jj_consume_token(PCOMA);
+    jj_consume_token(PYCOMA);
   }
 
   final public void DECLARAR() throws ParseException {
-    jj_consume_token(T_DECLARAR);
+    jj_consume_token(TOKEN_DECLARAR);
     LISTA_VARIABLE();
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case T_TEXT:
-    case T_INTEGER:
-    case T_DOUBLE:
-    case T_BOOL:
-    case T_DATE:
-    case T_DATETIME:{
+    case TOKEN_TEXT:
+    case TOKEN_INTEGER:
+    case TOKEN_DOUBLE:
+    case TOKEN_BOOL:
+    case TOKEN_DATE:
+    case TOKEN_DATETIME:{
       TIPO_DATO_DECLARAR();
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
       case IGUAL:{
@@ -798,7 +798,7 @@ public class analizador implements analizadorConstants {
       jj_consume_token(-1);
       throw new ParseException();
     }
-    jj_consume_token(PCOMA);
+    jj_consume_token(PYCOMA);
   }
 
   final public void LISTA_VARIABLE() throws ParseException {
@@ -817,28 +817,28 @@ public class analizador implements analizadorConstants {
 
   final public void TIPO_DATO_DECLARAR() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case T_TEXT:{
-      jj_consume_token(T_TEXT);
+    case TOKEN_TEXT:{
+      jj_consume_token(TOKEN_TEXT);
       break;
       }
-    case T_INTEGER:{
-      jj_consume_token(T_INTEGER);
+    case TOKEN_INTEGER:{
+      jj_consume_token(TOKEN_INTEGER);
       break;
       }
-    case T_DOUBLE:{
-      jj_consume_token(T_DOUBLE);
+    case TOKEN_DOUBLE:{
+      jj_consume_token(TOKEN_DOUBLE);
       break;
       }
-    case T_BOOL:{
-      jj_consume_token(T_BOOL);
+    case TOKEN_BOOL:{
+      jj_consume_token(TOKEN_BOOL);
       break;
       }
-    case T_DATE:{
-      jj_consume_token(T_DATE);
+    case TOKEN_DATE:{
+      jj_consume_token(TOKEN_DATE);
       break;
       }
-    case T_DATETIME:{
-      jj_consume_token(T_DATETIME);
+    case TOKEN_DATETIME:{
+      jj_consume_token(TOKEN_DATETIME);
       break;
       }
     default:
@@ -862,23 +862,23 @@ public class analizador implements analizadorConstants {
     }
     jj_consume_token(IGUAL);
     CONDICION();
-    jj_consume_token(PCOMA);
+    jj_consume_token(PYCOMA);
   }
 
   final public void SI() throws ParseException {
-    jj_consume_token(T_SI);
-    jj_consume_token(PAR_IZQ);
+    jj_consume_token(TOKEN_SI);
+    jj_consume_token(PAR_ABRE);
     CONDICION();
-    jj_consume_token(PAR_DER);
-    jj_consume_token(LLAVE_IZQ);
+    jj_consume_token(PAR_CIERRA);
+    jj_consume_token(LLAVE_ABRE);
     LISTA_SENTENCIA_LOCAL();
-    jj_consume_token(LLAVE_DER);
+    jj_consume_token(LLAVE_CIERRA);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case T_SINO:{
-      jj_consume_token(T_SINO);
-      jj_consume_token(LLAVE_IZQ);
+    case TOKEN_SINO:{
+      jj_consume_token(TOKEN_SINO);
+      jj_consume_token(LLAVE_ABRE);
       LISTA_SENTENCIA_LOCAL();
-      jj_consume_token(LLAVE_DER);
+      jj_consume_token(LLAVE_CIERRA);
       break;
       }
     default:
@@ -888,22 +888,22 @@ public class analizador implements analizadorConstants {
   }
 
   final public void SELECCIONA() throws ParseException {
-    jj_consume_token(T_SELECCIONA);
-    jj_consume_token(PAR_IZQ);
+    jj_consume_token(TOKEN_SELECCIONA);
+    jj_consume_token(PAR_ABRE);
     CONDICION();
-    jj_consume_token(PAR_DER);
-    jj_consume_token(LLAVE_IZQ);
+    jj_consume_token(PAR_CIERRA);
+    jj_consume_token(LLAVE_ABRE);
     LISTA_CASO();
-    jj_consume_token(LLAVE_DER);
+    jj_consume_token(LLAVE_CIERRA);
   }
 
   final public void LISTA_CASO() throws ParseException {
-    jj_consume_token(T_CASO);
+    jj_consume_token(TOKEN_CASO);
     VALOR_CASO();
-    jj_consume_token(DOSP);
+    jj_consume_token(DOSPUNTOS);
     LISTA_SENTENCIA_LOCAL();
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case T_CASO:{
+    case TOKEN_CASO:{
       LISTA_CASO();
       break;
       }
@@ -912,7 +912,7 @@ public class analizador implements analizadorConstants {
       ;
     }
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case T_DEFECTO:{
+    case TOKEN_DEFECTO:{
       DEFECTO();
       break;
       }
@@ -944,22 +944,22 @@ public class analizador implements analizadorConstants {
   }
 
   final public void DEFECTO() throws ParseException {
-    jj_consume_token(T_DEFECTO);
-    jj_consume_token(DOSP);
+    jj_consume_token(TOKEN_DEFECTO);
+    jj_consume_token(DOSPUNTOS);
     LISTA_SENTENCIA_LOCAL();
   }
 
   final public void PARA() throws ParseException {
-    jj_consume_token(T_PARA);
-    jj_consume_token(PAR_IZQ);
-    jj_consume_token(T_DECLARAR);
+    jj_consume_token(TOKEN_PARA);
+    jj_consume_token(PAR_ABRE);
+    jj_consume_token(TOKEN_DECLARAR);
     jj_consume_token(VARIABLE);
-    jj_consume_token(T_INTEGER);
+    jj_consume_token(TOKEN_INTEGER);
     jj_consume_token(IGUAL);
     CONDICION();
-    jj_consume_token(PCOMA);
+    jj_consume_token(PYCOMA);
     CONDICION();
-    jj_consume_token(PCOMA);
+    jj_consume_token(PYCOMA);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case AUMENTO:{
       jj_consume_token(AUMENTO);
@@ -974,48 +974,48 @@ public class analizador implements analizadorConstants {
       jj_consume_token(-1);
       throw new ParseException();
     }
-    jj_consume_token(PAR_DER);
-    jj_consume_token(LLAVE_IZQ);
+    jj_consume_token(PAR_CIERRA);
+    jj_consume_token(LLAVE_ABRE);
     LISTA_SENTENCIA_LOCAL();
-    jj_consume_token(LLAVE_DER);
+    jj_consume_token(LLAVE_CIERRA);
   }
 
   final public void MIENTRAS() throws ParseException {
-    jj_consume_token(T_MIENTRAS);
-    jj_consume_token(PAR_IZQ);
+    jj_consume_token(TOKEN_MIENTRAS);
+    jj_consume_token(PAR_ABRE);
     CONDICION();
-    jj_consume_token(PAR_DER);
-    jj_consume_token(LLAVE_IZQ);
+    jj_consume_token(PAR_CIERRA);
+    jj_consume_token(LLAVE_ABRE);
     LISTA_SENTENCIA_LOCAL();
-    jj_consume_token(LLAVE_DER);
+    jj_consume_token(LLAVE_CIERRA);
   }
 
   final public void DETENER() throws ParseException {
-    jj_consume_token(T_DETENER);
-    jj_consume_token(PCOMA);
+    jj_consume_token(TOKEN_DETENER);
+    jj_consume_token(PYCOMA);
   }
 
   final public void FUNCIONES_PROPIAS_DEL_LENGUAJE() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case T_FECHA:{
-      jj_consume_token(T_FECHA);
-      jj_consume_token(PAR_IZQ);
-      jj_consume_token(PAR_DER);
+    case TOKEN_FECHA:{
+      jj_consume_token(TOKEN_FECHA);
+      jj_consume_token(PAR_ABRE);
+      jj_consume_token(PAR_CIERRA);
       break;
       }
-    case T_FECHA_HORA:{
-      jj_consume_token(T_FECHA_HORA);
-      jj_consume_token(PAR_IZQ);
-      jj_consume_token(PAR_DER);
+    case TOKEN_FECHA_HORA:{
+      jj_consume_token(TOKEN_FECHA_HORA);
+      jj_consume_token(PAR_ABRE);
+      jj_consume_token(PAR_CIERRA);
       break;
       }
-    case T_CONTAR:{
-      jj_consume_token(T_CONTAR);
-      jj_consume_token(PAR_IZQ);
+    case TOKEN_CONTAR:{
+      jj_consume_token(TOKEN_CONTAR);
+      jj_consume_token(PAR_ABRE);
       jj_consume_token(MENOR_2);
       SELECCIONAR();
       jj_consume_token(MAYOR_2);
-      jj_consume_token(PAR_DER);
+      jj_consume_token(PAR_CIERRA);
       break;
       }
     default:
@@ -1027,12 +1027,12 @@ public class analizador implements analizadorConstants {
 
   final public void BACKUP() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case T_BACKUP_USQL:{
-      jj_consume_token(T_BACKUP_USQL);
+    case TOKEN_BACKUP_USQL:{
+      jj_consume_token(TOKEN_BACKUP_USQL);
       break;
       }
-    case T_BACKUP_COMPLETO:{
-      jj_consume_token(T_BACKUP_COMPLETO);
+    case TOKEN_BACKUP_COMPLETO:{
+      jj_consume_token(TOKEN_BACKUP_COMPLETO);
       break;
       }
     default:
@@ -1042,17 +1042,17 @@ public class analizador implements analizadorConstants {
     }
     jj_consume_token(ID);
     jj_consume_token(ID);
-    jj_consume_token(PCOMA);
+    jj_consume_token(PYCOMA);
   }
 
   final public void RESTAURAR() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case T_RESTAURAR_USQL:{
-      jj_consume_token(T_RESTAURAR_USQL);
+    case TOKEN_RESTAURAR_USQL:{
+      jj_consume_token(TOKEN_RESTAURAR_USQL);
       break;
       }
-    case T_RESTAURAR_COMPLETO:{
-      jj_consume_token(T_RESTAURAR_COMPLETO);
+    case TOKEN_RESTAURAR_COMPLETO:{
+      jj_consume_token(TOKEN_RESTAURAR_COMPLETO);
       break;
       }
     default:
@@ -1061,7 +1061,7 @@ public class analizador implements analizadorConstants {
       throw new ParseException();
     }
     jj_consume_token(CADENA);
-    jj_consume_token(PCOMA);
+    jj_consume_token(PYCOMA);
   }
 
   final public void CONDICION() throws ParseException {
@@ -1109,7 +1109,7 @@ public class analizador implements analizadorConstants {
     EXP();
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case IGUALACION:
-    case DIFERENCIACION:
+    case DIFERENTE:
     case MENOR:
     case MAYOR:
     case MENORIGUAL:
@@ -1119,8 +1119,8 @@ public class analizador implements analizadorConstants {
         jj_consume_token(IGUALACION);
         break;
         }
-      case DIFERENCIACION:{
-        jj_consume_token(DIFERENCIACION);
+      case DIFERENTE:{
+        jj_consume_token(DIFERENTE);
         break;
         }
       case MAYOR:{
@@ -1243,9 +1243,9 @@ public class analizador implements analizadorConstants {
       LLAMADA_METODO_OBJETO();
       break;
       }
-    case T_FECHA:
-    case T_FECHA_HORA:
-    case T_CONTAR:{
+    case TOKEN_FECHA:
+    case TOKEN_FECHA_HORA:
+    case TOKEN_CONTAR:{
       FUNCIONES_PROPIAS_DEL_LENGUAJE();
       break;
       }
@@ -1271,16 +1271,16 @@ public class analizador implements analizadorConstants {
   final public void LLAMADA_METODO_OBJETO() throws ParseException {
     jj_consume_token(ID);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case PAR_IZQ:
+    case PAR_ABRE:
     case PUNTO:{
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-      case PAR_IZQ:{
-        jj_consume_token(PAR_IZQ);
+      case PAR_ABRE:{
+        jj_consume_token(PAR_ABRE);
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
         case NOT:
-        case T_FECHA:
-        case T_FECHA_HORA:
-        case T_CONTAR:
+        case TOKEN_FECHA:
+        case TOKEN_FECHA_HORA:
+        case TOKEN_CONTAR:
         case CADENA:
         case ENTERO:
         case DECIMAL:
@@ -1293,7 +1293,7 @@ public class analizador implements analizadorConstants {
           jj_la1[54] = jj_gen;
           ;
         }
-        jj_consume_token(PAR_DER);
+        jj_consume_token(PAR_CIERRA);
         break;
         }
       case PUNTO:{
@@ -1318,12 +1318,12 @@ public class analizador implements analizadorConstants {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case ID:{
       jj_consume_token(ID);
-      jj_consume_token(PAR_IZQ);
+      jj_consume_token(PAR_ABRE);
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
       case NOT:
-      case T_FECHA:
-      case T_FECHA_HORA:
-      case T_CONTAR:
+      case TOKEN_FECHA:
+      case TOKEN_FECHA_HORA:
+      case TOKEN_CONTAR:
       case CADENA:
       case ENTERO:
       case DECIMAL:
@@ -1336,18 +1336,18 @@ public class analizador implements analizadorConstants {
         jj_la1[57] = jj_gen;
         ;
       }
-      jj_consume_token(PAR_DER);
-      jj_consume_token(PCOMA);
+      jj_consume_token(PAR_CIERRA);
+      jj_consume_token(PYCOMA);
       break;
       }
-    case T_IMPRIMIR:{
-      jj_consume_token(T_IMPRIMIR);
-      jj_consume_token(PAR_IZQ);
+    case TOKEN_IMPRIMIR:{
+      jj_consume_token(TOKEN_IMPRIMIR);
+      jj_consume_token(PAR_ABRE);
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
       case NOT:
-      case T_FECHA:
-      case T_FECHA_HORA:
-      case T_CONTAR:
+      case TOKEN_FECHA:
+      case TOKEN_FECHA_HORA:
+      case TOKEN_CONTAR:
       case CADENA:
       case ENTERO:
       case DECIMAL:
@@ -1360,8 +1360,8 @@ public class analizador implements analizadorConstants {
         jj_la1[58] = jj_gen;
         ;
       }
-      jj_consume_token(PAR_DER);
-      jj_consume_token(PCOMA);
+      jj_consume_token(PAR_CIERRA);
+      jj_consume_token(PYCOMA);
       break;
       }
     default:
@@ -1384,24 +1384,19 @@ public class analizador implements analizadorConstants {
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static private int[] jj_la1_2;
-  static private int[] jj_la1_3;
   static {
       jj_la1_init_0();
       jj_la1_init_1();
       jj_la1_init_2();
-      jj_la1_init_3();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x0,0x0,0x0,0x0,0x0,0x20000,0x0,0x0,0x0,0x0,0x20000,0x0,0x20000,0x0,0x20000,0x0,0x20000,0x0,0x0,0x0,0x0,0x0,0x0,0x8,0x0,0x0,0x0,0x8,0x8,0x80000,0x0,0x20000,0x0,0x100000,0x0,0x0,0x0,0x0,0xc0,0x0,0x0,0x0,0x10000000,0x8000000,0x20000000,0x7e00000,0x7e00000,0x6,0x6,0x18,0x18,0x20,0x100000,0x0,0x20000000,0x100400,0x100400,0x20000000,0x20000000,0x0,};
+      jj_la1_0 = new int[] {0x10000000,0x10000000,0x0,0x0,0x60000000,0x40,0x80000000,0x80000000,0x80000000,0x0,0x40,0x0,0x40,0x0,0x40,0x40000000,0x40,0x0,0x0,0x60000000,0x0,0x0,0x0,0x1000,0x0,0x0,0x0,0x1000,0x1000,0x100,0x0,0x40,0x0,0x200,0x0,0x0,0x0,0x0,0x18000,0x0,0x0,0x0,0x1000000,0x800000,0x2000000,0x7e0000,0x7e0000,0xc00,0xc00,0x3000,0x3000,0x4000,0x200,0x0,0x2000000,0x202,0x202,0x2000000,0x2000000,0x0,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0xac600040,0xac600040,0xa8020000,0xa8020000,0x5c180,0x0,0x3e00,0x3e00,0x3e00,0x3f,0x0,0x3f,0x0,0x3f,0x0,0x44100,0x0,0x1800000,0x1800000,0x44180,0x0,0x40000000,0x40000000,0x0,0x40000000,0x0,0x0,0x0,0x0,0x0,0x3f,0x0,0x3f,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_1 = new int[] {0x386b1800,0x386b1800,0x606a0080,0x606a0080,0x170,0x0,0xf,0xf,0xf,0x0,0x0,0x0,0x0,0x0,0x0,0x110,0x0,0x6000,0x6000,0x110,0x0,0x100000,0x100000,0x0,0x100000,0x6000000,0x1000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x80000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
    private static void jj_la1_init_2() {
-      jj_la1_2 = new int[] {0x10f100e1,0x10f100e1,0x3001e581,0x3001e581,0x0,0x0,0x0,0x0,0x0,0x10000000,0x0,0x10000000,0x0,0x10000000,0x0,0x0,0x0,0x0,0x0,0x0,0x10000000,0x0,0x0,0x10000000,0x0,0x18,0x4,0x10000000,0x10000000,0x0,0x10000000,0x0,0x0,0x0,0x200,0x800,0x1000,0xb000000,0x0,0xe0000,0x300000,0xc00000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x3b0e0000,0x3b0e0000,0x0,0x0,0x3b0e0000,0x3b0e0000,0x10010000,};
-   }
-   private static void jj_la1_init_3() {
-      jj_la1_3 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_2 = new int[] {0x1003c40,0x1003c40,0x3000079,0x3000079,0x0,0x0,0x0,0x0,0x0,0x10fc000,0x0,0x10fc000,0x0,0x10fc000,0x0,0x0,0x0,0x0,0x0,0x0,0x1000000,0x0,0x0,0x1000000,0x0,0x0,0x0,0x1000000,0x1000000,0x0,0x10fc000,0x0,0xfc000,0x0,0x0,0x2,0x4,0xb00000,0x0,0x380,0xc00,0x3000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x3b00380,0x3b00380,0x0,0x0,0x3b00380,0x3b00380,0x1000040,};
    }
 
   /** Constructor with InputStream. */
@@ -1518,7 +1513,7 @@ public class analizador implements analizadorConstants {
   /** Generate ParseException. */
   public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[100];
+    boolean[] la1tokens = new boolean[96];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
@@ -1535,13 +1530,10 @@ public class analizador implements analizadorConstants {
           if ((jj_la1_2[i] & (1<<j)) != 0) {
             la1tokens[64+j] = true;
           }
-          if ((jj_la1_3[i] & (1<<j)) != 0) {
-            la1tokens[96+j] = true;
-          }
         }
       }
     }
-    for (int i = 0; i < 100; i++) {
+    for (int i = 0; i < 96; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;
