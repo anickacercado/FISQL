@@ -1,0 +1,60 @@
+options {
+IGNORE_CASE = true;
+STATIC = false;
+    /*OUTPUTOKEN_DIRECTORY="C://Users//anick//Documents//NetBeansProjects//[Compi2]Proyecto1_201212859//src//xml//maestro//";*/
+    OUTPUTOKEN_DIRECTORY="C://Users//3plgtanickacf//Documents//GitHub//FISQL//src//xml//maestro//";
+}
+
+PARSER_BEGIN(maestro)
+package xml.maestro;
+
+public class maestro {
+  public static void main(String args[]) throws ParseException {
+    maestro parser = new maestro(System.in);
+    parser.S();
+    System.out.println("Exito!!");
+  }
+}
+PARSER_END(maestro)
+
+TOKEN:
+{   
+   <TOKEN_DB_ABRE: ("<db>")> {System.out.println(image);}
+  |<TOKEN_DB_CIERRA: ("</db>")> {System.out.println(image);}
+  |<TOKEN_PATH_ABRE: ("<path>")> {System.out.println(image);}
+  |<TOKEN_PATH_CIERRA: ("</path>")> {System.out.println(image);}
+  |<TOKEN_NOMBRE_ABRE: ("<nombre>")> {System.out.println(image);}
+  |<TOKEN_NOMBRE_CIERRA: ("</nombre>")> {System.out.println(image);}
+  |<CADENA:"\"" (~["\""])*"\""> {System.out.println(image);}
+}
+
+SKIP: 
+{
+  " "
+| "\n"
+| "\r"
+| "\t"
+}
+
+void S():
+{}
+{
+    LISTA_DB()
+}
+
+void LISTA_DB():
+{}
+{
+    DB() (LISTA_DB())?
+}
+
+void DB():
+{}
+{
+     <TOKEN_DB_ABRE>
+     <TOKEN_NOMBRE_ABRE> <CADENA> <TOKEN_NOMBRE_CIERRA>
+     <TOKEN_PATH_ABRE> <CADENA> <TOKEN_PATH_CIERRA>
+     <TOKEN_DB_CIERRA>
+}
+
+

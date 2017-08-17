@@ -8,6 +8,11 @@ package Formas;
 import analizador.ParseException;
 import analizador.TokenMgrError;
 import analizador.analizador;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import xml.db.db;
+import xml.maestro.maestro;
+import xml.tabla.tabla;
 
 /**
  *
@@ -76,13 +81,20 @@ public class principal extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-         analizador g = new analizador(new java.io.StringReader(this.jTextArea1.getText()));
+         
+        // analizador g = new analizador(new java.io.StringReader(this.jTextArea1.getText()));
+        // maestro g = new maestro(new java.io.StringReader(this.jTextArea1.getText()));
+        //db g = new db(new java.io.StringReader(this.jTextArea1.getText()));
+        tabla g = new tabla(new java.io.StringReader(this.jTextArea1.getText()));
+        
         try {
             g.S();
             System.out.println("Funciona");
-        } catch (ParseException | TokenMgrError e) {
-            System.out.println(e.getMessage());
+        } 
+        catch (xml.tabla.ParseException ex) {
+            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

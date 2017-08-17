@@ -1,0 +1,123 @@
+options {
+IGNORE_CASE = true;
+STATIC = false;
+    /*OUTPUTOKEN_DIRECTORY="C://Users//anick//Documents//NetBeansProjects//[Compi2]Proyecto1_201212859//src//xml//maestro//";*/
+    OUTPUTOKEN_DIRECTORY="C://Users//3plgtanickacf//Documents//GitHub//FISQL//src//xml//db//";
+}
+
+PARSER_BEGIN(db)
+package xml.db;
+
+public class db {
+  public static void main(String args[]) throws ParseException {
+    db parser = new db(System.in);
+    parser.S();
+    System.out.println("Exito!!");
+  }
+}
+PARSER_END(db)
+
+TOKEN:
+{   
+   <TOKEN_PROCEDURE_ABRE: ("<procedure>")> {System.out.println(image);}
+  |<TOKEN_PROCEDURE_CIERRA: ("</procedure>")> {System.out.println(image);}
+  |<TOKEN_PATH_ABRE: ("<path>")> {System.out.println(image);}
+  |<TOKEN_PATH_CIERRA: ("</path>")> {System.out.println(image);}
+  |<TOKEN_NOMBRE_ABRE: ("<nombre>")> {System.out.println(image);}
+  |<TOKEN_NOMBRE_CIERRA: ("</nombre>")> {System.out.println(image);}
+  |<TOKEN_OBJECT_ABRE: ("<object>")> {System.out.println(image);}
+  |<TOKEN_OBJECT_CIERRA: ("</object>")> {System.out.println(image);}
+  |<TOKEN_ROWS_ABRE: ("<rows>")> {System.out.println(image);}
+  |<TOKEN_ROWS_CIERRA: ("</rows>")> {System.out.println(image);}
+  |<TOKEN_TEXT_ABRE: ("<text>")> {System.out.println(image);}
+  |<TOKEN_TEXT_CIERRA: ("</text>")> {System.out.println(image);}
+  |<TOKEN_INTEGER_ABRE: ("<integer>")> {System.out.println(image);}
+  |<TOKEN_INTEGER_CIERRA: ("</integer>")> {System.out.println(image);}
+  |<TOKEN_DOUBLE_ABRE: ("<double>")> {System.out.println(image);}
+  |<TOKEN_DOUBLE_CIERRA: ("</double>")> {System.out.println(image);}
+  |<TOKEN_BOOL_ABRE: ("<bool>")> {System.out.println(image);}
+  |<TOKEN_BOOL_CIERRA: ("</bool>")> {System.out.println(image);}
+  |<TOKEN_DATE_ABRE: ("<date>")> {System.out.println(image);}
+  |<TOKEN_DATE_CIERRA: ("</date>")> {System.out.println(image);}
+  |<TOKEN_DATETIME_ABRE: ("<datetime>")> {System.out.println(image);}
+  |<TOKEN_DATETIME_CIERRA: ("</datetime>")> {System.out.println(image);}
+  |<TOKEN_TABLA_ABRE: ("<tabla>")> {System.out.println(image);}
+  |<TOKEN_TABLA_CIERRA: ("</tabla>")> {System.out.println(image);}
+
+
+  |<TOKEN_ID_ABRE: ("<")(["a"-"z","A"-"Z"])(["a"-"z","A"-"Z","0"-"9","_"])* (">")> {System.out.println(image);}
+  |<TOKEN_ID_CIERRA: ("</")(["a"-"z","A"-"Z"])(["a"-"z","A"-"Z","0"-"9","_"])* (">")> {System.out.println(image);}
+  
+
+  |<CADENA:"\"" (~["\""])*"\""> {System.out.println(image);}
+}
+
+SKIP: 
+{
+  " "
+| "\n"
+| "\r"
+| "\t"
+}
+
+void S():
+{}
+{
+   LISTA_REGISTRO()
+}
+
+void LISTA_REGISTRO():
+{}
+{
+    (PROCEDURE() | OBJECT() | TABLA()) (LISTA_REGISTRO())?
+}
+
+
+void PROCEDURE():
+{}
+{
+     <TOKEN_PROCEDURE_ABRE>
+     <TOKEN_PATH_ABRE> <CADENA> <TOKEN_PATH_CIERRA>
+     <TOKEN_PROCEDURE_CIERRA>
+}
+
+void OBJECT():
+{}
+{
+     <TOKEN_OBJECT_ABRE>
+     <TOKEN_PATH_ABRE> <CADENA> <TOKEN_PATH_CIERRA>
+     <TOKEN_OBJECT_CIERRA>
+}
+
+void TABLA():
+{}
+{
+     <TOKEN_TABLA_ABRE>
+     <TOKEN_NOMBRE_ABRE> <CADENA> <TOKEN_NOMBRE_CIERRA>
+     <TOKEN_PATH_ABRE> <CADENA> <TOKEN_PATH_CIERRA>
+     <TOKEN_ROWS_ABRE> LISTA_TIPO() <TOKEN_ROWS_CIERRA>
+     <TOKEN_TABLA_CIERRA>
+}
+
+void LISTA_TIPO():
+{}
+{
+    TIPO() (LISTA_TIPO())?
+}
+
+void TIPO():
+{}
+{
+    <TOKEN_INTEGER_ABRE> <CADENA> <TOKEN_INTEGER_CIERRA>
+    |<TOKEN_TEXT_ABRE> <CADENA> <TOKEN_TEXT_CIERRA>
+    |<TOKEN_DOUBLE_ABRE> <CADENA> <TOKEN_DOUBLE_CIERRA>
+    |<TOKEN_BOOL_ABRE> <CADENA> <TOKEN_BOOL_CIERRA>
+    |<TOKEN_DATE_ABRE> <CADENA> <TOKEN_DATE_CIERRA>
+    |<TOKEN_DATETIME_ABRE> <CADENA> <TOKEN_DATETIME_CIERRA>
+    |<TOKEN_ID_ABRE> <CADENA> <TOKEN_ID_CIERRA>
+
+}
+
+
+
+

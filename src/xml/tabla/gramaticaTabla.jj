@@ -1,0 +1,62 @@
+options {
+IGNORE_CASE = true;
+STATIC = false;
+    /*OUTPUTOKEN_DIRECTORY="C://Users//anick//Documents//NetBeansProjects//[Compi2]Proyecto1_201212859//src//xml//tabla//";*/
+    OUTPUTOKEN_DIRECTORY="C://Users//3plgtanickacf//Documents//GitHub//FISQL//src//xml//tabla//";
+}
+
+PARSER_BEGIN(tabla)
+package xml.tabla;
+
+public class tabla {
+  public static void main(String args[]) throws ParseException {
+    tabla parser = new tabla(System.in);
+    parser.S();
+    System.out.println("Exito!!");
+  }
+}
+PARSER_END(tabla)
+
+TOKEN:
+{   
+  
+  <TOKEN_ROWS_ABRE: ("<row>")> {System.out.println(image);}
+  |<TOKEN_ROWS_CIERRA: ("</row>")> {System.out.println(image);}
+  |<TOKEN_ID_ABRE: ("<")(["a"-"z","A"-"Z"])(["a"-"z","A"-"Z","0"-"9","_"])* (">")> {System.out.println(image);}
+  |<TOKEN_ID_CIERRA: ("</")(["a"-"z","A"-"Z"])(["a"-"z","A"-"Z","0"-"9","_"])* (">")> {System.out.println(image);}
+  |<CADENA:"\"" (~["\""])*"\""> {System.out.println(image);}
+}
+
+SKIP: 
+{
+  " "
+| "\n"
+| "\r"
+| "\t"
+}
+
+void S():
+{}
+{
+   ROW()
+}
+
+
+void ROW():
+{}
+{
+     (<TOKEN_ROWS_ABRE> LISTA_REGISTRO() <TOKEN_ROWS_CIERRA>) (ROW())?
+}
+
+
+void LISTA_REGISTRO():
+{}
+{
+     (<TOKEN_ID_ABRE> <CADENA> <TOKEN_ID_CIERRA>) (LISTA_REGISTRO())?
+}
+
+
+
+
+
+
