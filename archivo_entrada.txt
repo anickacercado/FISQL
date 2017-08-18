@@ -101,3 +101,68 @@ IMPRIMIR(COntar(<<SELECCIONAR * DE Producto>>));
 
 #el resultado de la instrucción debería ser:
 #180
+
+
+<Row> 
+<Nombre_campo1>"1"</Nombre_campo1> 
+<Nombre_campo2> "anicka" </Nombre_campo2> 
+<Nombre_campo3> "True" </Nombre_campo3> 
+</Row> 
+<Row> 
+<Nombre_campo1>"1"</Nombre_campo1> 
+<Nombre_campo2> "anicka" </Nombre_campo2> 
+<Nombre_campo3> "True" </Nombre_campo3> 
+</Row> 
+<Row> 
+<Nombre_campo1>"1"</Nombre_campo1> 
+<Nombre_campo2> "anicka" </Nombre_campo2> 
+<Nombre_campo3>
+<Nombre_campo1>"1"</Nombre_campo1> 
+<Nombre_campo2> "anicka" </Nombre_campo2> 
+<Nombre_campo3> "True" </Nombre_campo3> 
+</Nombre_campo3> 
+</Row>
+ 
+<Proc> 
+	<nombre>"nombre_proc1"</nombre> 
+	<params> 
+<integer>"Nombre_param1"</integer> 
+<text>"Nombre_param2"</text> 
+<bool>"Nombre_param3"</bool> 
+	</params> 
+<src> "Instrucciones" </src> 
+</Proc> 
+<Proc> 
+<nombre>"nombre_proc2"</nombre> 
+<params> 
+<integer>"Nombre_param1"</integer> 
+<text>"Nombre_param2"</text> 
+<bool>"Nombre_param3"</bool> 
+</params> 
+<src> "Instrucciones" </src> 
+</Proc> 
+
+ 
+<func> 
+	<nombre>"nombre_proc1"</nombre> 
+	<params> 
+<integer>"Nombre_param1"</integer> 
+<text>"Nombre_param2"</text> 
+<bool>"Nombre_param3"</bool> 
+	</params> 
+<src> "Instrucciones" </src> 
+<tipo>"integer"</tipo> 
+</func> 
+<func> 
+<nombre>"nombre_proc2"</nombre> 
+<params> 
+<integer>"Nombre_param1"</integer> 
+<text>"Nombre_param2"</text> 
+<bool>"Nombre_param3"</bool> 
+</params> 
+<src> "Instrucciones" </src> 
+<tipo>"integer"</tipo> 
+</func> 
+
+
+

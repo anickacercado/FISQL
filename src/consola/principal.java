@@ -3,15 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Formas;
+package consola;
 
-import analizador.ParseException;
-import analizador.TokenMgrError;
-import analizador.analizador;
+import usql.ParseException;
+import usql.TokenMgrError;
+import usql.analizador;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import xml.db.db;
+import xml.funcion.funcion;
 import xml.maestro.maestro;
+import xml.metodo.metodo;
+import xml.objeto.objeto;
 import xml.tabla.tabla;
 
 /**
@@ -84,8 +87,11 @@ public class principal extends javax.swing.JFrame {
          
         // analizador g = new analizador(new java.io.StringReader(this.jTextArea1.getText()));
         // maestro g = new maestro(new java.io.StringReader(this.jTextArea1.getText()));
-        //db g = new db(new java.io.StringReader(this.jTextArea1.getText()));
+        // db g = new db(new java.io.StringReader(this.jTextArea1.getText()));
         tabla g = new tabla(new java.io.StringReader(this.jTextArea1.getText()));
+        // metodo g = new metodo(new java.io.StringReader(this.jTextArea1.getText()));
+        // objeto g = new objeto(new java.io.StringReader(this.jTextArea1.getText()));
+        // funcion g = new funcion(new java.io.StringReader(this.jTextArea1.getText()));
         
         try {
             g.S();

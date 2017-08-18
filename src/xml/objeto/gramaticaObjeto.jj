@@ -1,0 +1,94 @@
+options {
+IGNORE_CASE = true;
+STATIC = false;
+    /*OUTPUTOKEN_DIRECTORY="C://Users//anick//Documents//NetBeansProjects//[Compi2]Proyecto1_201212859//src//xml//objeto//";*/
+    OUTPUTOKEN_DIRECTORY="C://Users//3plgtanickacf//Documents//GitHub//FISQL//src//xml//objeto//";
+}
+
+PARSER_BEGIN(objeto)
+package xml.objeto;
+
+public class objeto {
+  public static void main(String args[]) throws ParseException {
+    objeto parser = new objeto(System.in);
+    parser.S();
+    System.out.println("Exito!!");
+  }
+}
+PARSER_END(objeto)
+
+TOKEN:
+{   
+  
+   <TOKEN_OBJ_ABRE: ("<obj>")> {System.out.println(image);}
+  |<TOKEN_OBJ_CIERRA: ("</obj>")> {System.out.println(image);}
+  |<TOKEN_NOMBRE_ABRE: ("<nombre>")> {System.out.println(image);}
+  |<TOKEN_NOMBRE_CIERRA: ("</nombre>")> {System.out.println(image);}
+  |<TOKEN_ATTR_ABRE: ("<attr>")> {System.out.println(image);}
+  |<TOKEN_ATTR_CIERRA: ("</attr>")> {System.out.println(image);}
+  |<TOKEN_TEXT_ABRE: ("<text>")> {System.out.println(image);}
+  |<TOKEN_TEXT_CIERRA: ("</text>")> {System.out.println(image);}
+  |<TOKEN_INTEGER_ABRE: ("<integer>")> {System.out.println(image);}
+  |<TOKEN_INTEGER_CIERRA: ("</integer>")> {System.out.println(image);}
+  |<TOKEN_DOUBLE_ABRE: ("<double>")> {System.out.println(image);}
+  |<TOKEN_DOUBLE_CIERRA: ("</double>")> {System.out.println(image);}
+  |<TOKEN_BOOL_ABRE: ("<bool>")> {System.out.println(image);}
+  |<TOKEN_BOOL_CIERRA: ("</bool>")> {System.out.println(image);}
+  |<TOKEN_DATE_ABRE: ("<date>")> {System.out.println(image);}
+  |<TOKEN_DATE_CIERRA: ("</date>")> {System.out.println(image);}
+  |<TOKEN_DATETIME_ABRE: ("<datetime>")> {System.out.println(image);}
+  |<TOKEN_DATETIME_CIERRA: ("</datetime>")> {System.out.println(image);}
+
+  |<TOKEN_ID_ABRE: ("<")(["a"-"z","A"-"Z"])(["a"-"z","A"-"Z","0"-"9","_"])* (">")> {System.out.println(image);}
+  |<TOKEN_ID_CIERRA: ("</")(["a"-"z","A"-"Z"])(["a"-"z","A"-"Z","0"-"9","_"])* (">")> {System.out.println(image);}
+  |<CADENA:"\"" (~["\""])*"\""> {System.out.println(image);}
+}
+
+SKIP: 
+{
+  " "
+| "\n"
+| "\r"
+| "\t"
+}
+
+void S():
+{}
+{
+   OBJ()
+}
+
+
+void OBJ():
+{}
+{
+        (
+        <TOKEN_OBJ_ABRE> 
+            <TOKEN_NOMBRE_ABRE> <CADENA> <TOKEN_NOMBRE_CIERRA>
+                <TOKEN_ATTR_ABRE> LISTA_ATTR() <TOKEN_ATTR_CIERRA>    
+        <TOKEN_OBJ_CIERRA>
+        ) 
+        (OBJ())?
+}
+
+
+void LISTA_ATTR():
+{}
+{
+        ATTR() (LISTA_ATTR())?
+}
+
+void ATTR():
+{}
+{
+     <TOKEN_INTEGER_ABRE> <CADENA> <TOKEN_INTEGER_CIERRA>
+    |<TOKEN_TEXT_ABRE> <CADENA> <TOKEN_TEXT_CIERRA>
+    |<TOKEN_DOUBLE_ABRE> <CADENA> <TOKEN_DOUBLE_CIERRA>
+    |<TOKEN_BOOL_ABRE> <CADENA> <TOKEN_BOOL_CIERRA>
+    |<TOKEN_DATE_ABRE> <CADENA> <TOKEN_DATE_CIERRA>
+    |<TOKEN_DATETIME_ABRE> <CADENA> <TOKEN_DATETIME_CIERRA>
+    |<TOKEN_ID_ABRE> <CADENA> <TOKEN_ID_CIERRA>
+}
+
+
+

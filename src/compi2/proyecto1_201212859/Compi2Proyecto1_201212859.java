@@ -5,7 +5,7 @@
  */
 package compi2.proyecto1_201212859;
 
-import Formas.principal;
+import consola.principal;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
