@@ -1,8 +1,8 @@
 options {
 IGNORE_CASE = true;
 STATIC = false;
-    /*OUTPUTOKEN_DIRECTORY="C://Users//anick//Documents//NetBeansProjects//[Compi2]Proyecto1_201212859//src//xml//funcion//";*/
-    OUTPUTOKEN_DIRECTORY="C://Users//3plgtanickacf//Documents//GitHub//FISQL//src//xml//funcion//";
+    OUTPUTOKEN_DIRECTORY="C://Users//anick//Documents//NetBeansProjects//[Compi2]Proyecto1_201212859//FISQL//src//xml//funcion//";  
+    /*OUTPUTOKEN_DIRECTORY="C://Users//3plgtanickacf//Documents//GitHub//FISQL//src//xml//funcion//";*/
 }
 
 PARSER_BEGIN(funcion)
@@ -46,6 +46,7 @@ TOKEN:
   |<TOKEN_ID_ABRE: ("<")(["a"-"z","A"-"Z"])(["a"-"z","A"-"Z","0"-"9","_"])* (">")> {System.out.println(image);}
   |<TOKEN_ID_CIERRA: ("</")(["a"-"z","A"-"Z"])(["a"-"z","A"-"Z","0"-"9","_"])* (">")> {System.out.println(image);}
   |<CADENA:"\"" (~["\""])*"\""> {System.out.println(image);}
+  |<CODIGO:"\u007e" (~["\u007e"])* "\u007e"> {System.out.println(image);}
 }
 
 SKIP: 
@@ -70,7 +71,7 @@ void FUNC():
         <TOKEN_FUNC_ABRE> 
             <TOKEN_NOMBRE_ABRE> <CADENA> <TOKEN_NOMBRE_CIERRA>
                 <TOKEN_PARAMS_ABRE> LISTA_PARAMS() <TOKEN_PARAMS_CIERRA>    
-            <TOKEN_SRC_ABRE> <CADENA> <TOKEN_SRC_CIERRA>
+            <TOKEN_SRC_ABRE> <CODIGO> <TOKEN_SRC_CIERRA>
             <TOKEN_TIPO_ABRE> <CADENA> <TOKEN_TIPO_CIERRA>
         <TOKEN_FUNC_CIERRA>
         ) 

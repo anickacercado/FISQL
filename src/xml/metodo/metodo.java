@@ -22,7 +22,7 @@ public class metodo implements metodoConstants {
     LISTA_PARAMS();
     jj_consume_token(TOKEN_PARAMS_CIERRA);
     jj_consume_token(TOKEN_SRC_ABRE);
-    jj_consume_token(CADENA);
+    jj_consume_token(CODIGO);
     jj_consume_token(TOKEN_SRC_CIERRA);
     jj_consume_token(TOKEN_PROC_CIERRA);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -238,7 +238,7 @@ public class metodo implements metodoConstants {
   /** Generate ParseException. */
   public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[28];
+    boolean[] la1tokens = new boolean[29];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
@@ -252,7 +252,7 @@ public class metodo implements metodoConstants {
         }
       }
     }
-    for (int i = 0; i < 28; i++) {
+    for (int i = 0; i < 29; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

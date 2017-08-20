@@ -1,8 +1,8 @@
 options {
 IGNORE_CASE = true;
 STATIC = false;
-    /*OUTPUTOKEN_DIRECTORY="C://Users//anick//Documents//NetBeansProjects//[Compi2]Proyecto1_201212859//src//paquetes//"*/;
-    OUTPUTOKEN_DIRECTORY="C://Users//3plgtanickacf//Documents//GitHub//FISQL//src//paquetes//";
+    OUTPUTOKEN_DIRECTORY="C://Users//anick//Documents//NetBeansProjects//[Compi2]Proyecto1_201212859//FISQL//src//paquetes//";
+    /*OUTPUTOKEN_DIRECTORY="C://Users//3plgtanickacf//Documents//GitHub//FISQL//src//paquetes//";*/
 }
 
 PARSER_BEGIN(paquete)
@@ -28,13 +28,15 @@ TOKEN:
     |<TOKEN_LOGIN:"\""("login")"\""> {System.out.println(image);}
     |<TOKEN_COMANDO:"\""("comando")"\""> {System.out.println(image);}
     |<TOKEN_INSTRUCCION:"\""("instruccion")"\""> {System.out.println(image);}
-    
-    |<CADENA:"\"" (~["\""])*"\""> {System.out.println(image);}
-    |<ENTERO: (["0"-"9"])+ > {System.out.println(image);}
-
     |<TOKEN_FIN:"\""("fin")"\""> {System.out.println(image);}
     |<TOKEN_USQL:"\""("usql")"\""> {System.out.println(image);}
     |<TOKEN_REPORTE:"\""("reporte")"\""> {System.out.println(image);}
+    
+    |<CODIGO:"\u007e" (~["\u007e"])* "\u007e"> {System.out.println(image);}
+    |<CADENA:"\"" (~["\""])*"\""> {System.out.println(image);}
+    |<ENTERO: (["0"-"9"])+ > {System.out.println(image);}
+
+ 
 }
 
 SKIP: 
@@ -63,7 +65,7 @@ void VALIDAR():
   <TOKEN_VALIDAR> <DOSPUNTOS> <ENTERO> <COMA>
   <TOKEN_LOGIN> <DOSPUNTOS> 
     <COR_ABRE>
-        <COMANDO> <DOSPUNTOS> <CADENA>
+        <TOKEN_COMANDO> <DOSPUNTOS> <CODIGO>
     <COR_CIERRA>
 }
 
@@ -71,7 +73,7 @@ void PAQUETE():
 {}
 {
   <TOKEN_PAQUETE><DOSPUNTOS>(<TOKEN_FIN>|((<TOKEN_USQL>|<TOKEN_REPORTE>)<COMA>
-     <TOKEN_INSTRUCCION><DOSPUNTOS><CADENA>
+     <TOKEN_INSTRUCCION><DOSPUNTOS><CODIGO>
     )
   )
 }

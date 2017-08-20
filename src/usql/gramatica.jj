@@ -1,12 +1,12 @@
 options {
 IGNORE_CASE = true;
 STATIC = false;
-    /*OUTPUTOKEN_DIRECTORY="C://Users//anick//Documents//NetBeansProjects//[Compi2]Proyecto1_201212859//src//analizador//"*/;
-    OUTPUTOKEN_DIRECTORY="C://Users//3plgtanickacf//Documents//GitHub//FISQL//src//analizador//";
+    OUTPUTOKEN_DIRECTORY="C://Users//anick//Documents//NetBeansProjects//[Compi2]Proyecto1_201212859//FISQL//src//usql//";
+    /*OUTPUTOKEN_DIRECTORY="C://Users//3plgtanickacf//Documents//GitHub//FISQL//src//analizador//";*/
 }
 
 PARSER_BEGIN(analizador)
-package analizador;
+package usql;
 
 public class analizador {
   public static void main(String args[]) throws ParseException {
@@ -338,13 +338,13 @@ void SELECCIONAR():
 void OTORGAR():
 {}
 {
-     <TOKEN_OTORGAR> LISTA_ID() <ID> <PUNTO> (<POR> | <ID>) <PYCOMA>
+     <TOKEN_OTORGAR> <ID> <ID> <PUNTO> (<POR> | <ID>) <PYCOMA>
 }
 
 void DENEGAR():
 {}
 {
-      <TOKEN_DENEGAR> LISTA_ID() <ID> <PUNTO> (<POR> | <ID>) <PYCOMA>
+      <TOKEN_DENEGAR> <ID> <ID> <PUNTO> (<POR> | <ID>) <PYCOMA>
 }
 
 void DECLARAR():
@@ -483,7 +483,13 @@ void EXP():
 void F():
 {}
 {
- E() ((<POR>|<DIVISION>) F())?  
+ U() ((<POR>|<DIVISION>) F())?  
+}
+
+void U():
+{}
+{
+    (<MENOS>)? E() 
 }
 
 void E():
@@ -506,7 +512,7 @@ void H():
 void LLAMADA_METODO_OBJETO():
 {}
 {
-    <ID> ((<PAR_ABRE> (LISTA_COND())? <PAR_CIERRA>) | <PUNTO> <ID>)?
+    <ID> ((<PAR_ABRE> (LISTA_COND())? <PAR_CIERRA>) | <PUNTO> <ID>( <PUNTO> <ID>)?)?
 }
 
 void LLAMADA_METODO_FUNCION():

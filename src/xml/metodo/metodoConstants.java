@@ -56,6 +56,8 @@ public interface metodoConstants {
   int TOKEN_ID_CIERRA = 22;
   /** RegularExpression Id. */
   int CADENA = 23;
+  /** RegularExpression Id. */
+  int CODIGO = 24;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -86,6 +88,7 @@ public interface metodoConstants {
     "<TOKEN_ID_ABRE>",
     "<TOKEN_ID_CIERRA>",
     "<CADENA>",
+    "<CODIGO>",
     "\" \"",
     "\"\\n\"",
     "\"\\r\"",

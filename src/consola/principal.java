@@ -5,17 +5,20 @@
  */
 package consola;
 
+import archivos.archivo;
 import usql.ParseException;
 import usql.TokenMgrError;
 import usql.analizador;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import paquetes.paquete;
 import xml.db.db;
 import xml.funcion.funcion;
 import xml.maestro.maestro;
 import xml.metodo.metodo;
 import xml.objeto.objeto;
 import xml.tabla.tabla;
+import xml.usuario.usuario;
 
 /**
  *
@@ -85,22 +88,27 @@ public class principal extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
          
-        // analizador g = new analizador(new java.io.StringReader(this.jTextArea1.getText()));
+         analizador g = new analizador(new java.io.StringReader(this.jTextArea1.getText()));
         // maestro g = new maestro(new java.io.StringReader(this.jTextArea1.getText()));
         // db g = new db(new java.io.StringReader(this.jTextArea1.getText()));
-        tabla g = new tabla(new java.io.StringReader(this.jTextArea1.getText()));
+        // tabla g = new tabla(new java.io.StringReader(this.jTextArea1.getText()));
         // metodo g = new metodo(new java.io.StringReader(this.jTextArea1.getText()));
         // objeto g = new objeto(new java.io.StringReader(this.jTextArea1.getText()));
         // funcion g = new funcion(new java.io.StringReader(this.jTextArea1.getText()));
+        // paquete g = new paquete(new java.io.StringReader(this.jTextArea1.getText()));
+        // usuario g = new usuario(new java.io.StringReader(this.jTextArea1.getText()));
         
-        try {
-            g.S();
-            System.out.println("Funciona");
-        } 
-        catch (xml.tabla.ParseException ex) {
-            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        try {
+//            g.S();
+//            System.out.println("Funciona");
+//        } 
+//        catch (usql.ParseException ex) {
+//            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
+        archivo a=new archivo();
         
+         
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

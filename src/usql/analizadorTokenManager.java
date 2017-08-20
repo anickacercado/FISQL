@@ -1909,7 +1909,7 @@ void TokenLexicalActions(Token matchedToken)
       case 10 :
         image.append(jjstrLiteralImages[10]);
         lengthOfMatch = jjstrLiteralImages[10].length();
-                    System.out.println(image);
+                System.out.println(image);
          break;
       case 11 :
         image.append(jjstrLiteralImages[11]);
@@ -1944,7 +1944,7 @@ void TokenLexicalActions(Token matchedToken)
       case 17 :
         image.append(jjstrLiteralImages[17]);
         lengthOfMatch = jjstrLiteralImages[17].length();
-                            System.out.println(image);
+                        System.out.println(image);
          break;
       case 18 :
         image.append(jjstrLiteralImages[18]);
@@ -1989,7 +1989,7 @@ void TokenLexicalActions(Token matchedToken)
       case 26 :
         image.append(jjstrLiteralImages[26]);
         lengthOfMatch = jjstrLiteralImages[26].length();
-                         System.out.println(image);
+                     System.out.println(image);
          break;
       case 27 :
         image.append(jjstrLiteralImages[27]);
@@ -2198,27 +2198,27 @@ void TokenLexicalActions(Token matchedToken)
          break;
       case 78 :
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-                                 System.out.println(image);
+                             System.out.println(image);
          break;
       case 79 :
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-                                       System.out.println(image);
+                                   System.out.println(image);
          break;
       case 80 :
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-                                     System.out.println(image);
+                                 System.out.println(image);
          break;
       case 81 :
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-                                System.out.println(image);
+                            System.out.println(image);
          break;
       case 82 :
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-                                 System.out.println(image);
+                             System.out.println(image);
          break;
       case 83 :
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));
-                                         System.out.println(image);
+                                     System.out.println(image);
          break;
       case 84 :
         image.append(input_stream.GetSuffix(jjimageLen + (lengthOfMatch = jjmatchedPos + 1)));

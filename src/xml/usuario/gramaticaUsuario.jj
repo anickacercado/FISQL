@@ -1,0 +1,108 @@
+options {
+IGNORE_CASE = true;
+STATIC = false;
+    OUTPUTOKEN_DIRECTORY="C://Users//anick//Documents//NetBeansProjects//[Compi2]Proyecto1_201212859//FISQL//src//xml//usuario//";
+    /*OUTPUTOKEN_DIRECTORY="C://Users//3plgtanickacf//Documents//GitHub//FISQL//src//xml//tabla//";*/
+}
+
+PARSER_BEGIN(usuario)
+package xml.usuario;
+
+public class usuario {
+  public static void main(String args[]) throws ParseException {
+    usuario parser = new usuario(System.in);
+    parser.S();
+    System.out.println("Exito!!");
+  }
+}
+PARSER_END(usuario)
+
+TOKEN:
+{   
+  
+  <TOKEN_USR_ABRE: ("<usr>")> {System.out.println(image);}
+  |<TOKEN_USR_CIERRA: ("</usr>")> {System.out.println(image);}
+  |<TOKEN_NOMBRE_ABRE: ("<nombre>")> {System.out.println(image);}
+  |<TOKEN_NOMBRE_CIERRA: ("</nombre>")> {System.out.println(image);}
+  |<TOKEN_PASS_ABRE: ("<pass>")> {System.out.println(image);}
+  |<TOKEN_PASS_CIERRA: ("</pass>")> {System.out.println(image);}
+  |<TOKEN_TIPO_ABRE: ("<tipo>")> {System.out.println(image);}
+  |<TOKEN_TIPO_CIERRA: ("</tipo>")> {System.out.println(image);}
+  |<TOKEN_ESTADO_ABRE: ("<estado>")> {System.out.println(image);}
+  |<TOKEN_ESTADO_CIERRA: ("</estado>")> {System.out.println(image);}
+  |<TOKEN_PERMISO_ABRE: ("<permiso>")> {System.out.println(image);}
+  |<TOKEN_PERMISO_CIERRA: ("</permiso>")> {System.out.println(image);}
+  |<TOKEN_DB_ABRE: ("<db>")> {System.out.println(image);}
+  |<TOKEN_DB_CIERRA: ("</db>")> {System.out.println(image);}
+  |<TOKEN_TABLA_ABRE: ("<tabla>")> {System.out.println(image);}
+  |<TOKEN_TABLA_CIERRA: ("</tabla>")> {System.out.println(image);}
+  |<TOKEN_OBJ_ABRE: ("<obj>")> {System.out.println(image);}
+  |<TOKEN_OBJ_CIERRA: ("</obj>")> {System.out.println(image);}
+  |<TOKEN_FUNC_ABRE: ("<func>")> {System.out.println(image);}
+  |<TOKEN_FUNC_CIERRA: ("</func>")> {System.out.println(image);}
+  |<TOKEN_PROC_ABRE: ("<proc>")> {System.out.println(image);}
+  |<TOKEN_PROC_CIERRA: ("</proc>")> {System.out.println(image);}
+
+  |<CADENA:"\"" (~["\""])*"\""> {System.out.println(image);}
+}
+
+SKIP: 
+{
+  " "
+| "\n"
+| "\r"
+| "\t"
+}
+
+void S():
+{}
+{
+   USR()
+}
+
+
+void USR():
+{}
+{
+     (<TOKEN_USR_ABRE> 
+        <TOKEN_NOMBRE_ABRE> <CADENA> <TOKEN_NOMBRE_CIERRA>
+        <TOKEN_PASS_ABRE> <CADENA> <TOKEN_PASS_CIERRA>
+        <TOKEN_TIPO_ABRE> <CADENA> <TOKEN_TIPO_CIERRA>
+        <TOKEN_ESTADO_ABRE> <CADENA> <TOKEN_ESTADO_CIERRA>
+        <TOKEN_PERMISO_ABRE> (DB())? <TOKEN_PERMISO_CIERRA>
+       <TOKEN_USR_CIERRA>) 
+       (USR())?
+}
+
+void DB():
+{}
+{
+    (<TOKEN_DB_ABRE> 
+        <TOKEN_NOMBRE_ABRE> <CADENA> <TOKEN_NOMBRE_CIERRA>
+        (LISTA_OPCION())?
+    <TOKEN_DB_CIERRA>)
+    (DB())?
+}
+
+void LISTA_OPCION():
+{}
+{
+    OPCION() (LISTA_OPCION())?
+}
+
+void OPCION():
+{}
+{
+    <TOKEN_TABLA_ABRE> <CADENA> <TOKEN_TABLA_CIERRA>
+    |<TOKEN_OBJ_ABRE> <CADENA> <TOKEN_OBJ_CIERRA>
+    |<TOKEN_FUNC_ABRE> <CADENA> <TOKEN_FUNC_CIERRA>
+    |<TOKEN_PROC_ABRE> <CADENA> <TOKEN_PROC_CIERRA>
+}
+
+
+
+
+
+
+
+

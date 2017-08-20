@@ -724,7 +724,7 @@ public class analizador implements analizadorConstants {
 
   final public void OTORGAR() throws ParseException {
     jj_consume_token(TOKEN_OTORGAR);
-    LISTA_ID();
+    jj_consume_token(ID);
     jj_consume_token(ID);
     jj_consume_token(PUNTO);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -746,7 +746,7 @@ public class analizador implements analizadorConstants {
 
   final public void DENEGAR() throws ParseException {
     jj_consume_token(TOKEN_DENEGAR);
-    LISTA_ID();
+    jj_consume_token(ID);
     jj_consume_token(ID);
     jj_consume_token(PUNTO);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -1182,7 +1182,7 @@ public class analizador implements analizadorConstants {
   }
 
   final public void F() throws ParseException {
-    E();
+    U();
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case POR:
     case DIVISION:{
@@ -1209,6 +1209,19 @@ public class analizador implements analizadorConstants {
     }
   }
 
+  final public void U() throws ParseException {
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case MENOS:{
+      jj_consume_token(MENOS);
+      break;
+      }
+    default:
+      jj_la1[51] = jj_gen;
+      ;
+    }
+    E();
+  }
+
   final public void E() throws ParseException {
     H();
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -1218,7 +1231,7 @@ public class analizador implements analizadorConstants {
       break;
       }
     default:
-      jj_la1[51] = jj_gen;
+      jj_la1[52] = jj_gen;
       ;
     }
   }
@@ -1234,7 +1247,7 @@ public class analizador implements analizadorConstants {
         break;
         }
       default:
-        jj_la1[52] = jj_gen;
+        jj_la1[53] = jj_gen;
         ;
       }
       break;
@@ -1262,7 +1275,7 @@ public class analizador implements analizadorConstants {
       break;
       }
     default:
-      jj_la1[53] = jj_gen;
+      jj_la1[54] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1277,6 +1290,7 @@ public class analizador implements analizadorConstants {
       case PAR_ABRE:{
         jj_consume_token(PAR_ABRE);
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case MENOS:
         case NOT:
         case TOKEN_FECHA:
         case TOKEN_FECHA_HORA:
@@ -1290,7 +1304,7 @@ public class analizador implements analizadorConstants {
           break;
           }
         default:
-          jj_la1[54] = jj_gen;
+          jj_la1[55] = jj_gen;
           ;
         }
         jj_consume_token(PAR_CIERRA);
@@ -1299,17 +1313,27 @@ public class analizador implements analizadorConstants {
       case PUNTO:{
         jj_consume_token(PUNTO);
         jj_consume_token(ID);
+        switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+        case PUNTO:{
+          jj_consume_token(PUNTO);
+          jj_consume_token(ID);
+          break;
+          }
+        default:
+          jj_la1[56] = jj_gen;
+          ;
+        }
         break;
         }
       default:
-        jj_la1[55] = jj_gen;
+        jj_la1[57] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
       break;
       }
     default:
-      jj_la1[56] = jj_gen;
+      jj_la1[58] = jj_gen;
       ;
     }
   }
@@ -1320,6 +1344,7 @@ public class analizador implements analizadorConstants {
       jj_consume_token(ID);
       jj_consume_token(PAR_ABRE);
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case MENOS:
       case NOT:
       case TOKEN_FECHA:
       case TOKEN_FECHA_HORA:
@@ -1333,7 +1358,7 @@ public class analizador implements analizadorConstants {
         break;
         }
       default:
-        jj_la1[57] = jj_gen;
+        jj_la1[59] = jj_gen;
         ;
       }
       jj_consume_token(PAR_CIERRA);
@@ -1344,6 +1369,7 @@ public class analizador implements analizadorConstants {
       jj_consume_token(TOKEN_IMPRIMIR);
       jj_consume_token(PAR_ABRE);
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case MENOS:
       case NOT:
       case TOKEN_FECHA:
       case TOKEN_FECHA_HORA:
@@ -1357,7 +1383,7 @@ public class analizador implements analizadorConstants {
         break;
         }
       default:
-        jj_la1[58] = jj_gen;
+        jj_la1[60] = jj_gen;
         ;
       }
       jj_consume_token(PAR_CIERRA);
@@ -1365,7 +1391,7 @@ public class analizador implements analizadorConstants {
       break;
       }
     default:
-      jj_la1[59] = jj_gen;
+      jj_la1[61] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1380,7 +1406,7 @@ public class analizador implements analizadorConstants {
   public Token jj_nt;
   private int jj_ntk;
   private int jj_gen;
-  final private int[] jj_la1 = new int[60];
+  final private int[] jj_la1 = new int[62];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static private int[] jj_la1_2;
@@ -1390,13 +1416,13 @@ public class analizador implements analizadorConstants {
       jj_la1_init_2();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x10000000,0x10000000,0x0,0x0,0x60000000,0x40,0x80000000,0x80000000,0x80000000,0x0,0x40,0x0,0x40,0x0,0x40,0x40000000,0x40,0x0,0x0,0x60000000,0x0,0x0,0x0,0x1000,0x0,0x0,0x0,0x1000,0x1000,0x100,0x0,0x40,0x0,0x200,0x0,0x0,0x0,0x0,0x18000,0x0,0x0,0x0,0x1000000,0x800000,0x2000000,0x7e0000,0x7e0000,0xc00,0xc00,0x3000,0x3000,0x4000,0x200,0x0,0x2000000,0x202,0x202,0x2000000,0x2000000,0x0,};
+      jj_la1_0 = new int[] {0x10000000,0x10000000,0x0,0x0,0x60000000,0x40,0x80000000,0x80000000,0x80000000,0x0,0x40,0x0,0x40,0x0,0x40,0x40000000,0x40,0x0,0x0,0x60000000,0x0,0x0,0x0,0x1000,0x0,0x0,0x0,0x1000,0x1000,0x100,0x0,0x40,0x0,0x200,0x0,0x0,0x0,0x0,0x18000,0x0,0x0,0x0,0x1000000,0x800000,0x2000000,0x7e0000,0x7e0000,0xc00,0xc00,0x3000,0x3000,0x800,0x4000,0x200,0x0,0x2000800,0x200,0x202,0x202,0x2000800,0x2000800,0x0,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x386b1800,0x386b1800,0x606a0080,0x606a0080,0x170,0x0,0xf,0xf,0xf,0x0,0x0,0x0,0x0,0x0,0x0,0x110,0x0,0x6000,0x6000,0x110,0x0,0x100000,0x100000,0x0,0x100000,0x6000000,0x1000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x80000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_1 = new int[] {0x386b1800,0x386b1800,0x606a0080,0x606a0080,0x170,0x0,0xf,0xf,0xf,0x0,0x0,0x0,0x0,0x0,0x0,0x110,0x0,0x6000,0x6000,0x110,0x0,0x100000,0x100000,0x0,0x100000,0x6000000,0x1000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x80000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
    private static void jj_la1_init_2() {
-      jj_la1_2 = new int[] {0x1003c40,0x1003c40,0x3000079,0x3000079,0x0,0x0,0x0,0x0,0x0,0x10fc000,0x0,0x10fc000,0x0,0x10fc000,0x0,0x0,0x0,0x0,0x0,0x0,0x1000000,0x0,0x0,0x1000000,0x0,0x0,0x0,0x1000000,0x1000000,0x0,0x10fc000,0x0,0xfc000,0x0,0x0,0x2,0x4,0xb00000,0x0,0x380,0xc00,0x3000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x3b00380,0x3b00380,0x0,0x0,0x3b00380,0x3b00380,0x1000040,};
+      jj_la1_2 = new int[] {0x1003c40,0x1003c40,0x3000079,0x3000079,0x0,0x0,0x0,0x0,0x0,0x10fc000,0x0,0x10fc000,0x0,0x10fc000,0x0,0x0,0x0,0x0,0x0,0x0,0x1000000,0x0,0x0,0x1000000,0x0,0x0,0x0,0x1000000,0x1000000,0x0,0x10fc000,0x0,0xfc000,0x0,0x0,0x2,0x4,0xb00000,0x0,0x380,0xc00,0x3000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x3b00380,0x3b00380,0x0,0x0,0x0,0x3b00380,0x3b00380,0x1000040,};
    }
 
   /** Constructor with InputStream. */
@@ -1410,7 +1436,7 @@ public class analizador implements analizadorConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 60; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 62; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -1424,7 +1450,7 @@ public class analizador implements analizadorConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 60; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 62; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -1434,7 +1460,7 @@ public class analizador implements analizadorConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 60; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 62; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -1444,7 +1470,7 @@ public class analizador implements analizadorConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 60; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 62; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -1453,7 +1479,7 @@ public class analizador implements analizadorConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 60; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 62; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -1462,7 +1488,7 @@ public class analizador implements analizadorConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 60; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 62; i++) jj_la1[i] = -1;
   }
 
   private Token jj_consume_token(int kind) throws ParseException {
@@ -1518,7 +1544,7 @@ public class analizador implements analizadorConstants {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 60; i++) {
+    for (int i = 0; i < 62; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {

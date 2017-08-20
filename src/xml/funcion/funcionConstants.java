@@ -60,6 +60,8 @@ public interface funcionConstants {
   int TOKEN_ID_CIERRA = 24;
   /** RegularExpression Id. */
   int CADENA = 25;
+  /** RegularExpression Id. */
+  int CODIGO = 26;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -92,6 +94,7 @@ public interface funcionConstants {
     "<TOKEN_ID_ABRE>",
     "<TOKEN_ID_CIERRA>",
     "<CADENA>",
+    "<CODIGO>",
     "\" \"",
     "\"\\n\"",
     "\"\\r\"",
