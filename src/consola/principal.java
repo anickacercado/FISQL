@@ -77,7 +77,7 @@ public class principal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -88,7 +88,7 @@ public class principal extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
          
-         analizador g = new analizador(new java.io.StringReader(this.jTextArea1.getText()));
+        // analizador g = new analizador(new java.io.StringReader(this.jTextArea1.getText()));
         // maestro g = new maestro(new java.io.StringReader(this.jTextArea1.getText()));
         // db g = new db(new java.io.StringReader(this.jTextArea1.getText()));
         // tabla g = new tabla(new java.io.StringReader(this.jTextArea1.getText()));
@@ -108,6 +108,15 @@ public class principal extends javax.swing.JFrame {
 
         archivo a=new archivo();
         
+        
+        usuario g = new usuario(new java.io.StringReader(this.jTextArea1.getText()));  
+        try {
+            g.S();
+            System.out.println("Funciona");
+        } 
+        catch (xml.usuario.ParseException ex) {
+            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
          
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -11,11 +11,11 @@ import java.util.ArrayList;
  *
  * @author anick
  */
-public class usuario {
+public class user {
     public String nombre,pass,tipo,estado;
     public ArrayList<permisos> permisos;
     
-    public usuario(String nombre, String pass, String tipo, String estado, ArrayList<permisos> permisos)
+    public user(String nombre, String pass, String tipo, String estado, ArrayList<permisos> permisos)
     {
         this.nombre=nombre;
         this.pass=pass;

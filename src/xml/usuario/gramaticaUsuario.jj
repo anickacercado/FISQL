@@ -7,8 +7,19 @@ STATIC = false;
 
 PARSER_BEGIN(usuario)
 package xml.usuario;
+import java.util.ArrayList;
+import archivos.usuario.*;
 
 public class usuario {
+  private ArrayList<String> lt= new ArrayList<String>();
+  private ArrayList<String> lo= new ArrayList<String>();
+  private ArrayList<String> lf= new ArrayList<String>();
+  private ArrayList<String> lp= new ArrayList<String>();
+  private ArrayList<permisos> lista_permisos= new ArrayList<permisos>();
+  private ArrayList<user> lista_usuarios= new ArrayList<user>();
+  private String nombre_usuario,nombre_bd,pass,tipo,estado;
+  private String opcion;
+
   public static void main(String args[]) throws ParseException {
     usuario parser = new usuario(System.in);
     parser.S();
@@ -54,32 +65,52 @@ SKIP:
 | "\t"
 }
 
-void S():
+ArrayList<user> S():
 {}
 {
-   USR()
+   USR(){return lista_usuarios;}
 }
 
 
 void USR():
-{}
+{Token n; Token p; Token t; Token e;}
 {
      (<TOKEN_USR_ABRE> 
-        <TOKEN_NOMBRE_ABRE> <CADENA> <TOKEN_NOMBRE_CIERRA>
-        <TOKEN_PASS_ABRE> <CADENA> <TOKEN_PASS_CIERRA>
-        <TOKEN_TIPO_ABRE> <CADENA> <TOKEN_TIPO_CIERRA>
-        <TOKEN_ESTADO_ABRE> <CADENA> <TOKEN_ESTADO_CIERRA>
-        <TOKEN_PERMISO_ABRE> (DB())? <TOKEN_PERMISO_CIERRA>
+        <TOKEN_NOMBRE_ABRE> n=<CADENA> <TOKEN_NOMBRE_CIERRA> {nombre_usuario=n.image;}
+        <TOKEN_PASS_ABRE> p=<CADENA> <TOKEN_PASS_CIERRA> {pass=p.image;}
+        <TOKEN_TIPO_ABRE> t=<CADENA> <TOKEN_TIPO_CIERRA> {tipo=t.image;}
+        <TOKEN_ESTADO_ABRE> e=<CADENA> <TOKEN_ESTADO_CIERRA> {estado=e.image;}
+        <TOKEN_PERMISO_ABRE> (DB())? 
+                {
+                    nombre_usuario= nombre_usuario.substring(1, nombre_usuario.length()-1);
+                    pass= pass.substring(1, pass.length()-1);
+                    tipo= tipo.substring(1, tipo.length()-1);
+                    estado= estado.substring(1, estado.length()-1);
+                    
+                    user u= new user(nombre_usuario,pass,tipo,estado,lista_permisos);
+                    lista_usuarios.add(u);
+                    
+                    lista_permisos= new ArrayList<permisos>();
+                }
+        <TOKEN_PERMISO_CIERRA> 
        <TOKEN_USR_CIERRA>) 
        (USR())?
 }
 
 void DB():
-{}
+{Token t;}
 {
     (<TOKEN_DB_ABRE> 
-        <TOKEN_NOMBRE_ABRE> <CADENA> <TOKEN_NOMBRE_CIERRA>
-        (LISTA_OPCION())?
+        <TOKEN_NOMBRE_ABRE> t=<CADENA> <TOKEN_NOMBRE_CIERRA> {nombre_bd=t.image;}
+        (LISTA_OPCION())? {
+                            nombre_bd= nombre_bd.substring(1, nombre_bd.length()-1);
+                            permisos p= new permisos(nombre_bd,lt,lo,lf,lp);
+                            lista_permisos.add(p);
+                            lt= new ArrayList<String>();
+                            lo= new ArrayList<String>();
+                            lf= new ArrayList<String>();
+                            lp= new ArrayList<String>();
+                          }
     <TOKEN_DB_CIERRA>)
     (DB())?
 }
@@ -91,12 +122,28 @@ void LISTA_OPCION():
 }
 
 void OPCION():
-{}
+{Token t;}
 {
-    <TOKEN_TABLA_ABRE> <CADENA> <TOKEN_TABLA_CIERRA>
-    |<TOKEN_OBJ_ABRE> <CADENA> <TOKEN_OBJ_CIERRA>
-    |<TOKEN_FUNC_ABRE> <CADENA> <TOKEN_FUNC_CIERRA>
-    |<TOKEN_PROC_ABRE> <CADENA> <TOKEN_PROC_CIERRA>
+    <TOKEN_TABLA_ABRE> t=<CADENA> <TOKEN_TABLA_CIERRA> {
+                                                        opcion= t.image;
+                                                        opcion= opcion.substring(1, opcion.length()-1);
+                                                        lt.add(opcion);
+                                                        }
+    |<TOKEN_OBJ_ABRE>  t=<CADENA> <TOKEN_OBJ_CIERRA>   {
+                                                        opcion= t.image;
+                                                        opcion= opcion.substring(1, opcion.length()-1);
+                                                        lo.add(opcion);
+                                                        }
+    |<TOKEN_FUNC_ABRE> t=<CADENA> <TOKEN_FUNC_CIERRA>  {
+                                                        opcion= t.image;
+                                                        opcion= opcion.substring(1, opcion.length()-1);
+                                                        lf.add(t.image);
+                                                        }   
+    |<TOKEN_PROC_ABRE> t=<CADENA> <TOKEN_PROC_CIERRA>  {
+                                                        opcion= t.image;
+                                                        opcion= opcion.substring(1, opcion.length()-1);
+                                                        lp.add(opcion);
+                                                        }
 }
 
 
