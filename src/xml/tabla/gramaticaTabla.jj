@@ -1,18 +1,29 @@
 options {
 IGNORE_CASE = true;
 STATIC = false;
-    OUTPUTOKEN_DIRECTORY="C://Users//anick//Documents//NetBeansProjects//[Compi2]Proyecto1_201212859//FISQL//src//xml//tabla//";
-    /*OUTPUTOKEN_DIRECTORY="C://Users//3plgtanickacf//Documents//GitHub//FISQL//src//xml//tabla//";*/
+   /* OUTPUTOKEN_DIRECTORY="C://Users//anick//Documents//NetBeansProjects//[Compi2]Proyecto1_201212859//FISQL//src//xml//tabla//"; */
+    OUTPUTOKEN_DIRECTORY="C://Users//3plgtanickacf//Documents//GitHub//FISQL//src//xml//tabla//";
 }
 
 PARSER_BEGIN(tabla)
 package xml.tabla;
+import java.util.ArrayList;
+import archivos.tabla.*;
+import DML.*;
 
 public class tabla {
+ 
+  accionTabla at = new accionTabla();
+  private ArrayList<table> lt= new ArrayList<table>();
+  private ArrayList<registro_objeto> lro = new ArrayList<registro_objeto>();
+  private String nombre_campo, valor;
+
+
+
+
   public static void main(String args[]) throws ParseException {
     tabla parser = new tabla(System.in);
     parser.S();
-    System.out.println("Exito!!");
   }
 }
 PARSER_END(tabla)
@@ -35,25 +46,57 @@ SKIP:
 | "\t"
 }
 
-void S():
+ArrayList<table> S():
 {}
 {
-   ROW()
+   ROW() {return lt;}
 }
 
 
 void ROW():
 {}
 {
-     (<TOKEN_ROWS_ABRE> LISTA_REGISTRO() <TOKEN_ROWS_CIERRA>) (ROW())?
+     (<TOKEN_ROWS_ABRE> LISTA_REGISTRO() <TOKEN_ROWS_CIERRA>) {}
+     (ROW())?
 }
 
 
 void LISTA_REGISTRO():
-{}
+{Token nc,v;}
 {
-     (<TOKEN_ID_ABRE> (<CADENA>|LISTA_REGISTRO()) <TOKEN_ID_CIERRA>) (LISTA_REGISTRO())?
+     (nc=<TOKEN_ID_ABRE> (v=<CADENA>    {  
+                                            nombre_campo= nc.image;
+                                            nombre_campo= opcion.substring(1, opcion.length()-1);
+                                            valor= v.image;
+                                            valor= opcion.substring(1, opcion.length()-1);
+                                            at.insertTable(lt, nombre_campo,valor);               
+                                        }
+                                                
+                       
+                        |LISTA_OBJETO() {
+                                            nombre_campo= nc.image;
+                                            nombre_campo= opcion.substring(1, opcion.length()-1);
+                                            at.insertTableObject(table, nombre_campo, lro)
+                                            lro= new ArrayList<registro_objeto>();
+                                        }
+
+        ) <TOKEN_ID_CIERRA>) (LISTA_REGISTRO())?
 }
+
+void LISTA_OBJETO():
+{Token nc,v;}
+{
+     (nc=<TOKEN_ID_ABRE> v=<CADENA> {
+                                        nombre_campo= nc.image;
+                                        nombre_campo= opcion.substring(1, opcion.length()-1);
+                                        valor= v.image;
+                                        valor= opcion.substring(1, opcion.length()-1);
+                                        registro_objeto ro = new registro_objeto(nombre_campo,valor);
+                                        lro.add(ro);               
+                                    }
+      <TOKEN_ID_CIERRA>) (LISTA_OBJETO())?
+}
+
 
 
 

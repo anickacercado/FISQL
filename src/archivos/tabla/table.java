@@ -21,8 +21,8 @@ public ArrayList<fila_tabla_objeto> registro_objeto;
 public table(String nombre_campo, 
  ArrayList<fila_tabla> registro,
  boolean es_objeto,
+ 
  ArrayList<fila_tabla_objeto> registro_objeto){
-
     this.nombre_campo=nombre_campo;
     this.registro=registro;
     this.es_objeto=es_objeto;

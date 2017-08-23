@@ -23,7 +23,6 @@ public class usuario {
   public static void main(String args[]) throws ParseException {
     usuario parser = new usuario(System.in);
     parser.S();
-    System.out.println("Exito!!");
   }
 }
 PARSER_END(usuario)
