@@ -3,6 +3,7 @@
 package xml.tabla;
 import java.util.ArrayList;
 import archivos.tabla.*;
+import DML.*;
 
 /** Token Manager. */
 @SuppressWarnings("unused")public class tablaTokenManager implements tablaConstants {

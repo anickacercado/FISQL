@@ -66,17 +66,17 @@ void LISTA_REGISTRO():
 {
      (nc=<TOKEN_ID_ABRE> (v=<CADENA>    {  
                                             nombre_campo= nc.image;
-                                            nombre_campo= opcion.substring(1, opcion.length()-1);
+                                            nombre_campo= nombre_campo.substring(1, nombre_campo.length()-1);
                                             valor= v.image;
-                                            valor= opcion.substring(1, opcion.length()-1);
+                                            valor= valor.substring(1, valor.length()-1);
                                             at.insertTable(lt, nombre_campo,valor);               
                                         }
                                                 
                        
                         |LISTA_OBJETO() {
                                             nombre_campo= nc.image;
-                                            nombre_campo= opcion.substring(1, opcion.length()-1);
-                                            at.insertTableObject(table, nombre_campo, lro)
+                                            nombre_campo= nombre_campo.substring(1, nombre_campo.length()-1);
+                                            at.insertTableObject(lt, nombre_campo, lro);
                                             lro= new ArrayList<registro_objeto>();
                                         }
 
@@ -88,9 +88,9 @@ void LISTA_OBJETO():
 {
      (nc=<TOKEN_ID_ABRE> v=<CADENA> {
                                         nombre_campo= nc.image;
-                                        nombre_campo= opcion.substring(1, opcion.length()-1);
+                                        nombre_campo= nombre_campo.substring(1, nombre_campo.length()-1);
                                         valor= v.image;
-                                        valor= opcion.substring(1, opcion.length()-1);
+                                        valor= valor.substring(1, valor.length()-1);
                                         registro_objeto ro = new registro_objeto(nombre_campo,valor);
                                         lro.add(ro);               
                                     }

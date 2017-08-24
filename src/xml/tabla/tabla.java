@@ -3,15 +3,16 @@
 package xml.tabla;
 import java.util.ArrayList;
 import archivos.tabla.*;
+import DML.*;
 
 public class tabla implements tablaConstants {
 
-  private ArrayList<table> table= new ArrayList<table>();
-  private ArrayList<fila_tabla> fila_tabla= new ArrayList<fila_tabla>();
-  private ArrayList<fila_tabla_objeto> fila_tabla_objeto= new ArrayList<fila_tabla_objeto>();
-  private ArrayList<registro_objeto> registro_objeto= new ArrayList<registro_objeto>();
-  private String nombre_campo;
-  private int fila;
+  accionTabla at = new accionTabla();
+  private ArrayList<table> lt= new ArrayList<table>();
+  private ArrayList<registro_objeto> lro = new ArrayList<registro_objeto>();
+  private String nombre_campo, valor;
+
+
 
 
   public static void main(String args[]) throws ParseException {
@@ -19,14 +20,17 @@ public class tabla implements tablaConstants {
     parser.S();
   }
 
-  final public void S() throws ParseException {
+  final public ArrayList<table> S() throws ParseException {
     ROW();
+{if ("" != null) return lt;}
+    throw new Error("Missing return statement in function");
   }
 
   final public void ROW() throws ParseException {
     jj_consume_token(TOKEN_ROWS_ABRE);
     LISTA_REGISTRO();
     jj_consume_token(TOKEN_ROWS_CIERRA);
+
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case TOKEN_ROWS_ABRE:{
       ROW();
@@ -38,15 +42,24 @@ public class tabla implements tablaConstants {
     }
   }
 
-  final public void LISTA_REGISTRO() throws ParseException {
-    jj_consume_token(TOKEN_ID_ABRE);
+  final public void LISTA_REGISTRO() throws ParseException {Token nc,v;
+    nc = jj_consume_token(TOKEN_ID_ABRE);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case CADENA:{
-      jj_consume_token(CADENA);
+      v = jj_consume_token(CADENA);
+nombre_campo= nc.image;
+                                            nombre_campo= nombre_campo.substring(1, nombre_campo.length()-1);
+                                            valor= v.image;
+                                            valor= valor.substring(1, valor.length()-1);
+                                            at.insertTable(lt, nombre_campo,valor);
       break;
       }
     case TOKEN_ID_ABRE:{
       LISTA_OBJETO();
+nombre_campo= nc.image;
+                                            nombre_campo= nombre_campo.substring(1, nombre_campo.length()-1);
+                                            at.insertTableObject(lt, nombre_campo, lro);
+                                            lro= new ArrayList<registro_objeto>();
       break;
       }
     default:
@@ -66,9 +79,15 @@ public class tabla implements tablaConstants {
     }
   }
 
-  final public void LISTA_OBJETO() throws ParseException {
-    jj_consume_token(TOKEN_ID_ABRE);
-    jj_consume_token(CADENA);
+  final public void LISTA_OBJETO() throws ParseException {Token nc,v;
+    nc = jj_consume_token(TOKEN_ID_ABRE);
+    v = jj_consume_token(CADENA);
+nombre_campo= nc.image;
+                                        nombre_campo= nombre_campo.substring(1, nombre_campo.length()-1);
+                                        valor= v.image;
+                                        valor= valor.substring(1, valor.length()-1);
+                                        registro_objeto ro = new registro_objeto(nombre_campo,valor);
+                                        lro.add(ro);
     jj_consume_token(TOKEN_ID_CIERRA);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case TOKEN_ID_ABRE:{
