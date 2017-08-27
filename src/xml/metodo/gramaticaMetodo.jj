@@ -1,18 +1,23 @@
 options {
 IGNORE_CASE = true;
 STATIC = false;
-    OUTPUTOKEN_DIRECTORY="C://Users//anick//Documents//NetBeansProjects//[Compi2]Proyecto1_201212859//FISQL//src//xml//metodo//";
-    /*OUTPUTOKEN_DIRECTORY="C://Users//3plgtanickacf//Documents//GitHub//FISQL//src//xml//metodo//";*/
+     OUTPUTOKEN_DIRECTORY="C://Users//anick//Documents//NetBeansProjects//[Compi2]Proyecto1_201212859//FISQL//src//xml//metodo//";
 }
 
 PARSER_BEGIN(metodo)
 package xml.metodo;
+import java.util.ArrayList;
+import archivos.*;
+import archivos.metodo.*;
 
 public class metodo {
+  private ArrayList<parametro> lp= new ArrayList<parametro>();
+  private ArrayList<procedure> lproc = new ArrayList<procedure>();
+  private String nombre_proc, nombre_param, codigo, tipo;
+
   public static void main(String args[]) throws ParseException {
     metodo parser = new metodo(System.in);
     parser.S();
-    System.out.println("Exito!!");
   }
 }
 PARSER_END(metodo)
@@ -55,23 +60,33 @@ SKIP:
 | "\t"
 }
 
-void S():
+ArrayList<procedure> S():
 {}
 {
-   PROC()
+   PROC() {return lproc;}
 }
 
 
 void PROC():
-{}
+{Token t,cod;}
 {
         (
         <TOKEN_PROC_ABRE> 
-            <TOKEN_NOMBRE_ABRE> <CADENA> <TOKEN_NOMBRE_CIERRA>
+            <TOKEN_NOMBRE_ABRE> t=<CADENA> <TOKEN_NOMBRE_CIERRA>
                 <TOKEN_PARAMS_ABRE> LISTA_PARAMS() <TOKEN_PARAMS_CIERRA>    
-            <TOKEN_SRC_ABRE> <CODIGO> <TOKEN_SRC_CIERRA>
+            <TOKEN_SRC_ABRE> cod=<CODIGO> <TOKEN_SRC_CIERRA>
         <TOKEN_PROC_CIERRA>
         ) 
+        {
+            nombre_proc= t.image;
+            nombre_proc= nombre_proc.substring(1, nombre_proc.length()-1);
+            codigo = cod.image;
+            codigo = codigo.substring(1, codigo.length()-1);
+            procedure p= new procedure(nombre_proc,lp,codigo);
+            lproc.add(p);
+            lp= new ArrayList<parametro>();
+            
+        }
         (PROC())?
 }
 
@@ -83,15 +98,52 @@ void LISTA_PARAMS():
 }
 
 void PARAMS():
-{}
+{Token t,tip;}
 {
-     <TOKEN_INTEGER_ABRE> <CADENA> <TOKEN_INTEGER_CIERRA>
-    |<TOKEN_TEXT_ABRE> <CADENA> <TOKEN_TEXT_CIERRA>
-    |<TOKEN_DOUBLE_ABRE> <CADENA> <TOKEN_DOUBLE_CIERRA>
-    |<TOKEN_BOOL_ABRE> <CADENA> <TOKEN_BOOL_CIERRA>
-    |<TOKEN_DATE_ABRE> <CADENA> <TOKEN_DATE_CIERRA>
-    |<TOKEN_DATETIME_ABRE> <CADENA> <TOKEN_DATETIME_CIERRA>
-    |<TOKEN_ID_ABRE> <CADENA> <TOKEN_ID_CIERRA>
+   <TOKEN_INTEGER_ABRE> t=<CADENA> <TOKEN_INTEGER_CIERRA> {
+                                                                nombre_param= t.image;
+                                                                nombre_param= nombre_param.substring(1, nombre_param.length()-1);
+                                                                parametro p=new parametro(nombre_param,"INTEGER");
+                                                                lp.add(p);
+                                                            }
+    |<TOKEN_TEXT_ABRE> t=<CADENA> <TOKEN_TEXT_CIERRA>       {
+                                                                nombre_param= t.image;
+                                                                nombre_param= nombre_param.substring(1, nombre_param.length()-1);
+                                                                parametro p=new parametro(nombre_param,"TEXT");
+                                                                lp.add(p);                                                            
+                                                            }
+    |<TOKEN_DOUBLE_ABRE> t=<CADENA> <TOKEN_DOUBLE_CIERRA>   {
+                                                                nombre_param= t.image;
+                                                                nombre_param= nombre_param.substring(1, nombre_param.length()-1);
+                                                                parametro p=new parametro(nombre_param,"DOUBLE");
+                                                                lp.add(p);  
+                                                            }
+    |<TOKEN_BOOL_ABRE> t=<CADENA> <TOKEN_BOOL_CIERRA>       {
+                                                                nombre_param= t.image;
+                                                                nombre_param= nombre_param.substring(1, nombre_param.length()-1);
+                                                                parametro p=new parametro(nombre_param,"BOOL");
+                                                                lp.add(p);  
+                                                            }
+    |<TOKEN_DATE_ABRE> t=<CADENA> <TOKEN_DATE_CIERRA>       {
+                                                                nombre_param= t.image;
+                                                                nombre_param= nombre_param.substring(1, nombre_param.length()-1);
+                                                                parametro p=new parametro(nombre_param,"DATE");
+                                                                lp.add(p);  
+                                                            }
+    |<TOKEN_DATETIME_ABRE> t=<CADENA> <TOKEN_DATETIME_CIERRA> {
+                                                                nombre_param= t.image;
+                                                                nombre_param= nombre_param.substring(1, nombre_param.length()-1);
+                                                                parametro p=new parametro(nombre_param,"DATETIME");
+                                                                lp.add(p);
+                                                              } 
+    |tip=<TOKEN_ID_ABRE> t=<CADENA> <TOKEN_ID_CIERRA>         {
+                                                                tipo = tip.image;
+                                                                tipo = tipo.substring(1, tipo.length()-1);
+                                                                nombre_param= t.image;
+                                                                nombre_param= nombre_param.substring(1, nombre_param.length()-1);
+                                                                parametro p=new parametro(nombre_param,tipo);
+                                                                lp.add(p);
+                                                              } 
 }
 
 

@@ -174,4 +174,43 @@ IMPRIMIR(COntar(<<SELECCIONAR * DE Producto>>));
 </func> 
 
 
+<Obj>
+<nombre>"nombre_obj1"</nombre>
+	<attr>
+		<integer>"Nombre_param1"</integer>
+		<text>"Nombre_param2"</text>
+		<bool>"Nombre_param3"</bool>
+	</attr>
+</Obj>
+<Obj>
+<nombre>"nombre_obj2"</nombre>
+	<attr>
+		<integer>"Nombre_param1"</integer>
+		<text>"Nombre_param2"</text>
+		<bool>"Nombre_param3"</bool>
+		<date>"Nombre_param3"</date>
+		<datetime>"Nombre_param3"</datetime>
+		<double>"Nombre_param3"</double>
+	</attr>
+</Obj>
+
+
+<Procedure>
+	<path>"C:/Documentos/BD/proc.usac"</path>
+</Procedure>
+<Object>
+	<path>"C:/Documentos/BD/obj.usac"</path>
+</Object>
+<Tabla>
+	<nombre>"nombre_tabla1"</nombre>
+	<path>"C:/Documentos/BD/nombre_tabla1.usac"</path>
+	<rows>
+		<integer>"Nombre_campo1"</integer>
+		<text>"Nombre_campo2</text>
+		<bool>"Nombre_campo3"</bool>
+		<C4>"Nombre_campo4"</C4>
+	</rows>
+</Tabla>
+
+
 

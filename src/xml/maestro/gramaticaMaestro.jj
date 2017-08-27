@@ -2,17 +2,20 @@ options {
 IGNORE_CASE = true;
 STATIC = false;
     OUTPUTOKEN_DIRECTORY="C://Users//anick//Documents//NetBeansProjects//[Compi2]Proyecto1_201212859//FISQL//src//xml//maestro//";
-    /*OUTPUTOKEN_DIRECTORY="C://Users//3plgtanickacf//Documents//GitHub//FISQL//src//xml//maestro//";*/
 }
 
 PARSER_BEGIN(maestro)
 package xml.maestro;
+import java.util.ArrayList;
+import archivos.maestro.*;
 
 public class maestro {
+  private ArrayList<master> lm= new ArrayList<master>();
+  private String nombre,path;
+
   public static void main(String args[]) throws ParseException {
     maestro parser = new maestro(System.in);
     parser.S();
-    System.out.println("Exito!!");
   }
 }
 PARSER_END(maestro)
@@ -36,10 +39,10 @@ SKIP:
 | "\t"
 }
 
-void S():
+ArrayList<master> S():
 {}
 {
-    LISTA_DB()
+    LISTA_DB() {return lm;}
 }
 
 void LISTA_DB():
@@ -49,12 +52,20 @@ void LISTA_DB():
 }
 
 void DB():
-{}
+{Token n,p;}
 {
      <TOKEN_DB_ABRE>
-     <TOKEN_NOMBRE_ABRE> <CADENA> <TOKEN_NOMBRE_CIERRA>
-     <TOKEN_PATH_ABRE> <CADENA> <TOKEN_PATH_CIERRA>
+     <TOKEN_NOMBRE_ABRE> n=<CADENA> <TOKEN_NOMBRE_CIERRA>
+     <TOKEN_PATH_ABRE> p=<CADENA> <TOKEN_PATH_CIERRA>
      <TOKEN_DB_CIERRA>
+     {
+        nombre= n.image;
+        nombre= nombre.substring(1, nombre.length()-1);
+        path= p.image;
+        path= path.substring(1, path.length()-1);
+        master m= new master(nombre,path);
+        lm.add(m);
+     }
 }
 
 

@@ -89,9 +89,9 @@ public class principal extends javax.swing.JFrame {
         // TODO add your handling code here:
          
         // analizador g = new analizador(new java.io.StringReader(this.jTextArea1.getText()));
-        // maestro g = new maestro(new java.io.StringReader(this.jTextArea1.getText()));
+         maestro g = new maestro(new java.io.StringReader(this.jTextArea1.getText()));
         // db g = new db(new java.io.StringReader(this.jTextArea1.getText()));
-         tabla g = new tabla(new java.io.StringReader(this.jTextArea1.getText()));
+        // tabla g = new tabla(new java.io.StringReader(this.jTextArea1.getText()));
         // metodo g = new metodo(new java.io.StringReader(this.jTextArea1.getText()));
         // objeto g = new objeto(new java.io.StringReader(this.jTextArea1.getText()));
         // funcion g = new funcion(new java.io.StringReader(this.jTextArea1.getText()));
@@ -112,8 +112,7 @@ public class principal extends javax.swing.JFrame {
             g.S();
             System.out.println("Funciona");
         } 
-
-        catch (xml.tabla.ParseException ex) {
+        catch (xml.maestro.ParseException ex) {
             Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
         }
          

@@ -2,7 +2,6 @@ options {
 IGNORE_CASE = true;
 STATIC = false;
     OUTPUTOKEN_DIRECTORY="C://Users//anick//Documents//NetBeansProjects//[Compi2]Proyecto1_201212859//FISQL//src//xml//usuario//";
-    /*OUTPUTOKEN_DIRECTORY="C://Users//3plgtanickacf//Documents//GitHub//FISQL//src//xml//tabla//";*/
 }
 
 PARSER_BEGIN(usuario)

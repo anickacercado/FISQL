@@ -2,7 +2,6 @@ options {
 IGNORE_CASE = true;
 STATIC = false;
     OUTPUTOKEN_DIRECTORY="C://Users//anick//Documents//NetBeansProjects//[Compi2]Proyecto1_201212859//FISQL//src//usql//";
-    /*OUTPUTOKEN_DIRECTORY="C://Users//3plgtanickacf//Documents//GitHub//FISQL//src//analizador//";*/
 }
 
 PARSER_BEGIN(analizador)
@@ -12,7 +11,6 @@ public class analizador {
   public static void main(String args[]) throws ParseException {
     analizador parser = new analizador(System.in);
     parser.S();
-    System.out.println("Exito!!");
   }
 }
 PARSER_END(analizador)
