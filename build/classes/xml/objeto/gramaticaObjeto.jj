@@ -1,0 +1,137 @@
+options {
+IGNORE_CASE = true;
+STATIC = false;
+     OUTPUTOKEN_DIRECTORY="C://Users//anick//Documents//NetBeansProjects//[Compi2]Proyecto1_201212859//FISQL//src//xml//objeto//";
+}
+
+PARSER_BEGIN(objeto)
+package xml.objeto;
+import java.util.ArrayList;
+import archivos.*;
+import archivos.objeto.*;
+
+public class objeto {
+
+  private ArrayList<parametro> lp= new ArrayList<parametro>();
+  private ArrayList<object> lo = new ArrayList<object>();
+  private String nombre_obj, nombre_param;
+
+  public static void main(String args[]) throws ParseException {
+    objeto parser = new objeto(System.in);
+    parser.S();
+  }
+}
+PARSER_END(objeto)
+
+TOKEN:
+{   
+  
+   <TOKEN_OBJ_ABRE: ("<obj>")> {System.out.println(image);}
+  |<TOKEN_OBJ_CIERRA: ("</obj>")> {System.out.println(image);}
+  |<TOKEN_NOMBRE_ABRE: ("<nombre>")> {System.out.println(image);}
+  |<TOKEN_NOMBRE_CIERRA: ("</nombre>")> {System.out.println(image);}
+  |<TOKEN_ATTR_ABRE: ("<attr>")> {System.out.println(image);}
+  |<TOKEN_ATTR_CIERRA: ("</attr>")> {System.out.println(image);}
+  |<TOKEN_TEXT_ABRE: ("<text>")> {System.out.println(image);}
+  |<TOKEN_TEXT_CIERRA: ("</text>")> {System.out.println(image);}
+  |<TOKEN_INTEGER_ABRE: ("<integer>")> {System.out.println(image);}
+  |<TOKEN_INTEGER_CIERRA: ("</integer>")> {System.out.println(image);}
+  |<TOKEN_DOUBLE_ABRE: ("<double>")> {System.out.println(image);}
+  |<TOKEN_DOUBLE_CIERRA: ("</double>")> {System.out.println(image);}
+  |<TOKEN_BOOL_ABRE: ("<bool>")> {System.out.println(image);}
+  |<TOKEN_BOOL_CIERRA: ("</bool>")> {System.out.println(image);}
+  |<TOKEN_DATE_ABRE: ("<date>")> {System.out.println(image);}
+  |<TOKEN_DATE_CIERRA: ("</date>")> {System.out.println(image);}
+  |<TOKEN_DATETIME_ABRE: ("<datetime>")> {System.out.println(image);}
+  |<TOKEN_DATETIME_CIERRA: ("</datetime>")> {System.out.println(image);}
+
+  |<TOKEN_ID_ABRE: ("<")(["a"-"z","A"-"Z"])(["a"-"z","A"-"Z","0"-"9","_"])* (">")> {System.out.println(image);}
+  |<TOKEN_ID_CIERRA: ("</")(["a"-"z","A"-"Z"])(["a"-"z","A"-"Z","0"-"9","_"])* (">")> {System.out.println(image);}
+  |<CADENA:"\"" (~["\""])*"\""> {System.out.println(image);}
+}
+
+SKIP: 
+{
+  " "
+| "\n"
+| "\r"
+| "\t"
+}
+
+ArrayList<object> S():
+{}
+{
+   OBJ() {return lo;}
+}
+
+
+void OBJ():
+{Token t;}
+{
+        (
+        <TOKEN_OBJ_ABRE> 
+            <TOKEN_NOMBRE_ABRE> t=<CADENA> <TOKEN_NOMBRE_CIERRA>
+                <TOKEN_ATTR_ABRE> LISTA_ATTR() <TOKEN_ATTR_CIERRA>    
+        <TOKEN_OBJ_CIERRA>
+        ) 
+
+        {
+             nombre_obj= t.image;
+             nombre_obj= nombre_obj.substring(1, nombre_obj.length()-1);
+             object o= new object(nombre_obj,lp);
+             lo.add(o);
+             lp= new ArrayList<parametro>();
+        }
+        (OBJ())?
+}
+
+
+void LISTA_ATTR():
+{}
+{
+        ATTR() (LISTA_ATTR())?
+}
+
+void ATTR():
+{Token t;}
+{
+     <TOKEN_INTEGER_ABRE> t=<CADENA> <TOKEN_INTEGER_CIERRA> {
+                                                                nombre_param= t.image;
+                                                                nombre_param= nombre_param.substring(1, nombre_param.length()-1);
+                                                                parametro p=new parametro(nombre_param,"INTEGER");
+                                                                lp.add(p);
+                                                            }
+    |<TOKEN_TEXT_ABRE> t=<CADENA> <TOKEN_TEXT_CIERRA>       {
+                                                                nombre_param= t.image;
+                                                                nombre_param= nombre_param.substring(1, nombre_param.length()-1);
+                                                                parametro p=new parametro(nombre_param,"TEXT");
+                                                                lp.add(p);                                                            
+                                                            }
+    |<TOKEN_DOUBLE_ABRE> t=<CADENA> <TOKEN_DOUBLE_CIERRA>   {
+                                                                nombre_param= t.image;
+                                                                nombre_param= nombre_param.substring(1, nombre_param.length()-1);
+                                                                parametro p=new parametro(nombre_param,"DOUBLE");
+                                                                lp.add(p);  
+                                                            }
+    |<TOKEN_BOOL_ABRE> t=<CADENA> <TOKEN_BOOL_CIERRA>       {
+                                                                nombre_param= t.image;
+                                                                nombre_param= nombre_param.substring(1, nombre_param.length()-1);
+                                                                parametro p=new parametro(nombre_param,"BOOL");
+                                                                lp.add(p);  
+                                                            }
+    |<TOKEN_DATE_ABRE> t=<CADENA> <TOKEN_DATE_CIERRA>       {
+                                                                nombre_param= t.image;
+                                                                nombre_param= nombre_param.substring(1, nombre_param.length()-1);
+                                                                parametro p=new parametro(nombre_param,"DATE");
+                                                                lp.add(p);  
+                                                            }
+    |<TOKEN_DATETIME_ABRE> t=<CADENA> <TOKEN_DATETIME_CIERRA> {
+                                                                nombre_param= t.image;
+                                                                nombre_param= nombre_param.substring(1, nombre_param.length()-1);
+                                                                parametro p=new parametro(nombre_param,"DATETIME");
+                                                                lp.add(p);
+                                                              }
+}
+
+
+

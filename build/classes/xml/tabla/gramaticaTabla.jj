@@ -1,0 +1,104 @@
+options {
+IGNORE_CASE = true;
+STATIC = false;
+   OUTPUTOKEN_DIRECTORY="C://Users//anick//Documents//NetBeansProjects//[Compi2]Proyecto1_201212859//FISQL//src//xml//tabla//"; 
+}
+
+PARSER_BEGIN(tabla)
+package xml.tabla;
+import java.util.ArrayList;
+import archivos.tabla.*;
+import DML.*;
+
+public class tabla {
+ 
+  accionTabla at = new accionTabla();
+  private ArrayList<table> lt= new ArrayList<table>();
+  private ArrayList<registro_objeto> lro = new ArrayList<registro_objeto>();
+  private String nombre_campo, valor;
+
+
+
+
+  public static void main(String args[]) throws ParseException {
+    tabla parser = new tabla(System.in);
+    parser.S();
+  }
+}
+PARSER_END(tabla)
+
+TOKEN:
+{   
+  
+  <TOKEN_ROWS_ABRE: ("<row>")> {System.out.println(image);}
+  |<TOKEN_ROWS_CIERRA: ("</row>")> {System.out.println(image);}
+  |<TOKEN_ID_ABRE: ("<")(["a"-"z","A"-"Z"])(["a"-"z","A"-"Z","0"-"9","_"])* (">")> {System.out.println(image);}
+  |<TOKEN_ID_CIERRA: ("</")(["a"-"z","A"-"Z"])(["a"-"z","A"-"Z","0"-"9","_"])* (">")> {System.out.println(image);}
+  |<CADENA:"\"" (~["\""])*"\""> {System.out.println(image);}
+}
+
+SKIP: 
+{
+  " "
+| "\n"
+| "\r"
+| "\t"
+}
+
+ArrayList<table> S():
+{}
+{
+   ROW() {return lt;}
+}
+
+
+void ROW():
+{}
+{
+     (<TOKEN_ROWS_ABRE> LISTA_REGISTRO() <TOKEN_ROWS_CIERRA>) {}
+     (ROW())?
+}
+
+
+void LISTA_REGISTRO():
+{Token nc,v;}
+{
+     (nc=<TOKEN_ID_ABRE> (v=<CADENA>    {  
+                                            nombre_campo= nc.image;
+                                            nombre_campo= nombre_campo.substring(1, nombre_campo.length()-1);
+                                            valor= v.image;
+                                            valor= valor.substring(1, valor.length()-1);
+                                            at.insertTable(lt, nombre_campo,valor);               
+                                        }
+                                                
+                       
+                        |LISTA_OBJETO() {
+                                            nombre_campo= nc.image;
+                                            nombre_campo= nombre_campo.substring(1, nombre_campo.length()-1);
+                                            at.insertTableObject(lt, nombre_campo, lro);
+                                            lro= new ArrayList<registro_objeto>();
+                                        }
+
+        ) <TOKEN_ID_CIERRA>) (LISTA_REGISTRO())?
+}
+
+void LISTA_OBJETO():
+{Token nc,v;}
+{
+     (nc=<TOKEN_ID_ABRE> v=<CADENA> {
+                                        nombre_campo= nc.image;
+                                        nombre_campo= nombre_campo.substring(1, nombre_campo.length()-1);
+                                        valor= v.image;
+                                        valor= valor.substring(1, valor.length()-1);
+                                        registro_objeto ro = new registro_objeto(nombre_campo,valor);
+                                        lro.add(ro);               
+                                    }
+      <TOKEN_ID_CIERRA>) (LISTA_OBJETO())?
+}
+
+
+
+
+
+
+
