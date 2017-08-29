@@ -206,7 +206,7 @@ IMPRIMIR(COntar(<<SELECCIONAR * DE Producto>>));
 	<path>"C:/Documentos/BD/nombre_tabla1.usac"</path>
 	<rows>
 		<integer>"Nombre_campo1"</integer>
-		<text>"Nombre_campo2</text>
+		<text>"Nombre_campo2"</text>
 		<bool>"Nombre_campo3"</bool>
 		<C4>"Nombre_campo4"</C4>
 	</rows>

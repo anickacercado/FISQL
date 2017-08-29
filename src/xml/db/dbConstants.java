@@ -55,15 +55,51 @@ public interface dbConstants {
   /** RegularExpression Id. */
   int TOKEN_DATETIME_CIERRA = 22;
   /** RegularExpression Id. */
-  int TOKEN_TABLA_ABRE = 23;
+  int TOKEN_TABLE_ABRE = 23;
   /** RegularExpression Id. */
-  int TOKEN_TABLA_CIERRA = 24;
+  int TOKEN_TABLE_CIERRA = 24;
   /** RegularExpression Id. */
-  int TOKEN_ID_ABRE = 25;
+  int TOKEN_FUNCTION_ABRE = 25;
   /** RegularExpression Id. */
-  int TOKEN_ID_CIERRA = 26;
+  int TOKEN_FUNCTION_CIERRA = 26;
   /** RegularExpression Id. */
-  int CADENA = 27;
+  int TOKEN_FIELD_ABRE = 27;
+  /** RegularExpression Id. */
+  int TOKEN_FIELD_CIERRA = 28;
+  /** RegularExpression Id. */
+  int TOKEN_PROPERTY_ABRE = 29;
+  /** RegularExpression Id. */
+  int TOKEN_PROPERTY_CIERRA = 30;
+  /** RegularExpression Id. */
+  int TOKEN_NULO_ABRE = 31;
+  /** RegularExpression Id. */
+  int TOKEN_NULO_CIERRA = 32;
+  /** RegularExpression Id. */
+  int TOKEN_NO_NULO_ABRE = 33;
+  /** RegularExpression Id. */
+  int TOKEN_NO_NULO_CIERRA = 34;
+  /** RegularExpression Id. */
+  int TOKEN_AUTOINCREMENTABLE_ABRE = 35;
+  /** RegularExpression Id. */
+  int TOKEN_AUTOINCREMENTABLE_CIERRA = 36;
+  /** RegularExpression Id. */
+  int TOKEN_LLAVE_PRIMARIA_ABRE = 37;
+  /** RegularExpression Id. */
+  int TOKEN_LLAVE_PRIMARIA_CIERRA = 38;
+  /** RegularExpression Id. */
+  int TOKEN_LLAVE_FORANEA_ABRE = 39;
+  /** RegularExpression Id. */
+  int TOKEN_LLAVE_FORANEA_CIERRA = 40;
+  /** RegularExpression Id. */
+  int TOKEN_Y = 41;
+  /** RegularExpression Id. */
+  int TOKEN_N = 42;
+  /** RegularExpression Id. */
+  int TOKEN_ID_ABRE = 43;
+  /** RegularExpression Id. */
+  int TOKEN_ID_CIERRA = 44;
+  /** RegularExpression Id. */
+  int CADENA = 45;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -93,8 +129,26 @@ public interface dbConstants {
     "\"</date>\"",
     "\"<datetime>\"",
     "\"</datetime>\"",
-    "\"<tabla>\"",
-    "\"</tabla>\"",
+    "\"<table>\"",
+    "\"</table>\"",
+    "\"<function>\"",
+    "\"</function>\"",
+    "\"<field>\"",
+    "\"</field>\"",
+    "\"<property>\"",
+    "\"</property>\"",
+    "\"<nulo>\"",
+    "\"</nulo>\"",
+    "\"<no_nulo>\"",
+    "\"</no_nulo>\"",
+    "\"<autoincrementable>\"",
+    "\"</autoincrementable>\"",
+    "\"<llave_primaria>\"",
+    "\"</llave_primaria>\"",
+    "\"<llave_foranea>\"",
+    "\"</llave_foranea>\"",
+    "<TOKEN_Y>",
+    "<TOKEN_N>",
     "<TOKEN_ID_ABRE>",
     "<TOKEN_ID_CIERRA>",
     "<CADENA>",

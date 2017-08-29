@@ -45,7 +45,7 @@ nombre= n.image;
         nombre= nombre.substring(1, nombre.length()-1);
         path= p.image;
         path= path.substring(1, path.length()-1);
-        master m= new master(nombre,path);
+        master m= new master(nombre,path,null);
         lm.add(m);
   }
 

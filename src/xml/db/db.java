@@ -7,7 +7,8 @@ import archivos.db.*;
 
 public class db implements dbConstants {
   private String tipo,nombre,path,nombre_param;
-  private ArrayList<parametro> lp= new ArrayList<parametro>();
+  private String nulo, no_nulo, autoincrementable, llave_primaria, llave_foranea;
+  private ArrayList<propertyField> lp= new ArrayList<propertyField>();
   private ArrayList<database> ldb= new ArrayList<database>();
 
   public static void main(String args[]) throws ParseException {
@@ -27,12 +28,16 @@ public class db implements dbConstants {
       PROCEDURE();
       break;
       }
+    case TOKEN_FUNCTION_ABRE:{
+      FUNCTION();
+      break;
+      }
     case TOKEN_OBJECT_ABRE:{
       OBJECT();
       break;
       }
-    case TOKEN_TABLA_ABRE:{
-      TABLA();
+    case TOKEN_TABLE_ABRE:{
+      TABLE();
       break;
       }
     default:
@@ -43,7 +48,8 @@ public class db implements dbConstants {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case TOKEN_PROCEDURE_ABRE:
     case TOKEN_OBJECT_ABRE:
-    case TOKEN_TABLA_ABRE:{
+    case TOKEN_TABLE_ABRE:
+    case TOKEN_FUNCTION_ABRE:{
       LISTA_REGISTRO();
       break;
       }
@@ -61,7 +67,19 @@ public class db implements dbConstants {
     jj_consume_token(TOKEN_PROCEDURE_CIERRA);
 path= p.image;
      path= path.substring(1, path.length()-1);
-     database data = new database("PROCEDURE",null,path,null);
+     database data = new database("PROCEDURE",null,path,null,null,null,null,null);
+     ldb.add(data);
+  }
+
+  final public void FUNCTION() throws ParseException {Token p;
+    jj_consume_token(TOKEN_FUNCTION_ABRE);
+    jj_consume_token(TOKEN_PATH_ABRE);
+    p = jj_consume_token(CADENA);
+    jj_consume_token(TOKEN_PATH_CIERRA);
+    jj_consume_token(TOKEN_FUNCTION_CIERRA);
+path= p.image;
+     path= path.substring(1, path.length()-1);
+     database data = new database("FUNCTION",null,path,null,null,null,null,null);
      ldb.add(data);
   }
 
@@ -73,12 +91,12 @@ path= p.image;
     jj_consume_token(TOKEN_OBJECT_CIERRA);
 path= p.image;
      path= path.substring(1, path.length()-1);
-     database data = new database("OBJECT",null,path,null);
+     database data = new database("OBJECT",null,path,null,null,null,null,null);
      ldb.add(data);
   }
 
-  final public void TABLA() throws ParseException {Token n,p;
-    jj_consume_token(TOKEN_TABLA_ABRE);
+  final public void TABLE() throws ParseException {Token n,p;
+    jj_consume_token(TOKEN_TABLE_ABRE);
     jj_consume_token(TOKEN_NOMBRE_ABRE);
     n = jj_consume_token(CADENA);
     jj_consume_token(TOKEN_NOMBRE_CIERRA);
@@ -88,26 +106,22 @@ path= p.image;
     jj_consume_token(TOKEN_ROWS_ABRE);
     LISTA_TIPO();
     jj_consume_token(TOKEN_ROWS_CIERRA);
-    jj_consume_token(TOKEN_TABLA_CIERRA);
+    jj_consume_token(TOKEN_TABLE_CIERRA);
 nombre= n.image;
         nombre= nombre.substring(1, nombre.length()-1);
         path= p.image;
         path= path.substring(1, path.length()-1);
-        database data = new database("TABLA",nombre,path,lp);
+        database data = new database("TABLE",nombre,path,lp,null,null,null,null);
         ldb.add(data);
-        lp= new ArrayList<parametro>();
+        lp= new ArrayList<propertyField>();
   }
 
   final public void LISTA_TIPO() throws ParseException {
+    jj_consume_token(TOKEN_FIELD_ABRE);
     TIPO();
+    jj_consume_token(TOKEN_FIELD_CIERRA);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case TOKEN_TEXT_ABRE:
-    case TOKEN_INTEGER_ABRE:
-    case TOKEN_DOUBLE_ABRE:
-    case TOKEN_BOOL_ABRE:
-    case TOKEN_DATE_ABRE:
-    case TOKEN_DATETIME_ABRE:
-    case TOKEN_ID_ABRE:{
+    case TOKEN_FIELD_ABRE:{
       LISTA_TIPO();
       break;
       }
@@ -117,15 +131,108 @@ nombre= n.image;
     }
   }
 
-  final public void TIPO() throws ParseException {Token t,tip;
+  final public void TIPO() throws ParseException {Token t,tip,f;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case TOKEN_INTEGER_ABRE:{
       jj_consume_token(TOKEN_INTEGER_ABRE);
       t = jj_consume_token(CADENA);
       jj_consume_token(TOKEN_INTEGER_CIERRA);
+      jj_consume_token(TOKEN_PROPERTY_ABRE);
+      jj_consume_token(TOKEN_NULO_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case TOKEN_Y:{
+        jj_consume_token(TOKEN_Y);
+nulo="Y";
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+nulo="N";
+        break;
+        }
+      default:
+        jj_la1[3] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_NULO_CIERRA);
+      jj_consume_token(TOKEN_NO_NULO_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case TOKEN_Y:{
+        jj_consume_token(TOKEN_Y);
+no_nulo="Y";
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+no_nulo="N";
+        break;
+        }
+      default:
+        jj_la1[4] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_NO_NULO_CIERRA);
+      jj_consume_token(TOKEN_AUTOINCREMENTABLE_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case TOKEN_Y:{
+        jj_consume_token(TOKEN_Y);
+autoincrementable="Y";
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+autoincrementable="N";
+        break;
+        }
+      default:
+        jj_la1[5] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_AUTOINCREMENTABLE_CIERRA);
+      jj_consume_token(TOKEN_LLAVE_PRIMARIA_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case TOKEN_Y:{
+        jj_consume_token(TOKEN_Y);
+llave_primaria="Y";
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+llave_primaria="N";
+        break;
+        }
+      default:
+        jj_la1[6] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_LLAVE_PRIMARIA_CIERRA);
+      jj_consume_token(TOKEN_LLAVE_FORANEA_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case CADENA:{
+        f = jj_consume_token(CADENA);
+llave_foranea= f.image;
+                                                                                                                llave_foranea= llave_foranea.substring(1, llave_foranea.length()-1);
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+llave_foranea="N";
+        break;
+        }
+      default:
+        jj_la1[7] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_LLAVE_FORANEA_CIERRA);
+      jj_consume_token(TOKEN_PROPERTY_CIERRA);
 nombre_param= t.image;
                                                                 nombre_param= nombre_param.substring(1, nombre_param.length()-1);
-                                                                parametro p=new parametro(nombre_param,"INTEGER");
+                                                                propertyField p=new propertyField(nombre_param,"INTEGER",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea);
                                                                 lp.add(p);
       break;
       }
@@ -133,9 +240,102 @@ nombre_param= t.image;
       jj_consume_token(TOKEN_TEXT_ABRE);
       t = jj_consume_token(CADENA);
       jj_consume_token(TOKEN_TEXT_CIERRA);
+      jj_consume_token(TOKEN_PROPERTY_ABRE);
+      jj_consume_token(TOKEN_NULO_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case TOKEN_Y:{
+        jj_consume_token(TOKEN_Y);
+nulo="Y";
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+nulo="N";
+        break;
+        }
+      default:
+        jj_la1[8] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_NULO_CIERRA);
+      jj_consume_token(TOKEN_NO_NULO_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case TOKEN_Y:{
+        jj_consume_token(TOKEN_Y);
+no_nulo="Y";
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+no_nulo="N";
+        break;
+        }
+      default:
+        jj_la1[9] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_NO_NULO_CIERRA);
+      jj_consume_token(TOKEN_AUTOINCREMENTABLE_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case TOKEN_Y:{
+        jj_consume_token(TOKEN_Y);
+autoincrementable="Y";
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+autoincrementable="N";
+        break;
+        }
+      default:
+        jj_la1[10] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_AUTOINCREMENTABLE_CIERRA);
+      jj_consume_token(TOKEN_LLAVE_PRIMARIA_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case TOKEN_Y:{
+        jj_consume_token(TOKEN_Y);
+llave_primaria="Y";
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+llave_primaria="N";
+        break;
+        }
+      default:
+        jj_la1[11] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_LLAVE_PRIMARIA_CIERRA);
+      jj_consume_token(TOKEN_LLAVE_FORANEA_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case CADENA:{
+        f = jj_consume_token(CADENA);
+llave_foranea= f.image;
+                                                                                                                llave_foranea= llave_foranea.substring(1, llave_foranea.length()-1);
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+llave_foranea="N";
+        break;
+        }
+      default:
+        jj_la1[12] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_LLAVE_FORANEA_CIERRA);
+      jj_consume_token(TOKEN_PROPERTY_CIERRA);
 nombre_param= t.image;
                                                                 nombre_param= nombre_param.substring(1, nombre_param.length()-1);
-                                                                parametro p=new parametro(nombre_param,"TEXT");
+                                                                propertyField p=new propertyField(nombre_param,"TEXT",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea);
                                                                 lp.add(p);
       break;
       }
@@ -143,9 +343,102 @@ nombre_param= t.image;
       jj_consume_token(TOKEN_DOUBLE_ABRE);
       t = jj_consume_token(CADENA);
       jj_consume_token(TOKEN_DOUBLE_CIERRA);
+      jj_consume_token(TOKEN_PROPERTY_ABRE);
+      jj_consume_token(TOKEN_NULO_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case TOKEN_Y:{
+        jj_consume_token(TOKEN_Y);
+nulo="Y";
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+nulo="N";
+        break;
+        }
+      default:
+        jj_la1[13] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_NULO_CIERRA);
+      jj_consume_token(TOKEN_NO_NULO_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case TOKEN_Y:{
+        jj_consume_token(TOKEN_Y);
+no_nulo="Y";
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+no_nulo="N";
+        break;
+        }
+      default:
+        jj_la1[14] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_NO_NULO_CIERRA);
+      jj_consume_token(TOKEN_AUTOINCREMENTABLE_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case TOKEN_Y:{
+        jj_consume_token(TOKEN_Y);
+autoincrementable="Y";
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+autoincrementable="N";
+        break;
+        }
+      default:
+        jj_la1[15] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_AUTOINCREMENTABLE_CIERRA);
+      jj_consume_token(TOKEN_LLAVE_PRIMARIA_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case TOKEN_Y:{
+        jj_consume_token(TOKEN_Y);
+llave_primaria="Y";
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+llave_primaria="N";
+        break;
+        }
+      default:
+        jj_la1[16] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_LLAVE_PRIMARIA_CIERRA);
+      jj_consume_token(TOKEN_LLAVE_FORANEA_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case CADENA:{
+        f = jj_consume_token(CADENA);
+llave_foranea= f.image;
+                                                                                                                llave_foranea= llave_foranea.substring(1, llave_foranea.length()-1);
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+llave_foranea="N";
+        break;
+        }
+      default:
+        jj_la1[17] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_LLAVE_FORANEA_CIERRA);
+      jj_consume_token(TOKEN_PROPERTY_CIERRA);
 nombre_param= t.image;
                                                                 nombre_param= nombre_param.substring(1, nombre_param.length()-1);
-                                                                parametro p=new parametro(nombre_param,"DOUBLE");
+                                                                propertyField p=new propertyField(nombre_param,"DOUBLE",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea);
                                                                 lp.add(p);
       break;
       }
@@ -153,9 +446,102 @@ nombre_param= t.image;
       jj_consume_token(TOKEN_BOOL_ABRE);
       t = jj_consume_token(CADENA);
       jj_consume_token(TOKEN_BOOL_CIERRA);
+      jj_consume_token(TOKEN_PROPERTY_ABRE);
+      jj_consume_token(TOKEN_NULO_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case TOKEN_Y:{
+        jj_consume_token(TOKEN_Y);
+nulo="Y";
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+nulo="N";
+        break;
+        }
+      default:
+        jj_la1[18] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_NULO_CIERRA);
+      jj_consume_token(TOKEN_NO_NULO_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case TOKEN_Y:{
+        jj_consume_token(TOKEN_Y);
+no_nulo="Y";
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+no_nulo="N";
+        break;
+        }
+      default:
+        jj_la1[19] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_NO_NULO_CIERRA);
+      jj_consume_token(TOKEN_AUTOINCREMENTABLE_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case TOKEN_Y:{
+        jj_consume_token(TOKEN_Y);
+autoincrementable="Y";
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+autoincrementable="N";
+        break;
+        }
+      default:
+        jj_la1[20] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_AUTOINCREMENTABLE_CIERRA);
+      jj_consume_token(TOKEN_LLAVE_PRIMARIA_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case TOKEN_Y:{
+        jj_consume_token(TOKEN_Y);
+llave_primaria="Y";
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+llave_primaria="N";
+        break;
+        }
+      default:
+        jj_la1[21] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_LLAVE_PRIMARIA_CIERRA);
+      jj_consume_token(TOKEN_LLAVE_FORANEA_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case CADENA:{
+        f = jj_consume_token(CADENA);
+llave_foranea= f.image;
+                                                                                                                llave_foranea= llave_foranea.substring(1, llave_foranea.length()-1);
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+llave_foranea="N";
+        break;
+        }
+      default:
+        jj_la1[22] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_LLAVE_FORANEA_CIERRA);
+      jj_consume_token(TOKEN_PROPERTY_CIERRA);
 nombre_param= t.image;
                                                                 nombre_param= nombre_param.substring(1, nombre_param.length()-1);
-                                                                parametro p=new parametro(nombre_param,"BOOL");
+                                                                propertyField p=new propertyField(nombre_param,"BOOL",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea);
                                                                 lp.add(p);
       break;
       }
@@ -163,9 +549,102 @@ nombre_param= t.image;
       jj_consume_token(TOKEN_DATE_ABRE);
       t = jj_consume_token(CADENA);
       jj_consume_token(TOKEN_DATE_CIERRA);
+      jj_consume_token(TOKEN_PROPERTY_ABRE);
+      jj_consume_token(TOKEN_NULO_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case TOKEN_Y:{
+        jj_consume_token(TOKEN_Y);
+nulo="Y";
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+nulo="N";
+        break;
+        }
+      default:
+        jj_la1[23] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_NULO_CIERRA);
+      jj_consume_token(TOKEN_NO_NULO_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case TOKEN_Y:{
+        jj_consume_token(TOKEN_Y);
+no_nulo="Y";
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+no_nulo="N";
+        break;
+        }
+      default:
+        jj_la1[24] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_NO_NULO_CIERRA);
+      jj_consume_token(TOKEN_AUTOINCREMENTABLE_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case TOKEN_Y:{
+        jj_consume_token(TOKEN_Y);
+autoincrementable="Y";
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+autoincrementable="N";
+        break;
+        }
+      default:
+        jj_la1[25] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_AUTOINCREMENTABLE_CIERRA);
+      jj_consume_token(TOKEN_LLAVE_PRIMARIA_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case TOKEN_Y:{
+        jj_consume_token(TOKEN_Y);
+llave_primaria="Y";
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+llave_primaria="N";
+        break;
+        }
+      default:
+        jj_la1[26] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_LLAVE_PRIMARIA_CIERRA);
+      jj_consume_token(TOKEN_LLAVE_FORANEA_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case CADENA:{
+        f = jj_consume_token(CADENA);
+llave_foranea= f.image;
+                                                                                                                llave_foranea= llave_foranea.substring(1, llave_foranea.length()-1);
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+llave_foranea="N";
+        break;
+        }
+      default:
+        jj_la1[27] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_LLAVE_FORANEA_CIERRA);
+      jj_consume_token(TOKEN_PROPERTY_CIERRA);
 nombre_param= t.image;
                                                                 nombre_param= nombre_param.substring(1, nombre_param.length()-1);
-                                                                parametro p=new parametro(nombre_param,"DATE");
+                                                                propertyField p=new propertyField(nombre_param,"DATE",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea);
                                                                 lp.add(p);
       break;
       }
@@ -173,9 +652,102 @@ nombre_param= t.image;
       jj_consume_token(TOKEN_DATETIME_ABRE);
       t = jj_consume_token(CADENA);
       jj_consume_token(TOKEN_DATETIME_CIERRA);
+      jj_consume_token(TOKEN_PROPERTY_ABRE);
+      jj_consume_token(TOKEN_NULO_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case TOKEN_Y:{
+        jj_consume_token(TOKEN_Y);
+nulo="Y";
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+nulo="N";
+        break;
+        }
+      default:
+        jj_la1[28] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_NULO_CIERRA);
+      jj_consume_token(TOKEN_NO_NULO_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case TOKEN_Y:{
+        jj_consume_token(TOKEN_Y);
+no_nulo="Y";
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+no_nulo="N";
+        break;
+        }
+      default:
+        jj_la1[29] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_NO_NULO_CIERRA);
+      jj_consume_token(TOKEN_AUTOINCREMENTABLE_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case TOKEN_Y:{
+        jj_consume_token(TOKEN_Y);
+autoincrementable="Y";
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+autoincrementable="N";
+        break;
+        }
+      default:
+        jj_la1[30] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_AUTOINCREMENTABLE_CIERRA);
+      jj_consume_token(TOKEN_LLAVE_PRIMARIA_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case TOKEN_Y:{
+        jj_consume_token(TOKEN_Y);
+llave_primaria="Y";
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+llave_primaria="N";
+        break;
+        }
+      default:
+        jj_la1[31] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_LLAVE_PRIMARIA_CIERRA);
+      jj_consume_token(TOKEN_LLAVE_FORANEA_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case CADENA:{
+        f = jj_consume_token(CADENA);
+llave_foranea= f.image;
+                                                                                                                llave_foranea= llave_foranea.substring(1, llave_foranea.length()-1);
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+llave_foranea="N";
+        break;
+        }
+      default:
+        jj_la1[32] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_LLAVE_FORANEA_CIERRA);
+      jj_consume_token(TOKEN_PROPERTY_CIERRA);
 nombre_param= t.image;
                                                                 nombre_param= nombre_param.substring(1, nombre_param.length()-1);
-                                                                parametro p=new parametro(nombre_param,"DATETIME");
+                                                                propertyField p=new propertyField(nombre_param,"DATETIME",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea);
                                                                 lp.add(p);
       break;
       }
@@ -183,16 +755,109 @@ nombre_param= t.image;
       tip = jj_consume_token(TOKEN_ID_ABRE);
       t = jj_consume_token(CADENA);
       jj_consume_token(TOKEN_ID_CIERRA);
+      jj_consume_token(TOKEN_PROPERTY_ABRE);
+      jj_consume_token(TOKEN_NULO_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case TOKEN_Y:{
+        jj_consume_token(TOKEN_Y);
+nulo="Y";
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+nulo="N";
+        break;
+        }
+      default:
+        jj_la1[33] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_NULO_CIERRA);
+      jj_consume_token(TOKEN_NO_NULO_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case TOKEN_Y:{
+        jj_consume_token(TOKEN_Y);
+no_nulo="Y";
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+no_nulo="N";
+        break;
+        }
+      default:
+        jj_la1[34] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_NO_NULO_CIERRA);
+      jj_consume_token(TOKEN_AUTOINCREMENTABLE_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case TOKEN_Y:{
+        jj_consume_token(TOKEN_Y);
+autoincrementable="Y";
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+autoincrementable="N";
+        break;
+        }
+      default:
+        jj_la1[35] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_AUTOINCREMENTABLE_CIERRA);
+      jj_consume_token(TOKEN_LLAVE_PRIMARIA_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case TOKEN_Y:{
+        jj_consume_token(TOKEN_Y);
+llave_primaria="Y";
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+llave_primaria="N";
+        break;
+        }
+      default:
+        jj_la1[36] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_LLAVE_PRIMARIA_CIERRA);
+      jj_consume_token(TOKEN_LLAVE_FORANEA_ABRE);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case CADENA:{
+        f = jj_consume_token(CADENA);
+llave_foranea= f.image;
+                                                                                                                llave_foranea= llave_foranea.substring(1, llave_foranea.length()-1);
+        break;
+        }
+      case TOKEN_N:{
+        jj_consume_token(TOKEN_N);
+llave_foranea="N";
+        break;
+        }
+      default:
+        jj_la1[37] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+      jj_consume_token(TOKEN_LLAVE_FORANEA_CIERRA);
+      jj_consume_token(TOKEN_PROPERTY_CIERRA);
 tipo = tip.image;
                                                                 tipo = tipo.substring(1, tipo.length()-1);
                                                                 nombre_param= t.image;
                                                                 nombre_param= nombre_param.substring(1, nombre_param.length()-1);
-                                                                parametro p=new parametro(nombre_param,tipo);
-                                                                lp.add(p);
+                                                                propertyField p=new propertyField(nombre_param,tipo,nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea);
+                                                                                                                                lp.add(p);
       break;
       }
     default:
-      jj_la1[3] = jj_gen;
+      jj_la1[38] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -207,13 +872,18 @@ tipo = tip.image;
   public Token jj_nt;
   private int jj_ntk;
   private int jj_gen;
-  final private int[] jj_la1 = new int[4];
+  final private int[] jj_la1 = new int[39];
   static private int[] jj_la1_0;
+  static private int[] jj_la1_1;
   static {
       jj_la1_init_0();
+      jj_la1_init_1();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x800082,0x800082,0x22aa800,0x22aa800,};
+      jj_la1_0 = new int[] {0x2800082,0x2800082,0x8000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x2aa800,};
+   }
+   private static void jj_la1_init_1() {
+      jj_la1_1 = new int[] {0x0,0x0,0x0,0x600,0x600,0x600,0x600,0x2400,0x600,0x600,0x600,0x600,0x2400,0x600,0x600,0x600,0x600,0x2400,0x600,0x600,0x600,0x600,0x2400,0x600,0x600,0x600,0x600,0x2400,0x600,0x600,0x600,0x600,0x2400,0x600,0x600,0x600,0x600,0x2400,0x800,};
    }
 
   /** Constructor with InputStream. */
@@ -227,7 +897,7 @@ tipo = tip.image;
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 39; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -241,7 +911,7 @@ tipo = tip.image;
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 39; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -251,7 +921,7 @@ tipo = tip.image;
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 39; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -261,7 +931,7 @@ tipo = tip.image;
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 39; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -270,7 +940,7 @@ tipo = tip.image;
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 39; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -279,7 +949,7 @@ tipo = tip.image;
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 4; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 39; i++) jj_la1[i] = -1;
   }
 
   private Token jj_consume_token(int kind) throws ParseException {
@@ -330,21 +1000,24 @@ tipo = tip.image;
   /** Generate ParseException. */
   public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[32];
+    boolean[] la1tokens = new boolean[50];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 4; i++) {
+    for (int i = 0; i < 39; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {
             la1tokens[j] = true;
           }
+          if ((jj_la1_1[i] & (1<<j)) != 0) {
+            la1tokens[32+j] = true;
+          }
         }
       }
     }
-    for (int i = 0; i < 32; i++) {
+    for (int i = 0; i < 50; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

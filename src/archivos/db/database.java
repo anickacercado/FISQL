@@ -5,7 +5,11 @@
  */
 package archivos.db;
 
+import archivos.metodo.function;
+import archivos.metodo.procedure;
+import archivos.objeto.object;
 import archivos.parametro;
+import archivos.tabla.table;
 import java.util.ArrayList;
 
 /**
@@ -13,20 +17,95 @@ import java.util.ArrayList;
  * @author anick
  */
 public class database {
-    public String tipo;
-    public String nombre;
-    public String path;
-    public ArrayList<parametro> campo;
-    
-    public database(  String tipo,
-     String nombre,
-     String path,
-     ArrayList<parametro> campo)
-    {
-        this.tipo=tipo;
-        this.nombre=nombre;
-        this.path=path;
-        this.campo=campo;
+
+    private String tipo;
+    private String nombre;
+    private String path;
+    private ArrayList<propertyField> propertyField;
+    private ArrayList<function> function;
+    private ArrayList<procedure> procedure;
+    private ArrayList<object> object;
+    private ArrayList<table> table;
+
+
+    public database(String tipo, String nombre, String path, ArrayList<propertyField> propertyField, ArrayList<function> function, ArrayList<procedure> procedure, ArrayList<object> object, ArrayList<table> table) {
+        this.tipo = tipo;
+        this.nombre = nombre;
+        this.path = path;
+        this.propertyField = propertyField;
+        this.function = function;
+        this.procedure = procedure;
+        this.object = object;
+        this.table = table;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    public ArrayList<function> getFunction() {
+        return function;
+    }
+
+    public void setFunction(ArrayList<function> function) {
+        this.function = function;
+    }
+
+    public ArrayList<procedure> getProcedure() {
+        return procedure;
+    }
+
+    public void setProcedure(ArrayList<procedure> procedure) {
+        this.procedure = procedure;
+    }
+
+    public ArrayList<object> getObject() {
+        return object;
+    }
+
+    public void setObject(ArrayList<object> object) {
+        this.object = object;
+    }
+
+    public ArrayList<table> getTable() {
+        return table;
+    }
+
+    public void setTable(ArrayList<table> table) {
+        this.table = table;
+    }
+
+    public ArrayList<propertyField> getPropertyField() {
+        return propertyField;
+    }
+
+    public void setPropertyField(ArrayList<propertyField> propertyField) {
+        this.propertyField = propertyField;
     }
     
+    
+
+    
+    
+
 }

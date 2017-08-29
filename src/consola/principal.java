@@ -5,7 +5,8 @@
  */
 package consola;
 
-import archivos.archivo;
+import archivos.LecturaBD;
+import archivos.memoria;
 import usql.ParseException;
 import usql.TokenMgrError;
 import usql.analizador;
@@ -89,7 +90,7 @@ public class principal extends javax.swing.JFrame {
         // TODO add your handling code here:
          
         // analizador g = new analizador(new java.io.StringReader(this.jTextArea1.getText()));
-         maestro g = new maestro(new java.io.StringReader(this.jTextArea1.getText()));
+        // maestro g = new maestro(new java.io.StringReader(this.jTextArea1.getText()));
         // db g = new db(new java.io.StringReader(this.jTextArea1.getText()));
         // tabla g = new tabla(new java.io.StringReader(this.jTextArea1.getText()));
         // metodo g = new metodo(new java.io.StringReader(this.jTextArea1.getText()));
@@ -98,24 +99,17 @@ public class principal extends javax.swing.JFrame {
         // paquete g = new paquete(new java.io.StringReader(this.jTextArea1.getText()));
         // usuario g = new usuario(new java.io.StringReader(this.jTextArea1.getText()));
         
-//        try {
-//            g.S();
-//            System.out.println("Funciona");
-//        } 
-//        catch (usql.ParseException ex) {
-//            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+   
+        //        db gd = new db(new java.io.StringReader(jTextArea1.getText()));
+        //                try {
+        //                    gd.S();
+        //                    System.out.print("Exito");
+        //                } catch (xml.db.ParseException ex) {
+        //                    Logger.getLogger(LecturaBD.class
+        //                            .getName()).log(Level.SEVERE, null, ex);
+        //                }
 
-        archivo a=new archivo();
-        
-        try {
-            g.S();
-            System.out.println("Funciona");
-        } 
-        catch (xml.maestro.ParseException ex) {
-            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-         
+         LecturaBD lb=new LecturaBD(); 
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

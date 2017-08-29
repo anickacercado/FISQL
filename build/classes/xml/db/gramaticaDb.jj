@@ -12,7 +12,8 @@ import archivos.db.*;
 
 public class db {
   private String tipo,nombre,path,nombre_param;
-  private ArrayList<parametro> lp= new ArrayList<parametro>();
+  private String nulo, no_nulo, autoincrementable, llave_primaria, llave_foranea;
+  private ArrayList<propertyField> lp= new ArrayList<propertyField>();
   private ArrayList<database> ldb= new ArrayList<database>();
 
   public static void main(String args[]) throws ParseException {
@@ -46,8 +47,27 @@ TOKEN:
   |<TOKEN_DATE_CIERRA: ("</date>")> {System.out.println(image);}
   |<TOKEN_DATETIME_ABRE: ("<datetime>")> {System.out.println(image);}
   |<TOKEN_DATETIME_CIERRA: ("</datetime>")> {System.out.println(image);}
-  |<TOKEN_TABLA_ABRE: ("<tabla>")> {System.out.println(image);}
-  |<TOKEN_TABLA_CIERRA: ("</tabla>")> {System.out.println(image);}
+  |<TOKEN_TABLE_ABRE: ("<table>")> {System.out.println(image);}
+  |<TOKEN_TABLE_CIERRA: ("</table>")> {System.out.println(image);}
+  |<TOKEN_FUNCTION_ABRE: ("<function>")> {System.out.println(image);}
+  |<TOKEN_FUNCTION_CIERRA: ("</function>")> {System.out.println(image);}
+  |<TOKEN_FIELD_ABRE: ("<field>")> {System.out.println(image);}
+  |<TOKEN_FIELD_CIERRA: ("</field>")> {System.out.println(image);}
+  |<TOKEN_PROPERTY_ABRE: ("<property>")> {System.out.println(image);}
+  |<TOKEN_PROPERTY_CIERRA: ("</property>")> {System.out.println(image);}
+  |<TOKEN_NULO_ABRE: ("<nulo>")> {System.out.println(image);}
+  |<TOKEN_NULO_CIERRA: ("</nulo>")> {System.out.println(image);}
+  |<TOKEN_NO_NULO_ABRE: ("<no_nulo>")> {System.out.println(image);}
+  |<TOKEN_NO_NULO_CIERRA: ("</no_nulo>")> {System.out.println(image);}
+  |<TOKEN_AUTOINCREMENTABLE_ABRE: ("<autoincrementable>")> {System.out.println(image);}
+  |<TOKEN_AUTOINCREMENTABLE_CIERRA: ("</autoincrementable>")> {System.out.println(image);}
+  |<TOKEN_LLAVE_PRIMARIA_ABRE: ("<llave_primaria>")> {System.out.println(image);}
+  |<TOKEN_LLAVE_PRIMARIA_CIERRA: ("</llave_primaria>")> {System.out.println(image);}
+  |<TOKEN_LLAVE_FORANEA_ABRE: ("<llave_foranea>")> {System.out.println(image);}
+  |<TOKEN_LLAVE_FORANEA_CIERRA: ("</llave_foranea>")> {System.out.println(image);}
+  |<TOKEN_Y:("\""("Y")"\"")> {System.out.println(image);}
+  |<TOKEN_N:("\""("N")"\"")> {System.out.println(image);}
+
 
 
   |<TOKEN_ID_ABRE: ("<")(["a"-"z","A"-"Z"])(["a"-"z","A"-"Z","0"-"9","_"])* (">")> {System.out.println(image);}
@@ -74,7 +94,7 @@ ArrayList<database> S():
 void LISTA_REGISTRO():
 {}
 {
-    (PROCEDURE() | OBJECT() | TABLA()) (LISTA_REGISTRO())?
+    (PROCEDURE() | FUNCTION()| OBJECT() | TABLE()) (LISTA_REGISTRO())?
 }
 
 
@@ -87,7 +107,22 @@ void PROCEDURE():
      {
      path= p.image;
      path= path.substring(1, path.length()-1);
-     database data = new database("PROCEDURE",null,path,null);
+     database data = new database("PROCEDURE",null,path,null,null,null,null,null);
+     ldb.add(data);
+     }
+
+}
+
+void FUNCTION():
+{Token p;}
+{
+     <TOKEN_FUNCTION_ABRE>
+     <TOKEN_PATH_ABRE> p=<CADENA> <TOKEN_PATH_CIERRA>
+     <TOKEN_FUNCTION_CIERRA>
+     {
+     path= p.image;
+     path= path.substring(1, path.length()-1);
+     database data = new database("FUNCTION",null,path,null,null,null,null,null);
      ldb.add(data);
      }
 
@@ -102,28 +137,27 @@ void OBJECT():
      {
      path= p.image;
      path= path.substring(1, path.length()-1);
-     database data = new database("OBJECT",null,path,null);
+     database data = new database("OBJECT",null,path,null,null,null,null,null);
      ldb.add(data);
      }
 }
 
-void TABLA():
+void TABLE():
 {Token n,p;}
 {
-     <TOKEN_TABLA_ABRE>
+     <TOKEN_TABLE_ABRE>
      <TOKEN_NOMBRE_ABRE> n=<CADENA> <TOKEN_NOMBRE_CIERRA>
      <TOKEN_PATH_ABRE> p=<CADENA> <TOKEN_PATH_CIERRA>
      <TOKEN_ROWS_ABRE> LISTA_TIPO() <TOKEN_ROWS_CIERRA>
-     <TOKEN_TABLA_CIERRA>
+     <TOKEN_TABLE_CIERRA>
     {
         nombre= n.image;
         nombre= nombre.substring(1, nombre.length()-1);
         path= p.image;
         path= path.substring(1, path.length()-1);
-        database data = new database("TABLA",nombre,path,lp);
+        database data = new database("TABLE",nombre,path,lp,null,null,null,null);
         ldb.add(data);
-        lp= new ArrayList<parametro>();
- 
+        lp= new ArrayList<propertyField>();
     }
 
 }
@@ -131,56 +165,139 @@ void TABLA():
 void LISTA_TIPO():
 {}
 {
-    TIPO() (LISTA_TIPO())?
+   (<TOKEN_FIELD_ABRE> TIPO() <TOKEN_FIELD_CIERRA>) (LISTA_TIPO())?
 }
 
 void TIPO():
-{Token t,tip;}
+{Token t,tip,f;}
 {
-   <TOKEN_INTEGER_ABRE> t=<CADENA> <TOKEN_INTEGER_CIERRA> {
+   
+    <TOKEN_INTEGER_ABRE> t=<CADENA> <TOKEN_INTEGER_CIERRA>
+        <TOKEN_PROPERTY_ABRE> 
+			<TOKEN_NULO_ABRE> (<TOKEN_Y> {nulo="Y";}|<TOKEN_N> {nulo="N";}) <TOKEN_NULO_CIERRA> 
+			<TOKEN_NO_NULO_ABRE> (<TOKEN_Y> {no_nulo="Y";}|<TOKEN_N> {no_nulo="N";}) <TOKEN_NO_NULO_CIERRA> 
+			<TOKEN_AUTOINCREMENTABLE_ABRE> (<TOKEN_Y> {autoincrementable="Y";}|<TOKEN_N> {autoincrementable="N";}) <TOKEN_AUTOINCREMENTABLE_CIERRA> 
+			<TOKEN_LLAVE_PRIMARIA_ABRE> (<TOKEN_Y> {llave_primaria="Y";}|<TOKEN_N> {llave_primaria="N";}) <TOKEN_LLAVE_PRIMARIA_CIERRA> 
+			<TOKEN_LLAVE_FORANEA_ABRE> (f=<CADENA>{
+														llave_foranea= f.image;
+														llave_foranea= llave_foranea.substring(1, llave_foranea.length()-1);
+													  }|<TOKEN_N> {llave_foranea="N";}) <TOKEN_LLAVE_FORANEA_CIERRA> 
+        <TOKEN_PROPERTY_CIERRA> 
+   
+                                                            
+                                                             
+
+                                                            {
                                                                 nombre_param= t.image;
                                                                 nombre_param= nombre_param.substring(1, nombre_param.length()-1);
-                                                                parametro p=new parametro(nombre_param,"INTEGER");
+                                                                propertyField p=new propertyField(nombre_param,"INTEGER",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea);
                                                                 lp.add(p);
-                                                            }
-    |<TOKEN_TEXT_ABRE> t=<CADENA> <TOKEN_TEXT_CIERRA>       {
+                                                            }														
+    |<TOKEN_TEXT_ABRE> t=<CADENA> <TOKEN_TEXT_CIERRA>
+        <TOKEN_PROPERTY_ABRE> 
+			<TOKEN_NULO_ABRE> (<TOKEN_Y> {nulo="Y";}|<TOKEN_N> {nulo="N";}) <TOKEN_NULO_CIERRA> 
+			<TOKEN_NO_NULO_ABRE> (<TOKEN_Y> {no_nulo="Y";}|<TOKEN_N> {no_nulo="N";}) <TOKEN_NO_NULO_CIERRA> 
+			<TOKEN_AUTOINCREMENTABLE_ABRE> (<TOKEN_Y> {autoincrementable="Y";}|<TOKEN_N> {autoincrementable="N";}) <TOKEN_AUTOINCREMENTABLE_CIERRA> 
+			<TOKEN_LLAVE_PRIMARIA_ABRE> (<TOKEN_Y> {llave_primaria="Y";}|<TOKEN_N> {llave_primaria="N";}) <TOKEN_LLAVE_PRIMARIA_CIERRA> 
+			<TOKEN_LLAVE_FORANEA_ABRE> (f=<CADENA>{
+														llave_foranea= f.image;
+														llave_foranea= llave_foranea.substring(1, llave_foranea.length()-1);
+													  }|<TOKEN_N> {llave_foranea="N";}) <TOKEN_LLAVE_FORANEA_CIERRA> 
+        <TOKEN_PROPERTY_CIERRA> 
+ 
+                                                            {
                                                                 nombre_param= t.image;
                                                                 nombre_param= nombre_param.substring(1, nombre_param.length()-1);
-                                                                parametro p=new parametro(nombre_param,"TEXT");
+                                                                propertyField p=new propertyField(nombre_param,"TEXT",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea);
                                                                 lp.add(p);                                                            
                                                             }
-    |<TOKEN_DOUBLE_ABRE> t=<CADENA> <TOKEN_DOUBLE_CIERRA>   {
+    |<TOKEN_DOUBLE_ABRE> t=<CADENA> <TOKEN_DOUBLE_CIERRA>
+	<TOKEN_PROPERTY_ABRE> 
+			<TOKEN_NULO_ABRE> (<TOKEN_Y> {nulo="Y";}|<TOKEN_N> {nulo="N";}) <TOKEN_NULO_CIERRA> 
+			<TOKEN_NO_NULO_ABRE> (<TOKEN_Y> {no_nulo="Y";}|<TOKEN_N> {no_nulo="N";}) <TOKEN_NO_NULO_CIERRA> 
+			<TOKEN_AUTOINCREMENTABLE_ABRE> (<TOKEN_Y> {autoincrementable="Y";}|<TOKEN_N> {autoincrementable="N";}) <TOKEN_AUTOINCREMENTABLE_CIERRA> 
+			<TOKEN_LLAVE_PRIMARIA_ABRE> (<TOKEN_Y> {llave_primaria="Y";}|<TOKEN_N> {llave_primaria="N";}) <TOKEN_LLAVE_PRIMARIA_CIERRA> 
+			<TOKEN_LLAVE_FORANEA_ABRE> (f=<CADENA>{
+														llave_foranea= f.image;
+														llave_foranea= llave_foranea.substring(1, llave_foranea.length()-1);
+													  }|<TOKEN_N> {llave_foranea="N";}) <TOKEN_LLAVE_FORANEA_CIERRA> 
+	<TOKEN_PROPERTY_CIERRA> 
+															{
                                                                 nombre_param= t.image;
                                                                 nombre_param= nombre_param.substring(1, nombre_param.length()-1);
-                                                                parametro p=new parametro(nombre_param,"DOUBLE");
+                                                                propertyField p=new propertyField(nombre_param,"DOUBLE",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea);
                                                                 lp.add(p);  
                                                             }
-    |<TOKEN_BOOL_ABRE> t=<CADENA> <TOKEN_BOOL_CIERRA>       {
+    |<TOKEN_BOOL_ABRE> t=<CADENA> <TOKEN_BOOL_CIERRA>
+        <TOKEN_PROPERTY_ABRE> 
+			<TOKEN_NULO_ABRE> (<TOKEN_Y> {nulo="Y";}|<TOKEN_N> {nulo="N";}) <TOKEN_NULO_CIERRA> 
+			<TOKEN_NO_NULO_ABRE> (<TOKEN_Y> {no_nulo="Y";}|<TOKEN_N> {no_nulo="N";}) <TOKEN_NO_NULO_CIERRA> 
+			<TOKEN_AUTOINCREMENTABLE_ABRE> (<TOKEN_Y> {autoincrementable="Y";}|<TOKEN_N> {autoincrementable="N";}) <TOKEN_AUTOINCREMENTABLE_CIERRA> 
+			<TOKEN_LLAVE_PRIMARIA_ABRE> (<TOKEN_Y> {llave_primaria="Y";}|<TOKEN_N> {llave_primaria="N";}) <TOKEN_LLAVE_PRIMARIA_CIERRA> 
+			<TOKEN_LLAVE_FORANEA_ABRE> (f=<CADENA>{
+														llave_foranea= f.image;
+														llave_foranea= llave_foranea.substring(1, llave_foranea.length()-1);
+													  }|<TOKEN_N> {llave_foranea="N";}) <TOKEN_LLAVE_FORANEA_CIERRA> 
+	<TOKEN_PROPERTY_CIERRA> 
+															{
                                                                 nombre_param= t.image;
                                                                 nombre_param= nombre_param.substring(1, nombre_param.length()-1);
-                                                                parametro p=new parametro(nombre_param,"BOOL");
+                                                                propertyField p=new propertyField(nombre_param,"BOOL",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea);
                                                                 lp.add(p);  
                                                             }
-    |<TOKEN_DATE_ABRE> t=<CADENA> <TOKEN_DATE_CIERRA>       {
+    |<TOKEN_DATE_ABRE> t=<CADENA> <TOKEN_DATE_CIERRA>
+     <TOKEN_PROPERTY_ABRE> 
+			<TOKEN_NULO_ABRE> (<TOKEN_Y> {nulo="Y";}|<TOKEN_N> {nulo="N";}) <TOKEN_NULO_CIERRA> 
+			<TOKEN_NO_NULO_ABRE> (<TOKEN_Y> {no_nulo="Y";}|<TOKEN_N> {no_nulo="N";}) <TOKEN_NO_NULO_CIERRA> 
+			<TOKEN_AUTOINCREMENTABLE_ABRE> (<TOKEN_Y> {autoincrementable="Y";}|<TOKEN_N> {autoincrementable="N";}) <TOKEN_AUTOINCREMENTABLE_CIERRA> 
+			<TOKEN_LLAVE_PRIMARIA_ABRE> (<TOKEN_Y> {llave_primaria="Y";}|<TOKEN_N> {llave_primaria="N";}) <TOKEN_LLAVE_PRIMARIA_CIERRA> 
+			<TOKEN_LLAVE_FORANEA_ABRE> (f=<CADENA>{
+														llave_foranea= f.image;
+														llave_foranea= llave_foranea.substring(1, llave_foranea.length()-1);
+													  }|<TOKEN_N> {llave_foranea="N";}) <TOKEN_LLAVE_FORANEA_CIERRA> 
+	   <TOKEN_PROPERTY_CIERRA> 
+															{
                                                                 nombre_param= t.image;
                                                                 nombre_param= nombre_param.substring(1, nombre_param.length()-1);
-                                                                parametro p=new parametro(nombre_param,"DATE");
+                                                                propertyField p=new propertyField(nombre_param,"DATE",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea);
                                                                 lp.add(p);  
                                                             }
-    |<TOKEN_DATETIME_ABRE> t=<CADENA> <TOKEN_DATETIME_CIERRA> {
+    |<TOKEN_DATETIME_ABRE> t=<CADENA> <TOKEN_DATETIME_CIERRA>
+     <TOKEN_PROPERTY_ABRE> 
+			<TOKEN_NULO_ABRE> (<TOKEN_Y> {nulo="Y";}|<TOKEN_N> {nulo="N";}) <TOKEN_NULO_CIERRA> 
+			<TOKEN_NO_NULO_ABRE> (<TOKEN_Y> {no_nulo="Y";}|<TOKEN_N> {no_nulo="N";}) <TOKEN_NO_NULO_CIERRA> 
+			<TOKEN_AUTOINCREMENTABLE_ABRE> (<TOKEN_Y> {autoincrementable="Y";}|<TOKEN_N> {autoincrementable="N";}) <TOKEN_AUTOINCREMENTABLE_CIERRA> 
+			<TOKEN_LLAVE_PRIMARIA_ABRE> (<TOKEN_Y> {llave_primaria="Y";}|<TOKEN_N> {llave_primaria="N";}) <TOKEN_LLAVE_PRIMARIA_CIERRA> 
+			<TOKEN_LLAVE_FORANEA_ABRE> (f=<CADENA>{
+														llave_foranea= f.image;
+														llave_foranea= llave_foranea.substring(1, llave_foranea.length()-1);
+													  }|<TOKEN_N> {llave_foranea="N";}) <TOKEN_LLAVE_FORANEA_CIERRA> 
+	   <TOKEN_PROPERTY_CIERRA> 
+															{
                                                                 nombre_param= t.image;
                                                                 nombre_param= nombre_param.substring(1, nombre_param.length()-1);
-                                                                parametro p=new parametro(nombre_param,"DATETIME");
+                                                                propertyField p=new propertyField(nombre_param,"DATETIME",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea);
                                                                 lp.add(p);
-                                                              } 
-    |tip=<TOKEN_ID_ABRE> t=<CADENA> <TOKEN_ID_CIERRA>         {
+                                                            } 
+    |tip=<TOKEN_ID_ABRE> t=<CADENA> <TOKEN_ID_CIERRA>
+	     <TOKEN_PROPERTY_ABRE> 
+			<TOKEN_NULO_ABRE> (<TOKEN_Y> {nulo="Y";}|<TOKEN_N> {nulo="N";}) <TOKEN_NULO_CIERRA> 
+			<TOKEN_NO_NULO_ABRE> (<TOKEN_Y> {no_nulo="Y";}|<TOKEN_N> {no_nulo="N";}) <TOKEN_NO_NULO_CIERRA> 
+			<TOKEN_AUTOINCREMENTABLE_ABRE> (<TOKEN_Y> {autoincrementable="Y";}|<TOKEN_N> {autoincrementable="N";}) <TOKEN_AUTOINCREMENTABLE_CIERRA> 
+			<TOKEN_LLAVE_PRIMARIA_ABRE> (<TOKEN_Y> {llave_primaria="Y";}|<TOKEN_N> {llave_primaria="N";}) <TOKEN_LLAVE_PRIMARIA_CIERRA> 
+			<TOKEN_LLAVE_FORANEA_ABRE> (f=<CADENA>{
+														llave_foranea= f.image;
+														llave_foranea= llave_foranea.substring(1, llave_foranea.length()-1);
+													  }|<TOKEN_N> {llave_foranea="N";}) <TOKEN_LLAVE_FORANEA_CIERRA> 
+	   <TOKEN_PROPERTY_CIERRA> 
+															{
                                                                 tipo = tip.image;
                                                                 tipo = tipo.substring(1, tipo.length()-1);
                                                                 nombre_param= t.image;
                                                                 nombre_param= nombre_param.substring(1, nombre_param.length()-1);
-                                                                parametro p=new parametro(nombre_param,tipo);
-                                                                lp.add(p);
-                                                              } 
+                                                                propertyField p=new propertyField(nombre_param,tipo,nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea);
+																lp.add(p);
+                                                            } 
 }
 
 
