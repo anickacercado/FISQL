@@ -1,0 +1,19 @@
+<Obj>
+<nombre>"nombre_obj1"</nombre>
+	<attr>
+		<integer>"Nombre_param1"</integer>
+		<text>"Nombre_param2"</text>
+		<bool>"Nombre_param3"</bool>
+	</attr>
+</Obj>
+<Obj>
+<nombre>"nombre_obj2"</nombre>
+	<attr>
+		<integer>"Nombre_param1"</integer>
+		<text>"Nombre_param2"</text>
+		<bool>"Nombre_param3"</bool>
+		<date>"Nombre_param3"</date>
+		<datetime>"Nombre_param3"</datetime>
+		<double>"Nombre_param3"</double>
+	</attr>
+</Obj>

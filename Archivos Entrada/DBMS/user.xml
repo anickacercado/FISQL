@@ -1,0 +1,8 @@
+<usr>
+	<nombre>"admin"</nombre>
+	<pass>"admin"</pass>
+	<tipo>"admin"</tipo>
+	<estado>"inactivo"</estado>
+	<permiso>		
+	</permiso>
+</usr>

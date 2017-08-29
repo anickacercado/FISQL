@@ -1,0 +1,75 @@
+<Procedure> 
+	<path>"C:\DBMS\DB2\procedure1.xml"</path> 
+</Procedure> 
+<Object> 
+	<path>"C:\DBMS\DB2\object1.xml"</path> 
+</Object> 
+<Table> 
+	<nombre>"nombre_table1"</nombre> 
+	<path>"C:\DBMS\DB2\table1.xml"</path> 
+	<rows> 
+		<field>
+			<integer>"Nombre_campo1"</integer>
+			<property>
+				<nulo>"N"</nulo>
+				<no_nulo>"Y"</no_nulo>
+				<autoincrementable>"Y"</autoincrementable>
+				<llave_primaria>"Y"</llave_primaria>
+				<llave_foranea>"N"</llave_foranea>
+			</property>
+		</field>
+		<field>
+			<text>"Nombre_campo2"</text>
+			<property>
+				<nulo>"N"</nulo>
+				<no_nulo>"Y"</no_nulo>
+				<autoincrementable>"N"</autoincrementable>
+				<llave_primaria>"N"</llave_primaria>
+				<llave_foranea>"table2"</llave_foranea>
+			</property>		
+		</field>
+		<field>
+			<bool>"Nombre_campo3"</bool>
+			<property>
+				<nulo>"Y"</nulo>
+				<no_nulo>"N"</no_nulo>
+				<autoincrementable>"N"</autoincrementable>
+				<llave_primaria>"N"</llave_primaria>
+				<llave_foranea>"N"</llave_foranea>
+			</property>	
+		</field>
+		<field>
+			<date>"Nombre_campo1"</date>
+			<property>
+				<nulo>"Y"</nulo>
+				<no_nulo>"N"</no_nulo>
+				<autoincrementable>"N"</autoincrementable>
+				<llave_primaria>"N"</llave_primaria>
+				<llave_foranea>"N"</llave_foranea>
+			</property>	
+		</field>	
+		<field>
+			<datetime>"Nombre_campo2"</datetime>
+			<property>
+				<nulo>"Y"</nulo>
+				<no_nulo>"N"</no_nulo>
+				<autoincrementable>"N"</autoincrementable>
+				<llave_primaria>"N"</llave_primaria>
+				<llave_foranea>"N"</llave_foranea>
+			</property>	
+		</field>
+		<field>
+			<object1>"Nombre_campo3"</object1>
+			<property>
+				<nulo>"Y"</nulo>
+				<no_nulo>"N"</no_nulo>
+				<autoincrementable>"N"</autoincrementable>
+				<llave_primaria>"N"</llave_primaria>
+				<llave_foranea>"N"</llave_foranea>
+			</property>	
+		</field>		
+	</rows> 
+</Table>
+<Function> 
+	<path>"C:\DBMS\DB2\function1.xml"</path> 
+</Function> 

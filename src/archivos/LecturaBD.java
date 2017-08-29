@@ -80,7 +80,7 @@ public class LecturaBD {
    
     private void leerUser(){
        String cadenaUser = le.lectura(memoria.user);
-        if (cadenaUser != "NO") {
+        if (!"NO".equals(cadenaUser)) {
             usuario gu = new usuario(new java.io.StringReader(cadenaUser));
             try {
                 memoria.arbolUsuario = gu.S();
@@ -93,7 +93,7 @@ public class LecturaBD {
     
     private void leerMaestro() {
         String cadenaMaestro = le.lectura(memoria.maestro);
-        if (cadenaMaestro != "NO") {
+        if (!"NO".equals(cadenaMaestro)) {
             maestro gm = new maestro(new java.io.StringReader(cadenaMaestro));
             try {
                 memoria.arbolMaestro = gm.S();
@@ -113,7 +113,7 @@ public class LecturaBD {
             path = memoria.arbolMaestro.get(i).getPath();
             cadenaDB = le.lectura(path);
 
-            if (cadenaDB != "NO") {
+            if (!"NO".equals(cadenaDB)) {
                 db gd = new db(new java.io.StringReader(cadenaDB));
                 try {
                     arbolDataBase = gd.S();
@@ -137,43 +137,46 @@ public class LecturaBD {
             path = adb.get(i).getPath();
             cadena = le.lectura(path);
 
-            if (cadena != "NO") {
-                if (adb.get(i).getTipo().equals("PROCEDURE")) {
-                    metodo gm = new metodo(new java.io.StringReader(cadena));
-                    try {
-                        arbolProcedure = gm.S();
-                        adb.get(i).setProcedure(arbolProcedure);
-                    } catch (xml.metodo.ParseException ex) {
-                        Logger.getLogger(LecturaBD.class
-                                .getName()).log(Level.SEVERE, null, ex);
-                    }
-                } else if (adb.get(i).getTipo().equals("FUNCTION")) {
-                    funcion gf = new funcion(new java.io.StringReader(cadena));
-                    try {
-                        arbolFunction = gf.S();
-                        adb.get(i).setFunction(arbolFunction);
-                    } catch (xml.funcion.ParseException ex) {
-                        Logger.getLogger(LecturaBD.class
-                                .getName()).log(Level.SEVERE, null, ex);
-                    }
-                } else if (adb.get(i).getTipo().equals("OBJECT")) {
-                    objeto go = new objeto(new java.io.StringReader(cadena));
-                    try {
-                        arbolObject = go.S();
-                        adb.get(i).setObject(arbolObject);
-                    } catch (xml.objeto.ParseException ex) {
-                        Logger.getLogger(LecturaBD.class
-                                .getName()).log(Level.SEVERE, null, ex);
-                    }
-                } else if (adb.get(i).getTipo().equals("TABLE")) {
-                    tabla gt = new tabla(new java.io.StringReader(cadena));
-                    try {
-                        arbolTable = gt.S();
-                        adb.get(i).setTable(arbolTable);
-                    } catch (xml.tabla.ParseException ex) {
-                        Logger.getLogger(LecturaBD.class
-                                .getName()).log(Level.SEVERE, null, ex);
-                    }
+            if (!"NO".equals(cadena)) {
+                switch (adb.get(i).getTipo()) {
+                    case "PROCEDURE":
+                        metodo gm = new metodo(new java.io.StringReader(cadena));
+                        try {
+                            arbolProcedure = gm.S();
+                            adb.get(i).setProcedure(arbolProcedure);
+                        } catch (xml.metodo.ParseException ex) {
+                            Logger.getLogger(LecturaBD.class
+                                    .getName()).log(Level.SEVERE, null, ex);
+                        }   break;
+                    case "FUNCTION":
+                        funcion gf = new funcion(new java.io.StringReader(cadena));
+                        try {
+                            arbolFunction = gf.S();
+                            adb.get(i).setFunction(arbolFunction);
+                        } catch (xml.funcion.ParseException ex) {
+                            Logger.getLogger(LecturaBD.class
+                                    .getName()).log(Level.SEVERE, null, ex);
+                        }   break;
+                    case "OBJECT":
+                        objeto go = new objeto(new java.io.StringReader(cadena));
+                        try {
+                            arbolObject = go.S();
+                            adb.get(i).setObject(arbolObject);
+                        } catch (xml.objeto.ParseException ex) {
+                            Logger.getLogger(LecturaBD.class
+                                    .getName()).log(Level.SEVERE, null, ex);
+                        }   break;
+                    case "TABLE":
+                        tabla gt = new tabla(new java.io.StringReader(cadena));
+                        try {
+                            arbolTable = gt.S();
+                            adb.get(i).setTable(arbolTable);
+                        } catch (xml.tabla.ParseException ex) {
+                            Logger.getLogger(LecturaBD.class
+                                    .getName()).log(Level.SEVERE, null, ex);
+                        }   break;
+                    default:
+                        break;
                 }
             }
         }

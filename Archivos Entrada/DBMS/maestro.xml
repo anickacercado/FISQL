@@ -1,0 +1,12 @@
+<DB> 
+	<nombre>"DB1"</nombre> 
+	<path>"C:\DBMS\DB1\DB.xml"</path> 
+</DB> 
+<DB> 
+	<nombre>"DB2"</nombre> 
+	<path>"C:\DBMS\DB2\DB.xml"</path> 
+</DB>
+<DB> 
+	<nombre>"DB3"</nombre> 
+	<path>"C:\DBMS\DB3\DB.xml"</path> 
+</DB>
