@@ -17,7 +17,6 @@ public class usuario implements usuarioConstants {
   public static void main(String args[]) throws ParseException {
     usuario parser = new usuario(System.in);
     parser.S();
-    System.out.println("Exito!!");
   }
 
   final public ArrayList<user> S() throws ParseException {
@@ -155,7 +154,7 @@ opcion= t.image;
       jj_consume_token(TOKEN_FUNC_CIERRA);
 opcion= t.image;
                                                         opcion= opcion.substring(1, opcion.length()-1);
-                                                        lf.add(t.image);
+                                                        lf.add(opcion);
       break;
       }
     case TOKEN_PROC_ABRE:{

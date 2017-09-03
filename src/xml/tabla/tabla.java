@@ -4,11 +4,11 @@ package xml.tabla;
 import java.util.ArrayList;
 import archivos.tabla.*;
 import DML.*;
+import archivos.memoria;
 
 public class tabla implements tablaConstants {
 
   accionTabla at = new accionTabla();
-  private ArrayList<table> lt= new ArrayList<table>();
   private ArrayList<registro_objeto> lro = new ArrayList<registro_objeto>();
   private String nombre_campo, valor;
 
@@ -20,10 +20,8 @@ public class tabla implements tablaConstants {
     parser.S();
   }
 
-  final public ArrayList<table> S() throws ParseException {
+  final public void S() throws ParseException {
     ROW();
-{if ("" != null) return lt;}
-    throw new Error("Missing return statement in function");
   }
 
   final public void ROW() throws ParseException {
@@ -51,14 +49,14 @@ nombre_campo= nc.image;
                                             nombre_campo= nombre_campo.substring(1, nombre_campo.length()-1);
                                             valor= v.image;
                                             valor= valor.substring(1, valor.length()-1);
-                                            at.insertTable(lt, nombre_campo,valor);
+                                            at.insertTable(memoria.Insert_db_actual,memoria.Insert_table_actual, nombre_campo,valor);
       break;
       }
     case TOKEN_ID_ABRE:{
       LISTA_OBJETO();
 nombre_campo= nc.image;
                                             nombre_campo= nombre_campo.substring(1, nombre_campo.length()-1);
-                                            at.insertTableObject(lt, nombre_campo, lro);
+                                            at.insertTableObject(memoria.Insert_db_actual,memoria.Insert_table_actual, nombre_campo, lro);
                                             lro= new ArrayList<registro_objeto>();
       break;
       }

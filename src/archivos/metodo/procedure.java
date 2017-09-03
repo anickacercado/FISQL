@@ -14,14 +14,31 @@ import java.util.ArrayList;
  */
 public class procedure {
     
-    public String nombre, codigo;
-    public ArrayList<parametro> parametro;
+    private String nombre;
+    private String codigo;
+    private ArrayList<parametro> parametro;
     
     public procedure(String nombre, ArrayList<parametro> parametro, String codigo){
         this.nombre = nombre;
         this.parametro = parametro;
         this.codigo = codigo;
     }   
+    
+    public String XML() {
+        String cadena = "";
+        cadena += "<Proc>\n"
+                + "\t<nombre>\"" + nombre + "\"</nombre>\n"
+                + "\t<params>\n";
+
+        for (int i = 0; i < parametro.size(); i++) {
+            cadena += parametro.get(i).XML();
+        }
+
+        cadena += "\t</params>\n"
+                + "\t<src>~" + codigo + "~</src>\n"
+                + "\t</Proc>\n";
+        return cadena;
+    }
     
      public void addParametro(String nombre,String tipo){
          parametro attr = new parametro(nombre,tipo);
@@ -35,11 +52,35 @@ public class procedure {
     
      public boolean existsParametro(String nombre,String tipo){
         for(int i=0;i< this.parametro.size();i++){
-            if(this.parametro.get(i).nombre.equals(nombre)){
+            if(this.parametro.get(i).getNombre().equals(nombre)){
                 return true;
             }
         }
         return false;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(String codigo) {
+        this.codigo = codigo;
+    }
+
+    public ArrayList<parametro> getParametro() {
+        return parametro;
+    }
+
+    public void setParametro(ArrayList<parametro> parametro) {
+        this.parametro = parametro;
     }
     
     

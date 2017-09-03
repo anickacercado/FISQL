@@ -9,11 +9,12 @@ package xml.tabla;
 import java.util.ArrayList;
 import archivos.tabla.*;
 import DML.*;
+import archivos.memoria;
+
 
 public class tabla {
  
   accionTabla at = new accionTabla();
-  private ArrayList<table> lt= new ArrayList<table>();
   private ArrayList<registro_objeto> lro = new ArrayList<registro_objeto>();
   private String nombre_campo, valor;
 
@@ -45,10 +46,10 @@ SKIP:
 | "\t"
 }
 
-ArrayList<table> S():
+void S():
 {}
 {
-   ROW() {return lt;}
+   ROW() 
 }
 
 
@@ -68,14 +69,14 @@ void LISTA_REGISTRO():
                                             nombre_campo= nombre_campo.substring(1, nombre_campo.length()-1);
                                             valor= v.image;
                                             valor= valor.substring(1, valor.length()-1);
-                                            at.insertTable(lt, nombre_campo,valor);               
+                                            at.insertTable(memoria.Insert_db_actual,memoria.Insert_table_actual, nombre_campo,valor);               
                                         }
                                                 
                        
                         |LISTA_OBJETO() {
                                             nombre_campo= nc.image;
                                             nombre_campo= nombre_campo.substring(1, nombre_campo.length()-1);
-                                            at.insertTableObject(lt, nombre_campo, lro);
+                                            at.insertTableObject(memoria.Insert_db_actual,memoria.Insert_table_actual, nombre_campo, lro);
                                             lro= new ArrayList<registro_objeto>();
                                         }
 

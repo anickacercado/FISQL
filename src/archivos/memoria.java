@@ -21,7 +21,9 @@ public class memoria {
   public static String maestro= "C:\\DBMS\\maestro.xml";     
   
   //Base de Datos
-  public static ArrayList<user> arbolUsuario;
-  public static ArrayList<master> arbolMaestro;
+  public static ArrayList<user> arbolUsuario = new ArrayList<user>();
+  public static ArrayList<master> arbolMaestro = new  ArrayList<master>();
+  public static String Insert_db_actual = "";
+  public static String Insert_table_actual = "";
 
 }

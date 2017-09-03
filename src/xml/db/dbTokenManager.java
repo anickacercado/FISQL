@@ -4,6 +4,12 @@ package xml.db;
 import java.util.ArrayList;
 import archivos.*;
 import archivos.db.*;
+import archivos.metodo.function;
+import archivos.metodo.procedure;
+import archivos.objeto.object;
+import archivos.tabla.fila_tabla;
+import archivos.tabla.fila_tabla_objeto;
+import archivos.tabla.table;
 
 /** Token Manager. */
 @SuppressWarnings("unused")public class dbTokenManager implements dbConstants {

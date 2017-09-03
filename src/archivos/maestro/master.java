@@ -28,6 +28,27 @@ public class master {
         this.database = database;
     }
 
+    public master() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+     public String XML(){
+        String codigo ="";     
+        codigo += "<DB>\n"
+                + "\t<nombre>\"" + nombre + "\"</nombre>\n"
+                + "\t<path>\"" + path + "\"</path>\n"
+                + "</DB>";   
+        return codigo;
+    }
+    
+     public void insertDataBase(database data){
+         database.add(data);
+     }
+     
+    public void deleteDataBase(database data){
+         database.add(data);
+     }
+     
     public ArrayList<database> getDatabase() {
         return database;
     }

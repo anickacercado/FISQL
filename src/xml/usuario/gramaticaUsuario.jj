@@ -135,7 +135,7 @@ void OPCION():
     |<TOKEN_FUNC_ABRE> t=<CADENA> <TOKEN_FUNC_CIERRA>  {
                                                         opcion= t.image;
                                                         opcion= opcion.substring(1, opcion.length()-1);
-                                                        lf.add(t.image);
+                                                        lf.add(opcion);
                                                         }   
     |<TOKEN_PROC_ABRE> t=<CADENA> <TOKEN_PROC_CIERRA>  {
                                                         opcion= t.image;

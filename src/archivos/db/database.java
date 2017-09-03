@@ -8,7 +8,6 @@ package archivos.db;
 import archivos.metodo.function;
 import archivos.metodo.procedure;
 import archivos.objeto.object;
-import archivos.parametro;
 import archivos.tabla.table;
 import java.util.ArrayList;
 
@@ -21,22 +20,56 @@ public class database {
     private String tipo;
     private String nombre;
     private String path;
-    private ArrayList<propertyField> propertyField;
     private ArrayList<function> function;
     private ArrayList<procedure> procedure;
     private ArrayList<object> object;
     private ArrayList<table> table;
 
-
-    public database(String tipo, String nombre, String path, ArrayList<propertyField> propertyField, ArrayList<function> function, ArrayList<procedure> procedure, ArrayList<object> object, ArrayList<table> table) {
+    public database(String tipo, String nombre, String path, ArrayList<function> function, ArrayList<procedure> procedure, ArrayList<object> object, ArrayList<table> table) {
         this.tipo = tipo;
         this.nombre = nombre;
         this.path = path;
-        this.propertyField = propertyField;
         this.function = function;
         this.procedure = procedure;
         this.object = object;
         this.table = table;
+    }
+
+    public String XML() {
+        String cadena = "";
+        switch (tipo) {
+            case "PROCEDURE":
+                cadena += "<Procedure>\n"
+                        + "\t<path>\"" + path + "\"</path>\n"
+                        + "\t</Procedure>\n";
+                break;
+            case "FUNCTION":
+                cadena += "<Function>\n"
+                        + "\t<path>\"" + path + "\"</path>\n"
+                        + "\t</Function>\n";
+                break;
+            case "OBJECT":
+                cadena += "<Object>\n"
+                        + "\t<path>\"" + path + "\"</path>\n"
+                        + "\t</Object>\n";
+                break;
+            case "TABLE":
+                cadena += "<Table>\n"
+                        + "\t<nombre>\"" + nombre + "\"</nombre>\n"
+                        + "\t<path>\"" + path + "\"</path>\n"
+                        + "\t<rows>\n";
+
+                for (int i = 0; i < table.size(); i++) {
+                    cadena += table.get(i).Create_XML();
+                }
+
+                cadena += "\t</rows>\n"
+                        + "\t</Table>\n";
+                break;
+            default:
+                break;
+        }
+        return cadena;
     }
 
     public String getTipo() {
@@ -94,18 +127,4 @@ public class database {
     public void setTable(ArrayList<table> table) {
         this.table = table;
     }
-
-    public ArrayList<propertyField> getPropertyField() {
-        return propertyField;
-    }
-
-    public void setPropertyField(ArrayList<propertyField> propertyField) {
-        this.propertyField = propertyField;
-    }
-    
-    
-
-    
-    
-
 }

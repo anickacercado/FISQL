@@ -4,11 +4,17 @@ package xml.db;
 import java.util.ArrayList;
 import archivos.*;
 import archivos.db.*;
+import archivos.metodo.function;
+import archivos.metodo.procedure;
+import archivos.objeto.object;
+import archivos.tabla.fila_tabla;
+import archivos.tabla.fila_tabla_objeto;
+import archivos.tabla.table;
 
 public class db implements dbConstants {
   private String tipo,nombre,path,nombre_param;
   private String nulo, no_nulo, autoincrementable, llave_primaria, llave_foranea;
-  private ArrayList<propertyField> lp= new ArrayList<propertyField>();
+  ArrayList<table> lt = new ArrayList<table>();
   private ArrayList<database> ldb= new ArrayList<database>();
 
   public static void main(String args[]) throws ParseException {
@@ -67,7 +73,8 @@ public class db implements dbConstants {
     jj_consume_token(TOKEN_PROCEDURE_CIERRA);
 path= p.image;
      path= path.substring(1, path.length()-1);
-     database data = new database("PROCEDURE",null,path,null,null,null,null,null);
+     ArrayList<procedure> proc= new ArrayList<procedure>();
+     database data = new database("PROCEDURE",null,path,null,proc,null,null);
      ldb.add(data);
   }
 
@@ -79,7 +86,8 @@ path= p.image;
     jj_consume_token(TOKEN_FUNCTION_CIERRA);
 path= p.image;
      path= path.substring(1, path.length()-1);
-     database data = new database("FUNCTION",null,path,null,null,null,null,null);
+     ArrayList<function> func = new ArrayList<function>();
+     database data = new database("FUNCTION",null,path,func,null,null,null);
      ldb.add(data);
   }
 
@@ -91,7 +99,8 @@ path= p.image;
     jj_consume_token(TOKEN_OBJECT_CIERRA);
 path= p.image;
      path= path.substring(1, path.length()-1);
-     database data = new database("OBJECT",null,path,null,null,null,null,null);
+     ArrayList<object> obj = new ArrayList<object>();
+     database data = new database("OBJECT",null,path,null,null,obj,null);
      ldb.add(data);
   }
 
@@ -111,9 +120,9 @@ nombre= n.image;
         nombre= nombre.substring(1, nombre.length()-1);
         path= p.image;
         path= path.substring(1, path.length()-1);
-        database data = new database("TABLE",nombre,path,lp,null,null,null,null);
+        database data = new database("TABLE",nombre,path,null,null,null,lt);
         ldb.add(data);
-        lp= new ArrayList<propertyField>();
+        lt = new ArrayList<table>();
   }
 
   final public void LISTA_TIPO() throws ParseException {
@@ -232,8 +241,9 @@ llave_foranea="N";
       jj_consume_token(TOKEN_PROPERTY_CIERRA);
 nombre_param= t.image;
                                                                 nombre_param= nombre_param.substring(1, nombre_param.length()-1);
-                                                                propertyField p=new propertyField(nombre_param,"INTEGER",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea);
-                                                                lp.add(p);
+                                                                ArrayList<fila_tabla> registro = new ArrayList<fila_tabla>();
+                                                                table ta= new table(nombre_param,"INTEGER",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea,registro,false,null);
+                                                                lt.add(ta);
       break;
       }
     case TOKEN_TEXT_ABRE:{
@@ -335,8 +345,9 @@ llave_foranea="N";
       jj_consume_token(TOKEN_PROPERTY_CIERRA);
 nombre_param= t.image;
                                                                 nombre_param= nombre_param.substring(1, nombre_param.length()-1);
-                                                                propertyField p=new propertyField(nombre_param,"TEXT",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea);
-                                                                lp.add(p);
+                                                                ArrayList<fila_tabla> registro = new ArrayList<fila_tabla>();
+                                                                table ta= new table(nombre_param,"TEXT",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea,registro,false,null);
+                                                                lt.add(ta);
       break;
       }
     case TOKEN_DOUBLE_ABRE:{
@@ -438,8 +449,9 @@ llave_foranea="N";
       jj_consume_token(TOKEN_PROPERTY_CIERRA);
 nombre_param= t.image;
                                                                 nombre_param= nombre_param.substring(1, nombre_param.length()-1);
-                                                                propertyField p=new propertyField(nombre_param,"DOUBLE",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea);
-                                                                lp.add(p);
+                                                                ArrayList<fila_tabla> registro = new ArrayList<fila_tabla>();
+                                                                table ta= new table(nombre_param,"DOUBLE",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea,registro,false,null);
+                                                                lt.add(ta);
       break;
       }
     case TOKEN_BOOL_ABRE:{
@@ -541,8 +553,9 @@ llave_foranea="N";
       jj_consume_token(TOKEN_PROPERTY_CIERRA);
 nombre_param= t.image;
                                                                 nombre_param= nombre_param.substring(1, nombre_param.length()-1);
-                                                                propertyField p=new propertyField(nombre_param,"BOOL",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea);
-                                                                lp.add(p);
+                                                                ArrayList<fila_tabla> registro = new ArrayList<fila_tabla>();
+                                                                table ta= new table(nombre_param,"BOOL",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea,registro,false,null);
+                                                                lt.add(ta);
       break;
       }
     case TOKEN_DATE_ABRE:{
@@ -644,8 +657,9 @@ llave_foranea="N";
       jj_consume_token(TOKEN_PROPERTY_CIERRA);
 nombre_param= t.image;
                                                                 nombre_param= nombre_param.substring(1, nombre_param.length()-1);
-                                                                propertyField p=new propertyField(nombre_param,"DATE",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea);
-                                                                lp.add(p);
+                                                                ArrayList<fila_tabla> registro = new ArrayList<fila_tabla>();
+                                                                table ta= new table(nombre_param,"DATE",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea,registro,false,null);
+                                                                lt.add(ta);
       break;
       }
     case TOKEN_DATETIME_ABRE:{
@@ -747,8 +761,9 @@ llave_foranea="N";
       jj_consume_token(TOKEN_PROPERTY_CIERRA);
 nombre_param= t.image;
                                                                 nombre_param= nombre_param.substring(1, nombre_param.length()-1);
-                                                                propertyField p=new propertyField(nombre_param,"DATETIME",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea);
-                                                                lp.add(p);
+                                                                ArrayList<fila_tabla> registro = new ArrayList<fila_tabla>();
+                                                                table ta= new table(nombre_param,"DATETIME",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea,registro,false,null);
+                                                                lt.add(ta);
       break;
       }
     case TOKEN_ID_ABRE:{
@@ -852,8 +867,9 @@ tipo = tip.image;
                                                                 tipo = tipo.substring(1, tipo.length()-1);
                                                                 nombre_param= t.image;
                                                                 nombre_param= nombre_param.substring(1, nombre_param.length()-1);
-                                                                propertyField p=new propertyField(nombre_param,tipo,nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea);
-                                                                                                                                lp.add(p);
+                                                                ArrayList<fila_tabla_objeto> registro_objeto = new ArrayList<fila_tabla_objeto>();
+                                                                table ta= new table(nombre_param,tipo,nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea,null,true,registro_objeto);
+                                                                lt.add(ta);
       break;
       }
     default:

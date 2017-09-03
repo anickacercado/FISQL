@@ -10,10 +10,29 @@ package archivos.tabla;
  * @author anick
  */
 public class registro_objeto {
-    public String nombre,valor;
+    private String nombre;
+    private String valor;
     
     public registro_objeto(String nombre, String valor){
     this.nombre=nombre;
     this.valor=valor;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getValor() {
+        return valor;
+    }
+
+    public void setValor(String valor) {
+        this.valor = valor;
+    }
+    
+    
 }

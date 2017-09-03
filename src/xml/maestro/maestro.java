@@ -3,6 +3,7 @@
 package xml.maestro;
 import java.util.ArrayList;
 import archivos.maestro.*;
+import archivos.db.database;
 
 public class maestro implements maestroConstants {
   private ArrayList<master> lm= new ArrayList<master>();
@@ -45,7 +46,8 @@ nombre= n.image;
         nombre= nombre.substring(1, nombre.length()-1);
         path= p.image;
         path= path.substring(1, path.length()-1);
-        master m= new master(nombre,path,null);
+        ArrayList<database> data = new ArrayList<database>();
+        master m= new master(nombre,path,data);
         lm.add(m);
   }
 

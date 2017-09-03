@@ -5,20 +5,17 @@
  */
 package consola;
 
+import DDL.create;
+import archivos.EscrituraBD;
 import archivos.LecturaBD;
-import archivos.memoria;
-import usql.ParseException;
-import usql.TokenMgrError;
-import usql.analizador;
+import archivos.db.database;
+import archivos.parametro;
+import archivos.tabla.table;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import paquetes.paquete;
+import xml.db.ParseException;
 import xml.db.db;
-import xml.funcion.funcion;
-import xml.maestro.maestro;
-import xml.metodo.metodo;
-import xml.objeto.objeto;
-import xml.tabla.tabla;
 import xml.usuario.usuario;
 
 /**
@@ -86,31 +83,58 @@ public class principal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    ArrayList<parametro> lp = new ArrayList<parametro>();
+    ArrayList<table> lt = new ArrayList<table>();
+    create cre = new create();
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-         
-        // analizador g = new analizador(new java.io.StringReader(this.jTextArea1.getText()));
-        // maestro g = new maestro(new java.io.StringReader(this.jTextArea1.getText()));
-        // db g = new db(new java.io.StringReader(this.jTextArea1.getText()));
-        // tabla g = new tabla(new java.io.StringReader(this.jTextArea1.getText()));
-        // metodo g = new metodo(new java.io.StringReader(this.jTextArea1.getText()));
-        // objeto g = new objeto(new java.io.StringReader(this.jTextArea1.getText()));
-        // funcion g = new funcion(new java.io.StringReader(this.jTextArea1.getText()));
-        // paquete g = new paquete(new java.io.StringReader(this.jTextArea1.getText()));
-        // usuario g = new usuario(new java.io.StringReader(this.jTextArea1.getText()));
-        
-   
-        //        db gd = new db(new java.io.StringReader(jTextArea1.getText()));
-        //                try {
-        //                    gd.S();
-        //                    System.out.print("Exito");
-        //                } catch (xml.db.ParseException ex) {
-        //                    Logger.getLogger(LecturaBD.class
-        //                            .getName()).log(Level.SEVERE, null, ex);
-        //                }
 
-         LecturaBD lb=new LecturaBD(); 
+        //BD en memoria
+        LecturaBD lb = new LecturaBD();
+        lb.leer();
+        
+//        EscrituraBD eb = new EscrituraBD();
+//        eb.Escribir();
+
+//        //Creación de Objeto, Procedimiento, Funcion
+//        cre.insertParametro(lp, "campo1", "TEXT");
+//        cre.insertParametro(lp, "campo2", "INTEGER");
+//        cre.insertParametro(lp, "campo3", "DATE");
+//        cre.CrearObjeto("anicka", "objeto1", lp);
+//        cre.CrearProc("anicka", "procedimiento1", lp, "instrucciones");
+//        cre.CrearFunc("anicka", "funcion1", lp, "instrucciones", "DATE");
+//        cre.CrearObjeto("anicka", "objeto2", lp);
+//        cre.CrearProc("anicka", "procedimiento2", lp, "instrucciones");
+//        cre.CrearFunc("anicka", "Funcion2", lp, "instrucciones", "DATE");
+//        
+//        //Creación de Tabla
+//        cre.insertColumn(lt, "COLUMNA1", "INTEGER", "Y", "Y", "Y", "Y", "N");
+//        cre.insertColumn(lt, "COLUMNA2", "INTEGER", "Y", "Y", "Y", "Y", "N");
+//        cre.insertColumn(lt, "COLUMNA3", "INTEGER", "Y", "Y", "Y", "Y", "N");
+//        cre.insertColumn(lt, "COLUMNA4", "INTEGER", "Y", "Y", "Y", "Y", "N");
+//        cre.CrearTable("anicka", "TABLA1", lt);
+//        cre.CrearTable("anicka", "TABLA2", lt);
+//        cre.CrearTable("anicka", "TABLA3", lt);
+  
+
+//    try {
+//            db g = new db(new java.io.StringReader(this.jTextArea1.getText()));
+//            g.S();
+//        } catch (ParseException ex) {
+//            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    //Probar gramatica
+    private void testUsuario() {
+        usuario g = new usuario(new java.io.StringReader(this.jTextArea1.getText()));
+        try {
+            g.S();
+            System.out.print("Exito");
+        } catch (xml.usuario.ParseException ex) {
+            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -152,6 +176,5 @@ public class principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
-
 
 }

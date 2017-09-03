@@ -28,7 +28,22 @@ public class propertyField {
         this.llave_primaria = llave_primaria;
         this.llave_foranea = llave_foranea;
     }
-
+    
+       public String XML() {
+        String cadena = "";
+        cadena += "<field>\n"
+                + "\t<"+tipo+">\"" + nombre + "\"</"+tipo+">\n"
+                    + "\t<property>\n"
+                        + "\t<nulo>\""+nulo+"\"</nulo>\n"
+                        + "\t<no_nulo>\""+no_nulo+"\"</no_nulo>\n"
+                        + "\t<autoincrementable>\""+autoincrementable+"\"</autoincrementable>\n"
+                        + "\t<llave_primaria>\""+llave_primaria+"\"</llave_primaria>\n"
+                        + "\t<llave_foranea>\""+llave_foranea+"\"</llave_foranea>\n"
+                    + "\t</property>\n"
+                + "\t</field>\n";
+        return cadena;
+       }
+    
     public String getNombre() {
         return nombre;
     }

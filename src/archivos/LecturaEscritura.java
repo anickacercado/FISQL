@@ -74,4 +74,34 @@ public class LecturaEscritura {
         } catch (IOException ex) {
         }
     }
+
+    public void Eliminar_directorio(File path) {
+        if (!path.exists()) {
+            return;
+        }
+        if (path.isDirectory()) {
+            for (File f : path.listFiles()) {
+                Eliminar_directorio(f);
+            }
+        }
+        path.delete();
+    }
+
+    public void Crear_Directorio(String path) {
+        File f = new File(path);
+        f.mkdirs();
+    }
+
+    public void Crear_BD(String path) {
+
+        String[] parts = path.split("\\\\");
+        String part1 = parts[0];
+        String part2 = parts[1];
+        String part3 = parts[2];
+        path = part1 + "\\" + part2 + "\\" + part3;
+        File f = new File(path);
+        f.mkdirs();
+
+    }
+
 }
