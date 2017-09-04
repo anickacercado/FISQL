@@ -5,10 +5,13 @@
  */
 package consola;
 
+import DDL.alter;
 import DDL.create;
 import archivos.EscrituraBD;
 import archivos.LecturaBD;
 import archivos.db.database;
+import archivos.maestro.master;
+import archivos.memoria;
 import archivos.parametro;
 import archivos.tabla.table;
 import java.util.ArrayList;
@@ -86,43 +89,58 @@ public class principal extends javax.swing.JFrame {
     ArrayList<parametro> lp = new ArrayList<parametro>();
     ArrayList<table> lt = new ArrayList<table>();
     create cre = new create();
+    alter alt = new alter();
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         //BD en memoria
         LecturaBD lb = new LecturaBD();
         lb.leer();
+       
+        cre.crearBD("Titus");
         
-//        EscrituraBD eb = new EscrituraBD();
-//        eb.Escribir();
 
-//        //Creación de Objeto, Procedimiento, Funcion
-//        cre.insertParametro(lp, "campo1", "TEXT");
-//        cre.insertParametro(lp, "campo2", "INTEGER");
-//        cre.insertParametro(lp, "campo3", "DATE");
-//        cre.CrearObjeto("anicka", "objeto1", lp);
-//        cre.CrearProc("anicka", "procedimiento1", lp, "instrucciones");
-//        cre.CrearFunc("anicka", "funcion1", lp, "instrucciones", "DATE");
-//        cre.CrearObjeto("anicka", "objeto2", lp);
-//        cre.CrearProc("anicka", "procedimiento2", lp, "instrucciones");
-//        cre.CrearFunc("anicka", "Funcion2", lp, "instrucciones", "DATE");
-//        
-//        //Creación de Tabla
-//        cre.insertColumn(lt, "COLUMNA1", "INTEGER", "Y", "Y", "Y", "Y", "N");
-//        cre.insertColumn(lt, "COLUMNA2", "INTEGER", "Y", "Y", "Y", "Y", "N");
-//        cre.insertColumn(lt, "COLUMNA3", "INTEGER", "Y", "Y", "Y", "Y", "N");
-//        cre.insertColumn(lt, "COLUMNA4", "INTEGER", "Y", "Y", "Y", "Y", "N");
-//        cre.CrearTable("anicka", "TABLA1", lt);
-//        cre.CrearTable("anicka", "TABLA2", lt);
-//        cre.CrearTable("anicka", "TABLA3", lt);
+        //Creación de Objeto, Procedimiento, Funcion
+        cre.insertParametro(lp, "campo1", "TEXT");
+        cre.insertParametro(lp, "campo2", "INTEGER");
+        cre.insertParametro(lp, "campo3", "DATE");
+        cre.CrearObjeto("anicka", "objeto1", lp);
+        cre.CrearProc("anicka", "procedimiento1", lp, "instrucciones");
+        cre.CrearFunc("anicka", "funcion1", lp, "instrucciones", "DATE");
+        cre.CrearObjeto("anicka", "objeto2", lp);
+        cre.CrearProc("anicka", "procedimiento2", lp, "instrucciones");
+        cre.CrearFunc("anicka", "Funcion2", lp, "instrucciones", "DATE");
+        
+        //Creación de Tabla
+        cre.insertColumn(lt, "COLUMNA1", "INTEGER", "Y", "Y", "Y", "Y", "N");
+        cre.insertColumn(lt, "COLUMNA2", "INTEGER", "Y", "Y", "Y", "Y", "N");
+        cre.insertColumn(lt, "COLUMNA3", "INTEGER", "Y", "Y", "Y", "Y", "N");
+        cre.insertColumn(lt, "COLUMNA4", "INTEGER", "Y", "Y", "Y", "Y", "N");
+        cre.CrearTable("anicka", "TABLA1", lt);
+        cre.CrearTable("anicka", "TABLA2", lt);
+        cre.CrearTable("anicka", "TABLA3", lt);
+        cre.CrearTable("anicka", "TABLA4", lt);
+        cre.CrearTable("anicka", "TABLA5", lt);
+        
+        cre.crearBD("Ecuador");
+        cre.crearBD("ElSalvador");
   
-
-//    try {
-//            db g = new db(new java.io.StringReader(this.jTextArea1.getText()));
-//            g.S();
-//        } catch (ParseException ex) {
-//            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-
+        //Crear usuario
+        cre.createUsuario("anicka", "123", "user");
+        cre.createUsuario("santiago", "123", "user");
+        cre.crearBD("Santiaguito");
+        cre.crearBD("Roma");
+        cre.CrearTable("Santiaguito", "TABLA1", lt);
+        cre.CrearTable("Santiaguito", "TABLA2", lt);
+        cre.CrearTable("Santiaguito", "TABLA3", lt);
+        cre.CrearTable("Santiaguito", "TABLA4", lt);
+        cre.CrearTable("Santiaguito", "TABLA5", lt);
+        cre.crearBD("Italia");
+        cre.crearBD("USA");
+        
+        alt.alter_table_agregar("anicka","TABLA1", alt.alterColumn("COLUMNAALTER1", "INTEGER", "Y", "Y", "Y", "Y", "N"));
+        alt.alter_table_agregar("anicka","TABLA1", alt.alterColumn("COLUMNAALTER2", "OBJETO", "Y", "Y", "Y", "Y", "N"));
+        
+        ArrayList<master> arbolMaestro= memoria.arbolMaestro;
     }//GEN-LAST:event_jButton1ActionPerformed
 
     //Probar gramatica

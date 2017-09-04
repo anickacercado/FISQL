@@ -127,4 +127,72 @@ public class database {
     public void setTable(ArrayList<table> table) {
         this.table = table;
     }
+
+    public boolean existFunction(String nombre) {
+        for (int i = 0; i < function.size(); i++) {
+            if (function.get(i).getNombre().equals(nombre)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean existProcedure(String nombre) {
+        for (int i = 0; i < procedure.size(); i++) {
+            if (procedure.get(i).getNombre().equals(nombre)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean existObject(String nombre) {
+        for (int i = 0; i < object.size(); i++) {
+            if (object.get(i).getNombre().equals(nombre)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean existTable(String nombre) {
+        for (int i = 0; i < table.size(); i++) {
+            if (table.get(i).getNombre_campo().equals(nombre)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public void addFunction(function func) {
+        function.add(func);
+    }
+
+    public void addProcedure(procedure proc) {
+        procedure.add(proc);
+    }
+
+    public void addObject(object obj) {
+        object.add(obj);
+    }
+
+    public void addTable(table tab) {
+        table.add(tab);
+    }
+    
+    public void removeFunction(function func) {
+        function.remove(func);
+    }
+
+    public void removeProcedure(procedure proc) {
+        procedure.remove(proc);
+    }
+
+    public void removeObject(object obj) {
+        object.remove(obj);
+    }
+
+    public void removeTable(table tab) {
+        table.remove(tab);
+    }
 }

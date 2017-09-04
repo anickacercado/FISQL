@@ -18,6 +18,8 @@ import archivos.parametro;
 import archivos.tabla.fila_tabla;
 import archivos.tabla.fila_tabla_objeto;
 import archivos.tabla.table;
+import archivos.usuario.permisos;
+import archivos.usuario.user;
 import java.util.ArrayList;
 
 /**
@@ -41,7 +43,7 @@ public class create {
             ArrayList<procedure> proc = new ArrayList<procedure>();
             ArrayList<object> obj = new ArrayList<object>();
             database dpro = new database("PROCEDURE", null, pathProcedure, func, null, null, null);
-            database dfun = new database("FUNCTION", null, pathFunction,  null, proc, null, null);
+            database dfun = new database("FUNCTION", null, pathFunction, null, proc, null, null);
             database dobj = new database("OBJECT", null, pathObject, null, null, obj, null);
             ArrayList<database> adb = new ArrayList<database>();
             adb.add(dpro);
@@ -51,7 +53,6 @@ public class create {
             memoria.arbolMaestro.add(m);
             escritura.Escribir();
         }
-        maes = memoria.arbolMaestro;
     }
 
     public void CrearObjeto(String nombre_bd, String nombre_obj, ArrayList<parametro> para) {
@@ -80,7 +81,6 @@ public class create {
                 escritura.Escribir();
             }
         }
-        maes = memoria.arbolMaestro;
     }
 
     public void CrearProc(String nombre_bd, String nombre_proc, ArrayList<parametro> para, String codigo) {
@@ -109,7 +109,6 @@ public class create {
                 escritura.Escribir();
             }
         }
-        maes = memoria.arbolMaestro;
     }
 
     public void CrearFunc(String nombre_bd, String nombre_func, ArrayList<parametro> para, String codigo, String retorno) {
@@ -136,34 +135,45 @@ public class create {
             memoria.arbolMaestro.get(i).setDatabase(tempData);
             escritura.Escribir();
         }
-        maes = memoria.arbolMaestro;
     }
 
     public void CrearTable(String nombre_bd, String nombre_table, ArrayList<table> ta) {
         Boolean existeTable = false;
         ArrayList<database> tempData = new ArrayList<database>();
 
-        if (memoria.arbolMaestro != null) {
-            for (int i = 0; i < memoria.arbolMaestro.size(); i++) {
-                if (memoria.arbolMaestro.get(i).getNombre().equals(nombre_bd)) {
-                    tempData = memoria.arbolMaestro.get(i).getDatabase();
-                    for (int j = 0; j < tempData.size(); j++) {
-                        if (tempData.get(j).getTipo().equals("TABLE")) {
-                            if (tempData.get(j).getNombre().equals(nombre_table)) {
-                                existeTable = true;
-                            }
+        for (int i = 0; i < memoria.arbolMaestro.size(); i++) {
+            if (memoria.arbolMaestro.get(i).getNombre().equals(nombre_bd)) {
+                tempData = memoria.arbolMaestro.get(i).getDatabase();
+                for (int j = 0; j < tempData.size(); j++) {
+                    if (tempData.get(j).getTipo().equals("TABLE")) {
+                        if (tempData.get(j).getNombre().equals(nombre_table)) {
+                            existeTable = true;
                         }
                     }
-                    if (existeTable == false) {
-                        String path = memoria.DB + "\\" + nombre_bd + "\\" + nombre_table + ".xml";
-                        database data = new database("TABLE", nombre_table, path, null, null, null, ta);
-                        memoria.arbolMaestro.get(i).insertDataBase(data);
-                        escritura.Escribir();
-                    }
+                }
+                if (existeTable == false) {
+                    String path = memoria.DB + "\\" + nombre_bd + "\\" + nombre_table + ".xml";
+                    database data = new database("TABLE", nombre_table, path, null, null, null, ta);
+                    memoria.arbolMaestro.get(i).insertDataBase(data);
+                    escritura.Escribir();
                 }
             }
         }
-        maes = memoria.arbolMaestro;
+    }
+
+    public void createUsuario(String usuario, String contrasenia, String tipo) {
+        Boolean existeUsuario = false;
+        for (int i = 0; i < memoria.arbolUsuario.size(); i++) {
+            if (memoria.arbolUsuario.get(i).getNombre().equals(usuario)) {
+                existeUsuario = true;
+            }
+        }
+        if (existeUsuario == false) {
+            ArrayList<permisos> permisos = new ArrayList<permisos>();
+            user u = new user(usuario, contrasenia, tipo, "inactivo", permisos);
+            memoria.arbolUsuario.add(u);
+            escritura.Escribir();
+        }
     }
 
     public void insertColumn(ArrayList<table> lt, String nombre, String tipo, String nulo, String no_nulo, String autoincrementable, String llave_primaria, String llave_foranea) {
@@ -182,15 +192,13 @@ public class create {
                     || tipo.equals("BOOL")
                     || tipo.equals("DATE")
                     || tipo.equals("DATETIME")) {
-   
+
                 ArrayList<fila_tabla> registro = new ArrayList<fila_tabla>();
-                table ta= new table(nombre,tipo,nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea,registro,false,null);
+                table ta = new table(nombre, tipo, nulo, no_nulo, autoincrementable, llave_primaria, llave_foranea, registro, false, null);
                 lt.add(ta);
-            }
-            
-            else{
+            } else {
                 ArrayList<fila_tabla_objeto> registro_objeto = new ArrayList<fila_tabla_objeto>();
-                table ta= new table(nombre,tipo,nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea,null,true,registro_objeto);
+                table ta = new table(nombre, tipo, nulo, no_nulo, autoincrementable, llave_primaria, llave_foranea, null, true, registro_objeto);
                 lt.add(ta);
             }
 

@@ -12,7 +12,11 @@ import java.util.ArrayList;
  * @author anick
  */
 public class user {
-    public String nombre,pass,tipo,estado;
+
+    private String tipo;
+    private String nombre;
+    private String pass;
+    private String estado;
     public ArrayList<permisos> permisos;
     
     public user(String nombre, String pass, String tipo, String estado, ArrayList<permisos> permisos)
@@ -54,4 +58,30 @@ public class user {
         }
         return false;
     }    
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    
+    
 }
