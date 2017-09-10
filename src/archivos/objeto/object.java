@@ -37,17 +37,19 @@ public class object {
         return cadena;
     }
 
-    public void addAtributo(String nombre, String tipo) {
-        parametro attr = new parametro(nombre, tipo);
+    public void addAtributo(parametro attr) {
         this.atributo.add(attr);
     }
 
-    public void removeAtributo(String nombre, String tipo) {
-        parametro attr = new parametro(nombre, tipo);
-        this.atributo.remove(attr);
+    public void removeAtributo(String nombre) {
+        for (int i = 0; i < this.atributo.size(); i++) {
+            if (this.atributo.get(i).getNombre().equals(nombre)) {
+                this.atributo.remove(i);
+            }
+        }
     }
 
-    public boolean existsAtributo(String nombre, String tipo) {
+    public boolean existsAtributo(String nombre) {
         for (int i = 0; i < this.atributo.size(); i++) {
             if (this.atributo.get(i).getNombre().equals(nombre)) {
                 return true;

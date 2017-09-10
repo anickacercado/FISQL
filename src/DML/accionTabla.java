@@ -42,7 +42,6 @@ public class accionTabla {
                 memoria.arbolMaestro.get(i).setDatabase(tempData);
             }
         }
-
     }
 
     public void insertTableObject(String nombre_bd, String nombre_table, String nombre_campo, ArrayList<registro_objeto> ro) {

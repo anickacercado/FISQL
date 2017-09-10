@@ -177,21 +177,29 @@ public interface analizadorConstants {
   /** RegularExpression Id. */
   int TOKEN_DATETIME = 83;
   /** RegularExpression Id. */
-  int CADENA = 84;
+  int TOKEN_FALSO = 84;
   /** RegularExpression Id. */
-  int ENTERO = 85;
+  int TOKEN_VERDADERO = 85;
   /** RegularExpression Id. */
-  int NUMERO = 86;
+  int CADENA = 86;
   /** RegularExpression Id. */
-  int DECIMAL = 87;
+  int ENTERO = 87;
   /** RegularExpression Id. */
-  int ID = 88;
+  int NUMERO = 88;
   /** RegularExpression Id. */
-  int VARIABLE = 89;
+  int DECIMAL = 89;
   /** RegularExpression Id. */
-  int COMENTARIO_LINEA = 94;
+  int ID = 90;
   /** RegularExpression Id. */
-  int COMENTARIO_MULTI = 95;
+  int VARIABLE = 91;
+  /** RegularExpression Id. */
+  int DATE = 92;
+  /** RegularExpression Id. */
+  int DATETIME = 93;
+  /** RegularExpression Id. */
+  int COMENTARIO_LINEA = 98;
+  /** RegularExpression Id. */
+  int COMENTARIO_MULTI = 99;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -282,12 +290,16 @@ public interface analizadorConstants {
     "\"bool\"",
     "\"date\"",
     "\"datetime\"",
+    "\"falso\"",
+    "\"verdadero\"",
     "<CADENA>",
     "<ENTERO>",
     "<NUMERO>",
     "<DECIMAL>",
     "<ID>",
     "<VARIABLE>",
+    "<DATE>",
+    "<DATETIME>",
     "\" \"",
     "\"\\n\"",
     "\"\\r\"",

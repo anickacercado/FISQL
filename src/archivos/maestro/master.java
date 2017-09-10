@@ -21,8 +21,7 @@ public class master {
     public master(String nombre,
             String path,
             ArrayList<database> database
-    ) 
-    {
+    ) {
         this.nombre = nombre;
         this.path = path;
         this.database = database;
@@ -32,23 +31,44 @@ public class master {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-     public String XML(){
-        String codigo ="";     
+    public boolean existTable(String nombre) {
+        for (int i = 0; i < database.size(); i++) {
+            if (database.get(i).getTipo().equals("TABLE")) {
+                if (database.get(i).getNombre().equals(nombre)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public void removeTable(String nombre) {
+        for (int i = 0; i < database.size(); i++) {
+            if (database.get(i).getTipo().equals("TABLE")) {
+                if (database.get(i).getNombre().equals(nombre)) {
+                    database.remove(i);
+                }
+            }
+        }
+    }
+
+    public String XML() {
+        String codigo = "";
         codigo += "<DB>\n"
                 + "\t<nombre>\"" + nombre + "\"</nombre>\n"
                 + "\t<path>\"" + path + "\"</path>\n"
-                + "</DB>";   
+                + "</DB>";
         return codigo;
     }
-    
-     public void insertDataBase(database data){
-         database.add(data);
-     }
-     
-    public void deleteDataBase(database data){
-         database.add(data);
-     }
-     
+
+    public void insertDataBase(database data) {
+        database.add(data);
+    }
+
+    public void deleteDataBase(database data) {
+        database.add(data);
+    }
+
     public ArrayList<database> getDatabase() {
         return database;
     }
@@ -72,6 +92,5 @@ public class master {
     public void setPath(String path) {
         this.path = path;
     }
-    
-    
+
 }

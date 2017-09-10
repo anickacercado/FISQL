@@ -6,6 +6,8 @@ STATIC = false;
 
 PARSER_BEGIN(analizador)
 package usql;
+import estructuraUSQL.*;
+import java.util.ArrayList;
 
 public class analizador {
   public static void main(String args[]) throws ParseException {
@@ -104,6 +106,8 @@ TOKEN:
     |<TOKEN_BOOL:("bool")> {System.out.println(image);}
     |<TOKEN_DATE: ("date")> {System.out.println(image);}
     |<TOKEN_DATETIME: ("datetime")> {System.out.println(image);}
+    |<TOKEN_FALSO: ("falso")> {System.out.println(image);}
+    |<TOKEN_VERDADERO: ("verdadero")> {System.out.println(image);}
 
     |<CADENA:"\"" (~["\""])*"\""> {System.out.println(image);}
     |<ENTERO: (["0"-"9"])+ > {System.out.println(image);}
@@ -111,6 +115,8 @@ TOKEN:
     |<DECIMAL: (<NUMERO>)+(".")((<NUMERO>))> {System.out.println(image);}
     |<ID: (["a"-"z","A"-"Z"])(["a"-"z","A"-"Z","0"-"9","_"])*> {System.out.println(image);}
     |<VARIABLE: "@"(["a"-"z","A"-"Z"])(["a"-"z","A"-"Z","0"-"9","_"])*> {System.out.println(image);}
+    |<DATE: (("0"["1"-"9"])|(["1"-"2"]["0"-"9"])| ("3" ["0"-"1"] )) "-" (("0"["1"-"9"])| "1"["0"-"2"]) "-" ["0"-"9"]["0"-"9"]["0"-"9"]["0"-"9"]>{System.out.println(image);}
+    |<DATETIME: (((("0"["1"-"9"])|(["1"-"2"]["0"-"9"])| ("3" ["0"-"1"] )) "-" (("0"["1"-"9"])| "1"["0"-"2"]) "-" ["0"-"9"]["0"-"9"]["0"-"9"]["0"-"9"]) " " (["0"-"1"]["0"-"9"])| ("2" ["0"-"3"] )) ":" (["0"-"5"]["0"-"9"]) ":" (["0"-"5"]["0"-"9"])>{System.out.println(image);}
 }
 
 SKIP: 
@@ -127,40 +133,92 @@ SPECIAL_TOKEN:
     |<COMENTARIO_MULTI: "#*"(~["*"])*"*#">
 }
 
-void S():
-{}
+ejecutar S():
+{ArrayList<simbolo> lsim= new ArrayList<simbolo>();}
 {
-    LISTA_SENTENCIA_GLOBAL()
+    lsim=LISTA_SENTENCIA_GLOBAL(){return new ejecutar(lsim);}
 }
 
-void LISTA_SENTENCIA_GLOBAL():
-{}
+ArrayList<simbolo> LISTA_SENTENCIA_GLOBAL():
+{
+	ArrayList<simbolo> lsim= new ArrayList<simbolo>();
+	ArrayList<simbolo> lsim2= new ArrayList<simbolo>();
+    simbolo rsim;
+}
 { 
     (
-     CREAR()|USAR_BD()|ALTERAR()|ELIMINAR()|
-     INSERTAR()|ACTUALIZAR()|BORRAR()|
-     SELECCIONAR()<PYCOMA>|OTORGAR()|DENEGAR()|DECLARAR()|
-     BACKUP()|RESTAURAR()|LLAMADA_METODO_FUNCION()
+     rsim=CREAR()					{lsim.add(rsim);}
+	 |rsim=USAR_BD()				{lsim.add(rsim);}
+	 |rsim=ALTERAR()				{lsim.add(rsim);}
+	 |rsim=ELIMINAR()				{lsim.add(rsim);}
+	 |rsim=INSERTAR()				{lsim.add(rsim);}
+	 |rsim=ACTUALIZAR()				{lsim.add(rsim);}
+	 |rsim=BORRAR()					{lsim.add(rsim);}
+	 |rsim=SELECCIONAR()<PYCOMA>	{lsim.add(rsim);}
+	 |rsim=OTORGAR()   {lsim.add(rsim);}
+	 |rsim=DENEGAR()   {lsim.add(rsim);}
+	 |lsim=DECLARAR()
+	 |rsim=BACKUP()	   {lsim.add(rsim);}
+	 |rsim=RESTAURAR() {lsim.add(rsim);}
+	 |rsim=LLAMADA_METODO_FUNCION() {lsim.add(rsim);}
+
+
+         | rsim=ASIGNAR()			 {lsim.add(rsim);}
+         | rsim=MIENTRAS()			 {lsim.add(rsim);}
+         | rsim=SI()                             {lsim.add(rsim);}
+         | rsim=PARA()			         {lsim.add(rsim);}
+         | rsim=SELECCIONA()			 {lsim.add(rsim);}
+
      )
-    (LISTA_SENTENCIA_GLOBAL())?
+    (lsim2=LISTA_SENTENCIA_GLOBAL())?
+	
+		{
+			for(int i=0; i < lsim2.size(); i++){
+				lsim.add(lsim2.get(i));
+			}
+			return lsim;
+		}
 }
 
-void LISTA_SENTENCIA_LOCAL():
-{}
+ArrayList<simbolo> LISTA_SENTENCIA_LOCAL():
+{
+	ArrayList<simbolo> lsim= new ArrayList<simbolo>();
+	ArrayList<simbolo> lsim2= new ArrayList<simbolo>();
+	simbolo rsim;
+}
 { 
     (
-    RETORNO()|INSERTAR()|ACTUALIZAR()|BORRAR()|
-    SELECCIONAR()<PYCOMA>|DECLARAR()|ASIGNAR()|
-    SI()|SELECCIONA()|PARA()|MIENTRAS()|
-    DETENER()|LLAMADA_METODO_FUNCION()
+    rsim=RETORNO() 				 {lsim.add(rsim);}
+	| rsim=INSERTAR() 			 {lsim.add(rsim);}
+	| rsim=ACTUALIZAR() 		 {lsim.add(rsim);}
+	| rsim=BORRAR() 			 {lsim.add(rsim);}
+	| rsim=SELECCIONAR()<PYCOMA> {lsim.add(rsim);}
+	| lsim=DECLARAR()			 
+	| rsim=ASIGNAR()			 {lsim.add(rsim);}
+	| rsim=SI()					 {lsim.add(rsim);}
+	| rsim=SELECCIONA()			 {lsim.add(rsim);}		 
+	| rsim=PARA()				 {lsim.add(rsim);}
+	| rsim=MIENTRAS()			     {lsim.add(rsim);}
+	| rsim=DETENER()				 {lsim.add(rsim);}
+	| rsim=LLAMADA_METODO_FUNCION()  {lsim.add(rsim);}
     ) 
-    (LISTA_SENTENCIA_LOCAL())?
+    (lsim2=LISTA_SENTENCIA_LOCAL())? 
+		
+		{
+			for(int i=0; i < lsim2.size(); i++){
+				lsim.add(lsim2.get(i));
+			}
+			return lsim;
+		}
+
+		
 }
 
-void CREAR():
+simbolo CREAR():
 {}
 {
     <TOKEN_CREAR> (CREAR_BD()|CREAR_TABLA()|CREAR_OBJETO()|CREAR_FUNCION()|CREAR_PROCEDIMIENTO()|CREAR_USUARIO())
+	{return null;}
 }
 
 void CREAR_BD():
@@ -252,28 +310,43 @@ void CREAR_USUARIO():
     <TOKEN_USUARIO> <ID> <TOKEN_COLOCAR> <TOKEN_PASSWORD> <IGUAL> <CADENA> <PYCOMA>
 }
 
-void RETORNO():
-{}
+simbolo RETORNO():
+{Token t;
+expresion exp;}
 {
-    <TOKEN_RETORNO> CONDICION() <PYCOMA>
+    t=<TOKEN_RETORNO> exp=CONDICION() <PYCOMA>
+	{
+		return new simbolo(t.beginLine, t.beginColumn,"RETORNAR","RETORNAR","RETORNAR", new ambito("RETORNAR", new ArrayList<simbolo>()), exp);
+	}
 }
 
-void LISTA_COND():
-{}
+ArrayList<expresion> LISTA_COND():
+{ArrayList<expresion> cond = new ArrayList<expresion>();
+ ArrayList<expresion> listacond = new ArrayList<expresion>();
+ expresion exp;}
 {
-    CONDICION() (<COMA> LISTA_COND())?
+    exp=CONDICION() (<COMA> listacond=LISTA_COND())?
+	{
+		cond.add(exp);
+		for(int i=0; i < listacond.size(); i++){
+			cond.add(listacond.get(i));
+		}
+		return cond;
+	}
 }
 
-void USAR_BD():
+simbolo USAR_BD():
 {}
 {
     <TOKEN_USAR> <ID> <PYCOMA>
+	{return null;}
 }
 
-void ALTERAR():
+simbolo ALTERAR():
 {}
 {
     <TOKEN_ALTERAR> (ALTERAR_TABLA()|ALTERAR_OBJETO()|ALTERAR_USUARIO())
+	{return null;}
 }
 
 void LISTA_ID():
@@ -302,130 +375,294 @@ void ALTERAR_USUARIO():
     <TOKEN_USUARIO> <ID> <TOKEN_CAMBIAR> <TOKEN_PASSWORD> <IGUAL> <CADENA> <PYCOMA>
 }
 
-void ELIMINAR():
+simbolo ELIMINAR():
 {}
 {
     <TOKEN_ELIMINAR> (<TOKEN_TABLA> | <TOKEN_BASE_DATOS> | <TOKEN_OBJETO> | <TOKEN_USUARIO>) <ID> <PYCOMA>
+	{return null;}
 }
 
-void INSERTAR():
+simbolo INSERTAR():
 {}
 {
     <TOKEN_INSERTAR> <TOKEN_TABLA> <ID> <PAR_ABRE> (LISTA_ID() <PAR_CIERRA> <TOKEN_VALORES> <PAR_ABRE>)? LISTA_COND() <PAR_CIERRA> <PYCOMA>
+	{return null;}
 }
 
-void ACTUALIZAR():
+simbolo  ACTUALIZAR():
 {}
 {
     <TOKEN_ACTUALIZAR> <TOKEN_TABLA> <ID> <PAR_ABRE> LISTA_ID() <PAR_CIERRA> <TOKEN_VALORES> <PAR_ABRE> LISTA_COND() <PAR_CIERRA> (<TOKEN_DONDE> CONDICION())? <PYCOMA>
+	{return null;}
 }
 
-void BORRAR():
+simbolo BORRAR():
 {}
 {
     <TOKEN_BORRAR> <TOKEN_TABLA> <ID> (<TOKEN_DONDE> CONDICION())? <PYCOMA>
+	{return null;}
 }
 
-void SELECCIONAR():
+simbolo SELECCIONAR():
 {}
 {
     <TOKEN_SELECCIONAR> (LISTA_ID() | <POR>) <TOKEN_DE> LISTA_ID() (<TOKEN_DONDE> CONDICION())? (<TOKEN_ORDENAR> <ID> (<TOKEN_ASC>|<TOKEN_DESC>))? 
+	{return null;}
 }
 
 
-void OTORGAR():
+simbolo OTORGAR():
 {}
 {
      <TOKEN_OTORGAR> <ID> <ID> <PUNTO> (<POR> | <ID>) <PYCOMA>
+	 {return null;}
 }
 
-void DENEGAR():
+simbolo DENEGAR():
 {}
 {
       <TOKEN_DENEGAR> <ID> <ID> <PUNTO> (<POR> | <ID>) <PYCOMA>
+	  {return null;}
 }
 
-void DECLARAR():
-{}
+ArrayList<simbolo> DECLARAR():
+{ArrayList<declaracion> decla = new ArrayList<declaracion>();
+ArrayList<simbolo> simb = new ArrayList<simbolo>();
+String tipo;
+expresion exp=null;
+Token t;
+Token d;
+}
 {
-        <TOKEN_DECLARAR> LISTA_VARIABLE() ((TIPO_DATO_DECLARAR() (<IGUAL> CONDICION())?)| <ID> ) <PYCOMA>
+        d=<TOKEN_DECLARAR> decla=LISTA_VARIABLE() ((tipo=TIPO_DATO_DECLARAR() (<IGUAL> exp=CONDICION())?
+		{
+			for(int i=0; i < decla.size(); i++){
+				decla.get(i).tipo=tipo;
+				decla.get(i).valor=exp;
+				simb.add(new simbolo(d.beginLine, d.beginColumn,"DECLARACION", "DECLARACION","DECLARACION",decla.get(i).ambito,decla.get(i)));
+			}
+		}
+		
+		)| t=<ID>
+			{
+			for(int i=0; i < decla.size(); i++){
+				decla.get(i).tipo=t.image;
+				decla.get(i).valor=exp;
+				simb.add(new simbolo(d.beginLine, d.beginColumn,"DECLARACION", "DECLARACION","DECLARACION",decla.get(i).ambito,decla.get(i)));
+				}
+			}	
+		) <PYCOMA>
+		{return simb;}
+		
+		
 }
 
-void LISTA_VARIABLE():
-{}
+ArrayList<declaracion> LISTA_VARIABLE():
+{ArrayList<declaracion> decla = new ArrayList<declaracion>();
+ArrayList<declaracion>  lista_decla = new ArrayList<declaracion>();
+Token t;
+String vab;
+}
 {
-       <VARIABLE> (<COMA> LISTA_VARIABLE())?
+        t=<VARIABLE> (<COMA> lista_decla=LISTA_VARIABLE())?
+	   	{
+		vab= t.image;
+		vab= vab.substring(1, vab.length());
+		declaracion d= new declaracion("", vab, new ambito("DECLARACION", new ArrayList<simbolo>()) , null, t.beginLine, t.beginColumn);	
+		decla.add(d);
+		for(int i=0; i < lista_decla.size(); i++){
+			decla.add(lista_decla.get(i));
+		}
+		return decla;
+	}
 }
 
-void TIPO_DATO_DECLARAR():
+String TIPO_DATO_DECLARAR():
 {}
 {
-    <TOKEN_TEXT>
-    |<TOKEN_INTEGER>
-    |<TOKEN_DOUBLE>
-    |<TOKEN_BOOL>
-    |<TOKEN_DATE>
-    |<TOKEN_DATETIME>
+    <TOKEN_TEXT>	{return "CADENA";}
+    |<TOKEN_INTEGER> {return "ENTERO";}
+    |<TOKEN_DOUBLE> {return "DOUBLE";}
+    |<TOKEN_BOOL> {return "BOOL";}
+    |<TOKEN_DATE> {return "DATE";}
+    |<TOKEN_DATETIME> {return "DATETIME";}
 }
 
-void ASIGNAR():
-{}
+simbolo ASIGNAR():
 {
-    <VARIABLE>(<PUNTO> <ID>)? <IGUAL> CONDICION() <PYCOMA>
+	Token n1=null, n2=null;
+	String vab;
+	llamadaVariable llaVa;
+	expresion exp;
+}
+{
+    n1=<VARIABLE>(<PUNTO> n2=<ID>)? <IGUAL> exp=CONDICION() <PYCOMA>
+					{
+							if (n2!=null){
+								vab= n1.image;
+								vab= vab.substring(1, vab.length());
+								llaVa = new llamadaVariable(vab,n2.image,n1.beginLine, n1.beginColumn);
+							}
+							else {
+								vab= n1.image;
+								vab= vab.substring(1, vab.length());
+								llaVa = new llamadaVariable(vab,"",n1.beginLine, n1.beginColumn);
+							}
+							
+							asignacion asi= new asignacion(llaVa,new ambito("ASIGNACION", new ArrayList<simbolo>()),exp);
+							return new simbolo(n1.beginLine, n1.beginColumn,"ASIGNACION", "ASIGNACION","ASIGNACION",asi.ambito,asi);
+					}
 }
 
-void SI():
-{}
+simbolo SI():
+{expresion exp;
+ArrayList<simbolo> lsi= new ArrayList<simbolo>();
+ArrayList<simbolo> lsino= new ArrayList<simbolo>();
+Token t;
+}
 {
-  <TOKEN_SI> <PAR_ABRE> CONDICION() <PAR_CIERRA> <LLAVE_ABRE> LISTA_SENTENCIA_LOCAL() <LLAVE_CIERRA> (<TOKEN_SINO> <LLAVE_ABRE> LISTA_SENTENCIA_LOCAL() <LLAVE_CIERRA>)?
+  t=<TOKEN_SI> <PAR_ABRE> exp=CONDICION() <PAR_CIERRA> <LLAVE_ABRE> lsi=LISTA_SENTENCIA_LOCAL() <LLAVE_CIERRA> (<TOKEN_SINO> <LLAVE_ABRE> lsino=LISTA_SENTENCIA_LOCAL() <LLAVE_CIERRA>)?
+  {
+	ambito si = new ambito("SI",lsi);
+	ambito sino = new ambito("SINO", lsino);
+	ambito ambito= new ambito("SI", new ArrayList<simbolo>());
+	
+	for(int i=0; i < lsi.size(); i++){
+		lsi.get(i).ambito.padre= si;
+	}
+	for(int i=0; i < lsino.size(); i++){
+		lsino.get(i).ambito.padre= sino;
+	}
+	
+	si s = new si(exp, si, sino, ambito);  
+	return new simbolo(t.beginLine, t.beginColumn,"SI", "SI","SI",s.ambito,s);
+  }
 }
 
-void SELECCIONA():
-{}
+simbolo SELECCIONA():
+{Token t; 
+expresion exp; 
+ArrayList<caso> lista_caso = new ArrayList<caso>(); 
+caso def= null;}
 {
-    <TOKEN_SELECCIONA> <PAR_ABRE> CONDICION() <PAR_CIERRA> <LLAVE_ABRE> LISTA_CASO() <LLAVE_CIERRA>
+    t=<TOKEN_SELECCIONA> <PAR_ABRE> exp=CONDICION() <PAR_CIERRA> <LLAVE_ABRE> lista_caso=LISTA_CASO() (def=DEFECTO())? <LLAVE_CIERRA>	
+	 {
+        ambito ambito = new ambito("SELECCIONA", new ArrayList<simbolo>());
+        for(caso ca: lista_caso){
+            for(simbolo sim: ca.ambito.tablaSimbolo){
+                sim.ambito.padre = ambito;
+            }
+        }
+		
+        for(simbolo sim: def.ambito.tablaSimbolo){
+                sim.ambito.padre = ambito;
+        }
+		
+        selecciona sele = new selecciona(exp,lista_caso,def,ambito);
+        return new simbolo(t.beginLine, t.beginColumn,"SELECCIONA", "SELECCIONA","SELECCIONA",sele.ambito,sele);
+	 }	
 }
 
-void LISTA_CASO():
-{}
+ArrayList<caso> LISTA_CASO():
+{Token t; 
+expresion exp; 
+ArrayList<simbolo> lista_simb; 
+ArrayList<caso> lcaso = new ArrayList<caso>();
+ArrayList<caso> lista_caso = new ArrayList<caso>();}
 {
-    <TOKEN_CASO> VALOR_CASO() <DOSPUNTOS> LISTA_SENTENCIA_LOCAL() (LISTA_CASO())? (DEFECTO())?
+    t=<TOKEN_CASO> exp=VALOR_CASO() <DOSPUNTOS> lista_simb=LISTA_SENTENCIA_LOCAL() (lista_caso=LISTA_CASO())? 
+	{
+        ambito ambito = new ambito("CASO", lista_simb);		
+		for(int i=0; i < lista_simb.size(); i++){
+			lista_simb.get(i).ambito.padre= ambito;
+		}	
+		
+        caso ca = new caso(exp, ambito);
+        lcaso.add(ca);		
+		for(int i=0; i < lista_caso.size(); i++){
+			lcaso.add(lista_caso.get(i));
+		}
+		
+        return lcaso;        
+    }
 }
 
-void VALOR_CASO():
-{}
+expresion VALOR_CASO():
+{Token t;}
 {
-    <CADENA>
-    |<ENTERO>
-    |<DECIMAL>
+    t=<CADENA> {return new expresion(null, null, "CADENA", "CADENA", t.beginLine, t.beginColumn, t.image.substring(1, t.image.length()-1));}
+    |t=<ENTERO> {return new expresion(null, null, "ENTERO", "ENTERO", t.beginLine, t.beginColumn,t.image);}
+    |t=<DECIMAL> {return new expresion(null, null, "DOUBLE", "DOUBLE", t.beginLine, t.beginColumn,t.image);}
 }
 
-void DEFECTO():
-{}
+caso DEFECTO():
+{ArrayList<simbolo> lista_simb;}
 {
-    <TOKEN_DEFECTO> <DOSPUNTOS> LISTA_SENTENCIA_LOCAL()
+    <TOKEN_DEFECTO> <DOSPUNTOS> lista_simb=LISTA_SENTENCIA_LOCAL()
+	{
+        ambito ambito = new ambito("CASO", lista_simb);
+ 		for(int i=0; i < lista_simb.size(); i++){
+			lista_simb.get(i).ambito.padre= ambito;
+		}	
+        return new caso(null, ambito);      
+    }
 }
 
-void PARA():
-{}
+simbolo PARA():
+{Token tv, tp, to;
+String vab;
+expresion exp1,exp2;
+ArrayList<simbolo> lista_simb;}
 {
-    <TOKEN_PARA> <PAR_ABRE> <TOKEN_DECLARAR> <VARIABLE> <TOKEN_INTEGER> <IGUAL> CONDICION()
-    <PYCOMA> CONDICION() <PYCOMA> 
-    (<AUMENTO>|<DECREMENTO>) <PAR_CIERRA> 
-    <LLAVE_ABRE> LISTA_SENTENCIA_LOCAL() <LLAVE_CIERRA>
+    tp=<TOKEN_PARA> <PAR_ABRE> <TOKEN_DECLARAR> tv=<VARIABLE> <TOKEN_INTEGER> <IGUAL> exp1=CONDICION()
+    <PYCOMA> exp2=CONDICION() <PYCOMA> 
+    (to=<AUMENTO>|to=<DECREMENTO>) <PAR_CIERRA> 
+    <LLAVE_ABRE> lista_simb=LISTA_SENTENCIA_LOCAL() <LLAVE_CIERRA>
+	{
+	    vab= tv.image;
+	    vab= vab.substring(1, vab.length());
+	    declaracion decla = new declaracion("ENTERO", vab, new ambito("DECLARACION", new ArrayList<simbolo>()), exp1, tp.beginLine, tp.beginColumn); 
+            simbolo simb_decla = new simbolo( tp.beginLine, tp.beginColumn,"DECLARACION", "DECLARACION", "DECLARACION", new ambito("DECLARACION", new ArrayList<simbolo>()), decla);
+       
+	    ambito ambito = new ambito("PARA", lista_simb);
+ 
+		for(int i=0; i < lista_simb.size(); i++){
+			lista_simb.get(i).ambito.padre= ambito;
+		}
+		
+        para pa = new para(simb_decla,to.image,exp2,ambito);
+        return new simbolo( tp.beginLine, tp.beginColumn,"PARA","PARA", "PARA", pa.ambito, pa);
+	}
 }
 
 
-void MIENTRAS():
-{}
+simbolo MIENTRAS():
 {
-    <TOKEN_MIENTRAS> <PAR_ABRE> CONDICION() <PAR_CIERRA> <LLAVE_ABRE> LISTA_SENTENCIA_LOCAL() <LLAVE_CIERRA>
+	ArrayList<simbolo> lista_simb; 
+	expresion exp; 
+	Token t;
+}
+{
+    t=<TOKEN_MIENTRAS> <PAR_ABRE> exp=CONDICION() <PAR_CIERRA> <LLAVE_ABRE> lista_simb=LISTA_SENTENCIA_LOCAL() <LLAVE_CIERRA>
+	{
+		ambito ambito = new ambito("MIENTRAS", lista_simb);
+        
+		for(int i=0; i < lista_simb.size(); i++){
+				lista_simb.get(i).ambito.padre= ambito;
+		}
+		
+        mientras mien = new mientras(ambito,exp);
+        return new simbolo(t.beginLine, t.beginColumn,"MIENTRAS","MIENTRAS","MIENTRAS", mien.ambito, mien);
+	}
 }
 
-void DETENER():
-{}
+simbolo DETENER():
+{Token t;}
 {
-    <TOKEN_DETENER><PYCOMA>
+    t=<TOKEN_DETENER><PYCOMA>
+	{
+	return new simbolo(t.beginLine, t.beginColumn,"DETENER","DETENER","DETENER", new ambito("DETENER", new ArrayList<simbolo>()), null);
+	}
 }
 
 void FUNCIONES_PROPIAS_DEL_LENGUAJE():
@@ -436,86 +673,195 @@ void FUNCIONES_PROPIAS_DEL_LENGUAJE():
     |<TOKEN_CONTAR> <PAR_ABRE> <MENOR_2> SELECCIONAR() <MAYOR_2> <PAR_CIERRA>
 }
 
-void BACKUP():
+simbolo BACKUP():
 {}
 {
     (<TOKEN_BACKUP_USQL> | <TOKEN_BACKUP_COMPLETO>) <ID> <ID> <PYCOMA>
+	{return null;}
 }
 
-void RESTAURAR():
+simbolo RESTAURAR():
 {}
 {
     (<TOKEN_RESTAURAR_USQL> | <TOKEN_RESTAURAR_COMPLETO>) <CADENA> <PYCOMA>
+	{return null;}
 }
 
-void CONDICION():
-{}
+expresion CONDICION():
+{expresion nodoizq, nododer, nodo=null;
+Token t;}
 {
-    COND_AND() (<OR> CONDICION())? 
+    nodoizq=COND_AND() (t=<OR> nododer=COND_AND()
+	{nodo= new expresion(nodoizq, nododer, t.image, t.image, t.beginLine, t.beginColumn, null);})* 
+	{if(nodo == null){
+		return nodoizq;
+	}else{
+		return nodo;
+	}}
 }
 
-void COND_AND():
-{}
+expresion COND_AND():
+{expresion nodoizq, nododer,nodo=null;
+Token t;}
 {
-    COND_NOT() (<AND> COND_AND())?
+    nodoizq=COND_NOT() (t=<AND> nododer=COND_NOT()
+	{nodo=new expresion(nodoizq, nododer, t.image, t.image, t.beginLine, t.beginColumn, null);})* 
+	{if(nodo == null){
+		return nodoizq;
+	}else{
+		return nodo;
+	}}
 }
 
-void COND_NOT():
-{}
+expresion COND_NOT():
+{expresion nododer; 
+ Token t=null;}
 { 
-    (<NOT>)? REL()
+    (t=<NOT>)? nododer=REL()
+    {
+        if (t == null){ return nododer;}
+        else    {return new expresion(null, nododer, t.image, t.image, t.beginLine, t.beginColumn, null);}
+    }
 }
 
-void REL():
-{}
+expresion REL():
+{expresion nodoizq, nododer,nodo=null;
+Token t;}
 {
-   EXP() ((<IGUALACION> | <DIFERENTE> | <MAYOR> | <MENOR> | <MAYORIGUAL> | <MENORIGUAL>) REL())?
+   nodoizq=EXP() ((t=<IGUALACION> | t=<DIFERENTE> | t=<MAYOR> | t=<MENOR> | t=<MAYORIGUAL> | t=<MENORIGUAL>)  nododer=EXP()
+   {nodo= new expresion(nodoizq, nododer, t.image, t.image, t.beginLine, t.beginColumn, null);})*
+	{if(nodo == null){
+		return nodoizq;
+	}else{
+		return nodo;
+	}}
 }
 
-void EXP():
-{}
+expresion EXP():
+{expresion nodoizq, nododer,nodo=null;
+ Token t;}
 {
-  F() ((<MAS>|<MENOS>) EXP())?
+  nodoizq=F() ((t=<MAS>|t=<MENOS>) nododer=F() 
+  {nodo= new expresion(nodoizq, nododer, t.image, t.image, t.beginLine, t.beginColumn, null);})*
+	{if(nodo == null){
+		return nodoizq;
+	}else{
+		return nodo;
+	}}
 }
 
-void F():
-{}
+expresion F():
+{expresion nodoizq, nododer,nodo=null;
+ Token t;}
 {
- U() ((<POR>|<DIVISION>) F())?  
+ nodoizq=U() ((t=<POR>|t=<DIVISION>) nododer=U() 
+ {nodo= new expresion(nodoizq, nododer, t.image, t.image, t.beginLine, t.beginColumn, null);})* 
+	{if(nodo == null){
+		return nodoizq;
+	}else{
+		return nodo;
+	}}
 }
 
-void U():
-{}
+expresion U():
+{expresion nododer; 
+ Token t=null;
+}
 {
-    (<MENOS>)? E() 
+    (t=<MENOS>)? nododer=E() 
+    {
+        if (t == null){ return nododer;}
+        else    {return new expresion(null, nododer, t.image, t.image, t.beginLine, t.beginColumn, null);}
+    }
 }
 
-void E():
-{}
+expresion E():
+{expresion nodoizq, nododer,nodo=null;
+ Token t;
+}
 {
- H() (<POTENCIA> E())?
+ nodoizq=H() 
+ (t=<POTENCIA> nododer=H() 
+ {nodo= new expresion(nodoizq, nododer, t.image,  t.image, t.beginLine, t.beginColumn, null);})* 
+ 	{if(nodo == null){
+		return nodoizq;
+	}else{
+		return nodo;
+	}}
 }
 
-void H():
-{}
+expresion H():
+{Token t, n1=null, n2=null;
+ String vab1,vab2;
+ llamadaVariable llaVa;
+ expresion exp;
+}
 {
-<VARIABLE>(<PUNTO><ID>)?
-|LLAMADA_METODO_OBJETO()
+n1=<VARIABLE>(<PUNTO>n2=<ID>)? 	{			
+									if (n2!=null){
+										vab1= n1.image;
+										vab1= vab1.substring(1, vab1.length());
+										llaVa = new llamadaVariable(vab1,n2.image,n1.beginLine, n1.beginColumn);
+									}
+									else {
+                                        vab1= n1.image;
+										vab1= vab1.substring(1, vab1.length());
+										llaVa = new llamadaVariable(vab1,"",n1.beginLine, n1.beginColumn);
+									}
+									return new expresion(null, null, "VARIABLE", "VARIABLE", n1.beginLine, n1.beginColumn, llaVa);
+									
+								}
+|LLAMADA_METODO_OBJETO() 
 |FUNCIONES_PROPIAS_DEL_LENGUAJE()
-|<ENTERO>
-|<CADENA>
-|<DECIMAL>
+|t=<ENTERO> {return new expresion(null, null, "ENTERO", "ENTERO", t.beginLine, t.beginColumn,t.image);}
+|t=<CADENA> {return new expresion(null, null, "CADENA", "CADENA", t.beginLine, t.beginColumn, t.image.substring(1, t.image.length()-1));}
+|t=<DECIMAL> {return new expresion(null, null, "DOUBLE", "DOUBLE", t.beginLine, t.beginColumn,t.image);}
+|t=<DATE>    {return new expresion(null, null, "DATE", "DATE", t.beginLine, t.beginColumn,t.image);}
+|t=<DATETIME> {return new expresion(null, null, "DATETIME", "DATETIME", t.beginLine, t.beginColumn,t.image);}
+|t=<TOKEN_FALSO> {return new expresion(null, null, "BOOL", "BOOL", t.beginLine, t.beginColumn,t.image);}
+|t=<TOKEN_VERDADERO>  {return new expresion(null, null, "BOOL", "BOOL", t.beginLine, t.beginColumn,t.image);}
+|<PAR_ABRE> exp=CONDICION() <PAR_CIERRA> {return exp;}
 }
 
-void LLAMADA_METODO_OBJETO():
-{}
+expresion LLAMADA_METODO_OBJETO():
+{Token n1=null, n2=null, n3=null;
+ ArrayList<expresion> exp = new ArrayList<expresion>();
+ llamadaTabla llaTab;
+ llamadaMetodo llaMe;
+ }
 {
-    <ID> ((<PAR_ABRE> (LISTA_COND())? <PAR_CIERRA>) | <PUNTO> <ID>( <PUNTO> <ID>)?)?
+    n1=<ID> ((<PAR_ABRE> (exp=LISTA_COND())? <PAR_CIERRA>	
+	{llaMe = new llamadaMetodo(n1.image,exp,n1.beginLine, n1.beginColumn);
+	return new expresion(null, null, "METODO", "METODO", n1.beginLine, n1.beginColumn, llaMe);}
+	) 
+		
+	| (<PUNTO> n2=<ID>)
+	{llaTab = new llamadaTabla(n1.image, "", n2.image, n1.beginLine, n1.beginColumn);
+	return new expresion(null, null, "TABLA", "TABLA", n1.beginLine, n1.beginColumn, llaTab);}	
+
+	(<PUNTO> n3=<ID> 	
+	
+	{llaTab = new llamadaTabla(n1.image, n2.image, n3.image, n1.beginLine, n1.beginColumn);
+	return new expresion(null, null, "TABLA", "TABLA", n1.beginLine, n1.beginColumn, llaTab);}	
+	
+	)?)? 
+	
+	{llaTab = new llamadaTabla("", n1.image, "", n1.beginLine, n1.beginColumn);
+	return new expresion(null, null, "TABLA", "TABLA", n1.beginLine, n1.beginColumn, llaTab);}
 }
 
-void LLAMADA_METODO_FUNCION():
-{}
+simbolo LLAMADA_METODO_FUNCION():
 {
-    <ID> <PAR_ABRE> (LISTA_COND())? <PAR_CIERRA> <PYCOMA>
-    |<TOKEN_IMPRIMIR> <PAR_ABRE> (CONDICION())? <PAR_CIERRA> <PYCOMA>
+Token t;
+ArrayList<expresion> lexp= new ArrayList<expresion>();
+expresion exp=null;
+}
+{
+     t=<ID> <PAR_ABRE> (lexp=LISTA_COND())? <PAR_CIERRA> <PYCOMA> 	{
+																	llamadaMetodo llaMe = new llamadaMetodo(t.image,lexp,t.beginLine, t.beginColumn);
+																	return new simbolo(t.beginLine, t.beginColumn,"METODO","METODO","METODO", new ambito("METODO", new ArrayList<simbolo>()), llaMe);
+																	}
+    |t=<TOKEN_IMPRIMIR> <PAR_ABRE> (exp=CONDICION())? <PAR_CIERRA> <PYCOMA> {imprimir imp = new imprimir(exp);
+																			return new simbolo(t.beginLine, t.beginColumn,"IMPRIMIR","IMPRIMIR","IMPRIMIR", new ambito("IMPRIMIR", new ArrayList<simbolo>()), imp);
+																			} 
 }

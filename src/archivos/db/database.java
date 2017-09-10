@@ -179,20 +179,35 @@ public class database {
     public void addTable(table tab) {
         table.add(tab);
     }
-    
-    public void removeFunction(function func) {
-        function.remove(func);
+
+    public void removeFunction(String nombre) {
+        for (int i = 0; i < function.size(); i++) {
+            if (function.get(i).getNombre().equals(nombre)) {
+                function.remove(i);
+            }
+        }
     }
 
-    public void removeProcedure(procedure proc) {
-        procedure.remove(proc);
+    public void removeProcedure(String nombre) {
+        for (int i = 0; i < procedure.size(); i++) {
+            if (procedure.get(i).getNombre().equals(nombre)) {
+                procedure.remove(i);
+            }
+        }
+    }
+    public void removeObject(String nombre) {
+        for (int i = 0; i < object.size(); i++) {
+            if (object.get(i).getNombre().equals(nombre)) {
+                object.remove(i);
+            }
+        }
     }
 
-    public void removeObject(object obj) {
-        object.remove(obj);
-    }
-
-    public void removeTable(table tab) {
-        table.remove(tab);
+    public void removeTable(String nombre) {
+        for (int i = 0; i < table.size(); i++) {
+            if (table.get(i).getNombre_campo().equals(nombre)) {
+                table.remove(i);
+            }
+        }
     }
 }

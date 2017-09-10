@@ -182,7 +182,6 @@ public class LecturaBD {
                             /*PARCHE INSERT TABLE*/
                             memoria.Insert_table_actual= adb.get(i).getNombre();
                             /*PARCHE INSERT TABLE*/  
-                            
                             tabla gt = new tabla(new java.io.StringReader(cadena));
                             try {
                                 gt.S();                                                                                                                                                                                                                                                                                                              

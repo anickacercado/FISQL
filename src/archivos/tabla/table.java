@@ -75,12 +75,24 @@ public class table {
     public String XML(int fila) {
         String cadena = "";
         if (es_objeto) {
-            cadena += "\t<" + nombre_campo + ">\n"
-                    + registro_objeto.get(fila).XML()
-                    + "\t</" + nombre_campo + ">\n";
+            try {
+                cadena += "\t<" + nombre_campo + ">\n"
+                        + registro_objeto.get(fila).XML()
+                        + "\t</" + nombre_campo + ">\n";                                                                        
+            } catch (Exception e) {
+                cadena += "\t<" + nombre_campo + ">"
+                        + "\"NULL\""
+                        + "</" + nombre_campo + ">\n";
+            }
 
         } else {
-            cadena += "\t<" + nombre_campo + ">\"" + registro.get(fila).getValor() + "\"</" + nombre_campo + ">\n";
+            try {
+                cadena += "\t<" + nombre_campo + ">\"" + registro.get(fila).getValor() + "\"</" + nombre_campo + ">\n";
+            } catch (Exception e) {
+                cadena += "\t<" + nombre_campo + ">"
+                        + "\"NULL\""
+                        + "</" + nombre_campo + ">\n";
+            }
         }
         return cadena;
     }

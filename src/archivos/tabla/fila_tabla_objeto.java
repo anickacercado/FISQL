@@ -23,9 +23,13 @@ public class fila_tabla_objeto {
 
     public String XML() {
         String cadena = "";
-        for (int i = 0; i < registro.size(); i++) {
-            String nombre_campo = registro.get(i).getNombre();
-            cadena += "\t<" + nombre_campo + ">\"" + registro.get(i).getValor() + "\"</" + nombre_campo + ">\n";
+        try {
+            for (int i = 0; i < registro.size(); i++) {
+                String nombre_campo = registro.get(i).getNombre();
+                cadena += "\t<" + nombre_campo + ">\"" + registro.get(i).getValor() + "\"</" + nombre_campo + ">\n";
+            }
+        } catch (Exception e) {
+
         }
         return cadena;
     }
