@@ -19,18 +19,24 @@ public class receiveMessage extends Thread {
 
     public void run() {
         while (true) {
+            System.out.println("Entra Hilo...");
             try {
                 ServerSocket serverSo = new ServerSocket(9770);
                 Socket socket = new Socket();
                 System.out.println("Esperando Respuesta...");
 
+                /*Recibe Mensaje*/
                 socket = serverSo.accept();
                 BufferedReader entrada = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-                DataOutputStream salida = new DataOutputStream(socket.getOutputStream());
                 System.out.println("Conexion con Cliente");
 
                 String mensajeRecibido = entrada.readLine();
                 System.out.println(mensajeRecibido);
+
+                /*Envía Mensaje*/
+                DataOutputStream mensaje = new DataOutputStream(socket.getOutputStream());
+                mensaje.writeUTF("Mensaje prueba");
+                System.out.println("Mensaje Enviado...");
 
                 serverSo.close();
             } catch (Exception e) {

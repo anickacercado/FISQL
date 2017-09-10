@@ -39,7 +39,7 @@ public class principal extends javax.swing.JFrame {
     eliminar eli = new eliminar();
 
     Thread server = new Thread(new receiveMessage(), "server");
-    Thread client = new Thread(new sendMessage(), "client");
+    //Thread client = new Thread(new sendMessage(), "client");
 
     /**
      * Creates new form principal
@@ -107,7 +107,6 @@ public class principal extends javax.swing.JFrame {
 
     private void socket() {
         server.start();
-        client.start();
 
         try {
             Thread.currentThread().sleep(1000);

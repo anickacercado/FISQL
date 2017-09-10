@@ -23,6 +23,8 @@ public class sendMessage extends Thread {
                 mensaje.writeUTF("Mensaje prueba");
                 System.out.println("Mensaje enviado...");
                 socket.close();
+                
+                
 
             } catch (Exception e) {
                 System.out.println("Error: " + e.getMessage());
