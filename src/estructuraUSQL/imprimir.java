@@ -16,30 +16,46 @@ public class imprimir {
     public expresion valor;
     public ambito ambito;
 
-    public imprimir(expresion valor) {
+    public imprimir(expresion valor, ambito ambito) {
         this.valor = valor;
-        this.ambito = new ambito("IMPRIMIR", new ArrayList<simbolo>());
+        this.ambito = ambito;
+    }
+    
+    public expresion getValor() {
+        return valor;
     }
 
+    public void setValor(expresion valor) {
+        this.valor = valor;
+    }
+
+    public ambito getAmbito() {
+        return ambito;
+    }
+
+    public void setAmbito(ambito ambito) {
+        this.ambito = ambito;
+    }
+    
     public void ejecucion() {
-        expresion exp = valor.ResolverExpresion();
-        if (exp.Tipo.equals("ENTERO")) {
-            System.out.print(String.valueOf(exp.Entero));
+        expresion exp = valor.resCondicion();
+        if (exp.tipo.equals("ENTERO")) {
+            System.out.println(String.valueOf(exp.entero));
         }
-        else if (exp.Tipo.equals("DECIMAL")) {
-            System.out.print(String.valueOf(exp.Decimal));
+        else if (exp.tipo.equals("DECIMAL")) {
+            System.out.println(String.valueOf(exp.decimal));
         }
-        else if (exp.Tipo.equals("CADENA")) {
-            System.out.print(String.valueOf(exp.Cadena));
+        else if (exp.tipo.equals("CADENA")) {
+            System.out.println(String.valueOf(exp.cadena));
         }
-        else if (exp.Tipo.equals("BOOL")) {
-            System.out.print(String.valueOf(exp.Bool));
+        else if (exp.tipo.equals("BOOL")) {
+            System.out.println(String.valueOf(exp.bool));
         }
-        else if (exp.Tipo.equals("DATE")) {
-            System.out.print(String.valueOf(exp.Cadena));
+        else if (exp.tipo.equals("DATE")) {
+            System.out.println(String.valueOf(exp.cadena));
         }
-        else if (exp.Tipo.equals("DATETIME")) {
-            System.out.print(String.valueOf(exp.Cadena));
+        else if (exp.tipo.equals("DATETIME")) {
+            System.out.println(String.valueOf(exp.cadena));
         }
     }
 }

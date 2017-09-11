@@ -10,6 +10,7 @@ package estructuraUSQL;
  * @author anick
  */
 public class simbolo {
+    
     public int fila;
     public int columna;
     public String nombre;

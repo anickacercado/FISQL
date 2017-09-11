@@ -12,14 +12,24 @@ import java.util.ArrayList;
  * @author anick
  */
 public class ejecutar {
+
     ArrayList<simbolo> tablaSimbolo;
 
     public ejecutar(ArrayList<simbolo> tablaSimbolo) {
         this.tablaSimbolo = tablaSimbolo;
     }
-    
-    public void ejecucion(){
+
+    public ArrayList<simbolo> getTablaSimbolo() {
+        return tablaSimbolo;
+    }
+
+    public void setTablaSimbolo(ArrayList<simbolo> tablaSimbolo) {
+        this.tablaSimbolo = tablaSimbolo;
+    }
+
+    public void ejecucion() {
         ejecutarAmbito ejeA = new ejecutarAmbito(tablaSimbolo);
         ejeA.secuenciaEjecucion();
-    }   
+    }
+
 }

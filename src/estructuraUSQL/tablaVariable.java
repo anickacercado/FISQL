@@ -12,28 +12,25 @@ import java.util.ArrayList;
  *
  * @author anick
  */
-public class tablaUSQL {
+public class tablaVariable {
 
     public ArrayList<variable> tabla;
 
-    public tablaUSQL() {
+    public tablaVariable() {
         tabla = memoria.tablaVariables;
     }
 
-    public variable retornaFuncion(llamadaMetodo metodo) {
-        variable vab = null;
-        for(int i= tabla.size() - 1; i>=0; i--){
-            variable func = tabla.get(i);
-            if (func.nombre.equals(metodo.nombre) && func.rol.equals("METODO")) {
-                return func;
-            }
-        }
-        return vab;
+    public ArrayList<variable> getTabla() {
+        return tabla;
+    }
+
+    public void setTabla(ArrayList<variable> tabla) {
+        this.tabla = tabla;
     }
 
     public variable retornaVariable(String nombre_vab) {
         variable vab = null;
-         for(int i= tabla.size() - 1; i>=0; i--){
+        for (int i = tabla.size() - 1; i >= 0; i--) {
             variable vab2 = tabla.get(i);
             if (vab2.nombre.equals(nombre_vab) && vab2.rol.equals("VARIABLE")) {
                 return vab2;
@@ -51,7 +48,7 @@ public class tablaUSQL {
     }
 
     public void popVariable(String nombre_vab) {
-        for(int i= tabla.size() - 1; i>=0; i--){
+        for (int i = tabla.size() - 1; i >= 0; i--) {
             if (tabla.get(i).getNombre().equals(nombre_vab) && tabla.get(i).getRol().equals("VARIABLE")) {
                 tabla.remove(i);
                 break;
@@ -59,12 +56,14 @@ public class tablaUSQL {
         }
     }
 
-    public boolean encontrarRertorno() {
-        return tabla.get(tabla.size() - 1).rol.equals("RETORNAR");
+    public variable retornaFuncion(llamadaMetodo metodo) {
+        variable vab = null;
+        for (int i = tabla.size() - 1; i >= 0; i--) {
+            variable func = tabla.get(i);
+            if (func.nombre.equals(metodo.nombre) && func.rol.equals("METODO")) {
+                return func;
+            }
+        }
+        return vab;
     }
-
-    public boolean encontrarDetener() {
-       return tabla.get(tabla.size() - 1).rol.equals("DETENER");
-    }
-
 }

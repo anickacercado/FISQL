@@ -13,31 +13,14 @@ public class llamadaVariable {
 
     public String nombre;
     public String objeto;
-    public int fila, columna;
-    tablaUSQL tUSQL = new tablaUSQL();
+    public int fila;
+    public int columna;
 
     public llamadaVariable(String nombre, String objeto, int fila, int columna) {
         this.nombre = nombre;
         this.objeto = objeto;
         this.fila = fila;
         this.columna = columna;
-    }
-
-    public variable ejecucion() {
-        variable vab = tUSQL.retornaVariable(nombre);
-        if (vab != null) {
-            if (vab.tipo.equals("ENTERO")
-                    || vab.tipo.equals("CADENA")
-                    || vab.tipo.equals("DOUBLE")
-                    || vab.tipo.equals("DATE")
-                    || vab.tipo.equals("DATETIME")
-                    || vab.tipo.equals("BOOL")) {
-                if (vab.valor !=null) {
-                   return vab;
-                }
-            }
-        }
-        return vab;
     }
 
     public String getNombre() {
@@ -70,5 +53,18 @@ public class llamadaVariable {
 
     public void setColumna(int columna) {
         this.columna = columna;
+    }
+    
+     public variable ejecucion() {
+        tablaVariable tUSQL = new tablaVariable();
+        variable vab = tUSQL.retornaVariable(nombre);
+        if (vab != null) {
+            {
+                if (vab.valor != null) {
+                    return vab;
+                }
+            }
+        }
+        return vab;
     }
 }

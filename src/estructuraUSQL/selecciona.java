@@ -14,63 +14,80 @@ import java.util.ArrayList;
  */
 public class selecciona {
 
+    public expresion valor;
     public ArrayList<caso> lista_caso;
-    public ambito ambito;
     public caso defecto;
-    public expresion condicion;
-
-    public selecciona(expresion condicion, ArrayList<caso> casos, caso defecto, ambito ambito) {
+    public ambito ambito;
+    
+    public selecciona(expresion valor, ArrayList<caso> casos, caso defecto, ambito ambito) {
+        this.valor = valor;
         this.lista_caso = casos;
         this.defecto = defecto;
-        this.ambito = ambito;
-        this.condicion = condicion;
+        this.ambito = ambito;     
+    }
+    
+    public expresion getCondicion() {
+        return valor;
     }
 
-    public void ejecucion() {
-        expresion expGlobal = condicion.ResolverExpresion();
-        tablaUSQL tabla = new tablaUSQL();
+    public void setCondicion(expresion condicion) {
+        this.valor = condicion;
+    }
+
+    public ArrayList<caso> getLista_caso() {
+        return lista_caso;
+    }
+
+    public void setLista_caso(ArrayList<caso> lista_caso) {
+        this.lista_caso = lista_caso;
+    }
+
+    public caso getDefecto() {
+        return defecto;
+    }
+
+    public void setDefecto(caso defecto) {
+        this.defecto = defecto;
+    }
+
+    public ambito getAmbito() {
+        return ambito;
+    }
+
+    public void setAmbito(ambito ambito) {
+        this.ambito = ambito;
+    }
+    
+      public void ejecucion() {
+        expresion expGlobal = valor.resCondicion();
+        tablaVariable tabla = new tablaVariable();
         ejecutarAmbito ea;
         boolean coincidencia = false;
         for (int i = 0; i < lista_caso.size(); i++) {
-            if (coincidencia == false) {
-                expresion expCase = lista_caso.get(i).valor.ResolverExpresion();
-                if (expGlobal.Tipo.equals(expCase.Tipo)) {
-                    switch (expGlobal.Tipo) {
+            if (memoria.DETENER==false) {
+                expresion expCase = lista_caso.get(i).valor.resCondicion();
+                if (expGlobal.tipo.equals(expCase.tipo)) {
+                    switch (expGlobal.tipo) {
                         case "ENTERO":
-                            if (expGlobal.Entero == expCase.Entero) {
+                            if (expGlobal.entero == expCase.entero) {
                                 ea = new ejecutarAmbito(lista_caso.get(i).ambito.tablaSimbolo);
                                 ea.secuenciaEjecucion();
-                                if (tabla.encontrarDetener()) {
-                                    tabla.popVariable();
-                                    ea.popAmbito();
-                                    break;
-                                }
                                 ea.popAmbito();
                                 coincidencia = true;
                             }
                             break;
                         case "DOUBLE":
-                            if (expGlobal.Decimal == expCase.Decimal) {
+                            if (expGlobal.decimal == expCase.decimal) {
                                 ea = new ejecutarAmbito(lista_caso.get(i).ambito.tablaSimbolo);
                                 ea.secuenciaEjecucion();
-                                if (tabla.encontrarDetener()) {
-                                    tabla.popVariable();
-                                    ea.popAmbito();
-                                    break;
-                                }
                                 ea.popAmbito();
                                 coincidencia = true;
                             }
                             break;
                         case "CADENA":
-                            if (expGlobal.Cadena.equals(expCase.Cadena)) {
+                            if (expGlobal.cadena.equals(expCase.cadena)) {
                                 ea = new ejecutarAmbito(lista_caso.get(i).ambito.tablaSimbolo);
                                 ea.secuenciaEjecucion();
-                                if (tabla.encontrarDetener()) {
-                                    tabla.popVariable();
-                                    ea.popAmbito();
-                                    break;
-                                }
                                 ea.popAmbito();
                                 coincidencia = true;
                             }
@@ -79,7 +96,7 @@ public class selecciona {
                             break;
                     }
                 } else {
-                   memoria.addError("ERROR SEMANTICO ", "NO COINCIDEN TIPOS CASE " + expGlobal.Tipo + " CON "+ expCase.Tipo , expCase.Fila, expCase.Columna);
+                    memoria.addError("ERROR SEMANTICO ", "NO COINCIDEN TIPOS CASE " + expGlobal.tipo + " CON " + expCase.tipo, expCase.fila, expCase.columna);
                 }
 
             }
@@ -88,9 +105,7 @@ public class selecciona {
             ea = new ejecutarAmbito(defecto.ambito.tablaSimbolo);
             ea.secuenciaEjecucion();
             ea.popAmbito();
-            if (tabla.encontrarDetener()) {
-                tabla.popVariable();
-            }
         }
+        memoria.DETENER = false;
     }
 }

@@ -16,8 +16,7 @@ import archivos.tabla.table;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import socket.receiveMessage;
-import socket.sendMessage;
+import socket.server;
 import usql.analizador;
 import xml.usuario.usuario;
 
@@ -38,8 +37,7 @@ public class principal extends javax.swing.JFrame {
     alter alt = new alter();
     eliminar eli = new eliminar();
 
-    Thread server = new Thread(new receiveMessage(), "server");
-    //Thread client = new Thread(new sendMessage(), "client");
+    Thread server = new Thread(new server(), "server");
 
     /**
      * Creates new form principal
@@ -102,7 +100,8 @@ public class principal extends javax.swing.JFrame {
 
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        socket();
+        //socket();
+        pruebaUSQL();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void socket() {

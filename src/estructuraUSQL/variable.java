@@ -14,18 +14,18 @@ public class variable {
     public String tipo;
     public String nombre;
     public String rol;
-    public int fila, columna;
+    public int fila;
+    public int columna;
     public ambito ambito;
     public Object valor;
 
     public variable(String tipo, String nombre, String rol, int fila, int columna, ambito ambito, Object valor) {
         this.tipo = tipo;
         this.nombre = nombre;
-        this.rol = rol; //METODO O VARIABLE
+        this.rol = rol; //Metodo, variable, funcion
         this.ambito = ambito;
         this.valor = valor;
     }
-    
 
     public String getTipo() {
         return tipo;

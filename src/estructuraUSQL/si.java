@@ -14,22 +14,54 @@ import java.util.ArrayList;
  */
 public class si {
 
+    public expresion valor;
     public ambito si;
     public ambito sino;
     public ambito ambito;
-    public expresion condicion;
-
-    public si(expresion condicion, ambito si, ambito sino, ambito ambito) {
+    
+    public si(expresion valor, ambito si, ambito sino, ambito ambito) {
+        this.valor = valor;
         this.si = si;
-        this.sino = sino;
-        this.condicion = condicion;
+        this.sino = sino;  
         this.ambito = ambito;
     }
 
+    public expresion getCondicion() {
+        return valor;
+    }
+
+    public void setCondicion(expresion condicion) {
+        this.valor = condicion;
+    }
+
+    public ambito getSi() {
+        return si;
+    }
+
+    public void setSi(ambito si) {
+        this.si = si;
+    }
+
+    public ambito getSino() {
+        return sino;
+    }
+
+    public void setSino(ambito sino) {
+        this.sino = sino;
+    }
+
+    public ambito getAmbito() {
+        return ambito;
+    }
+
+    public void setAmbito(ambito ambito) {
+        this.ambito = ambito;
+    }
+    
     public void ejecucion() {
-        expresion exp = condicion.ResolverExpresion();
-        if (exp.Tipo.equals("BOOL")) {
-            if (exp.Bool) {
+        expresion exp = valor.resCondicion();
+        if (exp.tipo.equals("BOOL")) {
+            if (exp.bool) {
                 ejecutarAmbito ea = new ejecutarAmbito(si.tablaSimbolo);
                 ea.secuenciaEjecucion();
                 ea.popAmbito();
@@ -40,7 +72,8 @@ public class si {
                 ea.popAmbito();
             }
         } else {
-            memoria.addError("ERROR SEMANTICO ", "SE ESPERABA EXPRESION BOOL EN SI", exp.Fila, exp.Columna);
+            memoria.addError("ERROR SEMANTICO ", "SE ESPERABA EXPRESION BOOL EN SI", exp.fila, exp.columna);
         }
     }
+
 }

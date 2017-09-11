@@ -661,7 +661,7 @@ simbolo DETENER():
 {
     t=<TOKEN_DETENER><PYCOMA>
 	{
-	return new simbolo(t.beginLine, t.beginColumn,"DETENER","DETENER","DETENER", new ambito("DETENER", new ArrayList<simbolo>()), null);
+	return new simbolo(t.beginLine, t.beginColumn,"","DETENER","DETENER", new ambito("DETENER", new ArrayList<simbolo>()), null);
 	}
 }
 
@@ -861,7 +861,7 @@ expresion exp=null;
 																	llamadaMetodo llaMe = new llamadaMetodo(t.image,lexp,t.beginLine, t.beginColumn);
 																	return new simbolo(t.beginLine, t.beginColumn,"METODO","METODO","METODO", new ambito("METODO", new ArrayList<simbolo>()), llaMe);
 																	}
-    |t=<TOKEN_IMPRIMIR> <PAR_ABRE> (exp=CONDICION())? <PAR_CIERRA> <PYCOMA> {imprimir imp = new imprimir(exp);
+    |t=<TOKEN_IMPRIMIR> <PAR_ABRE> (exp=CONDICION())? <PAR_CIERRA> <PYCOMA> {imprimir imp = new imprimir(exp,new ambito("IMPRIMIR", new ArrayList<simbolo>()));
 																			return new simbolo(t.beginLine, t.beginColumn,"IMPRIMIR","IMPRIMIR","IMPRIMIR", new ambito("IMPRIMIR", new ArrayList<simbolo>()), imp);
 																			} 
 }

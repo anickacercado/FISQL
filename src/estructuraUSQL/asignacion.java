@@ -13,85 +13,118 @@ import archivos.memoria;
  */
 public class asignacion {
 
-    public ambito ambito;
-    public ambito padre;
     public llamadaVariable retornaVariable;
+    public ambito ambito;
     public expresion valor;
-
-    public asignacion(llamadaVariable retornaVariable, ambito ambito, Object valor) {
+    public ambito padre;
+    
+ 
+    public asignacion(llamadaVariable retornaVariable, ambito ambito, expresion valor) {
         this.ambito = ambito;
-        this.padre = null;
         this.retornaVariable = retornaVariable;
-        this.valor = (expresion) valor;
+        this.valor = valor;
+        this.padre = null;
     }
 
-    public void ejecucion() {
+    public ambito getAmbito() {
+        return ambito;
+    }
+
+    public void setAmbito(ambito ambito) {
+        this.ambito = ambito;
+    }
+
+    public ambito getPadre() {
+        return padre;
+    }
+
+    public void setPadre(ambito padre) {
+        this.padre = padre;
+    }
+
+    public llamadaVariable getRetornaVariable() {
+        return retornaVariable;
+    }
+
+    public void setRetornaVariable(llamadaVariable retornaVariable) {
+        this.retornaVariable = retornaVariable;
+    }
+
+    public expresion getValor() {
+        return valor;
+    }
+
+    public void setValor(expresion valor) {
+        this.valor = valor;
+    }
+    
+        public void ejecucion() {
         variable vab;
         if (valor != null) {
             expresion exp = valor;
-            exp = exp.ResolverExpresion();
+            exp = exp.resCondicion();
 
             vab = retornaVariable.ejecucion();
             if (vab != null) {
                 if (exp != null) {
                     switch (vab.tipo) {
                         case "ENTERO":
-                            if (exp.Tipo.equals("ENTERO")) {
-                            } else if (exp.Tipo.equals("BOOL")) {
-                                exp.Tipo = "ENTERO";
+                            if (exp.tipo.equals("ENTERO")) {
+                            } else if (exp.tipo.equals("BOOL")) {
+                                exp.tipo = "ENTERO";
                             } else {
-                                memoria.addError("ERROR SEMANTICO ", vab.tipo + " NO COINCIDE CON " + exp.Tipo, exp.Fila, exp.Columna);
+                                memoria.addError("ERROR SEMANTICO ", vab.tipo + " NO COINCIDE CON " + exp.tipo, exp.fila, exp.columna);
                             }
                             break;
                         case "CADENA":
-                            if (exp.Tipo.equals("CADENA")) {
-                            } else if (exp.Tipo.equals("ENTERO")) {
-                                exp.Tipo = "CADENA";
-                            } else if (exp.Tipo.equals("DOUBLE")) {
-                                exp.Tipo = "CADENA";
-                            } else if (exp.Tipo.equals("DATE")) {
-                                exp.Tipo = "CADENA";
-                            } else if (exp.Tipo.equals("DATETIME")) {
-                                exp.Tipo = "CADENA";
-                            } else if (exp.Tipo.equals("BOOL")) {
-                                exp.Tipo = "CADENA";
+                            if (exp.tipo.equals("CADENA")) {
+                            } else if (exp.tipo.equals("ENTERO")) {
+                                exp.tipo = "CADENA";
+                            } else if (exp.tipo.equals("DOUBLE")) {
+                                exp.tipo = "CADENA";
+                            } else if (exp.tipo.equals("DATE")) {
+                                exp.tipo = "CADENA";
+                            } else if (exp.tipo.equals("DATETIME")) {
+                                exp.tipo = "CADENA";
+                            } else if (exp.tipo.equals("BOOL")) {
+                                exp.tipo = "CADENA";
                             } else {
-                                memoria.addError("ERROR SEMANTICO ", vab.tipo + " NO COINCIDE CON " + exp.Tipo, exp.Fila, exp.Columna);
+                                memoria.addError("ERROR SEMANTICO ", vab.tipo + " NO COINCIDE CON " + exp.tipo, exp.fila, exp.columna);
                             }
                             break;
                         case "DOUBLE":
-                            if (exp.Tipo.equals("DOUBLE")) {
-                            } else if (exp.Tipo.equals("BOOL")) {
-                                exp.Tipo = "DOUBLE";
-                            } else if (exp.Tipo.equals("ENTERO")) {
-                                exp.Tipo = "DOUBLE";
+                            if (exp.tipo.equals("DOUBLE")) {
+                            } else if (exp.tipo.equals("BOOL")) {
+                                exp.tipo = "DOUBLE";
+                            } else if (exp.tipo.equals("ENTERO")) {
+                                exp.tipo = "DOUBLE";
                                 memoria.tablaVariables.add(vab);
                             } else {
-                                memoria.addError("ERROR SEMANTICO ", vab.tipo + " NO COINCIDE CON " + exp.Tipo, exp.Fila, exp.Columna);
+                                memoria.addError("ERROR SEMANTICO ", vab.tipo + " NO COINCIDE CON " + exp.tipo, exp.fila, exp.columna);
                             }
                             break;
                         case "DATE":
-                            if (exp.Tipo.equals("DATE")) {
+                            if (exp.tipo.equals("DATE")) {
                                 memoria.tablaVariables.add(vab);
                             } else {
-                                memoria.addError("ERROR SEMANTICO ", vab.tipo + " NO COINCIDE CON " + exp.Tipo, exp.Fila, exp.Columna);
+                                memoria.addError("ERROR SEMANTICO ", vab.tipo + " NO COINCIDE CON " + exp.tipo, exp.fila, exp.columna);
                             }
                             break;
                         case "DATETIME":
-                            if (exp.Tipo.equals("DATETIME")) {
+                            if (exp.tipo.equals("DATETIME")) {
                                 memoria.tablaVariables.add(vab);
                             } else {
-                                memoria.addError("ERROR SEMANTICO ", vab.tipo + " NO COINCIDE CON " + exp.Tipo, exp.Fila, exp.Columna);
+                                memoria.addError("ERROR SEMANTICO ", vab.tipo + " NO COINCIDE CON " + exp.tipo, exp.fila, exp.columna);
                             }
                             break;
                         case "BOOL":
-                            if (exp.Tipo.equals("BOOL")) {
+                            if (exp.tipo.equals("BOOL")) {
                             } else {
-                                memoria.addError("ERROR SEMANTICO ", vab.tipo + " NO COINCIDE CON " + exp.Tipo, exp.Fila, exp.Columna);
+                                memoria.addError("ERROR SEMANTICO ", vab.tipo + " NO COINCIDE CON " + exp.tipo, exp.fila, exp.columna);
                             }
                             break;
                         default:
-                            memoria.addError("ERROR SEMANTICO ", "EXPRESION NO VALIDA", exp.Fila, exp.Columna);
+                            memoria.addError("ERROR SEMANTICO ", "EXPRESION NO VALIDA", exp.fila, exp.columna);
                             break;
                     }
                 }

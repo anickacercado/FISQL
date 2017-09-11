@@ -51,5 +51,9 @@ public class memoria {
     
     //Tabla variable
     public static ArrayList<variable> tablaVariables= new ArrayList<variable>();
+    
+    //Detener - Retorna
+    public static boolean DETENER =false;
+    public static boolean RETORNA =false;
   
 }

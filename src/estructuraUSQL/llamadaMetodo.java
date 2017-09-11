@@ -14,9 +14,10 @@ import java.util.ArrayList;
 public class llamadaMetodo {
 
     public String nombre;
-    public int fila, columna;
     public ArrayList<expresion> parametros = new ArrayList<>();
-
+    public int fila;
+    public int columna;
+    
     public llamadaMetodo(String nombre, ArrayList<expresion> parametros, int fila, int columna) {
         this.nombre = nombre;
         this.parametros = parametros;

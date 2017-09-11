@@ -17,6 +17,21 @@ public class caso {
         this.valor = valor;
         this.ambito = ambito;
     }
-    
+
+    public expresion getValor() {
+        return valor;
+    }
+
+    public void setValor(expresion valor) {
+        this.valor = valor;
+    }
+
+    public ambito getAmbito() {
+        return ambito;
+    }
+
+    public void setAmbito(ambito ambito) {
+        this.ambito = ambito;
+    }
     
 }

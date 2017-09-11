@@ -1238,7 +1238,7 @@ ambito ambito = new ambito("MIENTRAS", lista_simb);
   final public simbolo DETENER() throws ParseException {Token t;
     t = jj_consume_token(TOKEN_DETENER);
     jj_consume_token(PYCOMA);
-{if ("" != null) return new simbolo(t.beginLine, t.beginColumn,"DETENER","DETENER","DETENER", new ambito("DETENER", new ArrayList<simbolo>()), null);}
+{if ("" != null) return new simbolo(t.beginLine, t.beginColumn,"","DETENER","DETENER", new ambito("DETENER", new ArrayList<simbolo>()), null);}
     throw new Error("Missing return statement in function");
   }
 
@@ -1795,7 +1795,7 @@ llamadaMetodo llaMe = new llamadaMetodo(t.image,lexp,t.beginLine, t.beginColumn)
       }
       jj_consume_token(PAR_CIERRA);
       jj_consume_token(PYCOMA);
-imprimir imp = new imprimir(exp);
+imprimir imp = new imprimir(exp,new ambito("IMPRIMIR", new ArrayList<simbolo>()));
                                                                                                                                                         {if ("" != null) return new simbolo(t.beginLine, t.beginColumn,"IMPRIMIR","IMPRIMIR","IMPRIMIR", new ambito("IMPRIMIR", new ArrayList<simbolo>()), imp);}
       break;
       }
