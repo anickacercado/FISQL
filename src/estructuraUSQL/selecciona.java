@@ -60,7 +60,7 @@ public class selecciona {
     
       public void ejecucion() {
         expresion expGlobal = valor.resCondicion();
-        tablaVariable tabla = new tablaVariable();
+        pilaVariable tabla = new pilaVariable();
         ejecutarAmbito ea;
         boolean coincidencia = false;
         for (int i = 0; i < lista_caso.size(); i++) {

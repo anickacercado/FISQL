@@ -17,7 +17,7 @@ public class llamadaVariable {
     public int columna;
 
     public llamadaVariable(String nombre, String objeto, int fila, int columna) {
-        this.nombre = nombre;
+        this.nombre = nombre.toLowerCase();
         this.objeto = objeto;
         this.fila = fila;
         this.columna = columna;
@@ -56,7 +56,7 @@ public class llamadaVariable {
     }
     
      public variable ejecucion() {
-        tablaVariable tUSQL = new tablaVariable();
+        pilaVariable tUSQL = new pilaVariable();
         variable vab = tUSQL.retornaVariable(nombre);
         if (vab != null) {
             {

@@ -3,8 +3,12 @@
 package usql;
 import estructuraUSQL.*;
 import java.util.ArrayList;
+import archivos.memoria;
 
 public class analizador implements analizadorConstants {
+
+  private boolean isMetodo=false;
+
   public static void main(String args[]) throws ParseException {
     analizador parser = new analizador(System.in);
     parser.S();
@@ -264,31 +268,32 @@ for(int i=0; i < lsim2.size(); i++){
     throw new Error("Missing return statement in function");
   }
 
-  final public simbolo CREAR() throws ParseException {
-    jj_consume_token(TOKEN_CREAR);
+  final public simbolo CREAR() throws ParseException {Token t;
+simbolo rsim;
+    t = jj_consume_token(TOKEN_CREAR);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case TOKEN_BASE_DATOS:{
-      CREAR_BD();
+      rsim = CREAR_BD();
       break;
       }
     case TOKEN_TABLA:{
-      CREAR_TABLA();
+      rsim = CREAR_TABLA();
       break;
       }
     case TOKEN_OBJETO:{
-      CREAR_OBJETO();
+      rsim = CREAR_OBJETO();
       break;
       }
     case TOKEN_FUNCION:{
-      CREAR_FUNCION();
+      rsim = CREAR_FUNCION();
       break;
       }
     case TOKEN_PROCEDIMIENTO:{
-      CREAR_PROCEDIMIENTO();
+      rsim = CREAR_PROCEDIMIENTO();
       break;
       }
     case TOKEN_USUARIO:{
-      CREAR_USUARIO();
+      rsim = CREAR_USUARIO();
       break;
       }
     default:
@@ -296,23 +301,27 @@ for(int i=0; i < lsim2.size(); i++){
       jj_consume_token(-1);
       throw new ParseException();
     }
-{if ("" != null) return null;}
+{if ("" != null) return rsim;}
     throw new Error("Missing return statement in function");
   }
 
-  final public void CREAR_BD() throws ParseException {
+  final public simbolo CREAR_BD() throws ParseException {
     jj_consume_token(TOKEN_BASE_DATOS);
     jj_consume_token(ID);
     jj_consume_token(PYCOMA);
+isMetodo=false;{if ("" != null) return null;}
+    throw new Error("Missing return statement in function");
   }
 
-  final public void CREAR_TABLA() throws ParseException {
+  final public simbolo CREAR_TABLA() throws ParseException {
     jj_consume_token(TOKEN_TABLA);
     jj_consume_token(ID);
     jj_consume_token(PAR_ABRE);
     LISTA_PARAMETRO_TABLA();
     jj_consume_token(PAR_CIERRA);
     jj_consume_token(PYCOMA);
+isMetodo=false;{if ("" != null) return null;}
+    throw new Error("Missing return statement in function");
   }
 
   final public void LISTA_PARAMETRO_TABLA() throws ParseException {
@@ -394,34 +403,41 @@ for(int i=0; i < lsim2.size(); i++){
     }
   }
 
-  final public void TIPO_DATO() throws ParseException {
+  final public String TIPO_DATO() throws ParseException {
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case TOKEN_TEXT:{
       jj_consume_token(TOKEN_TEXT);
+{if ("" != null) return "CADENA";}
       break;
       }
     case TOKEN_INTEGER:{
       jj_consume_token(TOKEN_INTEGER);
+{if ("" != null) return "ENTERO";}
       break;
       }
     case TOKEN_DOUBLE:{
       jj_consume_token(TOKEN_DOUBLE);
+{if ("" != null) return "DOUBLE";}
       break;
       }
     case TOKEN_BOOL:{
       jj_consume_token(TOKEN_BOOL);
+{if ("" != null) return "BOOL";}
       break;
       }
     case TOKEN_DATE:{
       jj_consume_token(TOKEN_DATE);
+{if ("" != null) return "DATE";}
       break;
       }
     case TOKEN_DATETIME:{
       jj_consume_token(TOKEN_DATETIME);
+{if ("" != null) return "DATETIME";}
       break;
       }
     case ID:{
       jj_consume_token(ID);
+{if ("" != null) return "OBJETO";}
       break;
       }
     default:
@@ -429,15 +445,18 @@ for(int i=0; i < lsim2.size(); i++){
       jj_consume_token(-1);
       throw new ParseException();
     }
+    throw new Error("Missing return statement in function");
   }
 
-  final public void CREAR_OBJETO() throws ParseException {
+  final public simbolo CREAR_OBJETO() throws ParseException {
     jj_consume_token(TOKEN_OBJETO);
     jj_consume_token(ID);
     jj_consume_token(PAR_ABRE);
     LISTA_PARAMETRO();
     jj_consume_token(PAR_CIERRA);
     jj_consume_token(PYCOMA);
+isMetodo=false;{if ("" != null) return null;}
+    throw new Error("Missing return statement in function");
   }
 
   final public void LISTA_PARAMETRO() throws ParseException {
@@ -455,9 +474,13 @@ for(int i=0; i < lsim2.size(); i++){
     }
   }
 
-  final public void CREAR_FUNCION() throws ParseException {
-    jj_consume_token(TOKEN_FUNCION);
-    jj_consume_token(ID);
+  final public simbolo CREAR_FUNCION() throws ParseException {ArrayList<simbolo> parametros= new ArrayList<simbolo>();
+ArrayList<simbolo> lista_simb= new ArrayList<simbolo>();
+Token t,t1,nombre;
+String tipo;
+int posIni=0, posFin=0;
+    t = jj_consume_token(TOKEN_FUNCION);
+    nombre = jj_consume_token(ID);
     jj_consume_token(PAR_ABRE);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case TOKEN_TEXT:
@@ -467,7 +490,7 @@ for(int i=0; i < lsim2.size(); i++){
     case TOKEN_DATE:
     case TOKEN_DATETIME:
     case ID:{
-      LISTA_PARAMETRO_PROC_FUN();
+      parametros = LISTA_PARAMETRO_PROC_FUN();
       break;
       }
     default:
@@ -475,30 +498,57 @@ for(int i=0; i < lsim2.size(); i++){
       ;
     }
     jj_consume_token(PAR_CIERRA);
-    TIPO_DATO();
+    tipo = TIPO_DATO();
     jj_consume_token(LLAVE_ABRE);
-    LISTA_SENTENCIA_LOCAL();
-    jj_consume_token(LLAVE_CIERRA);
+    lista_simb = LISTA_SENTENCIA_LOCAL();
+    t1 = jj_consume_token(LLAVE_CIERRA);
+posIni= t.beginColumn - 7;
+       posFin= t1.beginColumn;
+       ambito ambito = new ambito("METODO", lista_simb);
+       for(int i=0; i < lista_simb.size(); i++){
+            lista_simb.get(i).ambito.padre= ambito;
+        }
+       metodo m= new metodo(parametros, ambito,t.beginLine, t.beginColumn, tipo, nombre.image,posIni,posFin);
+       {if ("" != null) return new simbolo(t.beginLine, t.beginColumn,"METODO","METODO","METODO", m.ambito, m);}
+    throw new Error("Missing return statement in function");
   }
 
-  final public void LISTA_PARAMETRO_PROC_FUN() throws ParseException {
-    TIPO_DATO();
-    jj_consume_token(VARIABLE);
+  final public ArrayList<simbolo> LISTA_PARAMETRO_PROC_FUN() throws ParseException {ArrayList<simbolo> lista_simb = new ArrayList<simbolo>();
+ArrayList<simbolo> simb = new ArrayList<simbolo>();
+String tipo;
+String vab;
+Token t;
+    tipo = TIPO_DATO();
+    t = jj_consume_token(VARIABLE);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case COMA:{
       jj_consume_token(COMA);
-      LISTA_PARAMETRO_PROC_FUN();
+      lista_simb = LISTA_PARAMETRO_PROC_FUN();
       break;
       }
     default:
       jj_la1[12] = jj_gen;
       ;
     }
+vab= t.image;
+                vab= vab.substring(1, vab.length());
+                declaracion d= new declaracion(tipo, vab, new ambito("DECLARACION", new ArrayList<simbolo>()) , null, t.beginLine, t.beginColumn);
+                simbolo s= new simbolo(t.beginLine, t.beginColumn,"DECLARACION", "DECLARACION","DECLARACION",d.ambito,d);
+                simb.add(s);
+
+                for(int i=0; i < lista_simb.size(); i++){
+                        simb.add(lista_simb.get(i));
+                }
+                {if ("" != null) return simb;}
+    throw new Error("Missing return statement in function");
   }
 
-  final public void CREAR_PROCEDIMIENTO() throws ParseException {
-    jj_consume_token(TOKEN_PROCEDIMIENTO);
-    jj_consume_token(ID);
+  final public simbolo CREAR_PROCEDIMIENTO() throws ParseException {ArrayList<simbolo> parametros= new ArrayList<simbolo>();
+    ArrayList<simbolo> lista_simb= new ArrayList<simbolo>();
+    Token t,t1,nombre;
+    int posIni=0, posFin=0;
+    t = jj_consume_token(TOKEN_PROCEDIMIENTO);
+    nombre = jj_consume_token(ID);
     jj_consume_token(PAR_ABRE);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case TOKEN_TEXT:
@@ -508,7 +558,7 @@ for(int i=0; i < lsim2.size(); i++){
     case TOKEN_DATE:
     case TOKEN_DATETIME:
     case ID:{
-      LISTA_PARAMETRO_PROC_FUN();
+      parametros = LISTA_PARAMETRO_PROC_FUN();
       break;
       }
     default:
@@ -517,11 +567,20 @@ for(int i=0; i < lsim2.size(); i++){
     }
     jj_consume_token(PAR_CIERRA);
     jj_consume_token(LLAVE_ABRE);
-    LISTA_SENTENCIA_LOCAL();
-    jj_consume_token(LLAVE_CIERRA);
+    lista_simb = LISTA_SENTENCIA_LOCAL();
+    t1 = jj_consume_token(LLAVE_CIERRA);
+posIni= t.beginColumn - 7;
+       posFin= t1.beginColumn;
+       ambito ambito = new ambito("METODO", lista_simb);
+       for(int i=0; i < lista_simb.size(); i++){
+            lista_simb.get(i).ambito.padre= ambito;
+        }
+       metodo m= new metodo(parametros, ambito,t.beginLine, t.beginColumn, "PROCEDURE", nombre.image,posIni,posFin);
+       {if ("" != null) return new simbolo(t.beginLine, t.beginColumn,"METODO","METODO","METODO", m.ambito, m);}
+    throw new Error("Missing return statement in function");
   }
 
-  final public void CREAR_USUARIO() throws ParseException {
+  final public simbolo CREAR_USUARIO() throws ParseException {
     jj_consume_token(TOKEN_USUARIO);
     jj_consume_token(ID);
     jj_consume_token(TOKEN_COLOCAR);
@@ -529,6 +588,8 @@ for(int i=0; i < lsim2.size(); i++){
     jj_consume_token(IGUAL);
     jj_consume_token(CADENA);
     jj_consume_token(PYCOMA);
+{if ("" != null) return null;}
+    throw new Error("Missing return statement in function");
   }
 
   final public simbolo RETORNO() throws ParseException {Token t;
@@ -562,11 +623,11 @@ cond.add(exp);
     throw new Error("Missing return statement in function");
   }
 
-  final public simbolo USAR_BD() throws ParseException {
+  final public simbolo USAR_BD() throws ParseException {Token t;
     jj_consume_token(TOKEN_USAR);
-    jj_consume_token(ID);
+    t = jj_consume_token(ID);
     jj_consume_token(PYCOMA);
-{if ("" != null) return null;}
+{if ("" != null) return new simbolo(t.beginLine, t.beginColumn,"","USAR_BD","USAR_BD", new ambito("USAR_BD", new ArrayList<simbolo>()), t.image);}
     throw new Error("Missing return statement in function");
   }
 
@@ -1098,7 +1159,7 @@ ambito ambito = new ambito("SELECCIONA", new ArrayList<simbolo>());
 
   final public ArrayList<caso> LISTA_CASO() throws ParseException {Token t;
 expresion exp;
-ArrayList<simbolo> lista_simb;
+ArrayList<simbolo> lista_simb = new ArrayList<simbolo>();
 ArrayList<caso> lcaso = new ArrayList<caso>();
 ArrayList<caso> lista_caso = new ArrayList<caso>();
     t = jj_consume_token(TOKEN_CASO);
@@ -1154,7 +1215,7 @@ ambito ambito = new ambito("CASO", lista_simb);
     throw new Error("Missing return statement in function");
   }
 
-  final public caso DEFECTO() throws ParseException {ArrayList<simbolo> lista_simb;
+  final public caso DEFECTO() throws ParseException {ArrayList<simbolo> lista_simb = new ArrayList<simbolo>();
     jj_consume_token(TOKEN_DEFECTO);
     jj_consume_token(DOSPUNTOS);
     lista_simb = LISTA_SENTENCIA_LOCAL();
@@ -1169,7 +1230,7 @@ ambito ambito = new ambito("CASO", lista_simb);
   final public simbolo PARA() throws ParseException {Token tv, tp, to;
 String vab;
 expresion exp1,exp2;
-ArrayList<simbolo> lista_simb;
+ArrayList<simbolo> lista_simb= new ArrayList<simbolo>();
     tp = jj_consume_token(TOKEN_PARA);
     jj_consume_token(PAR_ABRE);
     jj_consume_token(TOKEN_DECLARAR);
@@ -1214,7 +1275,7 @@ vab= tv.image;
     throw new Error("Missing return statement in function");
   }
 
-  final public simbolo MIENTRAS() throws ParseException {ArrayList<simbolo> lista_simb;
+  final public simbolo MIENTRAS() throws ParseException {ArrayList<simbolo> lista_simb= new ArrayList<simbolo>();
         expresion exp;
         Token t;
     t = jj_consume_token(TOKEN_MIENTRAS);
@@ -1598,7 +1659,8 @@ if (n2!=null){
       break;
       }
     case ID:{
-      LLAMADA_METODO_OBJETO();
+      exp = LLAMADA_METODO_OBJETO();
+{if ("" != null) return exp;}
       break;
       }
     case TOKEN_FECHA:
@@ -1693,7 +1755,7 @@ if (n2!=null){
         }
         jj_consume_token(PAR_CIERRA);
 llaMe = new llamadaMetodo(n1.image,exp,n1.beginLine, n1.beginColumn);
-        {if ("" != null) return new expresion(null, null, "METODO", "METODO", n1.beginLine, n1.beginColumn, llaMe);}
+        {if ("" != null) return new expresion(null, null, "LLAMADA_METODO", "LLAMADA_METODO", n1.beginLine, n1.beginColumn, llaMe);}
         break;
         }
       case PUNTO:{
@@ -1764,7 +1826,7 @@ expresion exp=null;
       jj_consume_token(PAR_CIERRA);
       jj_consume_token(PYCOMA);
 llamadaMetodo llaMe = new llamadaMetodo(t.image,lexp,t.beginLine, t.beginColumn);
-                                                                                                                                        {if ("" != null) return new simbolo(t.beginLine, t.beginColumn,"METODO","METODO","METODO", new ambito("METODO", new ArrayList<simbolo>()), llaMe);}
+                                                                                                                                        {if ("" != null) return new simbolo(t.beginLine, t.beginColumn,"LLAMADA_METODO","LLAMADA_METODO","LLAMADA_METODO", new ambito("LLAMADA_METODO", new ArrayList<simbolo>()), llaMe);}
       break;
       }
     case TOKEN_IMPRIMIR:{

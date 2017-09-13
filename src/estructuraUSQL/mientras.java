@@ -39,7 +39,7 @@ public class mientras {
 
     public void ejecucion() {
         expresion exp = valor.resCondicion();
-        tablaVariable tabla = new tablaVariable();
+        pilaVariable tabla = new pilaVariable();
         ejecutarAmbito ea = new ejecutarAmbito(ambito.tablaSimbolo);
         if (exp.tipo.equals("BOOL")) {
             while (exp.bool && memoria.DETENER == false) {

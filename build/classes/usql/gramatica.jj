@@ -8,8 +8,12 @@ PARSER_BEGIN(analizador)
 package usql;
 import estructuraUSQL.*;
 import java.util.ArrayList;
+import archivos.memoria;
 
 public class analizador {
+    
+  private boolean isMetodo=false;
+
   public static void main(String args[]) throws ParseException {
     analizador parser = new analizador(System.in);
     parser.S();
@@ -215,22 +219,28 @@ ArrayList<simbolo> LISTA_SENTENCIA_LOCAL():
 }
 
 simbolo CREAR():
-{}
+{Token t;
+simbolo rsim;}
 {
-    <TOKEN_CREAR> (CREAR_BD()|CREAR_TABLA()|CREAR_OBJETO()|CREAR_FUNCION()|CREAR_PROCEDIMIENTO()|CREAR_USUARIO())
-	{return null;}
+    t=<TOKEN_CREAR> 
+    (rsim=CREAR_BD()|rsim=CREAR_TABLA()|rsim=CREAR_OBJETO()|rsim=CREAR_FUNCION()|rsim=CREAR_PROCEDIMIENTO()|rsim=CREAR_USUARIO())
+    { 
+    return rsim;
+    }
 }
 
-void CREAR_BD():
+simbolo CREAR_BD():
 {}
 {
     <TOKEN_BASE_DATOS> <ID> <PYCOMA>
+    {isMetodo=false;return null;}
 }
 
-void CREAR_TABLA():
+simbolo CREAR_TABLA():
 {}
 {
     <TOKEN_TABLA> <ID> <PAR_ABRE> LISTA_PARAMETRO_TABLA() <PAR_CIERRA> <PYCOMA>
+    {isMetodo=false;return null;}
 }
 
 void LISTA_PARAMETRO_TABLA():
@@ -262,22 +272,23 @@ void COMPLEMENTO_PARAMETRO_TABLA():
 }
 
 
-void TIPO_DATO():
+String TIPO_DATO():
 {}
 {
-    <TOKEN_TEXT>
-    |<TOKEN_INTEGER>
-    |<TOKEN_DOUBLE>
-    |<TOKEN_BOOL>
-    |<TOKEN_DATE>
-    |<TOKEN_DATETIME>
-    |<ID>
+    <TOKEN_TEXT> {return "CADENA";}
+    |<TOKEN_INTEGER> {return "ENTERO";}
+    |<TOKEN_DOUBLE> {return "DOUBLE";}
+    |<TOKEN_BOOL> {return "BOOL";}
+    |<TOKEN_DATE> {return "DATE";}
+    |<TOKEN_DATETIME> {return "DATETIME";}
+    |<ID> {return "OBJETO";}
 }
 
-void CREAR_OBJETO():
+simbolo CREAR_OBJETO():
 {}
 {
     <TOKEN_OBJETO> <ID> <PAR_ABRE> LISTA_PARAMETRO() <PAR_CIERRA> <PYCOMA>
+    {isMetodo=false;return null;}
 }
 
 void LISTA_PARAMETRO():
@@ -286,28 +297,78 @@ void LISTA_PARAMETRO():
     TIPO_DATO() <ID> (<COMA> LISTA_PARAMETRO())?
 }
 
-void CREAR_FUNCION():
-{}
+simbolo CREAR_FUNCION():
 {
-    <TOKEN_FUNCION> <ID> <PAR_ABRE> (LISTA_PARAMETRO_PROC_FUN())? <PAR_CIERRA> TIPO_DATO() <LLAVE_ABRE>  LISTA_SENTENCIA_LOCAL()  <LLAVE_CIERRA>
+ArrayList<simbolo> parametros= new ArrayList<simbolo>();
+ArrayList<simbolo> lista_simb= new ArrayList<simbolo>();
+Token t,t1,nombre;
+String tipo;
+int posIni=0, posFin=0;
+}
+{
+    t=<TOKEN_FUNCION> nombre=<ID> <PAR_ABRE> (parametros=LISTA_PARAMETRO_PROC_FUN())? <PAR_CIERRA> tipo=TIPO_DATO() <LLAVE_ABRE>  lista_simb=LISTA_SENTENCIA_LOCAL()  t1=<LLAVE_CIERRA>
+    {  
+       posIni= t.beginColumn - 7;
+       posFin= t1.beginColumn;
+       ambito ambito = new ambito("METODO", lista_simb);
+       for(int i=0; i < lista_simb.size(); i++){
+            lista_simb.get(i).ambito.padre= ambito;
+	}
+       metodo m= new metodo(parametros, ambito,t.beginLine, t.beginColumn, tipo, nombre.image,posIni,posFin);
+       return new simbolo(t.beginLine, t.beginColumn,"METODO","METODO","METODO", m.ambito, m);
+    }
 }
 
-void LISTA_PARAMETRO_PROC_FUN():
-{}
+ArrayList<simbolo> LISTA_PARAMETRO_PROC_FUN():
+{ArrayList<simbolo> lista_simb = new ArrayList<simbolo>();
+ArrayList<simbolo> simb = new ArrayList<simbolo>();
+String tipo;
+String vab;
+Token t;
+}
 {
-     TIPO_DATO() <VARIABLE> (<COMA> LISTA_PARAMETRO_PROC_FUN())?
+     tipo=TIPO_DATO()  t=<VARIABLE> (<COMA> lista_simb=LISTA_PARAMETRO_PROC_FUN())?
+     {
+		vab= t.image;
+		vab= vab.substring(1, vab.length());
+		declaracion d= new declaracion(tipo, vab, new ambito("DECLARACION", new ArrayList<simbolo>()) , null, t.beginLine, t.beginColumn);	
+		simbolo s= new simbolo(t.beginLine, t.beginColumn,"DECLARACION", "DECLARACION","DECLARACION",d.ambito,d);
+                simb.add(s);
+
+                for(int i=0; i < lista_simb.size(); i++){
+			simb.add(lista_simb.get(i));
+		}
+		return simb;
+    }
 }
 
-void CREAR_PROCEDIMIENTO():
-{}
+simbolo CREAR_PROCEDIMIENTO():
 {
-     <TOKEN_PROCEDIMIENTO> <ID> <PAR_ABRE> (LISTA_PARAMETRO_PROC_FUN())? <PAR_CIERRA> <LLAVE_ABRE> LISTA_SENTENCIA_LOCAL() <LLAVE_CIERRA>
+    ArrayList<simbolo> parametros= new ArrayList<simbolo>();
+    ArrayList<simbolo> lista_simb= new ArrayList<simbolo>();
+    Token t,t1,nombre;
+    int posIni=0, posFin=0;
+}
+{
+     t=<TOKEN_PROCEDIMIENTO> nombre=<ID> <PAR_ABRE> (parametros=LISTA_PARAMETRO_PROC_FUN())? <PAR_CIERRA> <LLAVE_ABRE> lista_simb=LISTA_SENTENCIA_LOCAL() t1=<LLAVE_CIERRA>
+    {
+       posIni= t.beginColumn - 7;
+       posFin= t1.beginColumn;
+       ambito ambito = new ambito("METODO", lista_simb);
+       for(int i=0; i < lista_simb.size(); i++){
+            lista_simb.get(i).ambito.padre= ambito;
+	}
+       metodo m= new metodo(parametros, ambito,t.beginLine, t.beginColumn, "PROCEDURE", nombre.image,posIni,posFin);
+       return new simbolo(t.beginLine, t.beginColumn,"METODO","METODO","METODO", m.ambito, m);
+    }
+
 }
 
-void CREAR_USUARIO():
+simbolo CREAR_USUARIO():
 {}
 {
     <TOKEN_USUARIO> <ID> <TOKEN_COLOCAR> <TOKEN_PASSWORD> <IGUAL> <CADENA> <PYCOMA>
+    {return null;}
 }
 
 simbolo RETORNO():
@@ -336,10 +397,12 @@ ArrayList<expresion> LISTA_COND():
 }
 
 simbolo USAR_BD():
-{}
+{Token t;}
 {
-    <TOKEN_USAR> <ID> <PYCOMA>
-	{return null;}
+    <TOKEN_USAR> t=<ID> <PYCOMA>
+	{
+        return new simbolo(t.beginLine, t.beginColumn,"","USAR_BD","USAR_BD", new ambito("USAR_BD", new ArrayList<simbolo>()), t.image);
+        }
 }
 
 simbolo ALTERAR():
@@ -566,7 +629,7 @@ caso def= null;}
 ArrayList<caso> LISTA_CASO():
 {Token t; 
 expresion exp; 
-ArrayList<simbolo> lista_simb; 
+ArrayList<simbolo> lista_simb = new ArrayList<simbolo>(); 
 ArrayList<caso> lcaso = new ArrayList<caso>();
 ArrayList<caso> lista_caso = new ArrayList<caso>();}
 {
@@ -596,7 +659,7 @@ expresion VALOR_CASO():
 }
 
 caso DEFECTO():
-{ArrayList<simbolo> lista_simb;}
+{ArrayList<simbolo> lista_simb = new ArrayList<simbolo>();}
 {
     <TOKEN_DEFECTO> <DOSPUNTOS> lista_simb=LISTA_SENTENCIA_LOCAL()
 	{
@@ -612,7 +675,7 @@ simbolo PARA():
 {Token tv, tp, to;
 String vab;
 expresion exp1,exp2;
-ArrayList<simbolo> lista_simb;}
+ArrayList<simbolo> lista_simb= new ArrayList<simbolo>();}
 {
     tp=<TOKEN_PARA> <PAR_ABRE> <TOKEN_DECLARAR> tv=<VARIABLE> <TOKEN_INTEGER> <IGUAL> exp1=CONDICION()
     <PYCOMA> exp2=CONDICION() <PYCOMA> 
@@ -638,7 +701,7 @@ ArrayList<simbolo> lista_simb;}
 
 simbolo MIENTRAS():
 {
-	ArrayList<simbolo> lista_simb; 
+	ArrayList<simbolo> lista_simb= new ArrayList<simbolo>(); 
 	expresion exp; 
 	Token t;
 }
@@ -811,7 +874,7 @@ n1=<VARIABLE>(<PUNTO>n2=<ID>)? 	{
 									return new expresion(null, null, "VARIABLE", "VARIABLE", n1.beginLine, n1.beginColumn, llaVa);
 									
 								}
-|LLAMADA_METODO_OBJETO() 
+|exp=LLAMADA_METODO_OBJETO() {return exp;}
 |FUNCIONES_PROPIAS_DEL_LENGUAJE()
 |t=<ENTERO> {return new expresion(null, null, "ENTERO", "ENTERO", t.beginLine, t.beginColumn,t.image);}
 |t=<CADENA> {return new expresion(null, null, "CADENA", "CADENA", t.beginLine, t.beginColumn, t.image.substring(1, t.image.length()-1));}
@@ -832,8 +895,8 @@ expresion LLAMADA_METODO_OBJETO():
 {
     n1=<ID> ((<PAR_ABRE> (exp=LISTA_COND())? <PAR_CIERRA>	
 	{llaMe = new llamadaMetodo(n1.image,exp,n1.beginLine, n1.beginColumn);
-	return new expresion(null, null, "METODO", "METODO", n1.beginLine, n1.beginColumn, llaMe);}
-	) 
+	return new expresion(null, null, "LLAMADA_METODO", "LLAMADA_METODO", n1.beginLine, n1.beginColumn, llaMe);}
+	)  
 		
 	| (<PUNTO> n2=<ID>)
 	{llaTab = new llamadaTabla(n1.image, "", n2.image, n1.beginLine, n1.beginColumn);
@@ -857,11 +920,10 @@ ArrayList<expresion> lexp= new ArrayList<expresion>();
 expresion exp=null;
 }
 {
-     t=<ID> <PAR_ABRE> (lexp=LISTA_COND())? <PAR_CIERRA> <PYCOMA> 	{
+     t=<ID> <PAR_ABRE> (lexp=LISTA_COND())? <PAR_CIERRA> <PYCOMA>{
 																	llamadaMetodo llaMe = new llamadaMetodo(t.image,lexp,t.beginLine, t.beginColumn);
-																	return new simbolo(t.beginLine, t.beginColumn,"METODO","METODO","METODO", new ambito("METODO", new ArrayList<simbolo>()), llaMe);
+																	return new simbolo(t.beginLine, t.beginColumn,"LLAMADA_METODO","LLAMADA_METODO","LLAMADA_METODO", new ambito("LLAMADA_METODO", new ArrayList<simbolo>()), llaMe);
 																	}
     |t=<TOKEN_IMPRIMIR> <PAR_ABRE> (exp=CONDICION())? <PAR_CIERRA> <PYCOMA> {imprimir imp = new imprimir(exp,new ambito("IMPRIMIR", new ArrayList<simbolo>()));
-																			return new simbolo(t.beginLine, t.beginColumn,"IMPRIMIR","IMPRIMIR","IMPRIMIR", new ambito("IMPRIMIR", new ArrayList<simbolo>()), imp);
-																			} 
+																			return new simbolo(t.beginLine, t.beginColumn,"IMPRIMIR","IMPRIMIR","IMPRIMIR", new ambito("IMPRIMIR", new ArrayList<simbolo>()), imp);																			} 
 }

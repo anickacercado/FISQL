@@ -9,6 +9,7 @@ import archivos.maestro.master;
 import archivos.usuario.user;
 import errores.error;
 import estructuraUSQL.variable;
+import estructuraUSQL.tablaMetodo;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -30,6 +31,13 @@ public class memoria {
   public static String Insert_db_actual = "";
   public static String Insert_table_actual = "";
   
+  public static String use_db="";
+  public static String cod_client_sin_saltos="";
+  public static String cod_client="";
+  
+  public static int posIni=0;
+  public static int posFin=0;
+  
   //Fechas
   public static DateFormat formatDateTime = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
   public static DateFormat formatDate = new SimpleDateFormat("dd-MM-yyyy");
@@ -49,11 +57,20 @@ public class memoria {
         memoria.tablaErroresUSQL.add(e);
     }
     
-    //Tabla variable
+    //Tablas
     public static ArrayList<variable> tablaVariables= new ArrayList<variable>();
+    public static ArrayList<tablaMetodo> tablaMetodo= new ArrayList<tablaMetodo>();
     
     //Detener - Retorna
     public static boolean DETENER =false;
     public static boolean RETORNA =false;
   
+    public static boolean existsBD(String nombre){
+        for(int i=0; i<memoria.arbolMaestro.size(); i++){
+            if(memoria.arbolMaestro.get(i).getNombre().equals(nombre)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

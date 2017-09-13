@@ -59,7 +59,7 @@ public class para {
 
     public void ejecucion() {
 
-        tablaVariable tabla = new tablaVariable();
+        pilaVariable tabla = new pilaVariable();
         variable vab;
         declaracion decla = (declaracion) declara.valor;
         decla.ejecucion();

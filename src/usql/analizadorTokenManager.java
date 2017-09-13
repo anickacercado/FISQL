@@ -3,6 +3,7 @@
 package usql;
 import estructuraUSQL.*;
 import java.util.ArrayList;
+import archivos.memoria;
 
 /** Token Manager. */
 @SuppressWarnings("unused")public class analizadorTokenManager implements analizadorConstants {

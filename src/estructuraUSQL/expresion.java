@@ -212,7 +212,7 @@ public class expresion {
             } catch (ParseException ex) {
                 Logger.getLogger(expresion.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else if (tipo.equals("METODO")) {
+        } else if (tipo.equals("LLAMADA_METODO")) {
             this.llamadaMetodo = (llamadaMetodo) valor;
         } else if (tipo.equals("VARIABLE")) {
             this.llamadaVariable = (llamadaVariable) valor;
@@ -291,6 +291,18 @@ public class expresion {
                 }
             } else {
                 memoria.addError("ERROR SEMANTICO ", "NO EXISTE LA VARIABLE", fila, columna);
+            }
+        } else if (nodo.tipo.equals("LLAMADA_METODO")) {
+            pilaVariable tabla = new pilaVariable();
+            llamadaMetodo llame = this.llamadaMetodo;
+            expresion aux= llame.ejecucion();
+            
+            if (aux!=null) {
+                temp = aux; 
+                tabla.popVariable();
+                memoria.RETORNA = false;
+            } else {
+                memoria.addError("ERROR SEMANTICO ", "METODO NO RETORNA VALOR ", fila, columna);
             }
         }
         return temp;

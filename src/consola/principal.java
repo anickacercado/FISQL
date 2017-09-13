@@ -44,6 +44,7 @@ public class principal extends javax.swing.JFrame {
      */
     public principal() {
         initComponents();
+        socket();
     }
 
     /**
@@ -100,8 +101,7 @@ public class principal extends javax.swing.JFrame {
 
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        //socket();
-        pruebaUSQL();
+        //pruebaUSQL();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void socket() {
@@ -114,90 +114,90 @@ public class principal extends javax.swing.JFrame {
     }
 
     private void pruebaUSQL() {
-        analizador g = new analizador(new java.io.StringReader(this.jTextArea1.getText()));
-        try {
-            g.S().ejecucion();
-        } catch (usql.ParseException ex) {
-            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        analizador g = new analizador(new java.io.StringReader(this.jTextArea1.getText()));
+//        try {
+//            g.S().ejecucion();
+//        } catch (usql.ParseException ex) {
+//            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+//        }
     }
 
     private void pruebasBD() {
-        //BD en memoria
-        LecturaBD lb = new LecturaBD();
-        lb.leer();
-
-        cre.crearBD("Titus");
-
-        //Creación de Objeto, Procedimiento, Funcion
-        cre.insertParametro(lp, "campo1", "TEXT");
-        cre.insertParametro(lp, "campo2", "INTEGER");
-        cre.insertParametro(lp, "campo3", "DATE");
-        cre.CrearObjeto("anicka", "objeto1", lp);
-        cre.CrearProc("anicka", "procedimiento1", lp, "instrucciones");
-        cre.CrearFunc("anicka", "funcion1", lp, "instrucciones", "DATE");
-        cre.CrearObjeto("anicka", "objeto2", lp);
-        cre.CrearProc("anicka", "procedimiento2", lp, "instrucciones");
-        cre.CrearFunc("anicka", "Funcion2", lp, "instrucciones", "DATE");
-        cre.CrearObjeto("anicka", "objeto3", lp);
-        cre.CrearProc("anicka", "procedimiento3", lp, "instrucciones");
-        cre.CrearFunc("anicka", "Funcion3", lp, "instrucciones", "DATE");
-
-        //Creación de Tabla
-        cre.insertColumn(lt, "COLUMNA1", "INTEGER", "Y", "Y", "Y", "Y", "N");
-        cre.insertColumn(lt, "COLUMNA2", "INTEGER", "Y", "Y", "Y", "Y", "N");
-        cre.insertColumn(lt, "COLUMNA3", "INTEGER", "Y", "Y", "Y", "Y", "N");
-        cre.insertColumn(lt, "COLUMNA4", "INTEGER", "Y", "Y", "Y", "Y", "N");
-        cre.CrearTable("anicka", "TABLA1", lt);
-        cre.CrearTable("anicka", "TABLA2", lt);
-        cre.CrearTable("anicka", "TABLA3", lt);
-        cre.CrearTable("anicka", "TABLA4", lt);
-        cre.CrearTable("anicka", "TABLA5", lt);
-        cre.CrearTable("anicka", "TABLASANTI", lt);
-
-        cre.crearBD("Ecuador");
-        cre.crearBD("ElSalvador");
-
-        //Crear usuario
-        cre.createUsuario("anicka", "123", "user");
-        cre.createUsuario("santiago", "123", "user");
-        cre.crearBD("Santiaguito");
-        cre.crearBD("Roma");
-        cre.CrearTable("Santiaguito", "TABLA1", lt);
-        cre.CrearTable("Santiaguito", "TABLA2", lt);
-        cre.CrearTable("Santiaguito", "TABLA3", lt);
-        cre.CrearTable("Santiaguito", "TABLA4", lt);
-        cre.CrearTable("Santiaguito", "TABLA5", lt);
-        cre.crearBD("Italia");
-        cre.crearBD("USA");
-
-//        alt.alterColumn(lt2,"COLUMNAALTER1", "INTEGER", "Y", "Y", "Y", "Y", "N");
-//        alt.alterColumn(lt2,"COLUMNAALTER2", "OBJETO", "Y", "Y", "Y", "Y", "N");
-//        alt.alter_table_agregar("anicka","TABLA1",lt2);
-//        alt.alter_table_agregar("anicka","TABLA2",lt2);
-//        alt.alter_table_agregar("anicka","TABLA3",lt2);
-        alt.alterParametro(lpalter, "CBJETOALTER1", "INTEGER");
-        alt.alterParametro(lpalter, "CBJETOALTER3", "INTEGER");
-        alt.alterParametro(lpalter_quitar, "CBJETOALTER4", "");
-        alt.alterParametro(lpalter_quitar, "CBJETOALTER3", "");
-        alt.alterParametro(lpalter_quitar, "campo2", "");
-        alt.alter_objeto_agregar("anicka", "objeto2", lpalter);
-        alt.alter_objeto_agregar("anicka", "objeto1", lpalter);
-        alt.alter_objeto_quitar("anicka", "objeto1", lpalter_quitar);
-
-        alt.alterParametro(lpalter_quitar_columna, "COLUMNA3", "");
-        alt.alterParametro(lpalter_quitar_columna, "COLUMNA1", "");
-        alt.alter_table_quitar("anicka", "TABLA1", lpalter_quitar_columna);
-        alt.alterUsuario("anicka", "alter123");
-        alt.alterUsuario("santiago", "alter456");
-
-        eli.eliminarFunction("anicka", "Funcion2");
-        eli.eliminarObjeto("anicka", "objeto2");
-        eli.eliminarProcedure("anicka", "procedimiento2");
-        eli.eliminarUsuario("anicka");
-        eli.eliminarTable("anicka", "TABLA2");
-
-        ArrayList<master> arbolMaestro = memoria.arbolMaestro;
+//        //BD en memoria
+//        LecturaBD lb = new LecturaBD();
+//        lb.leer();
+//
+//        cre.crearBD("Titus");
+//
+//        //Creación de Objeto, Procedimiento, Funcion
+//        cre.insertParametro(lp, "campo1", "TEXT");
+//        cre.insertParametro(lp, "campo2", "INTEGER");
+//        cre.insertParametro(lp, "campo3", "DATE");
+//        cre.CrearObjeto("anicka", "objeto1", lp);
+//        cre.CrearProc("anicka", "procedimiento1", lp, "instrucciones");
+//        cre.CrearFunc("anicka", "funcion1", lp, "instrucciones", "DATE");
+//        cre.CrearObjeto("anicka", "objeto2", lp);
+//        cre.CrearProc("anicka", "procedimiento2", lp, "instrucciones");
+//        cre.CrearFunc("anicka", "Funcion2", lp, "instrucciones", "DATE");
+//        cre.CrearObjeto("anicka", "objeto3", lp);
+//        cre.CrearProc("anicka", "procedimiento3", lp, "instrucciones");
+//        cre.CrearFunc("anicka", "Funcion3", lp, "instrucciones", "DATE");
+//
+//        //Creación de Tabla
+//        cre.insertColumn(lt, "COLUMNA1", "INTEGER", "Y", "Y", "Y", "Y", "N");
+//        cre.insertColumn(lt, "COLUMNA2", "INTEGER", "Y", "Y", "Y", "Y", "N");
+//        cre.insertColumn(lt, "COLUMNA3", "INTEGER", "Y", "Y", "Y", "Y", "N");
+//        cre.insertColumn(lt, "COLUMNA4", "INTEGER", "Y", "Y", "Y", "Y", "N");
+//        cre.CrearTable("anicka", "TABLA1", lt);
+//        cre.CrearTable("anicka", "TABLA2", lt);
+//        cre.CrearTable("anicka", "TABLA3", lt);
+//        cre.CrearTable("anicka", "TABLA4", lt);
+//        cre.CrearTable("anicka", "TABLA5", lt);
+//        cre.CrearTable("anicka", "TABLASANTI", lt);
+//
+//        cre.crearBD("Ecuador");
+//        cre.crearBD("ElSalvador");
+//
+//        //Crear usuario
+//        cre.createUsuario("anicka", "123", "user");
+//        cre.createUsuario("santiago", "123", "user");
+//        cre.crearBD("Santiaguito");
+//        cre.crearBD("Roma");
+//        cre.CrearTable("Santiaguito", "TABLA1", lt);
+//        cre.CrearTable("Santiaguito", "TABLA2", lt);
+//        cre.CrearTable("Santiaguito", "TABLA3", lt);
+//        cre.CrearTable("Santiaguito", "TABLA4", lt);
+//        cre.CrearTable("Santiaguito", "TABLA5", lt);
+//        cre.crearBD("Italia");
+//        cre.crearBD("USA");
+//
+////        alt.alterColumn(lt2,"COLUMNAALTER1", "INTEGER", "Y", "Y", "Y", "Y", "N");
+////        alt.alterColumn(lt2,"COLUMNAALTER2", "OBJETO", "Y", "Y", "Y", "Y", "N");
+////        alt.alter_table_agregar("anicka","TABLA1",lt2);
+////        alt.alter_table_agregar("anicka","TABLA2",lt2);
+////        alt.alter_table_agregar("anicka","TABLA3",lt2);
+//        alt.alterParametro(lpalter, "CBJETOALTER1", "INTEGER");
+//        alt.alterParametro(lpalter, "CBJETOALTER3", "INTEGER");
+//        alt.alterParametro(lpalter_quitar, "CBJETOALTER4", "");
+//        alt.alterParametro(lpalter_quitar, "CBJETOALTER3", "");
+//        alt.alterParametro(lpalter_quitar, "campo2", "");
+//        alt.alter_objeto_agregar("anicka", "objeto2", lpalter);
+//        alt.alter_objeto_agregar("anicka", "objeto1", lpalter);
+//        alt.alter_objeto_quitar("anicka", "objeto1", lpalter_quitar);
+//
+//        alt.alterParametro(lpalter_quitar_columna, "COLUMNA3", "");
+//        alt.alterParametro(lpalter_quitar_columna, "COLUMNA1", "");
+//        alt.alter_table_quitar("anicka", "TABLA1", lpalter_quitar_columna);
+//        alt.alterUsuario("anicka", "alter123");
+//        alt.alterUsuario("santiago", "alter456");
+//
+//        eli.eliminarFunction("anicka", "Funcion2");
+//        eli.eliminarObjeto("anicka", "objeto2");
+//        eli.eliminarProcedure("anicka", "procedimiento2");
+//        eli.eliminarUsuario("anicka");
+//        eli.eliminarTable("anicka", "TABLA2");
+//
+//        ArrayList<master> arbolMaestro = memoria.arbolMaestro;
     }
 
     //Probar gramatica

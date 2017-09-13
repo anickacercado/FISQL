@@ -12,11 +12,11 @@ import java.util.ArrayList;
  *
  * @author anick
  */
-public class tablaVariable {
+public class pilaVariable {
 
     public ArrayList<variable> tabla;
 
-    public tablaVariable() {
+    public pilaVariable() {
         tabla = memoria.tablaVariables;
     }
 
@@ -30,6 +30,7 @@ public class tablaVariable {
 
     public variable retornaVariable(String nombre_vab) {
         variable vab = null;
+        nombre_vab=nombre_vab.toLowerCase();
         for (int i = tabla.size() - 1; i >= 0; i--) {
             variable vab2 = tabla.get(i);
             if (vab2.nombre.equals(nombre_vab) && vab2.rol.equals("VARIABLE")) {
@@ -48,6 +49,7 @@ public class tablaVariable {
     }
 
     public void popVariable(String nombre_vab) {
+        nombre_vab=nombre_vab.toLowerCase();
         for (int i = tabla.size() - 1; i >= 0; i--) {
             if (tabla.get(i).getNombre().equals(nombre_vab) && tabla.get(i).getRol().equals("VARIABLE")) {
                 tabla.remove(i);
@@ -56,14 +58,14 @@ public class tablaVariable {
         }
     }
 
-    public variable retornaFuncion(llamadaMetodo metodo) {
-        variable vab = null;
-        for (int i = tabla.size() - 1; i >= 0; i--) {
-            variable func = tabla.get(i);
-            if (func.nombre.equals(metodo.nombre) && func.rol.equals("METODO")) {
-                return func;
-            }
-        }
-        return vab;
-    }
+//    public variable retornaFuncion(llamadaMetodo metodo) {
+//        variable vab = null;
+//        for (int i = tabla.size() - 1; i >= 0; i--) {
+//            variable func = tabla.get(i);
+//            if (func.nombre.equals(metodo.nombre) && func.rol.equals("METODO")) {
+//                return func;
+//            }
+//        }
+//        return vab;
+//    }
 }

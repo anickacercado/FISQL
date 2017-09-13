@@ -21,7 +21,7 @@ public class ejecutarAmbito {
     }
 
     public void popAmbito() {
-        tablaVariable tU = new tablaVariable();
+        pilaVariable tU = new pilaVariable();
         for (int i = tablaSimbolo.size() - 1; i >= 0; i--) {
             if (tablaSimbolo.get(i).rol.equals("DECLARACION")) {
                 tU.popVariable(tablaSimbolo.get(i).nombre);
@@ -39,9 +39,14 @@ public class ejecutarAmbito {
 
     public void secuenciaEjecucion() {
         for (int i = 0; i < tablaSimbolo.size(); i++) {
-            if (memoria.DETENER == false) {
+            if (memoria.DETENER == false && memoria.RETORNA==false && tablaSimbolo.get(i) != null) {
                 switch (tablaSimbolo.get(i).tipo) {
                     case "RETORNAR":
+                        expresion exp= (expresion) tablaSimbolo.get(i).valor;
+                        exp = exp.resCondicion();
+                        variable vab = new variable("RETORNO", "RETORNO", "VARIABLE",tablaSimbolo.get(i).fila, tablaSimbolo.get(i).fila, tablaSimbolo.get(i).ambito , exp);
+                        memoria.tablaVariables.add(vab);
+                        memoria.RETORNA = true;
                         break;
                     case "INSERTAR":
                         break;
@@ -79,10 +84,25 @@ public class ejecutarAmbito {
                         memoria.DETENER = true;
                         break;
                     case "METODO":
+                        metodo met = (metodo) tablaSimbolo.get(i).valor;
+                        met.ejecucion();
                         break;
                     case "IMPRIMIR":
                         imprimir imp = (imprimir) tablaSimbolo.get(i).valor;
                         imp.ejecucion();
+                        break;
+                    case "USAR_BD":
+                        String nombre = (String) tablaSimbolo.get(i).valor;
+                        if (memoria.existsBD(nombre)) {
+                            memoria.use_db = nombre;
+                        } else {
+                            memoria.addError("ERROR BD ", "No existe BD " + nombre, tablaSimbolo.get(i).fila, tablaSimbolo.get(i).fila);
+                            memoria.use_db = "";
+                        }
+                        break;
+                    case "LLAMADA_METODO":
+                        llamadaMetodo llame = (llamadaMetodo) tablaSimbolo.get(i).valor;
+                        llame.ejecucion();
                         break;
                     default:
                         break;

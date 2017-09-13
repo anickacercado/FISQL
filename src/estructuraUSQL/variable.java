@@ -21,7 +21,7 @@ public class variable {
 
     public variable(String tipo, String nombre, String rol, int fila, int columna, ambito ambito, Object valor) {
         this.tipo = tipo;
-        this.nombre = nombre;
+        this.nombre = nombre.toLowerCase();
         this.rol = rol; //Metodo, variable, funcion
         this.ambito = ambito;
         this.valor = valor;

@@ -5,6 +5,7 @@
  */
 package estructuraUSQL;
 
+import archivos.memoria;
 import java.util.ArrayList;
 
 /**
@@ -17,9 +18,9 @@ public class llamadaMetodo {
     public ArrayList<expresion> parametros = new ArrayList<>();
     public int fila;
     public int columna;
-    
+
     public llamadaMetodo(String nombre, ArrayList<expresion> parametros, int fila, int columna) {
-        this.nombre = nombre;
+        this.nombre = nombre.toLowerCase();
         this.parametros = parametros;
         this.fila = fila;
         this.columna = columna;
@@ -59,5 +60,65 @@ public class llamadaMetodo {
 
     public void setParametros(ArrayList<expresion> parametros) {
         this.parametros = parametros;
+    }
+
+    public expresion ejecucion() {
+        pilaVariable tabla = new pilaVariable();
+        boolean existMetodo = false;
+        boolean existBase = false;
+        boolean tipoDato = false;
+        int contPop = 0;
+        for (int i = 0; i < memoria.tablaMetodo.size(); i++) {
+            if (memoria.tablaMetodo.get(i).nombre_bd.equals(memoria.use_db)) {
+                existBase = true;
+                metodo tempMetodo = memoria.tablaMetodo.get(i).returnMetodo(nombre);
+                if (tempMetodo != null) {
+                    existMetodo = true;
+                    if (tempMetodo.parametros.size() == parametros.size()) {
+                        for (int j = 0; j < tempMetodo.parametros.size(); j++) {
+                            expresion exp = parametros.get(j).resCondicion();
+                            
+                            declaracion tempDecla = (declaracion) tempMetodo.parametros.get(j).valor;
+                            if (tempDecla.tipo.equals(exp.tipo)) {
+                                tempDecla.valor = exp;
+                                tempDecla.ejecucion();
+                                contPop++;
+                            } else {
+                                tipoDato = true;
+                                memoria.addError("ERROR SEMANTICO ", "TIPO DE DATOS NO COINCIDEN DE METODO " + nombre, fila, columna);
+                            }
+                        }
+                        if (tipoDato == false) {
+                            ejecutarAmbito ea = new ejecutarAmbito(tempMetodo.ambito.tablaSimbolo);
+                            ea.secuenciaEjecucion();                            
+                                                        
+                            if(memoria.RETORNA==true){
+                                expresion aux= (expresion) tabla.retornaVariable("RETORNO").valor;
+                                tabla.popVariable();
+                                memoria.RETORNA=false;
+                                return aux;
+                            }
+                            
+                            ea.popAmbito();
+                        }
+                        for (int k = 0; k < contPop; k++) {
+                            tabla.popVariable();
+                        }
+                    } else {
+                        memoria.addError("ERROR SEMANTICO ", "NO COINCIDEN PARAMETROS DE METODO " + nombre, fila, columna);
+                    }
+                }
+            }
+        }
+        if (existBase == false) {
+            memoria.addError("ERROR BD ", "No existe BD " + memoria.use_db, fila, columna);
+        }
+        if (existMetodo == false) {
+            {
+                memoria.addError("ERROR BD ", "No existe Metodo " + nombre, fila, columna);
+            }
+        }
+        memoria.RETORNA=false;
+        return null;
     }
 }
