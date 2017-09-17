@@ -5,8 +5,6 @@
  */
 package socket;
 
-import archivos.memoria;
-import estructuraUSQL.analizar;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataOutputStream;
@@ -44,24 +42,16 @@ public class server extends Thread {
                 
                 String readLine = "";
                 String mensajeRecibido = "";
-                String mensajeFuncProc = "";
                 while ((readLine = entrada.readLine()) != null) {
                     if(readLine.equals("$*@n!ck@*$")) break;
                     mensajeRecibido+=readLine + "\n";
-                    mensajeFuncProc+=readLine + " ";
                     System.out.println(">>>> " + readLine);
                 }
-                
-                memoria.cod_client= mensajeRecibido;
-                memoria.cod_client_sin_saltos = mensajeFuncProc;
-
                 //Aqui mandar a analizar el mensaje recibido en la variable mensajeRecibido
-                analizar a = new analizar();
-                a.iniciarEjecucion();
-
+                
                 //Luego la respuesta del analisis enviarla de regreso
 
-                               /*Envía Mensaje*/
+                /*Envía Mensaje*/
                 String respuesta = "Se recibio el mensaje:\n"
                 + mensajeRecibido
                 + "\n----------------------------------- aqui termina\n";
