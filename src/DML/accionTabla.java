@@ -7,7 +7,6 @@ package DML;
 
 import archivos.db.database;
 import archivos.memoria;
-import archivos.metodo.function;
 import archivos.tabla.*;
 import java.util.ArrayList;
 
@@ -35,11 +34,9 @@ public class accionTabla {
                                     tempTable.get(k).addRegistro(ft);
                                 }
                             }
-                            tempData.get(j).setTable(tempTable);
                         }
                     }
                 }
-                memoria.arbolMaestro.get(i).setDatabase(tempData);
             }
         }
     }
@@ -62,11 +59,9 @@ public class accionTabla {
                                     tempTable.get(k).addRegistroObjeto(fto);
                                 }
                             }
-                            tempData.get(j).setTable(tempTable);
                         }
                     }
                 }
-                memoria.arbolMaestro.get(i).setDatabase(tempData);
             }
         }
     }

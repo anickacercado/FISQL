@@ -54,16 +54,22 @@ public class llamadaVariable {
     public void setColumna(int columna) {
         this.columna = columna;
     }
-    
-     public variable ejecucion() {
-        pilaVariable tUSQL = new pilaVariable();
-        variable vab = tUSQL.retornaVariable(nombre);
-        if (vab != null) {
-            {
-                if (vab.valor != null) {
-                    return vab;
+
+    public variable ejecucion() {
+        variable vab = null;
+        pilaVariable tabla = new pilaVariable();
+        if (objeto.equals("")) {
+            vab = tabla.retornaVariable(nombre);
+            if (vab != null) {
+                {
+                    if (vab.valor != null) {
+                        return vab;
+                    }
                 }
             }
+        } else {
+            vab = tabla.retornaObjeto(nombre, objeto);
+            return vab;
         }
         return vab;
     }

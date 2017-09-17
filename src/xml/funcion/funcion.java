@@ -83,7 +83,7 @@ nombre_fun= t.image;
       jj_consume_token(TOKEN_INTEGER_CIERRA);
 nombre_param= t.image;
                                                                 nombre_param= nombre_param.substring(1, nombre_param.length()-1);
-                                                                parametro p=new parametro(nombre_param,"INTEGER");
+                                                                parametro p=new parametro(nombre_param,"ENTERO");
                                                                 lp.add(p);
       break;
       }
@@ -93,7 +93,7 @@ nombre_param= t.image;
       jj_consume_token(TOKEN_TEXT_CIERRA);
 nombre_param= t.image;
                                                                 nombre_param= nombre_param.substring(1, nombre_param.length()-1);
-                                                                parametro p=new parametro(nombre_param,"TEXT");
+                                                                parametro p=new parametro(nombre_param,"CADENA");
                                                                 lp.add(p);
       break;
       }

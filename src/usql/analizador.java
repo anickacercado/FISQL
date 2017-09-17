@@ -4,10 +4,28 @@ package usql;
 import estructuraUSQL.*;
 import java.util.ArrayList;
 import archivos.memoria;
+import archivos.parametro;
+import archivos.db.propertyField;
+import DML.insert;
+import DDL.*;
+
 
 public class analizador implements analizadorConstants {
-
   private boolean isMetodo=false;
+
+    private String nulo ="N";
+    private String no_nulo="N";
+    private String autoincrementable="N";
+    private String llave_primaria="N";
+    private String llave_foranea="N";
+
+    public void limpiar(){
+      nulo="N";
+      no_nulo="N";
+      autoincrementable="N";
+      llave_primaria="N";
+      llave_foranea="N";
+    }
 
   public static void main(String args[]) throws ParseException {
     analizador parser = new analizador(System.in);
@@ -305,42 +323,54 @@ simbolo rsim;
     throw new Error("Missing return statement in function");
   }
 
-  final public simbolo CREAR_BD() throws ParseException {
-    jj_consume_token(TOKEN_BASE_DATOS);
-    jj_consume_token(ID);
+  final public simbolo CREAR_BD() throws ParseException {Token nombre, t;
+    t = jj_consume_token(TOKEN_BASE_DATOS);
+    nombre = jj_consume_token(ID);
     jj_consume_token(PYCOMA);
-isMetodo=false;{if ("" != null) return null;}
+EjecucionCreate ec = new EjecucionCreate("CREARBD",nombre.image,"",null,new ambito("CREAR", new ArrayList<simbolo>()));
+    {if ("" != null) return new simbolo( t.beginLine, t.beginColumn,"CREAR","CREAR", "CREAR", new ambito("CREAR", new ArrayList<simbolo>()), ec);}
     throw new Error("Missing return statement in function");
   }
 
-  final public simbolo CREAR_TABLA() throws ParseException {
-    jj_consume_token(TOKEN_TABLA);
-    jj_consume_token(ID);
+  final public simbolo CREAR_TABLA() throws ParseException {Token nombre, t;
+ArrayList<propertyField> lista_pf = new ArrayList<propertyField>();
+    t = jj_consume_token(TOKEN_TABLA);
+    nombre = jj_consume_token(ID);
     jj_consume_token(PAR_ABRE);
-    LISTA_PARAMETRO_TABLA();
+    lista_pf = LISTA_PARAMETRO_TABLA();
     jj_consume_token(PAR_CIERRA);
     jj_consume_token(PYCOMA);
-isMetodo=false;{if ("" != null) return null;}
+EjecucionCreate ec = new EjecucionCreate("CREARTABLA","",nombre.image,lista_pf,new ambito("CREAR", new ArrayList<simbolo>()));
+    {if ("" != null) return new simbolo( t.beginLine, t.beginColumn,"CREAR","CREAR", "CREAR", new ambito("CREAR", new ArrayList<simbolo>()), ec);}
     throw new Error("Missing return statement in function");
   }
 
-  final public void LISTA_PARAMETRO_TABLA() throws ParseException {
-    PARAMETRO_TABLA();
+  final public ArrayList<propertyField> LISTA_PARAMETRO_TABLA() throws ParseException {ArrayList<propertyField> retorna_pf = new ArrayList<propertyField>();
+ArrayList<propertyField> lista_pf = new ArrayList<propertyField>();
+propertyField pf;
+    pf = PARAMETRO_TABLA();
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case COMA:{
       jj_consume_token(COMA);
-      LISTA_PARAMETRO_TABLA();
+      lista_pf = LISTA_PARAMETRO_TABLA();
       break;
       }
     default:
       jj_la1[5] = jj_gen;
       ;
     }
+retorna_pf.add(pf);
+        for(int i=0; i < lista_pf.size(); i++){
+                retorna_pf.add(lista_pf.get(i));
+        }
+        {if ("" != null) return retorna_pf;}
+    throw new Error("Missing return statement in function");
   }
 
-  final public void PARAMETRO_TABLA() throws ParseException {
-    TIPO_DATO();
-    jj_consume_token(ID);
+  final public propertyField PARAMETRO_TABLA() throws ParseException {String tipoDato;
+Token nombre;
+    tipoDato = TIPO_DATO();
+    nombre = jj_consume_token(ID);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case TOKEN_NULO:
     case TOKEN_NO_NULO:
@@ -354,6 +384,10 @@ isMetodo=false;{if ("" != null) return null;}
       jj_la1[6] = jj_gen;
       ;
     }
+propertyField pf = new propertyField(nombre.image, tipoDato, nulo, no_nulo, autoincrementable, llave_primaria, llave_foranea);
+    limpiar();
+    {if ("" != null) return pf;}
+    throw new Error("Missing return statement in function");
   }
 
   final public void LISTA_COMPLEMENTO_PARAMETRO_TABLA() throws ParseException {
@@ -373,27 +407,32 @@ isMetodo=false;{if ("" != null) return null;}
     }
   }
 
-  final public void COMPLEMENTO_PARAMETRO_TABLA() throws ParseException {
+  final public void COMPLEMENTO_PARAMETRO_TABLA() throws ParseException {Token t;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case TOKEN_NULO:{
       jj_consume_token(TOKEN_NULO);
+nulo="Y";
       break;
       }
     case TOKEN_NO_NULO:{
       jj_consume_token(TOKEN_NO_NULO);
+no_nulo="Y";
       break;
       }
     case TOKEN_AUTOINCREMETABLE:{
       jj_consume_token(TOKEN_AUTOINCREMETABLE);
+autoincrementable="Y";
       break;
       }
     case TOKEN_LLAVE_PRIMARIA:{
       jj_consume_token(TOKEN_LLAVE_PRIMARIA);
+llave_primaria="Y";
       break;
       }
     case TOKEN_LLAVE_FORANEA:{
       jj_consume_token(TOKEN_LLAVE_FORANEA);
-      jj_consume_token(ID);
+      t = jj_consume_token(ID);
+llave_foranea=t.image;
       break;
       }
     default:
@@ -403,7 +442,7 @@ isMetodo=false;{if ("" != null) return null;}
     }
   }
 
-  final public String TIPO_DATO() throws ParseException {
+  final public String TIPO_DATO() throws ParseException {Token t; String ide="";
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case TOKEN_TEXT:{
       jj_consume_token(TOKEN_TEXT);
@@ -436,8 +475,9 @@ isMetodo=false;{if ("" != null) return null;}
       break;
       }
     case ID:{
-      jj_consume_token(ID);
-{if ("" != null) return "OBJETO";}
+      t = jj_consume_token(ID);
+ide=t.image;
+             {if ("" != null) return ide;}
       break;
       }
     default:
@@ -448,30 +488,43 @@ isMetodo=false;{if ("" != null) return null;}
     throw new Error("Missing return statement in function");
   }
 
-  final public simbolo CREAR_OBJETO() throws ParseException {
-    jj_consume_token(TOKEN_OBJETO);
-    jj_consume_token(ID);
+  final public simbolo CREAR_OBJETO() throws ParseException {Token nombre,t;
+    ArrayList<parametro> para = new ArrayList<parametro>();
+    t = jj_consume_token(TOKEN_OBJETO);
+    nombre = jj_consume_token(ID);
     jj_consume_token(PAR_ABRE);
-    LISTA_PARAMETRO();
+    para = LISTA_PARAMETRO();
     jj_consume_token(PAR_CIERRA);
     jj_consume_token(PYCOMA);
-isMetodo=false;{if ("" != null) return null;}
+isMetodo=false;
+        EjecucionCreate ec = new EjecucionCreate("CREAROBJETO","",nombre.image,para,new ambito("CREAR", new ArrayList<simbolo>()));
+        {if ("" != null) return new simbolo( t.beginLine, t.beginColumn,"CREAR","CREAR", "CREAR", new ambito("CREAR", new ArrayList<simbolo>()), ec);}
     throw new Error("Missing return statement in function");
   }
 
-  final public void LISTA_PARAMETRO() throws ParseException {
-    TIPO_DATO();
-    jj_consume_token(ID);
+  final public ArrayList<parametro> LISTA_PARAMETRO() throws ParseException {ArrayList<parametro> para = new ArrayList<parametro>();
+ArrayList<parametro> lista_para = new ArrayList<parametro>();
+Token nombre;
+String tipoDato="";
+    tipoDato = TIPO_DATO();
+    nombre = jj_consume_token(ID);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case COMA:{
       jj_consume_token(COMA);
-      LISTA_PARAMETRO();
+      lista_para = LISTA_PARAMETRO();
       break;
       }
     default:
       jj_la1[10] = jj_gen;
       ;
     }
+parametro p= new parametro(nombre.image,tipoDato);
+        para.add(p);
+        for(int i=0; i < lista_para.size(); i++){
+                para.add(lista_para.get(i));
+        }
+        {if ("" != null) return para;}
+    throw new Error("Missing return statement in function");
   }
 
   final public simbolo CREAR_FUNCION() throws ParseException {ArrayList<simbolo> parametros= new ArrayList<simbolo>();
@@ -580,15 +633,19 @@ posIni= t.beginColumn - 7;
     throw new Error("Missing return statement in function");
   }
 
-  final public simbolo CREAR_USUARIO() throws ParseException {
-    jj_consume_token(TOKEN_USUARIO);
-    jj_consume_token(ID);
+  final public simbolo CREAR_USUARIO() throws ParseException {Token usuario,contra,t;
+String con="";
+    t = jj_consume_token(TOKEN_USUARIO);
+    usuario = jj_consume_token(ID);
     jj_consume_token(TOKEN_COLOCAR);
     jj_consume_token(TOKEN_PASSWORD);
     jj_consume_token(IGUAL);
-    jj_consume_token(CADENA);
+    contra = jj_consume_token(CADENA);
     jj_consume_token(PYCOMA);
-{if ("" != null) return null;}
+con= contra.image;
+      con= con.substring(1, con.length()-1);
+      EjecucionCreate ec = new EjecucionCreate("CREARUSUARIO",usuario.image,con,null,new ambito("CREAR", new ArrayList<simbolo>()));
+      {if ("" != null) return new simbolo( t.beginLine, t.beginColumn,"CREAR","CREAR", "CREAR", new ambito("CREAR", new ArrayList<simbolo>()), ec);}
     throw new Error("Missing return statement in function");
   }
 
@@ -631,19 +688,19 @@ cond.add(exp);
     throw new Error("Missing return statement in function");
   }
 
-  final public simbolo ALTERAR() throws ParseException {
+  final public simbolo ALTERAR() throws ParseException {simbolo rsim;
     jj_consume_token(TOKEN_ALTERAR);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case TOKEN_TABLA:{
-      ALTERAR_TABLA();
+      rsim = ALTERAR_TABLA();
       break;
       }
     case TOKEN_OBJETO:{
-      ALTERAR_OBJETO();
+      rsim = ALTERAR_OBJETO();
       break;
       }
     case TOKEN_USUARIO:{
-      ALTERAR_USUARIO();
+      rsim = ALTERAR_USUARIO();
       break;
       }
     default:
@@ -651,38 +708,60 @@ cond.add(exp);
       jj_consume_token(-1);
       throw new ParseException();
     }
-{if ("" != null) return null;}
+{if ("" != null) return rsim;}
     throw new Error("Missing return statement in function");
   }
 
-  final public void LISTA_ID() throws ParseException {
-    jj_consume_token(ID);
+  final public ArrayList<String> LISTA_ID() throws ParseException {Token t;
+ArrayList<String> id = new ArrayList<String>();
+ArrayList<String> lista_id = new ArrayList<String>();
+    t = jj_consume_token(ID);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case COMA:{
       jj_consume_token(COMA);
-      LISTA_ID();
+      lista_id = LISTA_ID();
       break;
       }
     default:
       jj_la1[16] = jj_gen;
       ;
     }
+id.add(t.image);
+        for(int i=0; i < lista_id.size(); i++){
+                id.add(lista_id.get(i));
+        }
+        {if ("" != null) return id;}
+    throw new Error("Missing return statement in function");
   }
 
-  final public void ALTERAR_TABLA() throws ParseException {
-    jj_consume_token(TOKEN_TABLA);
-    jj_consume_token(ID);
+  final public simbolo ALTERAR_TABLA() throws ParseException {simbolo simb;
+Token nombre, t;
+ArrayList<propertyField> lista_pf = new ArrayList<propertyField>();
+ArrayList<String> lista_id = new ArrayList<String>();
+ArrayList<parametro> lista_para = new ArrayList<parametro>();
+    t = jj_consume_token(TOKEN_TABLA);
+    nombre = jj_consume_token(ID);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case TOKEN_AGREGAR:{
       jj_consume_token(TOKEN_AGREGAR);
       jj_consume_token(PAR_ABRE);
-      LISTA_PARAMETRO_TABLA();
+      lista_pf = LISTA_PARAMETRO_TABLA();
       jj_consume_token(PAR_CIERRA);
+ambito ambito = new ambito("ALTER", new ArrayList<simbolo>());
+                alter alt = new alter("ALTER_TABLE_AGREGAR",nombre.image,"",lista_pf,ambito);
+        simb= new simbolo( t.beginLine, t.beginColumn,"ALTER","ALTER", "ALTER", alt.ambito, alt);
       break;
       }
     case TOKEN_QUITAR:{
       jj_consume_token(TOKEN_QUITAR);
-      LISTA_ID();
+      lista_id = LISTA_ID();
+for(int i=0; i<lista_id.size(); i++){
+            parametro p= new parametro(lista_id.get(i),"");
+            lista_para.add(p);
+        }
+                ambito ambito = new ambito("ALTER", new ArrayList<simbolo>());
+        alter alt = new alter("ALTER_TABLE_QUITAR",nombre.image,"",lista_para,ambito);
+        simb= new simbolo( t.beginLine, t.beginColumn,"ALTER","ALTER", "ALTER", alt.ambito, alt);
       break;
       }
     default:
@@ -691,22 +770,38 @@ cond.add(exp);
       throw new ParseException();
     }
     jj_consume_token(PYCOMA);
+{if ("" != null) return simb;}
+    throw new Error("Missing return statement in function");
   }
 
-  final public void ALTERAR_OBJETO() throws ParseException {
-    jj_consume_token(TOKEN_OBJETO);
-    jj_consume_token(ID);
+  final public simbolo ALTERAR_OBJETO() throws ParseException {simbolo simb;
+Token nombre, t;
+ArrayList<propertyField> lista_pf = new ArrayList<propertyField>();
+ArrayList<String> lista_id = new ArrayList<String>();
+ArrayList<parametro> lista_para = new ArrayList<parametro>();
+    t = jj_consume_token(TOKEN_OBJETO);
+    nombre = jj_consume_token(ID);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case TOKEN_AGREGAR:{
       jj_consume_token(TOKEN_AGREGAR);
       jj_consume_token(PAR_ABRE);
-      LISTA_PARAMETRO();
+      lista_para = LISTA_PARAMETRO();
       jj_consume_token(PAR_CIERRA);
+ambito ambito = new ambito("ALTER", new ArrayList<simbolo>());
+        alter alt = new alter("ALTER_OBJETO_AGREGAR",nombre.image,"",lista_para,ambito);
+        simb= new simbolo( t.beginLine, t.beginColumn,"ALTER","ALTER", "ALTER", alt.ambito, alt);
       break;
       }
     case TOKEN_QUITAR:{
       jj_consume_token(TOKEN_QUITAR);
-      LISTA_ID();
+      lista_id = LISTA_ID();
+for(int i=0; i<lista_id.size(); i++){
+            parametro p= new parametro(lista_id.get(i),"");
+            lista_para.add(p);
+        }
+                ambito ambito = new ambito("ALTER", new ArrayList<simbolo>());
+        alter alt = new alter("ALTER_OBJETO_QUITAR",nombre.image,"",lista_para,ambito);
+        simb= new simbolo( t.beginLine, t.beginColumn,"ALTER","ALTER", "ALTER", alt.ambito, alt);
       break;
       }
     default:
@@ -715,35 +810,48 @@ cond.add(exp);
       throw new ParseException();
     }
     jj_consume_token(PYCOMA);
+{if ("" != null) return simb;}
+    throw new Error("Missing return statement in function");
   }
 
-  final public void ALTERAR_USUARIO() throws ParseException {
-    jj_consume_token(TOKEN_USUARIO);
-    jj_consume_token(ID);
+  final public simbolo ALTERAR_USUARIO() throws ParseException {Token t,usr,contra;
+String pass;
+    t = jj_consume_token(TOKEN_USUARIO);
+    usr = jj_consume_token(ID);
     jj_consume_token(TOKEN_CAMBIAR);
     jj_consume_token(TOKEN_PASSWORD);
     jj_consume_token(IGUAL);
-    jj_consume_token(CADENA);
+    contra = jj_consume_token(CADENA);
     jj_consume_token(PYCOMA);
+pass= contra.image;
+     pass= pass.substring(1, pass.length()-1);
+         ambito ambito = new ambito("ALTER", new ArrayList<simbolo>());
+     alter alt = new alter("ALTER_USUARIO",usr.image,pass,null,ambito);
+     {if ("" != null) return new simbolo( t.beginLine, t.beginColumn,"ALTER","ALTER", "ALTER", alt.ambito, alt);}
+    throw new Error("Missing return statement in function");
   }
 
-  final public simbolo ELIMINAR() throws ParseException {
-    jj_consume_token(TOKEN_ELIMINAR);
+  final public simbolo ELIMINAR() throws ParseException {String tipo=""; Token nombre,t;
+    t = jj_consume_token(TOKEN_ELIMINAR);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case TOKEN_TABLA:{
       jj_consume_token(TOKEN_TABLA);
+tipo="TABLE";
       break;
       }
     case TOKEN_BASE_DATOS:{
       jj_consume_token(TOKEN_BASE_DATOS);
+tipo="BD";
       break;
       }
     case TOKEN_OBJETO:{
       jj_consume_token(TOKEN_OBJETO);
+tipo="OBJECT";
       break;
       }
     case TOKEN_USUARIO:{
       jj_consume_token(TOKEN_USUARIO);
+tipo="USER";
       break;
       }
     default:
@@ -751,20 +859,24 @@ cond.add(exp);
       jj_consume_token(-1);
       throw new ParseException();
     }
-    jj_consume_token(ID);
+    nombre = jj_consume_token(ID);
     jj_consume_token(PYCOMA);
-{if ("" != null) return null;}
+ambito ambito = new ambito("ELIMINAR", new ArrayList<simbolo>());
+            eliminar el = new eliminar(tipo,nombre.image,ambito);
+            {if ("" != null) return new simbolo( t.beginLine, t.beginColumn,"ELIMINAR","ELIMINAR", "ELIMINAR", el.ambito, el);}
     throw new Error("Missing return statement in function");
   }
 
-  final public simbolo INSERTAR() throws ParseException {
-    jj_consume_token(TOKEN_INSERTAR);
+  final public simbolo INSERTAR() throws ParseException {ArrayList<String> lista_id = null;
+ArrayList<expresion> lista_exp = null;
+Token t,l;
+    l = jj_consume_token(TOKEN_INSERTAR);
     jj_consume_token(TOKEN_TABLA);
-    jj_consume_token(ID);
+    t = jj_consume_token(ID);
     jj_consume_token(PAR_ABRE);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case ID:{
-      LISTA_ID();
+      lista_id = LISTA_ID();
       jj_consume_token(PAR_CIERRA);
       jj_consume_token(TOKEN_VALORES);
       jj_consume_token(PAR_ABRE);
@@ -774,10 +886,12 @@ cond.add(exp);
       jj_la1[20] = jj_gen;
       ;
     }
-    LISTA_COND();
+    lista_exp = LISTA_COND();
     jj_consume_token(PAR_CIERRA);
     jj_consume_token(PYCOMA);
-{if ("" != null) return null;}
+ambito ambito = new ambito("INSERT", new ArrayList<simbolo>());
+    insert ins= new insert(t.image, lista_id, lista_exp,ambito);
+    {if ("" != null) return new simbolo(l.beginLine, l.beginColumn,"INSERT", "INSERT","INSERT",ins.ambito,ins);}
     throw new Error("Missing return statement in function");
   }
 
@@ -826,15 +940,26 @@ cond.add(exp);
     throw new Error("Missing return statement in function");
   }
 
-  final public simbolo SELECCIONAR() throws ParseException {
-    jj_consume_token(TOKEN_SELECCIONAR);
+  final public simbolo SELECCIONAR() throws ParseException {ArrayList<llamadaTabla> lista_columna =new ArrayList<llamadaTabla>();
+    boolean todaColumna = false;
+    ArrayList<String> lista_tabla =new ArrayList<String>();
+    expresion  expresion=null;
+    boolean tieneOrdenar= false;
+    ArrayList<llamadaTabla> tabla_ordenar= new ArrayList<llamadaTabla>();
+    String tipo_ordenar="";
+    int fila=0;
+    int col=0;
+    ambito ambito=null;
+    Token t=null,tipo=null;
+    t = jj_consume_token(TOKEN_SELECCIONAR);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case ID:{
-      LISTA_ID();
+      lista_columna = LLAMADA_TABLA();
       break;
       }
     case POR:{
       jj_consume_token(POR);
+todaColumna=true;
       break;
       }
     default:
@@ -843,11 +968,11 @@ cond.add(exp);
       throw new ParseException();
     }
     jj_consume_token(TOKEN_DE);
-    LISTA_ID();
+    lista_tabla = LISTA_ID();
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case TOKEN_DONDE:{
       jj_consume_token(TOKEN_DONDE);
-      CONDICION();
+      expresion = CONDICION();
       break;
       }
     default:
@@ -857,14 +982,14 @@ cond.add(exp);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case TOKEN_ORDENAR:{
       jj_consume_token(TOKEN_ORDENAR);
-      jj_consume_token(ID);
+      tabla_ordenar = LLAMADA_TABLA();
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
       case TOKEN_ASC:{
-        jj_consume_token(TOKEN_ASC);
+        tipo = jj_consume_token(TOKEN_ASC);
         break;
         }
       case TOKEN_DESC:{
-        jj_consume_token(TOKEN_DESC);
+        tipo = jj_consume_token(TOKEN_DESC);
         break;
         }
       default:
@@ -872,13 +997,69 @@ cond.add(exp);
         jj_consume_token(-1);
         throw new ParseException();
       }
+tieneOrdenar=true;
       break;
       }
     default:
       jj_la1[26] = jj_gen;
       ;
     }
-{if ("" != null) return null;}
+ambito = new ambito("SELECT", new ArrayList<simbolo>());
+        if(tipo==null){tipo_ordenar="";}
+        else{tipo_ordenar=tipo.image;}
+        select selec = new select(lista_columna,todaColumna,lista_tabla,expresion,tieneOrdenar,tabla_ordenar,tipo_ordenar, t.beginLine, t.beginColumn, ambito);
+        {if ("" != null) return new simbolo( t.beginLine, t.beginColumn,"SELECT","SELECT", "SELECT", selec.ambito, selec);}
+    throw new Error("Missing return statement in function");
+  }
+
+  final public ArrayList<llamadaTabla> LLAMADA_TABLA() throws ParseException {Token n1=null, n2=null, n3=null;
+ llamadaTabla llaTab=null;
+ ArrayList<llamadaTabla> id = new ArrayList<llamadaTabla>();
+ ArrayList<llamadaTabla> lista_id = new ArrayList<llamadaTabla>();
+    n1 = jj_consume_token(ID);
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case PUNTO:{
+      jj_consume_token(PUNTO);
+      n2 = jj_consume_token(ID);
+      switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+      case PUNTO:{
+        jj_consume_token(PUNTO);
+        n3 = jj_consume_token(ID);
+        break;
+        }
+      default:
+        jj_la1[27] = jj_gen;
+        ;
+      }
+      break;
+      }
+    default:
+      jj_la1[28] = jj_gen;
+      ;
+    }
+    switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
+    case COMA:{
+      jj_consume_token(COMA);
+      lista_id = LLAMADA_TABLA();
+      break;
+      }
+    default:
+      jj_la1[29] = jj_gen;
+      ;
+    }
+if(n2==null && n3==null){
+        llaTab = new llamadaTabla("", n1.image, "", n1.beginLine, n1.beginColumn);}
+        else if(n2!=null && n3==null){
+        llaTab = new llamadaTabla(n1.image, n2.image, "" , n1.beginLine, n1.beginColumn);}
+        else if (n3!=null && n2!=null){
+        llaTab = new llamadaTabla(n1.image, n2.image, n3.image, n1.beginLine, n1.beginColumn);
+        }
+
+        id.add(llaTab);
+        for(int i=0; i < lista_id.size(); i++){
+                id.add(lista_id.get(i));
+        }
+        {if ("" != null) return id;}
     throw new Error("Missing return statement in function");
   }
 
@@ -897,7 +1078,7 @@ cond.add(exp);
       break;
       }
     default:
-      jj_la1[27] = jj_gen;
+      jj_la1[30] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -921,7 +1102,7 @@ cond.add(exp);
       break;
       }
     default:
-      jj_la1[28] = jj_gen;
+      jj_la1[31] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -953,7 +1134,7 @@ Token d;
         break;
         }
       default:
-        jj_la1[29] = jj_gen;
+        jj_la1[32] = jj_gen;
         ;
       }
 for(int i=0; i < decla.size(); i++){
@@ -967,13 +1148,13 @@ for(int i=0; i < decla.size(); i++){
       t = jj_consume_token(ID);
 for(int i=0; i < decla.size(); i++){
                                 decla.get(i).tipo=t.image;
-                                decla.get(i).valor=exp;
+                                decla.get(i).valor=null;
                                 simb.add(new simbolo(d.beginLine, d.beginColumn,"DECLARACION", "DECLARACION","DECLARACION",decla.get(i).ambito,decla.get(i)));
                                 }
       break;
       }
     default:
-      jj_la1[30] = jj_gen;
+      jj_la1[33] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -994,7 +1175,7 @@ String vab;
       break;
       }
     default:
-      jj_la1[31] = jj_gen;
+      jj_la1[34] = jj_gen;
       ;
     }
 vab= t.image;
@@ -1041,7 +1222,7 @@ vab= t.image;
       break;
       }
     default:
-      jj_la1[32] = jj_gen;
+      jj_la1[35] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1060,7 +1241,7 @@ vab= t.image;
       break;
       }
     default:
-      jj_la1[33] = jj_gen;
+      jj_la1[36] = jj_gen;
       ;
     }
     jj_consume_token(IGUAL);
@@ -1102,7 +1283,7 @@ Token t;
       break;
       }
     default:
-      jj_la1[34] = jj_gen;
+      jj_la1[37] = jj_gen;
       ;
     }
 ambito si = new ambito("SI",lsi);
@@ -1137,7 +1318,7 @@ caso def= null;
       break;
       }
     default:
-      jj_la1[35] = jj_gen;
+      jj_la1[38] = jj_gen;
       ;
     }
     jj_consume_token(LLAVE_CIERRA);
@@ -1172,7 +1353,7 @@ ArrayList<caso> lista_caso = new ArrayList<caso>();
       break;
       }
     default:
-      jj_la1[36] = jj_gen;
+      jj_la1[39] = jj_gen;
       ;
     }
 ambito ambito = new ambito("CASO", lista_simb);
@@ -1208,7 +1389,7 @@ ambito ambito = new ambito("CASO", lista_simb);
       break;
       }
     default:
-      jj_la1[37] = jj_gen;
+      jj_la1[40] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1251,7 +1432,7 @@ ArrayList<simbolo> lista_simb= new ArrayList<simbolo>();
       break;
       }
     default:
-      jj_la1[38] = jj_gen;
+      jj_la1[41] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1327,52 +1508,75 @@ ambito ambito = new ambito("MIENTRAS", lista_simb);
       break;
       }
     default:
-      jj_la1[39] = jj_gen;
+      jj_la1[42] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
   }
 
-  final public simbolo BACKUP() throws ParseException {
+  final public simbolo BACKUP() throws ParseException {Token bd, nombre;
+int op=0;
+simbolo simb=null;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case TOKEN_BACKUP_USQL:{
       jj_consume_token(TOKEN_BACKUP_USQL);
+op=1;
       break;
       }
     case TOKEN_BACKUP_COMPLETO:{
       jj_consume_token(TOKEN_BACKUP_COMPLETO);
+op=2;
       break;
       }
     default:
-      jj_la1[40] = jj_gen;
+      jj_la1[43] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
-    jj_consume_token(ID);
-    jj_consume_token(ID);
+    bd = jj_consume_token(ID);
+    nombre = jj_consume_token(ID);
     jj_consume_token(PYCOMA);
-{if ("" != null) return null;}
+if (op==1){
+            ambito ambito = new ambito("BACKUP", new ArrayList<simbolo>());
+            backup back = new backup("BACKUP_USQLDUMP",bd.image,nombre.image,ambito);
+            simb= new simbolo( bd.beginLine, bd.beginColumn,"BACKUP","BACKUP", "BACKUP", back.ambito, back);
+        }
+        else{simb=null;}
+        {if ("" != null) return simb;}
     throw new Error("Missing return statement in function");
   }
 
-  final public simbolo RESTAURAR() throws ParseException {
+  final public simbolo RESTAURAR() throws ParseException {Token bd;
+String path="";
+int op=0;
+simbolo simb=null;
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case TOKEN_RESTAURAR_USQL:{
       jj_consume_token(TOKEN_RESTAURAR_USQL);
+op=1;
       break;
       }
     case TOKEN_RESTAURAR_COMPLETO:{
       jj_consume_token(TOKEN_RESTAURAR_COMPLETO);
+op=2;
       break;
       }
     default:
-      jj_la1[41] = jj_gen;
+      jj_la1[44] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
-    jj_consume_token(CADENA);
+    bd = jj_consume_token(CADENA);
     jj_consume_token(PYCOMA);
-{if ("" != null) return null;}
+if (op==1){
+            path= bd.image;
+            path= path.substring(1, path.length()-1);
+            ambito ambito = new ambito("BACKUP", new ArrayList<simbolo>());
+            backup back = new backup("RESTAURAR_USQLDUMP","",path,ambito);
+            simb= new simbolo( bd.beginLine, bd.beginColumn,"BACKUP","BACKUP", "BACKUP", back.ambito, back);
+        }
+        else{simb= null;}
+        {if ("" != null) return simb;}
     throw new Error("Missing return statement in function");
   }
 
@@ -1387,7 +1591,7 @@ Token t;
         break;
         }
       default:
-        jj_la1[42] = jj_gen;
+        jj_la1[45] = jj_gen;
         break label_1;
       }
       t = jj_consume_token(OR);
@@ -1413,7 +1617,7 @@ Token t;
         break;
         }
       default:
-        jj_la1[43] = jj_gen;
+        jj_la1[46] = jj_gen;
         break label_2;
       }
       t = jj_consume_token(AND);
@@ -1436,7 +1640,7 @@ if(nodo == null){
       break;
       }
     default:
-      jj_la1[44] = jj_gen;
+      jj_la1[47] = jj_gen;
       ;
     }
     nododer = REL();
@@ -1461,7 +1665,7 @@ Token t;
         break;
         }
       default:
-        jj_la1[45] = jj_gen;
+        jj_la1[48] = jj_gen;
         break label_3;
       }
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -1490,7 +1694,7 @@ Token t;
         break;
         }
       default:
-        jj_la1[46] = jj_gen;
+        jj_la1[49] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -1517,7 +1721,7 @@ if(nodo == null){
         break;
         }
       default:
-        jj_la1[47] = jj_gen;
+        jj_la1[50] = jj_gen;
         break label_4;
       }
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -1530,7 +1734,7 @@ if(nodo == null){
         break;
         }
       default:
-        jj_la1[48] = jj_gen;
+        jj_la1[51] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -1557,7 +1761,7 @@ if(nodo == null){
         break;
         }
       default:
-        jj_la1[49] = jj_gen;
+        jj_la1[52] = jj_gen;
         break label_5;
       }
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
@@ -1570,7 +1774,7 @@ if(nodo == null){
         break;
         }
       default:
-        jj_la1[50] = jj_gen;
+        jj_la1[53] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -1593,7 +1797,7 @@ if(nodo == null){
       break;
       }
     default:
-      jj_la1[51] = jj_gen;
+      jj_la1[54] = jj_gen;
       ;
     }
     nododer = E();
@@ -1613,7 +1817,7 @@ if (t == null){ {if ("" != null) return nododer;}}
         break;
         }
       default:
-        jj_la1[52] = jj_gen;
+        jj_la1[55] = jj_gen;
         break label_6;
       }
       t = jj_consume_token(POTENCIA);
@@ -1642,7 +1846,7 @@ if(nodo == null){
         break;
         }
       default:
-        jj_la1[53] = jj_gen;
+        jj_la1[56] = jj_gen;
         ;
       }
 if (n2!=null){
@@ -1712,7 +1916,7 @@ if (n2!=null){
       break;
       }
     default:
-      jj_la1[54] = jj_gen;
+      jj_la1[57] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1750,7 +1954,7 @@ if (n2!=null){
           break;
           }
         default:
-          jj_la1[55] = jj_gen;
+          jj_la1[58] = jj_gen;
           ;
         }
         jj_consume_token(PAR_CIERRA);
@@ -1761,7 +1965,7 @@ llaMe = new llamadaMetodo(n1.image,exp,n1.beginLine, n1.beginColumn);
       case PUNTO:{
         jj_consume_token(PUNTO);
         n2 = jj_consume_token(ID);
-llaTab = new llamadaTabla(n1.image, "", n2.image, n1.beginLine, n1.beginColumn);
+llaTab = new llamadaTabla(n1.image, n2.image, "" , n1.beginLine, n1.beginColumn);
         {if ("" != null) return new expresion(null, null, "TABLA", "TABLA", n1.beginLine, n1.beginColumn, llaTab);}
         switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
         case PUNTO:{
@@ -1772,20 +1976,20 @@ llaTab = new llamadaTabla(n1.image, n2.image, n3.image, n1.beginLine, n1.beginCo
           break;
           }
         default:
-          jj_la1[56] = jj_gen;
+          jj_la1[59] = jj_gen;
           ;
         }
         break;
         }
       default:
-        jj_la1[57] = jj_gen;
+        jj_la1[60] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
       break;
       }
     default:
-      jj_la1[58] = jj_gen;
+      jj_la1[61] = jj_gen;
       ;
     }
 llaTab = new llamadaTabla("", n1.image, "", n1.beginLine, n1.beginColumn);
@@ -1820,7 +2024,7 @@ expresion exp=null;
         break;
         }
       default:
-        jj_la1[59] = jj_gen;
+        jj_la1[62] = jj_gen;
         ;
       }
       jj_consume_token(PAR_CIERRA);
@@ -1852,7 +2056,7 @@ llamadaMetodo llaMe = new llamadaMetodo(t.image,lexp,t.beginLine, t.beginColumn)
         break;
         }
       default:
-        jj_la1[60] = jj_gen;
+        jj_la1[63] = jj_gen;
         ;
       }
       jj_consume_token(PAR_CIERRA);
@@ -1862,7 +2066,7 @@ imprimir imp = new imprimir(exp,new ambito("IMPRIMIR", new ArrayList<simbolo>())
       break;
       }
     default:
-      jj_la1[61] = jj_gen;
+      jj_la1[64] = jj_gen;
       jj_consume_token(-1);
       throw new ParseException();
     }
@@ -1878,7 +2082,7 @@ imprimir imp = new imprimir(exp,new ambito("IMPRIMIR", new ArrayList<simbolo>())
   public Token jj_nt;
   private int jj_ntk;
   private int jj_gen;
-  final private int[] jj_la1 = new int[62];
+  final private int[] jj_la1 = new int[65];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static private int[] jj_la1_2;
@@ -1890,16 +2094,16 @@ imprimir imp = new imprimir(exp,new ambito("IMPRIMIR", new ArrayList<simbolo>())
       jj_la1_init_3();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x10000000,0x10000000,0x0,0x0,0x60000000,0x40,0x80000000,0x80000000,0x80000000,0x0,0x40,0x0,0x40,0x0,0x40,0x40000000,0x40,0x0,0x0,0x60000000,0x0,0x0,0x0,0x1000,0x0,0x0,0x0,0x1000,0x1000,0x100,0x0,0x40,0x0,0x200,0x0,0x0,0x0,0x0,0x18000,0x0,0x0,0x0,0x1000000,0x800000,0x2000000,0x7e0000,0x7e0000,0xc00,0xc00,0x3000,0x3000,0x800,0x4000,0x200,0x2,0x2000802,0x200,0x202,0x202,0x2000802,0x2000802,0x0,};
+      jj_la1_0 = new int[] {0x10000000,0x10000000,0x0,0x0,0x60000000,0x40,0x80000000,0x80000000,0x80000000,0x0,0x40,0x0,0x40,0x0,0x40,0x40000000,0x40,0x0,0x0,0x60000000,0x0,0x0,0x0,0x1000,0x0,0x0,0x0,0x200,0x200,0x40,0x1000,0x1000,0x100,0x0,0x40,0x0,0x200,0x0,0x0,0x0,0x0,0x18000,0x0,0x0,0x0,0x1000000,0x800000,0x2000000,0x7e0000,0x7e0000,0xc00,0xc00,0x3000,0x3000,0x800,0x4000,0x200,0x2,0x2000802,0x200,0x202,0x202,0x2000802,0x2000802,0x0,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x786b1800,0x786b1800,0x606a0080,0x606a0080,0x170,0x0,0xf,0xf,0xf,0x0,0x0,0x0,0x0,0x0,0x0,0x110,0x0,0x6000,0x6000,0x110,0x0,0x100000,0x100000,0x0,0x100000,0x6000000,0x1000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x80000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_1 = new int[] {0x786b1800,0x786b1800,0x606a0080,0x606a0080,0x170,0x0,0xf,0xf,0xf,0x0,0x0,0x0,0x0,0x0,0x0,0x110,0x0,0x6000,0x6000,0x110,0x0,0x100000,0x100000,0x0,0x100000,0x6000000,0x1000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x80000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
    private static void jj_la1_init_2() {
-      jj_la1_2 = new int[] {0xc003c59,0xc003c59,0xc000079,0xc000079,0x0,0x0,0x0,0x0,0x0,0x40fc000,0x0,0x40fc000,0x0,0x40fc000,0x0,0x0,0x0,0x0,0x0,0x0,0x4000000,0x0,0x0,0x4000000,0x0,0x0,0x0,0x4000000,0x4000000,0x0,0x40fc000,0x0,0xfc000,0x0,0x0,0x4,0x2,0x2c00000,0x0,0x380,0xc00,0x3000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x3ef00380,0x3ef00380,0x0,0x0,0x0,0x3ef00380,0x3ef00380,0x4000040,};
+      jj_la1_2 = new int[] {0xc003c59,0xc003c59,0xc000079,0xc000079,0x0,0x0,0x0,0x0,0x0,0x40fc000,0x0,0x40fc000,0x0,0x40fc000,0x0,0x0,0x0,0x0,0x0,0x0,0x4000000,0x0,0x0,0x4000000,0x0,0x0,0x0,0x0,0x0,0x0,0x4000000,0x4000000,0x0,0x40fc000,0x0,0xfc000,0x0,0x0,0x4,0x2,0x2c00000,0x0,0x380,0xc00,0x3000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x3ef00380,0x3ef00380,0x0,0x0,0x0,0x3ef00380,0x3ef00380,0x4000040,};
    }
    private static void jj_la1_init_3() {
-      jj_la1_3 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_3 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
 
   /** Constructor with InputStream. */
@@ -1913,7 +2117,7 @@ imprimir imp = new imprimir(exp,new ambito("IMPRIMIR", new ArrayList<simbolo>())
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 62; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 65; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -1927,7 +2131,7 @@ imprimir imp = new imprimir(exp,new ambito("IMPRIMIR", new ArrayList<simbolo>())
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 62; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 65; i++) jj_la1[i] = -1;
   }
 
   /** Constructor. */
@@ -1937,7 +2141,7 @@ imprimir imp = new imprimir(exp,new ambito("IMPRIMIR", new ArrayList<simbolo>())
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 62; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 65; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -1947,7 +2151,7 @@ imprimir imp = new imprimir(exp,new ambito("IMPRIMIR", new ArrayList<simbolo>())
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 62; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 65; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -1956,7 +2160,7 @@ imprimir imp = new imprimir(exp,new ambito("IMPRIMIR", new ArrayList<simbolo>())
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 62; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 65; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -1965,7 +2169,7 @@ imprimir imp = new imprimir(exp,new ambito("IMPRIMIR", new ArrayList<simbolo>())
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 62; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 65; i++) jj_la1[i] = -1;
   }
 
   private Token jj_consume_token(int kind) throws ParseException {
@@ -2021,7 +2225,7 @@ imprimir imp = new imprimir(exp,new ambito("IMPRIMIR", new ArrayList<simbolo>())
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 62; i++) {
+    for (int i = 0; i < 65; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {

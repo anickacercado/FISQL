@@ -9,10 +9,28 @@ package usql;
 import estructuraUSQL.*;
 import java.util.ArrayList;
 import archivos.memoria;
+import archivos.parametro;
+import archivos.db.propertyField;
+import DML.insert;
+import DDL.*;
+
 
 public class analizador {
-    
   private boolean isMetodo=false;
+
+    private String nulo ="N";
+    private String no_nulo="N";
+    private String autoincrementable="N";
+    private String llave_primaria="N";
+    private String llave_foranea="N";
+  
+    public void limpiar(){
+      nulo="N";
+      no_nulo="N";
+      autoincrementable="N";
+      llave_primaria="N";
+      llave_foranea="N";
+    }
 
   public static void main(String args[]) throws ParseException {
     analizador parser = new analizador(System.in);
@@ -230,29 +248,56 @@ simbolo rsim;}
 }
 
 simbolo CREAR_BD():
-{}
+{Token nombre, t;}
 {
-    <TOKEN_BASE_DATOS> <ID> <PYCOMA>
-    {isMetodo=false;return null;}
+    t=<TOKEN_BASE_DATOS> nombre=<ID> <PYCOMA>
+    {        
+    EjecucionCreate ec = new EjecucionCreate("CREARBD",nombre.image,"",null,new ambito("CREAR", new ArrayList<simbolo>()));
+    return new simbolo( t.beginLine, t.beginColumn,"CREAR","CREAR", "CREAR", new ambito("CREAR", new ArrayList<simbolo>()), ec);
+    }
 }
 
 simbolo CREAR_TABLA():
-{}
+{Token nombre, t;
+ArrayList<propertyField> lista_pf = new ArrayList<propertyField>();
+}
 {
-    <TOKEN_TABLA> <ID> <PAR_ABRE> LISTA_PARAMETRO_TABLA() <PAR_CIERRA> <PYCOMA>
-    {isMetodo=false;return null;}
+    t=<TOKEN_TABLA> nombre=<ID> <PAR_ABRE> lista_pf=LISTA_PARAMETRO_TABLA() <PAR_CIERRA> <PYCOMA>
+    {
+    EjecucionCreate ec = new EjecucionCreate("CREARTABLA","",nombre.image,lista_pf,new ambito("CREAR", new ArrayList<simbolo>()));
+    return new simbolo( t.beginLine, t.beginColumn,"CREAR","CREAR", "CREAR", new ambito("CREAR", new ArrayList<simbolo>()), ec);
+    }
 }
 
-void LISTA_PARAMETRO_TABLA():
-{}
+ArrayList<propertyField> LISTA_PARAMETRO_TABLA():
 {
-    PARAMETRO_TABLA() (<COMA> LISTA_PARAMETRO_TABLA())?
+ArrayList<propertyField> retorna_pf = new ArrayList<propertyField>();
+ArrayList<propertyField> lista_pf = new ArrayList<propertyField>();
+propertyField pf;
+}
+{
+    pf=PARAMETRO_TABLA() (<COMA> lista_pf=LISTA_PARAMETRO_TABLA())?
+    {
+        retorna_pf.add(pf);
+        for(int i=0; i < lista_pf.size(); i++){
+                retorna_pf.add(lista_pf.get(i));
+        }
+        return retorna_pf;
+   
+    }
 }
 
-void PARAMETRO_TABLA():
-{}
+propertyField PARAMETRO_TABLA():
+{String tipoDato;
+Token nombre;
+}
 {
-    TIPO_DATO() <ID> (LISTA_COMPLEMENTO_PARAMETRO_TABLA())?
+    tipoDato=TIPO_DATO() nombre=<ID> (LISTA_COMPLEMENTO_PARAMETRO_TABLA())?
+    {
+    propertyField pf = new propertyField(nombre.image, tipoDato, nulo, no_nulo, autoincrementable, llave_primaria, llave_foranea);
+    limpiar();
+    return pf;
+    }
 }
 
 void LISTA_COMPLEMENTO_PARAMETRO_TABLA():
@@ -262,18 +307,18 @@ COMPLEMENTO_PARAMETRO_TABLA() (LISTA_COMPLEMENTO_PARAMETRO_TABLA())?
 }
 
 void COMPLEMENTO_PARAMETRO_TABLA():
-{}
+{Token t;}
 {
-    <TOKEN_NULO>
-    |<TOKEN_NO_NULO>
-    |<TOKEN_AUTOINCREMETABLE>
-    |<TOKEN_LLAVE_PRIMARIA>
-    |<TOKEN_LLAVE_FORANEA> <ID>
+    <TOKEN_NULO>    {nulo="Y";}
+    |<TOKEN_NO_NULO>    {no_nulo="Y";}
+    |<TOKEN_AUTOINCREMETABLE>   {autoincrementable="Y";}
+    |<TOKEN_LLAVE_PRIMARIA> {llave_primaria="Y";}
+    |<TOKEN_LLAVE_FORANEA> t=<ID> {llave_foranea=t.image;}
 }
 
 
 String TIPO_DATO():
-{}
+{Token t; String ide="";}
 {
     <TOKEN_TEXT> {return "CADENA";}
     |<TOKEN_INTEGER> {return "ENTERO";}
@@ -281,20 +326,41 @@ String TIPO_DATO():
     |<TOKEN_BOOL> {return "BOOL";}
     |<TOKEN_DATE> {return "DATE";}
     |<TOKEN_DATETIME> {return "DATETIME";}
-    |<ID> {return "OBJETO";}
+    |t=<ID> {ide=t.image;
+             return ide;}
 }
 
 simbolo CREAR_OBJETO():
-{}
 {
-    <TOKEN_OBJETO> <ID> <PAR_ABRE> LISTA_PARAMETRO() <PAR_CIERRA> <PYCOMA>
-    {isMetodo=false;return null;}
+    Token nombre,t;
+    ArrayList<parametro> para = new ArrayList<parametro>();
+}
+{
+    t=<TOKEN_OBJETO> nombre=<ID> <PAR_ABRE> para=LISTA_PARAMETRO() <PAR_CIERRA> <PYCOMA>
+    {
+        isMetodo=false;
+        EjecucionCreate ec = new EjecucionCreate("CREAROBJETO","",nombre.image,para,new ambito("CREAR", new ArrayList<simbolo>()));
+        return new simbolo( t.beginLine, t.beginColumn,"CREAR","CREAR", "CREAR", new ambito("CREAR", new ArrayList<simbolo>()), ec);
+    }
 }
 
-void LISTA_PARAMETRO():
-{}
+ArrayList<parametro> LISTA_PARAMETRO():
 {
-    TIPO_DATO() <ID> (<COMA> LISTA_PARAMETRO())?
+ArrayList<parametro> para = new ArrayList<parametro>();
+ArrayList<parametro> lista_para = new ArrayList<parametro>();
+Token nombre;
+String tipoDato="";
+}
+{
+    tipoDato=TIPO_DATO() nombre=<ID> (<COMA> lista_para=LISTA_PARAMETRO())?
+    {
+        parametro p= new parametro(nombre.image,tipoDato);
+        para.add(p);
+        for(int i=0; i < lista_para.size(); i++){
+                para.add(lista_para.get(i));
+        }
+        return para;
+    }
 }
 
 simbolo CREAR_FUNCION():
@@ -365,10 +431,17 @@ simbolo CREAR_PROCEDIMIENTO():
 }
 
 simbolo CREAR_USUARIO():
-{}
+{Token usuario,contra,t;
+String con="";
+}
 {
-    <TOKEN_USUARIO> <ID> <TOKEN_COLOCAR> <TOKEN_PASSWORD> <IGUAL> <CADENA> <PYCOMA>
-    {return null;}
+    t=<TOKEN_USUARIO> usuario=<ID> <TOKEN_COLOCAR> <TOKEN_PASSWORD> <IGUAL> contra=<CADENA> <PYCOMA>
+    {
+      con= contra.image;
+      con= con.substring(1, con.length()-1);
+      EjecucionCreate ec = new EjecucionCreate("CREARUSUARIO",usuario.image,con,null,new ambito("CREAR", new ArrayList<simbolo>()));
+      return new simbolo( t.beginLine, t.beginColumn,"CREAR","CREAR", "CREAR", new ambito("CREAR", new ArrayList<simbolo>()), ec);
+    }
 }
 
 simbolo RETORNO():
@@ -406,50 +479,125 @@ simbolo USAR_BD():
 }
 
 simbolo ALTERAR():
-{}
+{simbolo rsim;}
 {
-    <TOKEN_ALTERAR> (ALTERAR_TABLA()|ALTERAR_OBJETO()|ALTERAR_USUARIO())
-	{return null;}
+    <TOKEN_ALTERAR> (rsim=ALTERAR_TABLA()|rsim=ALTERAR_OBJETO()|rsim=ALTERAR_USUARIO())
+	{return rsim;}
 }
 
-void LISTA_ID():
-{}
+ArrayList<String> LISTA_ID():
+{Token t;
+ArrayList<String> id = new ArrayList<String>();
+ArrayList<String> lista_id = new ArrayList<String>();
+}
 {
-    <ID> (<COMA> LISTA_ID())?
+    t=<ID> (<COMA> lista_id=LISTA_ID())?
+    {
+        id.add(t.image);
+        for(int i=0; i < lista_id.size(); i++){
+                id.add(lista_id.get(i));
+        }
+        return id;
+    }
 }
 
-void ALTERAR_TABLA():
-{}
+simbolo ALTERAR_TABLA():
 {
-    <TOKEN_TABLA> <ID> (<TOKEN_AGREGAR> <PAR_ABRE> LISTA_PARAMETRO_TABLA() <PAR_CIERRA>
-    |<TOKEN_QUITAR> LISTA_ID()) <PYCOMA>
+simbolo simb;
+Token nombre, t;
+ArrayList<propertyField> lista_pf = new ArrayList<propertyField>();
+ArrayList<String> lista_id = new ArrayList<String>();
+ArrayList<parametro> lista_para = new ArrayList<parametro>();
+}
+{
+    t=<TOKEN_TABLA> nombre=<ID> (<TOKEN_AGREGAR> <PAR_ABRE> lista_pf=LISTA_PARAMETRO_TABLA() <PAR_CIERRA>
+    
+	{   ambito ambito = new ambito("ALTER", new ArrayList<simbolo>());
+		alter alt = new alter("ALTER_TABLE_AGREGAR",nombre.image,"",lista_pf,ambito);
+        simb= new simbolo( t.beginLine, t.beginColumn,"ALTER","ALTER", "ALTER", alt.ambito, alt);}
+    
+	
+	|<TOKEN_QUITAR> lista_id=LISTA_ID()
+    
+	{ 
+        for(int i=0; i<lista_id.size(); i++){
+            parametro p= new parametro(lista_id.get(i),"");
+            lista_para.add(p);
+        }
+		ambito ambito = new ambito("ALTER", new ArrayList<simbolo>());
+        alter alt = new alter("ALTER_TABLE_QUITAR",nombre.image,"",lista_para,ambito);
+        simb= new simbolo( t.beginLine, t.beginColumn,"ALTER","ALTER", "ALTER", alt.ambito, alt);
+    }
+    
+	) <PYCOMA> {return simb;}
 }
 
-void ALTERAR_OBJETO():
-{}
+simbolo ALTERAR_OBJETO():
 {
-     <TOKEN_OBJETO> <ID> (<TOKEN_AGREGAR> <PAR_ABRE> LISTA_PARAMETRO() <PAR_CIERRA>
-    |<TOKEN_QUITAR> LISTA_ID()) <PYCOMA>
+simbolo simb;
+Token nombre, t;
+ArrayList<propertyField> lista_pf = new ArrayList<propertyField>();
+ArrayList<String> lista_id = new ArrayList<String>();
+ArrayList<parametro> lista_para = new ArrayList<parametro>();}
+{
+     t=<TOKEN_OBJETO> nombre=<ID> (<TOKEN_AGREGAR> <PAR_ABRE> lista_para=LISTA_PARAMETRO() <PAR_CIERRA>
+     {
+		ambito ambito = new ambito("ALTER", new ArrayList<simbolo>());
+        alter alt = new alter("ALTER_OBJETO_AGREGAR",nombre.image,"",lista_para,ambito);
+        simb= new simbolo( t.beginLine, t.beginColumn,"ALTER","ALTER", "ALTER", alt.ambito, alt);
+     }
+    |<TOKEN_QUITAR> lista_id=LISTA_ID()
+    {
+        for(int i=0; i<lista_id.size(); i++){
+            parametro p= new parametro(lista_id.get(i),"");
+            lista_para.add(p);
+        }
+		ambito ambito = new ambito("ALTER", new ArrayList<simbolo>());
+        alter alt = new alter("ALTER_OBJETO_QUITAR",nombre.image,"",lista_para,ambito);
+        simb= new simbolo( t.beginLine, t.beginColumn,"ALTER","ALTER", "ALTER", alt.ambito, alt);
+    }
+) <PYCOMA> {return simb;}
 }
 
-void ALTERAR_USUARIO():
-{}
+simbolo ALTERAR_USUARIO():
+{Token t,usr,contra;
+String pass;
+}
 {
-    <TOKEN_USUARIO> <ID> <TOKEN_CAMBIAR> <TOKEN_PASSWORD> <IGUAL> <CADENA> <PYCOMA>
+    t=<TOKEN_USUARIO> usr=<ID> <TOKEN_CAMBIAR> <TOKEN_PASSWORD> <IGUAL> contra=<CADENA> <PYCOMA>
+    {
+     pass= contra.image;
+     pass= pass.substring(1, pass.length()-1);
+	 ambito ambito = new ambito("ALTER", new ArrayList<simbolo>());
+     alter alt = new alter("ALTER_USUARIO",usr.image,pass,null,ambito);
+     return new simbolo( t.beginLine, t.beginColumn,"ALTER","ALTER", "ALTER", alt.ambito, alt);
+    }
 }
 
 simbolo ELIMINAR():
-{}
+{String tipo=""; Token nombre,t;}
 {
-    <TOKEN_ELIMINAR> (<TOKEN_TABLA> | <TOKEN_BASE_DATOS> | <TOKEN_OBJETO> | <TOKEN_USUARIO>) <ID> <PYCOMA>
-	{return null;}
+    t=<TOKEN_ELIMINAR> (<TOKEN_TABLA> {tipo="TABLE";} | <TOKEN_BASE_DATOS> {tipo="BD";}  | <TOKEN_OBJETO> {tipo="OBJECT";} | <TOKEN_USUARIO> {tipo="USER";}) nombre=<ID> <PYCOMA>
+		{
+			ambito ambito = new ambito("ELIMINAR", new ArrayList<simbolo>());
+            eliminar el = new eliminar(tipo,nombre.image,ambito);
+            return new simbolo( t.beginLine, t.beginColumn,"ELIMINAR","ELIMINAR", "ELIMINAR", el.ambito, el);
+        }
 }
 
 simbolo INSERTAR():
-{}
 {
-    <TOKEN_INSERTAR> <TOKEN_TABLA> <ID> <PAR_ABRE> (LISTA_ID() <PAR_CIERRA> <TOKEN_VALORES> <PAR_ABRE>)? LISTA_COND() <PAR_CIERRA> <PYCOMA>
-	{return null;}
+ArrayList<String> lista_id = null;
+ArrayList<expresion> lista_exp = null;
+Token t,l;
+}
+{
+    l=<TOKEN_INSERTAR> <TOKEN_TABLA> t=<ID> <PAR_ABRE> (lista_id=LISTA_ID() <PAR_CIERRA> <TOKEN_VALORES> <PAR_ABRE>)? lista_exp=LISTA_COND() <PAR_CIERRA> <PYCOMA>
+    {
+    ambito ambito = new ambito("INSERT", new ArrayList<simbolo>());
+    insert ins= new insert(t.image, lista_id, lista_exp,ambito);
+    return new simbolo(l.beginLine, l.beginColumn,"INSERT", "INSERT","INSERT",ins.ambito,ins);
+    }
 }
 
 simbolo  ACTUALIZAR():
@@ -467,10 +615,56 @@ simbolo BORRAR():
 }
 
 simbolo SELECCIONAR():
-{}
 {
-    <TOKEN_SELECCIONAR> (LISTA_ID() | <POR>) <TOKEN_DE> LISTA_ID() (<TOKEN_DONDE> CONDICION())? (<TOKEN_ORDENAR> <ID> (<TOKEN_ASC>|<TOKEN_DESC>))? 
-	{return null;}
+    ArrayList<llamadaTabla> lista_columna =new ArrayList<llamadaTabla>();
+    boolean todaColumna = false;
+    ArrayList<String> lista_tabla =new ArrayList<String>();
+    expresion  expresion=null;
+    boolean tieneOrdenar= false;
+    ArrayList<llamadaTabla> tabla_ordenar= new ArrayList<llamadaTabla>();
+    String tipo_ordenar="";
+    int fila=0;
+    int col=0;
+    ambito ambito=null;
+    Token t=null,tipo=null;
+}
+{
+        t=<TOKEN_SELECCIONAR> (lista_columna=LLAMADA_TABLA() | <POR> {todaColumna=true;})
+       <TOKEN_DE> lista_tabla=LISTA_ID() (<TOKEN_DONDE> expresion=CONDICION())? (<TOKEN_ORDENAR> tabla_ordenar=LLAMADA_TABLA() (tipo=<TOKEN_ASC>|tipo=<TOKEN_DESC>) {tieneOrdenar=true;})? 
+	
+        {
+        ambito = new ambito("SELECT", new ArrayList<simbolo>());
+        if(tipo==null){tipo_ordenar="";}
+        else{tipo_ordenar=tipo.image;}
+        select selec = new select(lista_columna,todaColumna,lista_tabla,expresion,tieneOrdenar,tabla_ordenar,tipo_ordenar, t.beginLine, t.beginColumn, ambito);
+        return new simbolo( t.beginLine, t.beginColumn,"SELECT","SELECT", "SELECT", selec.ambito, selec);
+        }
+}
+
+ArrayList<llamadaTabla> LLAMADA_TABLA():
+{Token n1=null, n2=null, n3=null;
+ llamadaTabla llaTab=null;
+ ArrayList<llamadaTabla> id = new ArrayList<llamadaTabla>();
+ ArrayList<llamadaTabla> lista_id = new ArrayList<llamadaTabla>();
+}
+{
+    n1=<ID> ((<PUNTO> n2=<ID>)(<PUNTO> n3=<ID>)?)? (<COMA> lista_id=LLAMADA_TABLA())?
+	{
+	if(n2==null && n3==null){
+	llaTab = new llamadaTabla("", n1.image, "", n1.beginLine, n1.beginColumn);}
+	else if(n2!=null && n3==null){
+	llaTab = new llamadaTabla(n1.image, n2.image, "" , n1.beginLine, n1.beginColumn);}
+	else if (n3!=null && n2!=null){
+	llaTab = new llamadaTabla(n1.image, n2.image, n3.image, n1.beginLine, n1.beginColumn);	
+	}	
+	
+	id.add(llaTab);
+        for(int i=0; i < lista_id.size(); i++){
+                id.add(lista_id.get(i));
+        }
+        return id;
+	
+	}
 }
 
 
@@ -508,11 +702,11 @@ Token d;
 		
 		)| t=<ID>
 			{
-			for(int i=0; i < decla.size(); i++){
+                                for(int i=0; i < decla.size(); i++){
 				decla.get(i).tipo=t.image;
-				decla.get(i).valor=exp;
+				decla.get(i).valor=null;
 				simb.add(new simbolo(d.beginLine, d.beginColumn,"DECLARACION", "DECLARACION","DECLARACION",decla.get(i).ambito,decla.get(i)));
-				}
+                                }
 			}	
 		) <PYCOMA>
 		{return simb;}
@@ -737,17 +931,43 @@ void FUNCIONES_PROPIAS_DEL_LENGUAJE():
 }
 
 simbolo BACKUP():
-{}
+{Token bd, nombre;
+int op=0;
+simbolo simb=null;
+}
 {
-    (<TOKEN_BACKUP_USQL> | <TOKEN_BACKUP_COMPLETO>) <ID> <ID> <PYCOMA>
-	{return null;}
+    (<TOKEN_BACKUP_USQL> {op=1;} | <TOKEN_BACKUP_COMPLETO> {op=2;}) bd=<ID> nombre=<ID> <PYCOMA>
+    {
+        if (op==1){
+            ambito ambito = new ambito("BACKUP", new ArrayList<simbolo>());
+            backup back = new backup("BACKUP_USQLDUMP",bd.image,nombre.image,ambito);
+            simb= new simbolo( bd.beginLine, bd.beginColumn,"BACKUP","BACKUP", "BACKUP", back.ambito, back);
+        }
+        else{simb=null;}
+        return simb;
+    }
 }
 
 simbolo RESTAURAR():
-{}
+{Token bd;
+String path="";
+int op=0;
+simbolo simb=null;
+}
 {
-    (<TOKEN_RESTAURAR_USQL> | <TOKEN_RESTAURAR_COMPLETO>) <CADENA> <PYCOMA>
-	{return null;}
+    (<TOKEN_RESTAURAR_USQL> {op=1;} | <TOKEN_RESTAURAR_COMPLETO>  {op=2;}) bd=<CADENA> <PYCOMA>
+        {
+        if (op==1){
+            path= bd.image;
+            path= path.substring(1, path.length()-1);
+            ambito ambito = new ambito("BACKUP", new ArrayList<simbolo>());
+            backup back = new backup("RESTAURAR_USQLDUMP","",path,ambito);
+            simb= new simbolo( bd.beginLine, bd.beginColumn,"BACKUP","BACKUP", "BACKUP", back.ambito, back);
+        }
+        else{simb= null;}
+        return simb;
+        }
+        
 }
 
 expresion CONDICION():
@@ -899,7 +1119,7 @@ expresion LLAMADA_METODO_OBJETO():
 	)  
 		
 	| (<PUNTO> n2=<ID>)
-	{llaTab = new llamadaTabla(n1.image, "", n2.image, n1.beginLine, n1.beginColumn);
+	{llaTab = new llamadaTabla(n1.image, n2.image, "" , n1.beginLine, n1.beginColumn);
 	return new expresion(null, null, "TABLA", "TABLA", n1.beginLine, n1.beginColumn, llaTab);}	
 
 	(<PUNTO> n3=<ID> 	

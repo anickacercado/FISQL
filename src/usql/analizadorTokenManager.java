@@ -4,6 +4,10 @@ package usql;
 import estructuraUSQL.*;
 import java.util.ArrayList;
 import archivos.memoria;
+import archivos.parametro;
+import archivos.db.propertyField;
+import DML.insert;
+import DDL.*;
 
 /** Token Manager. */
 @SuppressWarnings("unused")public class analizadorTokenManager implements analizadorConstants {

@@ -5,6 +5,7 @@
  */
 package archivos;
 
+import java.awt.Desktop;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -102,6 +103,15 @@ public class LecturaEscritura {
         File f = new File(path);
         f.mkdirs();
 
+    }
+
+    public void abrirArchivo(String archivo) {
+        try {
+            File objetofile = new File(archivo);
+            Desktop.getDesktop().open(objetofile);
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
     }
 
 }

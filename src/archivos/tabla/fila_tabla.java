@@ -10,8 +10,8 @@ package archivos.tabla;
  * @author anick
  */
 public class fila_tabla {
-    private int no_fila;
-    private String valor;
+    public int no_fila;
+    public String valor;
     
     public fila_tabla(int no_fila, String valor){
         this.no_fila = no_fila;

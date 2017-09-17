@@ -17,7 +17,7 @@ import archivos.tabla.fila_tabla_objeto;
 import archivos.tabla.table;
 
 public class db {
-  private String tipo,nombre,path,nombre_param;
+  private String tipo,nombre,path,contador,nombre_param;
   private String nulo, no_nulo, autoincrementable, llave_primaria, llave_foranea;
   ArrayList<table> lt = new ArrayList<table>();
   private ArrayList<database> ldb= new ArrayList<database>();
@@ -41,10 +41,10 @@ TOKEN:
   |<TOKEN_OBJECT_CIERRA: ("</object>")> {System.out.println(image);}
   |<TOKEN_ROWS_ABRE: ("<rows>")> {System.out.println(image);}
   |<TOKEN_ROWS_CIERRA: ("</rows>")> {System.out.println(image);}
-  |<TOKEN_TEXT_ABRE: ("<text>")> {System.out.println(image);}
-  |<TOKEN_TEXT_CIERRA: ("</text>")> {System.out.println(image);}
-  |<TOKEN_INTEGER_ABRE: ("<integer>")> {System.out.println(image);}
-  |<TOKEN_INTEGER_CIERRA: ("</integer>")> {System.out.println(image);}
+  |<TOKEN_TEXT_ABRE: ("<cadena>")> {System.out.println(image);}
+  |<TOKEN_TEXT_CIERRA: ("</cadena>")> {System.out.println(image);}
+  |<TOKEN_INTEGER_ABRE: ("<entero>")> {System.out.println(image);}
+  |<TOKEN_INTEGER_CIERRA: ("</entero>")> {System.out.println(image);}
   |<TOKEN_DOUBLE_ABRE: ("<double>")> {System.out.println(image);}
   |<TOKEN_DOUBLE_CIERRA: ("</double>")> {System.out.println(image);}
   |<TOKEN_BOOL_ABRE: ("<bool>")> {System.out.println(image);}
@@ -71,6 +71,8 @@ TOKEN:
   |<TOKEN_LLAVE_PRIMARIA_CIERRA: ("</llave_primaria>")> {System.out.println(image);}
   |<TOKEN_LLAVE_FORANEA_ABRE: ("<llave_foranea>")> {System.out.println(image);}
   |<TOKEN_LLAVE_FORANEA_CIERRA: ("</llave_foranea>")> {System.out.println(image);}
+  |<TOKEN_CONTADOR_ABRE: ("<contador>")> {System.out.println(image);}
+  |<TOKEN_CONTADOR_CIERRA: ("</contador>")> {System.out.println(image);}
   |<TOKEN_Y:("\""("Y")"\"")> {System.out.println(image);}
   |<TOKEN_N:("\""("N")"\"")> {System.out.println(image);}
 
@@ -114,7 +116,7 @@ void PROCEDURE():
      path= p.image;
      path= path.substring(1, path.length()-1);
      ArrayList<procedure> proc= new ArrayList<procedure>();
-     database data = new database("PROCEDURE",null,path,null,proc,null,null);
+     database data = new database("PROCEDURE",null,path,null,proc,null,null,0);
      ldb.add(data);
      }
 
@@ -130,7 +132,7 @@ void FUNCTION():
      path= p.image;
      path= path.substring(1, path.length()-1);
      ArrayList<function> func = new ArrayList<function>();
-     database data = new database("FUNCTION",null,path,func,null,null,null);
+     database data = new database("FUNCTION",null,path,func,null,null,null,0);
      ldb.add(data);
      }
 
@@ -146,17 +148,18 @@ void OBJECT():
      path= p.image;
      path= path.substring(1, path.length()-1);
      ArrayList<object> obj = new ArrayList<object>();
-     database data = new database("OBJECT",null,path,null,null,obj,null);
+     database data = new database("OBJECT",null,path,null,null,obj,null,0);
      ldb.add(data);
      }
 }
 
 void TABLE():
-{Token n,p;}
+{Token n,p,c;}
 {
      <TOKEN_TABLE_ABRE>
      <TOKEN_NOMBRE_ABRE> n=<CADENA> <TOKEN_NOMBRE_CIERRA>
      <TOKEN_PATH_ABRE> p=<CADENA> <TOKEN_PATH_CIERRA>
+     <TOKEN_CONTADOR_ABRE> c=<CADENA> <TOKEN_CONTADOR_CIERRA>
      <TOKEN_ROWS_ABRE> LISTA_TIPO() <TOKEN_ROWS_CIERRA>
      <TOKEN_TABLE_CIERRA>
     {
@@ -164,7 +167,10 @@ void TABLE():
         nombre= nombre.substring(1, nombre.length()-1);
         path= p.image;
         path= path.substring(1, path.length()-1);
-        database data = new database("TABLE",nombre,path,null,null,null,lt);
+        contador= c.image;
+        contador= contador.substring(1, contador.length()-1);
+        int cont= Integer.parseInt(contador);
+        database data = new database("TABLE",nombre,path,null,null,null,lt,cont);
         ldb.add(data);
         lt = new ArrayList<table>();
     }
@@ -200,7 +206,7 @@ void TIPO():
                                                                 nombre_param= t.image;
                                                                 nombre_param= nombre_param.substring(1, nombre_param.length()-1);
                                                                 ArrayList<fila_tabla> registro = new ArrayList<fila_tabla>();
-                                                                table ta= new table(nombre_param,"INTEGER",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea,registro,false,null);
+                                                                table ta= new table(nombre_param,"ENTERO",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea,registro,false,null);
                                                                 lt.add(ta);
                                                             }														
     |<TOKEN_TEXT_ABRE> t=<CADENA> <TOKEN_TEXT_CIERRA>
@@ -219,7 +225,7 @@ void TIPO():
                                                                 nombre_param= t.image;
                                                                 nombre_param= nombre_param.substring(1, nombre_param.length()-1);
                                                                 ArrayList<fila_tabla> registro = new ArrayList<fila_tabla>();
-                                                                table ta= new table(nombre_param,"TEXT",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea,registro,false,null);
+                                                                table ta= new table(nombre_param,"CADENA",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea,registro,false,null);
                                                                 lt.add(ta);                                                           
                                                             }
     |<TOKEN_DOUBLE_ABRE> t=<CADENA> <TOKEN_DOUBLE_CIERRA>

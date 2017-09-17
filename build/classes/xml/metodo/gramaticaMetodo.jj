@@ -33,10 +33,10 @@ TOKEN:
   |<TOKEN_PARAMS_CIERRA: ("</params>")> {System.out.println(image);}
   |<TOKEN_SRC_ABRE: ("<src>")> {System.out.println(image);}
   |<TOKEN_SRC_CIERRA: ("</src>")> {System.out.println(image);}
-  |<TOKEN_TEXT_ABRE: ("<text>")> {System.out.println(image);}
-  |<TOKEN_TEXT_CIERRA: ("</text>")> {System.out.println(image);}
-  |<TOKEN_INTEGER_ABRE: ("<integer>")> {System.out.println(image);}
-  |<TOKEN_INTEGER_CIERRA: ("</integer>")> {System.out.println(image);}
+  |<TOKEN_TEXT_ABRE: ("<cadena>")> {System.out.println(image);}
+  |<TOKEN_TEXT_CIERRA: ("</cadena>")> {System.out.println(image);}
+  |<TOKEN_INTEGER_ABRE: ("<entero>")> {System.out.println(image);}
+  |<TOKEN_INTEGER_CIERRA: ("</entero>")> {System.out.println(image);}
   |<TOKEN_DOUBLE_ABRE: ("<double>")> {System.out.println(image);}
   |<TOKEN_DOUBLE_CIERRA: ("</double>")> {System.out.println(image);}
   |<TOKEN_BOOL_ABRE: ("<bool>")> {System.out.println(image);}
@@ -103,13 +103,13 @@ void PARAMS():
    <TOKEN_INTEGER_ABRE> t=<CADENA> <TOKEN_INTEGER_CIERRA> {
                                                                 nombre_param= t.image;
                                                                 nombre_param= nombre_param.substring(1, nombre_param.length()-1);
-                                                                parametro p=new parametro(nombre_param,"INTEGER");
+                                                                parametro p=new parametro(nombre_param,"ENTERO");
                                                                 lp.add(p);
                                                             }
     |<TOKEN_TEXT_ABRE> t=<CADENA> <TOKEN_TEXT_CIERRA>       {
                                                                 nombre_param= t.image;
                                                                 nombre_param= nombre_param.substring(1, nombre_param.length()-1);
-                                                                parametro p=new parametro(nombre_param,"TEXT");
+                                                                parametro p=new parametro(nombre_param,"CADENA");
                                                                 lp.add(p);                                                            
                                                             }
     |<TOKEN_DOUBLE_ABRE> t=<CADENA> <TOKEN_DOUBLE_CIERRA>   {

@@ -17,8 +17,7 @@ public class asignacion {
     public ambito ambito;
     public expresion valor;
     public ambito padre;
-    
- 
+
     public asignacion(llamadaVariable retornaVariable, ambito ambito, expresion valor) {
         this.ambito = ambito;
         this.retornaVariable = retornaVariable;
@@ -57,8 +56,8 @@ public class asignacion {
     public void setValor(expresion valor) {
         this.valor = valor;
     }
-    
-        public void ejecucion() {
+
+    public void ejecucion() {
         variable vab;
         if (valor != null) {
             expresion exp = valor;

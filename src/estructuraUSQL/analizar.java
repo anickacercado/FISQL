@@ -25,10 +25,13 @@ public class analizar {
       cadena= cadena.replaceAll("\n", " ");
       cadena= cadena.replaceAll("\r", " ");
       cadena= cadena.replaceAll("\t", " ");
+      cadena= cadena.toLowerCase();
       return cadena;
     }
+    
     private void pasada1() {
-        analizador g = new analizador(new java.io.StringReader(replace(memoria.cod_client_sin_saltos)));
+        memoria.cod_client_sin_saltos=replace(memoria.cod_client_sin_saltos);
+        analizador g = new analizador(new java.io.StringReader(memoria.cod_client_sin_saltos));
         try {
             g.S().ejecucion();
         } catch (usql.ParseException ex) {

@@ -57,7 +57,7 @@ public class tablaMetodo {
     public metodo returnMetodo(String nombre_metodo) {
         for (int i = 0; i < lista_metodo.size(); i++) {
             metodo met = (metodo) lista_metodo.get(i).valor;
-            if (met.nombre.equals(nombre_metodo)) {
+            if (met.nombre.toLowerCase().equals(nombre_metodo)) {
                 return met;
             }
         }

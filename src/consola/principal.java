@@ -33,9 +33,9 @@ public class principal extends javax.swing.JFrame {
 
     ArrayList<table> lt = new ArrayList<table>();
     ArrayList<table> lt2 = new ArrayList<table>();
-    create cre = new create();
-    alter alt = new alter();
-    eliminar eli = new eliminar();
+    //create cre = new create();
+    //alter alt = new alter();
+    //eliminar eli = new eliminar();
 
     Thread server = new Thread(new server(), "server");
 
@@ -114,12 +114,12 @@ public class principal extends javax.swing.JFrame {
     }
 
     private void pruebaUSQL() {
-//        analizador g = new analizador(new java.io.StringReader(this.jTextArea1.getText()));
-//        try {
-//            g.S().ejecucion();
-//        } catch (usql.ParseException ex) {
-//            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        analizador g = new analizador(new java.io.StringReader(this.jTextArea1.getText()));
+        try {
+            g.S().ejecucion();
+        } catch (usql.ParseException ex) {
+            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void pruebasBD() {

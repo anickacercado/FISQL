@@ -24,6 +24,7 @@ public class expresion {
     public Date date;
     public Date dateTime;
     public boolean bool;
+    public objeto objeto;
     public llamadaMetodo llamadaMetodo;
     public llamadaVariable llamadaVariable;
     public llamadaTabla llamadaTabla;
@@ -155,12 +156,6 @@ public class expresion {
     }
 
     public expresion(expresion nodo) {
-        this.expIzq = nodo.expIzq;
-        this.expDer = nodo.expDer;
-        this.tipo = nodo.tipo;
-        this.nombre = nodo.nombre;
-        this.fila = nodo.fila;
-        this.columna = nodo.columna;
         this.entero = nodo.entero;
         this.decimal = nodo.decimal;
         this.cadena = nodo.cadena;
@@ -170,6 +165,13 @@ public class expresion {
         this.llamadaMetodo = nodo.llamadaMetodo;
         this.llamadaVariable = nodo.llamadaVariable;
         this.llamadaTabla = nodo.llamadaTabla;
+        this.objeto = nodo.objeto;
+        this.expIzq = nodo.expIzq;
+        this.expDer = nodo.expDer;
+        this.tipo = nodo.tipo;
+        this.nombre = nodo.nombre;
+        this.fila = nodo.fila;
+        this.columna = nodo.columna;
     }
 
     public expresion(expresion expIzq, expresion expDer, String tipo, String nombre, int fila, int columna, Object valor) {
@@ -189,7 +191,7 @@ public class expresion {
             this.cadena = (String) valor;
         } else if (tipo.equals("BOOL")) {
             this.cadena = valor.toString();
-            if (this.cadena.equals("true") || this.cadena.equals("verdaexpDero")) {
+            if (this.cadena.equals("true") || this.cadena.equals("verdadero")) {
                 this.bool = true;
                 this.entero = 1;
                 this.decimal = 1;
@@ -218,6 +220,8 @@ public class expresion {
             this.llamadaVariable = (llamadaVariable) valor;
         } else if (tipo.equals("TABLA")) {
             this.llamadaTabla = (llamadaTabla) valor;
+        } else if (tipo.equals("OBJETO")) {
+            this.objeto = (objeto) valor;
         }
     }
 
@@ -229,7 +233,6 @@ public class expresion {
         if (nodo.expIzq != null) {
             expIzq = nodo.expIzq.resCondicion();
         }
-
         if (nodo.expDer != null) {
             expDer = nodo.expDer.resCondicion();
         }
@@ -295,15 +298,18 @@ public class expresion {
         } else if (nodo.tipo.equals("LLAMADA_METODO")) {
             pilaVariable tabla = new pilaVariable();
             llamadaMetodo llame = this.llamadaMetodo;
-            expresion aux= llame.ejecucion();
-            
+            expresion aux= llame.ejecucion();  
             if (aux!=null) {
                 temp = aux; 
-                tabla.popVariable();
-                memoria.RETORNA = false;
             } else {
                 memoria.addError("ERROR SEMANTICO ", "METODO NO RETORNA VALOR ", fila, columna);
             }
+        } 
+        else if (nodo.tipo.equals("TABLA")){
+           expresion aux= this.llamadaTabla.ejecucion();
+           if(aux!=null){
+               temp=aux;
+           }     
         }
         return temp;
     }

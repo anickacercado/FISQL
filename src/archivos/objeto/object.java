@@ -14,8 +14,8 @@ import java.util.ArrayList;
  */
 public class object {
 
-    private String nombre;
-    private ArrayList<parametro> atributo;
+    public String nombre;
+    public ArrayList<parametro> atributo;
 
     public object(String nombre, ArrayList<parametro> atributo) {
         this.nombre = nombre;

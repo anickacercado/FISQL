@@ -11,8 +11,8 @@ package archivos;
  */
 public class parametro {
     
-    private String nombre;
-    private String tipo;
+    public String nombre;
+    public String tipo;
     
     public parametro(String nombre, String tipo){
         this.nombre = nombre;

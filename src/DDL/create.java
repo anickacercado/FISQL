@@ -8,7 +8,6 @@ package DDL;
 import archivos.EscrituraBD;
 import archivos.LecturaEscritura;
 import archivos.db.database;
-import archivos.db.propertyField;
 import archivos.maestro.master;
 import archivos.memoria;
 import archivos.metodo.function;
@@ -42,9 +41,9 @@ public class create {
             ArrayList<function> func = new ArrayList<function>();
             ArrayList<procedure> proc = new ArrayList<procedure>();
             ArrayList<object> obj = new ArrayList<object>();
-            database dpro = new database("PROCEDURE", null, pathProcedure, func, null, null, null);
-            database dfun = new database("FUNCTION", null, pathFunction, null, proc, null, null);
-            database dobj = new database("OBJECT", null, pathObject, null, null, obj, null);
+            database dpro = new database("PROCEDURE", null, pathProcedure, func, null, null, null,0);
+            database dfun = new database("FUNCTION", null, pathFunction, null, proc, null, null,0);
+            database dobj = new database("OBJECT", null, pathObject, null, null, obj, null,0);
             ArrayList<database> adb = new ArrayList<database>();
             adb.add(dpro);
             adb.add(dfun);
@@ -68,10 +67,8 @@ public class create {
                             object o = new object(nombre_obj, para);
                             tempObject.add(o);
                         }
-                        tempData.get(j).setObject(tempObject);
                     }
                 }
-                memoria.arbolMaestro.get(i).setDatabase(tempData);
             }
         }
         escritura.Escribir();
@@ -90,10 +87,8 @@ public class create {
                             procedure p = new procedure(nombre_proc, para, codigo);
                             tempProc.add(p);
                         }
-                        tempData.get(j).setProcedure(tempProc);
                     }
                 }
-                memoria.arbolMaestro.get(i).setDatabase(tempData);
             }
         }
         escritura.Escribir();
@@ -111,10 +106,8 @@ public class create {
                         function f = new function(nombre_func, para, codigo, retorno);
                         tempFunc.add(f);
                     }
-                    tempData.get(j).setFunction(tempFunc);
                 }
             }
-            memoria.arbolMaestro.get(i).setDatabase(tempData);
         }
         escritura.Escribir();
     }
@@ -124,7 +117,7 @@ public class create {
             if (memoria.arbolMaestro.get(i).getNombre().equals(nombre_bd)) {
                 if (memoria.arbolMaestro.get(i).existTable(nombre_table) == false) {
                     String path = memoria.DB + "\\" + nombre_bd + "\\" + nombre_table + ".xml";
-                    database data = new database("TABLE", nombre_table, path, null, null, null, ta);
+                    database data = new database("TABLE", nombre_table, path, null, null, null, ta,0);
                     memoria.arbolMaestro.get(i).insertDataBase(data);
                 }
             }
@@ -147,7 +140,18 @@ public class create {
         }
     }
 
-    public void insertColumn(ArrayList<table> lt, String nombre, String tipo, String nulo, String no_nulo, String autoincrementable, String llave_primaria, String llave_foranea) {
+    private boolean ExisteBD(String nombre) {
+        if (memoria.arbolMaestro != null) {
+            for (int i = 0; i < memoria.arbolMaestro.size(); i++) {
+                if (memoria.arbolMaestro.get(i).getNombre().equals(nombre)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    
+      public void insertColumn(ArrayList<table> lt, String nombre, String tipo, String nulo, String no_nulo, String autoincrementable, String llave_primaria, String llave_foranea) {
         boolean existe = false;
         for (int i = 0; i < lt.size(); i++) {
             if (lt.get(i).getNombre_campo().equals(nombre)) {
@@ -155,12 +159,7 @@ public class create {
             }
         }
         if (existe == false) {
-            if (tipo.equals("INTEGER")
-                    || tipo.equals("TEXT")
-                    || tipo.equals("DOUBLE")
-                    || tipo.equals("BOOL")
-                    || tipo.equals("DATE")
-                    || tipo.equals("DATETIME")) {
+            if (tipo.equals("ENTERO") || tipo.equals("CADENA") || tipo.equals("DOUBLE") || tipo.equals("BOOL") || tipo.equals("DATE") || tipo.equals("DATETIME")) {
                 ArrayList<fila_tabla> registro = new ArrayList<fila_tabla>();
                 table ta = new table(nombre, tipo, nulo, no_nulo, autoincrementable, llave_primaria, llave_foranea, registro, false, null);
                 lt.add(ta);
@@ -188,16 +187,5 @@ public class create {
         } else {
             System.out.println("Ya existe parametro");
         }
-    }
-
-    private boolean ExisteBD(String nombre) {
-        if (memoria.arbolMaestro != null) {
-            for (int i = 0; i < memoria.arbolMaestro.size(); i++) {
-                if (memoria.arbolMaestro.get(i).getNombre().equals(nombre)) {
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 }

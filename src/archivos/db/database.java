@@ -24,8 +24,9 @@ public class database {
     private ArrayList<procedure> procedure;
     private ArrayList<object> object;
     private ArrayList<table> table;
+    private int contador = 0;
 
-    public database(String tipo, String nombre, String path, ArrayList<function> function, ArrayList<procedure> procedure, ArrayList<object> object, ArrayList<table> table) {
+    public database(String tipo, String nombre, String path, ArrayList<function> function, ArrayList<procedure> procedure, ArrayList<object> object, ArrayList<table> table, int contador) {
         this.tipo = tipo;
         this.nombre = nombre;
         this.path = path;
@@ -33,6 +34,7 @@ public class database {
         this.procedure = procedure;
         this.object = object;
         this.table = table;
+        this.contador = contador;
     }
 
     public String XML() {
@@ -57,6 +59,7 @@ public class database {
                 cadena += "<Table>\n"
                         + "\t<nombre>\"" + nombre + "\"</nombre>\n"
                         + "\t<path>\"" + path + "\"</path>\n"
+                        + "\t<contador>\"" + contador + "\"</contador>\n"
                         + "\t<rows>\n";
 
                 for (int i = 0; i < table.size(); i++) {
@@ -70,6 +73,14 @@ public class database {
                 break;
         }
         return cadena;
+    }
+
+    public int getContador() {
+        return contador;
+    }
+
+    public void setContador(int contador) {
+        this.contador = contador;
     }
 
     public String getTipo() {
@@ -195,6 +206,7 @@ public class database {
             }
         }
     }
+
     public void removeObject(String nombre) {
         for (int i = 0; i < object.size(); i++) {
             if (object.get(i).getNombre().equals(nombre)) {
@@ -209,5 +221,14 @@ public class database {
                 table.remove(i);
             }
         }
+    }
+
+    public object returnObject(String nombre) {
+        for (int i = 0; i < object.size(); i++) {
+            if (object.get(i).getNombre().equals(nombre)) {
+                return object.get(i);
+            }
+        }
+        return null;
     }
 }

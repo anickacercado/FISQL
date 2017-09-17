@@ -8,6 +8,7 @@ package archivos;
 import archivos.maestro.master;
 import archivos.usuario.user;
 import errores.error;
+import estructuraUSQL.seleccionaTabla;
 import estructuraUSQL.variable;
 import estructuraUSQL.tablaMetodo;
 import java.text.DateFormat;
@@ -24,6 +25,9 @@ public class memoria {
   public static String DB= "C:\\DBMS";
   public static String user= "C:\\DBMS\\user.xml";
   public static String maestro= "C:\\DBMS\\maestro.xml";     
+  public static String backup= "C:\\BACKUP"; 
+  public static String backupUsuario= "C:\\BACKUPUSUARIO";  
+  
   
   //Base de Datos
   public static ArrayList<user> arbolUsuario = new ArrayList<user>();
@@ -73,4 +77,12 @@ public class memoria {
         }
         return false;
     }
+    
+    //Select
+    public static seleccionaTabla select= null;
+    public static seleccionaTabla select_union= null;
+    
+    
+    public static int posicion=0;
+    
 }

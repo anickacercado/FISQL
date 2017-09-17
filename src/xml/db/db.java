@@ -12,7 +12,7 @@ import archivos.tabla.fila_tabla_objeto;
 import archivos.tabla.table;
 
 public class db implements dbConstants {
-  private String tipo,nombre,path,nombre_param;
+  private String tipo,nombre,path,contador,nombre_param;
   private String nulo, no_nulo, autoincrementable, llave_primaria, llave_foranea;
   ArrayList<table> lt = new ArrayList<table>();
   private ArrayList<database> ldb= new ArrayList<database>();
@@ -74,7 +74,7 @@ public class db implements dbConstants {
 path= p.image;
      path= path.substring(1, path.length()-1);
      ArrayList<procedure> proc= new ArrayList<procedure>();
-     database data = new database("PROCEDURE",null,path,null,proc,null,null);
+     database data = new database("PROCEDURE",null,path,null,proc,null,null,0);
      ldb.add(data);
   }
 
@@ -87,7 +87,7 @@ path= p.image;
 path= p.image;
      path= path.substring(1, path.length()-1);
      ArrayList<function> func = new ArrayList<function>();
-     database data = new database("FUNCTION",null,path,func,null,null,null);
+     database data = new database("FUNCTION",null,path,func,null,null,null,0);
      ldb.add(data);
   }
 
@@ -100,11 +100,11 @@ path= p.image;
 path= p.image;
      path= path.substring(1, path.length()-1);
      ArrayList<object> obj = new ArrayList<object>();
-     database data = new database("OBJECT",null,path,null,null,obj,null);
+     database data = new database("OBJECT",null,path,null,null,obj,null,0);
      ldb.add(data);
   }
 
-  final public void TABLE() throws ParseException {Token n,p;
+  final public void TABLE() throws ParseException {Token n,p,c;
     jj_consume_token(TOKEN_TABLE_ABRE);
     jj_consume_token(TOKEN_NOMBRE_ABRE);
     n = jj_consume_token(CADENA);
@@ -112,6 +112,9 @@ path= p.image;
     jj_consume_token(TOKEN_PATH_ABRE);
     p = jj_consume_token(CADENA);
     jj_consume_token(TOKEN_PATH_CIERRA);
+    jj_consume_token(TOKEN_CONTADOR_ABRE);
+    c = jj_consume_token(CADENA);
+    jj_consume_token(TOKEN_CONTADOR_CIERRA);
     jj_consume_token(TOKEN_ROWS_ABRE);
     LISTA_TIPO();
     jj_consume_token(TOKEN_ROWS_CIERRA);
@@ -120,7 +123,10 @@ nombre= n.image;
         nombre= nombre.substring(1, nombre.length()-1);
         path= p.image;
         path= path.substring(1, path.length()-1);
-        database data = new database("TABLE",nombre,path,null,null,null,lt);
+        contador= c.image;
+        contador= contador.substring(1, contador.length()-1);
+        int cont= Integer.parseInt(contador);
+        database data = new database("TABLE",nombre,path,null,null,null,lt,cont);
         ldb.add(data);
         lt = new ArrayList<table>();
   }
@@ -242,7 +248,7 @@ llave_foranea="N";
 nombre_param= t.image;
                                                                 nombre_param= nombre_param.substring(1, nombre_param.length()-1);
                                                                 ArrayList<fila_tabla> registro = new ArrayList<fila_tabla>();
-                                                                table ta= new table(nombre_param,"INTEGER",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea,registro,false,null);
+                                                                table ta= new table(nombre_param,"ENTERO",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea,registro,false,null);
                                                                 lt.add(ta);
       break;
       }
@@ -346,7 +352,7 @@ llave_foranea="N";
 nombre_param= t.image;
                                                                 nombre_param= nombre_param.substring(1, nombre_param.length()-1);
                                                                 ArrayList<fila_tabla> registro = new ArrayList<fila_tabla>();
-                                                                table ta= new table(nombre_param,"TEXT",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea,registro,false,null);
+                                                                table ta= new table(nombre_param,"CADENA",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea,registro,false,null);
                                                                 lt.add(ta);
       break;
       }
@@ -899,7 +905,7 @@ tipo = tip.image;
       jj_la1_0 = new int[] {0x2800082,0x2800082,0x8000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x2aa800,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x0,0x0,0x0,0x600,0x600,0x600,0x600,0x2400,0x600,0x600,0x600,0x600,0x2400,0x600,0x600,0x600,0x600,0x2400,0x600,0x600,0x600,0x600,0x2400,0x600,0x600,0x600,0x600,0x2400,0x600,0x600,0x600,0x600,0x2400,0x600,0x600,0x600,0x600,0x2400,0x800,};
+      jj_la1_1 = new int[] {0x0,0x0,0x0,0x1800,0x1800,0x1800,0x1800,0x9000,0x1800,0x1800,0x1800,0x1800,0x9000,0x1800,0x1800,0x1800,0x1800,0x9000,0x1800,0x1800,0x1800,0x1800,0x9000,0x1800,0x1800,0x1800,0x1800,0x9000,0x1800,0x1800,0x1800,0x1800,0x9000,0x1800,0x1800,0x1800,0x1800,0x9000,0x2000,};
    }
 
   /** Constructor with InputStream. */
@@ -1016,7 +1022,7 @@ tipo = tip.image;
   /** Generate ParseException. */
   public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[50];
+    boolean[] la1tokens = new boolean[52];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
@@ -1033,7 +1039,7 @@ tipo = tip.image;
         }
       }
     }
-    for (int i = 0; i < 50; i++) {
+    for (int i = 0; i < 52; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

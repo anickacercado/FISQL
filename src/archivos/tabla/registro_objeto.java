@@ -10,8 +10,8 @@ package archivos.tabla;
  * @author anick
  */
 public class registro_objeto {
-    private String nombre;
-    private String valor;
+    public String nombre;
+    public String valor;
     
     public registro_objeto(String nombre, String valor){
     this.nombre=nombre;

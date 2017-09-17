@@ -16,7 +16,7 @@ public class fila_tabla_objeto {
     public int no_fila;
     public ArrayList<registro_objeto> registro = new ArrayList<registro_objeto>();
 
-    public fila_tabla_objeto(int no_fila, ArrayList<registro_objeto> registro) {
+    public fila_tabla_objeto(int no_fila,ArrayList<registro_objeto> registro) {
         this.no_fila = no_fila;
         this.registro = registro;
     }

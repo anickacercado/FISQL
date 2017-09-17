@@ -5,6 +5,8 @@
  */
 package estructuraUSQL;
 
+import archivos.memoria;
+
 /**
  *
  * @author anick
@@ -62,5 +64,10 @@ public class llamadaTabla {
 
     public void setCol(int col) {
         this.col = col;
+    }
+    
+    public expresion ejecucion(){
+        expresion exp = memoria.select_union.getValor(tabla, columna, objeto);
+        return exp;
     }
 }

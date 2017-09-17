@@ -91,15 +91,19 @@ public interface dbConstants {
   /** RegularExpression Id. */
   int TOKEN_LLAVE_FORANEA_CIERRA = 40;
   /** RegularExpression Id. */
-  int TOKEN_Y = 41;
+  int TOKEN_CONTADOR_ABRE = 41;
   /** RegularExpression Id. */
-  int TOKEN_N = 42;
+  int TOKEN_CONTADOR_CIERRA = 42;
   /** RegularExpression Id. */
-  int TOKEN_ID_ABRE = 43;
+  int TOKEN_Y = 43;
   /** RegularExpression Id. */
-  int TOKEN_ID_CIERRA = 44;
+  int TOKEN_N = 44;
   /** RegularExpression Id. */
-  int CADENA = 45;
+  int TOKEN_ID_ABRE = 45;
+  /** RegularExpression Id. */
+  int TOKEN_ID_CIERRA = 46;
+  /** RegularExpression Id. */
+  int CADENA = 47;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -117,10 +121,10 @@ public interface dbConstants {
     "\"</object>\"",
     "\"<rows>\"",
     "\"</rows>\"",
-    "\"<text>\"",
-    "\"</text>\"",
-    "\"<integer>\"",
-    "\"</integer>\"",
+    "\"<cadena>\"",
+    "\"</cadena>\"",
+    "\"<entero>\"",
+    "\"</entero>\"",
     "\"<double>\"",
     "\"</double>\"",
     "\"<bool>\"",
@@ -147,6 +151,8 @@ public interface dbConstants {
     "\"</llave_primaria>\"",
     "\"<llave_foranea>\"",
     "\"</llave_foranea>\"",
+    "\"<contador>\"",
+    "\"</contador>\"",
     "<TOKEN_Y>",
     "<TOKEN_N>",
     "<TOKEN_ID_ABRE>",

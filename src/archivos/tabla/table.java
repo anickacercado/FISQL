@@ -13,16 +13,17 @@ import java.util.ArrayList;
  */
 public class table {
 
-    private String nombre_campo;
-    private String tipo;
-    private String nulo;
-    private String no_nulo;
-    private String autoincrementable;
-    private String llave_primaria;
-    private String llave_foranea;
-    private ArrayList<fila_tabla> registro = new ArrayList<fila_tabla>();
-    private boolean es_objeto;
-    private ArrayList<fila_tabla_objeto> registro_objeto = new ArrayList<fila_tabla_objeto>();
+    public String nombre_campo;
+    public String tipo;
+    public String nulo;
+    public String no_nulo;
+    public String autoincrementable;
+    public String llave_primaria;
+    public String llave_foranea;
+    public ArrayList<fila_tabla> registro = new ArrayList<fila_tabla>();
+    public boolean es_objeto;
+    public ArrayList<fila_tabla_objeto> registro_objeto = new ArrayList<fila_tabla_objeto>();
+    public int contador;
 
     //table t= new table(nombre_param,"INTEGER",nulo,no_nulo,autoincrementable,llave_primaria,llave_foranea,registro,false,null);
     public table(String nombre_campo,
@@ -46,7 +47,6 @@ public class table {
         this.registro = registro;
         this.es_objeto = es_objeto;
         this.registro_objeto = registro_objeto;
-
     }
 
     public String Create_XML() {
@@ -64,6 +64,14 @@ public class table {
         return cadena;
     }
 
+    public int getContador() {
+        return contador;
+    }
+
+    public void setContador(int contador) {
+        this.contador = contador;
+    }
+    
     public void addRegistro(fila_tabla ft) {
         registro.add(ft);
     }
