@@ -6,11 +6,17 @@
 package socket;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,18 +43,25 @@ public class server extends Thread {
                 String readLine = "";
                 String mensajeRecibido = "";
                 while ((readLine = entrada.readLine()) != null) {
-                    if(readLine.equals("$$$$$*$*$*$*****$$$$$")) break;
+                    if(readLine.equals("$*@n!ck@*$")) break;
                     mensajeRecibido+=readLine + "\n";
                     System.out.println(">>>> " + readLine);
                 }
-
                 //Aqui mandar a analizar el mensaje recibido en la variable mensajeRecibido
                 
                 //Luego la respuesta del analisis enviarla de regreso
 
                 /*Envía Mensaje*/
-                DataOutputStream mensaje = new DataOutputStream(socket.getOutputStream());
-                mensaje.writeUTF("Mensaje prueba\nlinea 2\n");
+                String respuesta = "Se recibio el mensaje:\n"
+                + mensajeRecibido
+                + "\n----------------------------------- aqui termina\n";
+                
+                System.out.println(mensajeRecibido);
+
+                PrintWriter pw = new PrintWriter(socket.getOutputStream(), true);
+                pw.println(respuesta);
+                pw.println("$*@n!ck@*$");
+                
                 System.out.println("Respuesta enviada");
 
                 serverSo.close();
