@@ -895,21 +895,24 @@ ambito ambito = new ambito("INSERT", new ArrayList<simbolo>());
     throw new Error("Missing return statement in function");
   }
 
-  final public simbolo ACTUALIZAR() throws ParseException {
+  final public simbolo ACTUALIZAR() throws ParseException {Token t;
+  ArrayList<String> lista_columna =new ArrayList<String>();
+  ArrayList<expresion> lista_exp = new ArrayList<expresion>();
+  expresion  expresion=null;
     jj_consume_token(TOKEN_ACTUALIZAR);
     jj_consume_token(TOKEN_TABLA);
-    jj_consume_token(ID);
+    t = jj_consume_token(ID);
     jj_consume_token(PAR_ABRE);
-    LISTA_ID();
+    lista_columna = LISTA_ID();
     jj_consume_token(PAR_CIERRA);
     jj_consume_token(TOKEN_VALORES);
     jj_consume_token(PAR_ABRE);
-    LISTA_COND();
+    lista_exp = LISTA_COND();
     jj_consume_token(PAR_CIERRA);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
     case TOKEN_DONDE:{
       jj_consume_token(TOKEN_DONDE);
-      CONDICION();
+      expresion = CONDICION();
       break;
       }
     default:
@@ -917,7 +920,9 @@ ambito ambito = new ambito("INSERT", new ArrayList<simbolo>());
       ;
     }
     jj_consume_token(PYCOMA);
-{if ("" != null) return null;}
+ambito ambito = new ambito("UPDATE", new ArrayList<simbolo>());
+    actualizar act= new actualizar(t.image, lista_columna, lista_exp, expresion, ambito);
+    {if ("" != null) return new simbolo( t.beginLine, t.beginColumn,"UPDATE","UPDATE", "UPDATE", act.ambito, act);}
     throw new Error("Missing return statement in function");
   }
 

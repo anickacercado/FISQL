@@ -26,4 +26,44 @@ public class columna {
         this.tipo = tipo;
         this.exp = exp;
     } 
+
+    public String getTabla() {
+        return tabla;
+    }
+
+    public void setTabla(String tabla) {
+        this.tabla = tabla;
+    }
+
+    public String getObjeto() {
+        return objeto;
+    }
+
+    public void setObjeto(String objeto) {
+        this.objeto = objeto;
+    }
+
+    public String getAtributo() {
+        return atributo;
+    }
+
+    public void setAtributo(String atributo) {
+        this.atributo = atributo;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public ArrayList<expresion> getExp() {
+        return exp;
+    }
+
+    public void setExp(ArrayList<expresion> exp) {
+        this.exp = exp;
+    }
 }

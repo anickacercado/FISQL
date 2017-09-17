@@ -183,8 +183,6 @@ ArrayList<simbolo> LISTA_SENTENCIA_GLOBAL():
 	 |rsim=BACKUP()	   {lsim.add(rsim);}
 	 |rsim=RESTAURAR() {lsim.add(rsim);}
 	 |rsim=LLAMADA_METODO_FUNCION() {lsim.add(rsim);}
-
-
          | rsim=ASIGNAR()			 {lsim.add(rsim);}
          | rsim=MIENTRAS()			 {lsim.add(rsim);}
          | rsim=SI()                             {lsim.add(rsim);}
@@ -601,17 +599,26 @@ Token t,l;
 }
 
 simbolo  ACTUALIZAR():
-{}
+{ 
+  Token t;  
+  ArrayList<String> lista_columna =new ArrayList<String>();
+  ArrayList<expresion> lista_exp = new ArrayList<expresion>();
+  expresion  expresion=null; 
+}
 {
-    <TOKEN_ACTUALIZAR> <TOKEN_TABLA> <ID> <PAR_ABRE> LISTA_ID() <PAR_CIERRA> <TOKEN_VALORES> <PAR_ABRE> LISTA_COND() <PAR_CIERRA> (<TOKEN_DONDE> CONDICION())? <PYCOMA>
-	{return null;}
+    <TOKEN_ACTUALIZAR> <TOKEN_TABLA> t=<ID> <PAR_ABRE> lista_columna=LISTA_ID() <PAR_CIERRA> <TOKEN_VALORES> <PAR_ABRE> lista_exp=LISTA_COND() <PAR_CIERRA> (<TOKEN_DONDE> expresion=CONDICION())? <PYCOMA>
+    {
+    ambito ambito = new ambito("UPDATE", new ArrayList<simbolo>());
+    actualizar act= new actualizar(t.image, lista_columna, lista_exp, expresion, ambito);
+    return new simbolo( t.beginLine, t.beginColumn,"UPDATE","UPDATE", "UPDATE", act.ambito, act);
+    }
 }
 
 simbolo BORRAR():
 {}
 {
     <TOKEN_BORRAR> <TOKEN_TABLA> <ID> (<TOKEN_DONDE> CONDICION())? <PYCOMA>
-	{return null;}
+    {return null;}
 }
 
 simbolo SELECCIONAR():

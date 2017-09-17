@@ -81,8 +81,11 @@ public class memoria {
     //Select
     public static seleccionaTabla select= null;
     public static seleccionaTabla select_union= null;
+    public static seleccionaTabla updateTabla=null;
     
     
     public static int posicion=0;
-    
+    public static int tipoDetransaccion=0;
+    public static  ArrayList<seleccionaTabla> lista_de_select = new ArrayList<seleccionaTabla>();
+    public static  ArrayList<String> mensaje_consola= new  ArrayList<String>();
 }

@@ -12,6 +12,7 @@ import archivos.memoria;
  * @author anick
  */
 public class llamadaTabla {
+
     public String tabla;
     public String columna;
     public String objeto;
@@ -24,7 +25,7 @@ public class llamadaTabla {
         this.objeto = objeto;
         this.fila = fila;
         this.col = col;
-    }  
+    }
 
     public String getTabla() {
         return tabla;
@@ -65,9 +66,14 @@ public class llamadaTabla {
     public void setCol(int col) {
         this.col = col;
     }
-    
-    public expresion ejecucion(){
-        expresion exp = memoria.select_union.getValor(tabla, columna, objeto);
-        return exp;
+
+    public expresion ejecucion() {
+        if (memoria.tipoDetransaccion == 1) {
+            expresion exp = memoria.select_union.retornaExp(tabla, columna, objeto);
+            return exp;
+        } else {
+            expresion exp = memoria.updateTabla.retornaExp(tabla, columna, objeto);
+            return exp;
+        }
     }
 }

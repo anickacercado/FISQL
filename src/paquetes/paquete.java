@@ -5,8 +5,6 @@ package paquetes;
 public class paquete implements paqueteConstants {
   public static void main(String args[]) throws ParseException {
     paquete parser = new paquete(System.in);
-    parser.S();
-    System.out.println("Exito!!");
   }
 
   final public void S() throws ParseException {
@@ -15,8 +13,12 @@ public class paquete implements paqueteConstants {
 
   final public void E() throws ParseException {
     jj_consume_token(COR_ABRE);
+    jj_consume_token(TOKEN_VALIDAR);
+    jj_consume_token(DOSPUNTOS);
+    jj_consume_token(ENTERO);
+    jj_consume_token(COMA);
     switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
-    case TOKEN_VALIDAR:{
+    case TOKEN_LOGIN:{
       VALIDAR();
       break;
       }
@@ -33,10 +35,6 @@ public class paquete implements paqueteConstants {
   }
 
   final public void VALIDAR() throws ParseException {
-    jj_consume_token(TOKEN_VALIDAR);
-    jj_consume_token(DOSPUNTOS);
-    jj_consume_token(ENTERO);
-    jj_consume_token(COMA);
     jj_consume_token(TOKEN_LOGIN);
     jj_consume_token(DOSPUNTOS);
     jj_consume_token(COR_ABRE);
@@ -98,7 +96,7 @@ public class paquete implements paqueteConstants {
       jj_la1_init_0();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x60,0x1800,0x1c00,};
+      jj_la1_0 = new int[] {0xc0,0x1800,0x1c00,};
    }
 
   /** Constructor with InputStream. */

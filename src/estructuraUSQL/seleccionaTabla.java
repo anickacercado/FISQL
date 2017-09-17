@@ -23,12 +23,40 @@ public class seleccionaTabla {
     ArrayList<columna> lista_columna = new ArrayList<columna>();
     String nombre_tabla;
     retornoObjetoBD rob = new retornoObjetoBD();
-   
+    public String codigo;
 
     public seleccionaTabla(String nombre_tabla) {
         this.nombre_tabla = nombre_tabla;
     }
+
     public seleccionaTabla() {
+
+    }
+
+    public void HTML() {
+        String nombre_campo = "";
+        String codigo = "<table>";
+        codigo += "\n<tr>";
+        for (int i = 0; i < lista_columna.size(); i++) {
+            nombre_campo = lista_columna.get(i).tabla + " " + lista_columna.get(i).objeto + " " + lista_columna.get(i).atributo;
+            codigo += "\n<td>" + nombre_campo + "</td>";
+        }
+        codigo += "\n</tr>";
+
+        try {
+            for (int i = 0; i < size(); i++) {
+                codigo += "\n<tr>";
+                for (int j = 0; j < lista_columna.size(); j++) {
+                    expresion exp = lista_columna.get(i).exp.get(j).resCondicion();
+                    nombre_campo = exp.cadena;
+                    codigo += "\n<td>" + nombre_campo + "</td>";
+                }
+                codigo += "\n</tr>";
+            }
+        } catch (Exception exp) {
+        }
+        codigo += "\n</table>";
+        this.codigo = codigo;
     }
 
     public void ejecucion() {
@@ -132,6 +160,8 @@ public class seleccionaTabla {
                     }
                 }
             }
+        } {
+        memoria.addError("ERROR BD ", "No existe tabla en SELECCIONAR O UPDATE ", 0, 0);
         }
     }
 
@@ -163,46 +193,54 @@ public class seleccionaTabla {
         }
         return retornoValor;
     }
-    
-   public int size() {
-        int reg=lista_columna.get(0).exp.size();
+
+    public int size() {
+        int reg = lista_columna.get(0).exp.size();
         return reg;
     }
 
-    public expresion getValor(String Tabla, String Objeto, String Atributo) {
-        if (!Tabla.equals("") && !Objeto.equals("") && !Atributo.equals("")) {
-         for (columna col : this.lista_columna) {
-                if (col.tabla.equals(Tabla) &&  col.objeto.equals(Objeto) && col.atributo.equals(Atributo)) {
-                    return col.exp.get( memoria.posicion);
+    public expresion retornaExp(String tabla, String objeto, String atributo) {
+        if (!tabla.equals("") && !objeto.equals("") && !atributo.equals("")) {
+            for (columna col : this.lista_columna) {
+                if (col.tabla.equals(tabla) && col.objeto.equals(objeto) && col.atributo.equals(atributo)) {
+                    return col.exp.get(memoria.posicion);
                 }
             }
-        } 
-        
-        if (!Tabla.equals("") && !Objeto.equals("")) {
+        }
+
+        if (!tabla.equals("") && !objeto.equals("")) {
             for (columna col : this.lista_columna) {
-                if (col.tabla.equals(Tabla) && col.objeto.equals(Objeto)) {
-                    return col.exp.get( memoria.posicion);
-                } 
+                if (col.tabla.equals(tabla) && col.objeto.equals(objeto)) {
+                    return col.exp.get(memoria.posicion);
+                }
             }
-        } 
-        
-       if (!Objeto.equals("") && Tabla.equals("") && Atributo.equals("")) {
+        }
+
+        if (!objeto.equals("") && tabla.equals("") && atributo.equals("")) {
             for (columna col : this.lista_columna) {
-                if (col.atributo.equals(Atributo)) {
-                    return col.exp.get( memoria.posicion);
-                } else if (col.objeto.equals(Objeto)) {
-                    return col.exp.get( memoria.posicion);
+                if (col.atributo.equals(atributo)) {
+                    return col.exp.get(memoria.posicion);
+                } else if (col.objeto.equals(objeto)) {
+                    return col.exp.get(memoria.posicion);
                 }
             }
         }
         return null;
     }
 
-    public void setResultado() {
+    public void actualizaCol(String nombre, expresion exp) {
+        for (columna col : this.lista_columna) {
+            if (col.objeto.equals(nombre)) {
+                col.exp.set(memoria.posicion, exp);
+            }
+        }
+    }
+
+    public void ingresar_select() {
         expresion exp;
-        for (int i = 0; i < memoria.select_union.lista_columna.size() ; i++) {
-        exp = memoria.select_union.lista_columna.get(i).exp.get(memoria.posicion);  
-        memoria.select.lista_columna.get(i).exp.add(exp);
+        for (int i = 0; i < memoria.select_union.lista_columna.size(); i++) {
+            exp = memoria.select_union.lista_columna.get(i).exp.get(memoria.posicion);
+            memoria.select.lista_columna.get(i).exp.add(exp);
         }
         //memoria.select.lista_columna.get(i).exp.add(result);
     }

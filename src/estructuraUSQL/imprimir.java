@@ -5,7 +5,12 @@
  */
 package estructuraUSQL;
 
+import archivos.memoria;
+import consola.principal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -15,6 +20,8 @@ public class imprimir {
 
     public expresion valor;
     public ambito ambito;
+     Date date = new Date();
+    DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
 
     public imprimir(expresion valor, ambito ambito) {
         this.valor = valor;
@@ -39,23 +46,30 @@ public class imprimir {
     
     public void ejecucion() {
         expresion exp = valor.resCondicion();
+        String imp= "";
         if (exp.tipo.equals("ENTERO")) {
-            System.out.println(String.valueOf(exp.entero));
+            imp= String.valueOf(exp.entero);
+            principal.imprimir(hourFormat.format(date) + " Imprimir Salida -->" + imp);
         }
         else if (exp.tipo.equals("DECIMAL")) {
-            System.out.println(String.valueOf(exp.decimal));
+            imp= String.valueOf(exp.decimal);
+            principal.imprimir(hourFormat.format(date) + " Imprimir Salida -->" + imp);
         }
         else if (exp.tipo.equals("CADENA")) {
-            System.out.println(String.valueOf(exp.cadena));
+            imp= String.valueOf(exp.cadena);
+            principal.imprimir(hourFormat.format(date) + " Imprimir Salida -->" + imp);
         }
         else if (exp.tipo.equals("BOOL")) {
-            System.out.println(String.valueOf(exp.bool));
+            imp= String.valueOf(exp.bool);
+            principal.imprimir(hourFormat.format(date) + " Imprimir Salida -->" + imp);
         }
         else if (exp.tipo.equals("DATE")) {
-            System.out.println(String.valueOf(exp.cadena));
+            imp= String.valueOf(exp.cadena);
+            principal.imprimir(hourFormat.format(date) + " Imprimir Salida -->" + imp);
         }
         else if (exp.tipo.equals("DATETIME")) {
-            System.out.println(String.valueOf(exp.cadena));
+            imp= String.valueOf(exp.cadena);
+            principal.imprimir(hourFormat.format(date) + " Imprimir Salida -->" + imp);
         }
     }
 }

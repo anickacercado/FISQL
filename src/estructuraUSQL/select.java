@@ -40,37 +40,41 @@ public class select {
     }
 
     public void ejecucion() {
-        memoria.select_union= pivote();
-        memoria.posicion=0;
+        memoria.tipoDetransaccion=1;
+        memoria.select_union = new seleccionaTabla();
+        memoria.select_union = pivote();
+        memoria.posicion = 0;
+        memoria.select = new seleccionaTabla();
         hacerEncabezados();
-        
-        for (int i = 0; i < memoria.select_union.size(); i++) {
-            expresion estado = expresion.resCondicion();
-            if (estado.tipo.equals("BOOL")) {
-                if (estado.bool) {
-                    memoria.select.setResultado();
+
+        if (expresion!=null) {
+            for (int i = 0; i < memoria.select_union.size(); i++) {
+                expresion exp = expresion.resCondicion();
+                if (exp.tipo.equals("BOOL")) {
+                    if (exp.bool) {
+                        memoria.select.ingresar_select();
+                    }
                 }
-            } 
-             memoria.posicion++;
+                memoria.posicion++;
+            }
         }
-        
-        memoria.select=memoria.select;     
-        
+        else {memoria.select=memoria.select_union;}
+        memoria.select.HTML();       
         //GENERAR EL HTML DE LA TABLA
-      }
-    
-    private void hacerEncabezados(){
-        memoria.select= new seleccionaTabla();
+        memoria.lista_de_select.add(memoria.select);
+    }
+
+    private void hacerEncabezados() {
         ArrayList<columna> col = new ArrayList<columna>();
         ArrayList<expresion> lista_exp = new ArrayList<expresion>();
-        col= memoria.select_union.lista_columna;
-        
-        for (int i=0; i<col.size();i++){
-           lista_exp = new ArrayList<expresion>();
-           columna colum = new columna(col.get(i).tabla, col.get(i).objeto, col.get(i).atributo, col.get(i).tipo, lista_exp);
-           memoria.select.lista_columna.add(colum);
+        col = memoria.select_union.lista_columna;
+
+        for (int i = 0; i < col.size(); i++) {
+            lista_exp = new ArrayList<expresion>();
+            columna colum = new columna(col.get(i).tabla, col.get(i).objeto, col.get(i).atributo, col.get(i).tipo, lista_exp);
+            memoria.select.lista_columna.add(colum);
         }
-        
+
     }
 
     seleccionaTabla pivote() {
@@ -119,8 +123,8 @@ public class select {
                     lista_columna.add(colum);
                 }
                 lista_columna = lista_columna;
-                col= lista_columna; 
-                st.lista_columna =col;
+                col = lista_columna;
+                st.lista_columna = col;
             }
         }
         return st;

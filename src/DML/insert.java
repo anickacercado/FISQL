@@ -110,7 +110,7 @@ public class insert {
                                         columna.addRegistroObjeto(fto);
                                         lro = new ArrayList<registro_objeto>();
                                     }
-                                    //TIPO DE DATOS NO COINCIDEN
+                                      memoria.addError("ERROR BD ", "Tipos de datos no coinciden INSERT ", 0, 0);
                                 }
                             } else {
                                 if (columna.getTipo().equals(exp.tipo)) {
@@ -131,14 +131,15 @@ public class insert {
                                         ft = new fila_tabla(0, "NULL");
                                         columna.addRegistro(ft);
                                     }
-                                    //TIPO DE DATOS NO COINCIDEN 
+                                      memoria.addError("ERROR BD ", "Tipos de datos no coinciden INSERT ", 0, 0);
                                 }
                             }
                         }
                     } else {
-                        //VALUES NO COINCIDEN EN CANTIDAD CON EXPRESIONES
+                                      memoria.addError("ERROR BD ", "No coincide la cantidad de parametro INSERT ", 0, 0);
                     }
-                } else {//NO EXISTE TABLA
+                } else {  memoria.addError("ERROR BD ", "No existe tabla: " + nombre_tabla, 0, 0);
+
 
                 }
             } else {
@@ -173,7 +174,7 @@ public class insert {
                                         columna.addRegistroObjeto(fto);
                                         lro = new ArrayList<registro_objeto>();
                                     }
-                                    //TIPO DE DATOS NO COINCIDEN
+                                      memoria.addError("ERROR BD ", "Tipos de datos no coinciden INSERT ", 0, 0);
                                 }
                             } else {
                                 if (columna.getTipo().equals(exp.tipo)) {
@@ -193,20 +194,20 @@ public class insert {
                                         ft = new fila_tabla(0, "NULL");
                                         columna.addRegistro(ft);
                                     }
-                                    //TIPO DE DATOS NO COINCIDEN 
+                                      memoria.addError("ERROR BD ", "Tipos de datos no coinciden INSERT ", 0, 0);
                                 }
                             }
 
-                        } else {//NO EXISTE TABLA
+                        } else {memoria.addError("ERROR BD ", "No existe tabla: " + nombre_tabla, 0, 0);
                         }
                     }
                     filasEquitativas();
                 } else {
-                    //VALUES NO COINCIDEN EN CANTIDAD CON EXPRESIONES
+                    memoria.addError("ERROR BD ", "No coincide la cantidad de parametro INSERT ", 0, 0);
                 }
             }
         } else {
-            //NO EXISTE DB EN BASE DE DATOS
+           memoria.addError("ERROR BD ", "No existe tabla en BD ", 0, 0);
         }
 
         escritura.Escribir();

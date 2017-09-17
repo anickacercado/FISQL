@@ -6,17 +6,21 @@
 package socket;
 
 import archivos.memoria;
-import consola.principal;
 import estructuraUSQL.analizar;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import usql.analizador;
 
 /**
  *
@@ -35,20 +39,19 @@ public class server extends Thread {
 
                 /*Recibe Mensaje*/
                 socket = serverSo.accept();
-                BufferedReader entrada = new BufferedReader(new InputStreamReader(socket.getInputStream(), "UTF-8"));
+                BufferedReader entrada = new BufferedReader(new InputStreamReader(socket.getInputStream(),"UTF-8"));
                 System.out.println("Conexion con Cliente");
-
+                
                 String readLine = "";
                 String mensajeRecibido = "";
                 String mensajeFuncProc = "";
                 while ((readLine = entrada.readLine()) != null) {
-                    if (readLine.equals("$$$$$*$*$*$*****$$$$$")) {
-                        break;
-                    }
-                    mensajeRecibido += readLine + "\n";
-                    mensajeFuncProc += readLine + " ";
+                    if(readLine.equals("$*@n!ck@*$")) break;
+                    mensajeRecibido+=readLine + "\n";
+                    mensajeFuncProc+=readLine + " ";
                     System.out.println(">>>> " + readLine);
                 }
+                
                 memoria.cod_client= mensajeRecibido;
                 memoria.cod_client_sin_saltos = mensajeFuncProc;
 
@@ -58,9 +61,17 @@ public class server extends Thread {
 
                 //Luego la respuesta del analisis enviarla de regreso
 
-                /*Envía Mensaje*/
-                DataOutputStream mensaje = new DataOutputStream(socket.getOutputStream());
-                mensaje.writeUTF("Mensaje prueba\nlinea 2\n");
+                               /*Envía Mensaje*/
+                String respuesta = "Se recibio el mensaje:\n"
+                + mensajeRecibido
+                + "\n----------------------------------- aqui termina\n";
+                
+                System.out.println(mensajeRecibido);
+
+                PrintWriter pw = new PrintWriter(socket.getOutputStream(), true);
+                pw.println(respuesta);
+                pw.println("$*@n!ck@*$");
+                
                 System.out.println("Respuesta enviada");
 
                 serverSo.close();

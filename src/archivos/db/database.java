@@ -5,6 +5,7 @@
  */
 package archivos.db;
 
+import archivos.memoria;
 import archivos.metodo.function;
 import archivos.metodo.procedure;
 import archivos.objeto.object;
@@ -142,6 +143,7 @@ public class database {
     public boolean existFunction(String nombre) {
         for (int i = 0; i < function.size(); i++) {
             if (function.get(i).getNombre().equals(nombre)) {
+                  memoria.addError("ERROR BD ", "Ya existe funcion en base de datos " + nombre, 0, 0);
                 return true;
             }
         }
@@ -151,6 +153,7 @@ public class database {
     public boolean existProcedure(String nombre) {
         for (int i = 0; i < procedure.size(); i++) {
             if (procedure.get(i).getNombre().equals(nombre)) {
+                memoria.addError("ERROR BD ", "Ya existe procedimiento en base de datos " + nombre, 0, 0);
                 return true;
             }
         }
@@ -160,6 +163,7 @@ public class database {
     public boolean existObject(String nombre) {
         for (int i = 0; i < object.size(); i++) {
             if (object.get(i).getNombre().equals(nombre)) {
+                memoria.addError("ERROR BD ", "Ya existe objeto en base de datos " + nombre, 0, 0);
                 return true;
             }
         }
@@ -169,6 +173,7 @@ public class database {
     public boolean existTable(String nombre) {
         for (int i = 0; i < table.size(); i++) {
             if (table.get(i).getNombre_campo().equals(nombre)) {
+                  memoria.addError("ERROR BD ", "Ya existe tabla en base de datos " + nombre, 0, 0);
                 return true;
             }
         }
