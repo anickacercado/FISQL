@@ -35,7 +35,9 @@ public class seleccionaTabla {
 
     public void HTML() {
         String nombre_campo = "";
-        String codigo = "<table>";
+        String codigo = "";
+        //String codigo = "\n <html> \n <body> ";
+        codigo += "\n<table>";
         codigo += "\n<tr>";
         for (int i = 0; i < lista_columna.size(); i++) {
             nombre_campo = lista_columna.get(i).tabla + " " + lista_columna.get(i).objeto + " " + lista_columna.get(i).atributo;
@@ -47,7 +49,7 @@ public class seleccionaTabla {
             for (int i = 0; i < size(); i++) {
                 codigo += "\n<tr>";
                 for (int j = 0; j < lista_columna.size(); j++) {
-                    expresion exp = lista_columna.get(i).exp.get(j).resCondicion();
+                    expresion exp = lista_columna.get(j).exp.get(i).resCondicion();
                     nombre_campo = exp.cadena;
                     codigo += "\n<td>" + nombre_campo + "</td>";
                 }
@@ -56,6 +58,7 @@ public class seleccionaTabla {
         } catch (Exception exp) {
         }
         codigo += "\n</table>";
+        //codigo += "\n </body> \n </html>";
         this.codigo = codigo;
     }
 

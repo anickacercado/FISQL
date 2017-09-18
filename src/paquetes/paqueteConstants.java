@@ -35,11 +35,15 @@ public interface paqueteConstants {
   /** RegularExpression Id. */
   int TOKEN_REPORTE = 12;
   /** RegularExpression Id. */
-  int CODIGO = 13;
+  int TOKEN_USR = 13;
   /** RegularExpression Id. */
-  int CADENA = 14;
+  int TOKEN_PASS = 14;
   /** RegularExpression Id. */
-  int ENTERO = 15;
+  int CODIGO = 15;
+  /** RegularExpression Id. */
+  int CADENA = 16;
+  /** RegularExpression Id. */
+  int ENTERO = 17;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -59,6 +63,8 @@ public interface paqueteConstants {
     "<TOKEN_FIN>",
     "<TOKEN_USQL>",
     "<TOKEN_REPORTE>",
+    "<TOKEN_USR>",
+    "<TOKEN_PASS>",
     "<CODIGO>",
     "<CADENA>",
     "<ENTERO>",

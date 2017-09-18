@@ -6,6 +6,8 @@ STATIC = false;
 
 PARSER_BEGIN(paquete)
 package paquetes;
+import  archivos.memoria;
+
 
 public class paquete {
   public static void main(String args[]) throws ParseException {
@@ -28,6 +30,8 @@ TOKEN:
     |<TOKEN_FIN:"\""("fin")"\""> {System.out.println(image);}
     |<TOKEN_USQL:"\""("usql")"\""> {System.out.println(image);}
     |<TOKEN_REPORTE:"\""("reporte")"\""> {System.out.println(image);}
+    |<TOKEN_USR:"\""("usr")"\""> {System.out.println(image);}
+    |<TOKEN_PASS:"\""("pass")"\""> {System.out.println(image);}
     
     |<CODIGO:"\u007e" (~["\u007e"])* "\u007e"> {System.out.println(image);}
     |<CADENA:"\"" (~["\""])*"\""> {System.out.println(image);}
@@ -53,23 +57,47 @@ void S():
 void E():
 {}
 {
-   <COR_ABRE> <TOKEN_VALIDAR> <DOSPUNTOS> <ENTERO> <COMA> (VALIDAR()|PAQUETE())<COR_CIERRA>
-}
-
-void VALIDAR():
-{}
-{
-  <TOKEN_LOGIN> <DOSPUNTOS> 
-    <COR_ABRE>
-        <TOKEN_COMANDO> <DOSPUNTOS> <CODIGO>
+   <COR_ABRE> <TOKEN_VALIDAR> <DOSPUNTOS> <CADENA> <COMA> (VALIDAR()|PAQUETE())
     <COR_CIERRA>
 }
 
-void PAQUETE():
-{}
+void VALIDAR():
 {
-  <TOKEN_PAQUETE><DOSPUNTOS>(<TOKEN_FIN>|((<TOKEN_USQL>|<TOKEN_REPORTE>)<COMA>
-     <TOKEN_INSTRUCCION><DOSPUNTOS><CODIGO>
+String usr, pass;
+Token u, p; 
+}
+{
+   
+  <TOKEN_LOGIN> <DOSPUNTOS> 
+    <COR_ABRE>
+        <TOKEN_USR> <DOSPUNTOS>  u=<CADENA> <COMA>
+        <TOKEN_PASS> <DOSPUNTOS> p=<CADENA>
+    <COR_CIERRA>
+    {
+    memoria.paquetePly="LOGIN";
+    usr = u.image;
+    usr = usr.substring(1, usr.length()-1);
+    memoria.usrPly= usr;
+
+    pass = p.image;
+    pass = pass.substring(1, pass.length()-1);
+    memoria.passPly= pass;
+    }
+}
+
+void PAQUETE():
+{Token t;
+String cod;}
+{
+  <TOKEN_PAQUETE><DOSPUNTOS>(<TOKEN_FIN>
+    {memoria.paquetePly="FIN";}|
+
+    ((<TOKEN_USQL> {memoria.paquetePly="USQL";}|<TOKEN_REPORTE>{memoria.paquetePly="REPORTE";})<COMA>
+     <TOKEN_INSTRUCCION><DOSPUNTOS>t=<CODIGO> {
+                                                cod = t.image;
+                                                cod = cod.substring(1, cod.length()-1);
+                                                memoria.codigoPly = cod; 
+                                              }
     )
   )
 }

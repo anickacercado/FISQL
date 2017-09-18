@@ -35,7 +35,7 @@ public class analizar {
         try {
             g.S().ejecucion();
         } catch (usql.ParseException ex) {
-            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+            memoria.addError("ERROR SINTACTICO", "CADENA ERRONEA", 0, 0);
         }
     }
 

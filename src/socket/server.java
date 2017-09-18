@@ -5,18 +5,14 @@
  */
 package socket;
 
+import archivos.analizaPaquete;
+import archivos.memoria;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -42,25 +38,54 @@ public class server extends Thread {
                 
                 String readLine = "";
                 String mensajeRecibido = "";
+                String mensajeFuncProc = "";
                 while ((readLine = entrada.readLine()) != null) {
-                    if(readLine.equals("$*@n!ck@*$")) break;
+                    if(readLine.equals("$*@n!ck@*$")) 
+                        break;
                     mensajeRecibido+=readLine + "\n";
+                    mensajeFuncProc+=readLine + " ";
                     System.out.println(">>>> " + readLine);
                 }
-                //Aqui mandar a analizar el mensaje recibido en la variable mensajeRecibido
                 
+                memoria.cod_client= mensajeRecibido;
+                memoria.cod_client_sin_saltos = mensajeFuncProc;
+
+                //Aqui mandar a analizar el mensaje recibido en la variable mensajeRecibido
+                analizaPaquete a= new analizaPaquete();
+                a.analizar();
+
                 //Luego la respuesta del analisis enviarla de regreso
 
-                /*Envía Mensaje*/
+                               /*Envía Mensaje*/
                 String respuesta = "Se recibio el mensaje:\n"
                 + mensajeRecibido
                 + "\n----------------------------------- aqui termina\n";
                 
                 System.out.println(mensajeRecibido);
+                String variable= memoria.respuestaPly;
+                variable= variable.replace("Ó","O");
+                variable= variable.replace("Á","A");
+                variable= variable.replace("É","E");
+                variable= variable.replace("Í","I");
+                variable= variable.replace("Ú","U");
+                variable= variable.replace("ó","o");
+                variable= variable.replace("á","a");
+                variable= variable.replace("é","e");
+                variable= variable.replace("í","i");
+                variable= variable.replace("ú","u");
+                variable= variable.replace("[","{");
+                variable= variable.replace("]","}");  
+                variable= variable.replace("ñ","n");
+                
+                String[] partes = variable.split("\n");
 
                 PrintWriter pw = new PrintWriter(socket.getOutputStream(), true);
-                pw.println(respuesta);
-                pw.println("$*@n!ck@*$");
+                //pw.println(memoria.respuestaPly+"\n");
+                for (String v : partes){
+                    pw.println(v);
+                }
+                //pw.println(variable+"\n");
+                pw.println("$$$$$$$$$$");
                 
                 System.out.println("Respuesta enviada");
 
