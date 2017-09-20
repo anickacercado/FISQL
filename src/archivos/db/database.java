@@ -38,6 +38,62 @@ public class database {
         this.contador = contador;
     }
 
+    public String ARBOL() {
+        String cadena = "";
+        switch (tipo) {
+            case "PROCEDURE":
+                cadena += "\n\"procedures\":[";
+                for (int i = 0; i < procedure.size(); i++) {
+                    if (i == procedure.size() - 1) {
+                        cadena += "\"" + procedure.get(i).getNombre() + "\"";
+                    } else {
+                        cadena += "\"" + procedure.get(i).getNombre() + "\"" + ",";
+                    }
+                }
+                cadena += "]";
+                break;
+            case "FUNCTION":
+                cadena += "\n\"functions\":[";
+                for (int i = 0; i < function.size(); i++) {
+                    if (i == function.size() - 1) {
+                        cadena += "\"" + function.get(i).getNombre() + "\"";
+                    } else {
+                        cadena += "\"" + function.get(i).getNombre() + "\"" + ",";
+                    }
+                }
+                cadena += "]";
+                break;
+            case "OBJECT":
+                cadena += "\n\"objects\":[";
+                for (int i = 0; i < object.size(); i++) {
+                    if (i == object.size() - 1) {
+                        cadena += "\"" + object.get(i).getNombre() + "\"";
+                    } else {
+                        cadena += "\"" + object.get(i).getNombre() + "\"" + ",";
+                    }
+                }
+                cadena += "]";
+                break;
+            case "TABLE":
+                cadena += "\n{";
+                cadena += "\n\"table_id\":\"" + nombre + "\",";
+                cadena += "\n\"columns\":[";
+                for (int i = 0; i < table.size(); i++) {
+                    if (i == table.size() - 1) {
+                        cadena += "\"" + table.get(i).getNombre_campo() + "\"";
+                    } else {
+                        cadena += "\"" + table.get(i).getNombre_campo() + "\"" + ",";
+                    }
+                }
+                cadena += "]";
+                cadena += "\n}";
+                break;
+            default:
+                break;
+        }
+        return cadena;
+    }
+
     public String XML() {
         String cadena = "";
         switch (tipo) {
@@ -143,7 +199,7 @@ public class database {
     public boolean existFunction(String nombre) {
         for (int i = 0; i < function.size(); i++) {
             if (function.get(i).getNombre().equals(nombre)) {
-                  memoria.addError("ERROR BD ", "Ya existe funcion en base de datos " + nombre, 0, 0);
+                memoria.addError("ERROR BD ", "Ya existe funcion en base de datos " + nombre, 0, 0);
                 return true;
             }
         }
@@ -173,7 +229,7 @@ public class database {
     public boolean existTable(String nombre) {
         for (int i = 0; i < table.size(); i++) {
             if (table.get(i).getNombre_campo().equals(nombre)) {
-                  memoria.addError("ERROR BD ", "Ya existe tabla en base de datos " + nombre, 0, 0);
+                memoria.addError("ERROR BD ", "Ya existe tabla en base de datos " + nombre, 0, 0);
                 return true;
             }
         }

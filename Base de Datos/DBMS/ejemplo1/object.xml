@@ -1,0 +1,9 @@
+<Obj>
+	<nombre>"direccion"</nombre>
+	<attr>
+	<ENTERO>"avenida"</ENTERO>
+	<ENTERO>"calle"</ENTERO>
+	<CADENA>"nombre"</CADENA>
+	<CADENA>"descripcion"</CADENA>
+	</attr>
+	</Obj>

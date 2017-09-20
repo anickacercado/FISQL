@@ -70,7 +70,8 @@ memoria.paquetePly="FIN";
       break;
       }
     case TOKEN_USQL:
-    case TOKEN_REPORTE:{
+    case TOKEN_REPORTE:
+    case TOKEN_ARBOL:{
       switch ((jj_ntk==-1)?jj_ntk_f():jj_ntk) {
       case TOKEN_USQL:{
         jj_consume_token(TOKEN_USQL);
@@ -80,6 +81,11 @@ memoria.paquetePly="USQL";
       case TOKEN_REPORTE:{
         jj_consume_token(TOKEN_REPORTE);
 memoria.paquetePly="REPORTE";
+        break;
+        }
+      case TOKEN_ARBOL:{
+        jj_consume_token(TOKEN_ARBOL);
+memoria.paquetePly="ARBOL";
         break;
         }
       default:
@@ -118,7 +124,7 @@ cod = t.image;
       jj_la1_init_0();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0xc0,0x1800,0x1c00,};
+      jj_la1_0 = new int[] {0xc0,0x3800,0x3c00,};
    }
 
   /** Constructor with InputStream. */
@@ -235,7 +241,7 @@ cod = t.image;
   /** Generate ParseException. */
   public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[22];
+    boolean[] la1tokens = new boolean[23];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
@@ -249,7 +255,7 @@ cod = t.image;
         }
       }
     }
-    for (int i = 0; i < 22; i++) {
+    for (int i = 0; i < 23; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;

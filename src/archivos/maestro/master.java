@@ -27,6 +27,32 @@ public class master {
         this.database = database;
     }
 
+    public String ARBOL() {
+        String cadena = "";
+        cadena += "{";
+        cadena += "\n\"database_id\":\"" + nombre + "\",";
+        cadena += "\n\"tables\": [";
+        for (int i = 0; i < database.size(); i++) {
+            if (i >= 3) {
+                if (i == database.size() - 1) {
+                    cadena += database.get(i).ARBOL();
+                } else {
+                    cadena += database.get(i).ARBOL() + ",";
+                }
+            }
+        }
+        cadena += "]";
+        for (int i = 0; i < 3; i++) {
+            if (i == 2) {
+                cadena += database.get(i).ARBOL();
+            } else {
+                cadena += database.get(i).ARBOL() + ",";
+            }
+        }
+        cadena += "}";
+        return cadena;
+    }
+
     public master() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

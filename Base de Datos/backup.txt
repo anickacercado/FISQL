@@ -1,0 +1,70 @@
+USAR EJEMPLO1;
+
+CREAR FUNCION factorial(integer @n)integer{
+	SI(@n==0){
+		RETORNO 1;
+		
+	}SINO{
+		RETORNO @n*factorial(@n-1);
+		
+	}
+	
+}
+
+
+CREAR OBJETO Direccion(INTEGER avenida, 
+INTEGER calle, 
+TEXT nombre, 
+TEXT descripcion);
+
+CREAR TABLA Estudiante ( INTEGER id Llave_Primaria Autoincrementable, 
+TEXT Nombre No Nulo,
+DATE fh_nac No Nulo, 
+BOOL trabaja, 
+Direccion direccion); 
+ 
+CREAR TABLA Curso( INTEGER id Llave_Primaria Autoincrementable, 
+TEXT Nombre No Nulo, 
+INTEGER creditos No Nulo); 
+
+CREAR TABLA Asignacion( INTEGER id Llave_Primaria Autoincrementable, 
+DATETIME fh_Asignacion No Nulo, 
+INTEGER id_estudiante Llave_Foranea Estudiante, 
+INTEGER id_curso Llave_Foranea Curso);
+
+
+USAR ejemplo1;
+
+CREAR FUNCION crearDireccion (INTEGER @calle, INTEGER @avenida, TEXT @nombre, TEXT @descripcion) Direccion{
+DECLARAR @direc DIRECCION; 
+@direc.calle = @calle;
+@direc.avenida = @avenida;
+@direc.nombre = @nombre;
+@direc.descripcion = @descripcion;                      
+RETORNO @direc; }
+
+DECLARAR @direc2 Direccion;
+@direc2= creardireccion(1,2,"Nombre Direccion","Nombre Descripcion");
+INSERTAR EN TABLA ESTUDIANTE (1,"ESTUDIANTE1",01-01-2017,verdadero,@direc2);
+INSERTAR EN TABLA ESTUDIANTE (1,"ESTUDIANTE2",01-01-2017,verdadero,@direc2);
+INSERTAR EN TABLA ESTUDIANTE (1,"ESTUDIANTE3",01-01-2017,verdadero,@direc2);
+INSERTAR EN TABLA ESTUDIANTE (1,"ESTUDIANTE4",01-01-2017,verdadero,@direc2);
+INSERTAR EN TABLA ESTUDIANTE (1,"ESTUDIANTE5",01-01-2017,verdadero,@direc2);
+INSERTAR EN TABLA ESTUDIANTE (1,"ESTUDIANTE6",01-01-2017,verdadero,@direc2);
+INSERTAR EN TABLA ESTUDIANTE (1,"ESTUDIANTE7",01-01-2017,verdadero,@direc2);
+INSERTAR EN TABLA ESTUDIANTE (1,"ESTUDIANTE8",01-01-2017,verdadero,@direc2);
+
+INSERTAR EN TABLA CURSO(1,"AYD1",2);
+INSERTAR EN TABLA CURSO(1,"COMPI2",3);
+INSERTAR EN TABLA CURSO(1,"SOPES1",4);
+INSERTAR EN TABLA CURSO(1,"GERENCIALES2",5);
+
+INSERTAR EN TABLA Asignacion( 1, 10-10-2017 00:00:00, 1, 1);
+INSERTAR EN TABLA Asignacion( 1, 10-01-2017 00:00:00, 1, 2);
+
+usar ejemplo1;
+imprimir(factorial(5));
+SELECCIONAR * DE estudiante DONDE estudiante.id==4;
+
+
+

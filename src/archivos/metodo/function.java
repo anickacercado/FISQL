@@ -25,6 +25,8 @@ public class function {
         this.codigo = codigo;
         this.retorno = retorno;
     }
+    
+    
 
     public String XML() {
         String cadena = "";

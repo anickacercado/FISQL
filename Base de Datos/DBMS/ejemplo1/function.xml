@@ -1,0 +1,19 @@
+<Func>
+	<nombre>"factorial"</nombre>
+	<params>
+	<ENTERO>"n"</ENTERO>
+	</params>
+	<src>~crear funcion factorial(integer @n)integer{  si(@n==0){   retorno 1;     }sino{   retorno @n*factorial(@n-1);     }   }~</src>
+	<tipo>"ENTERO"</tipo>
+	</Func>
+<Func>
+	<nombre>"creardireccion"</nombre>
+	<params>
+	<ENTERO>"calle"</ENTERO>
+	<ENTERO>"avenida"</ENTERO>
+	<CADENA>"nombre"</CADENA>
+	<CADENA>"descripcion"</CADENA>
+	</params>
+	<src>~crear funcion creardireccion (integer @calle, integer @avenida, text @nombre, text @descripcion) direccion{ declarar @direc direccion;  @direc.calle = @calle; @direc.avenida = @avenida; @direc.nombre = @nombre; @direc.descripcion = @descripcion;                       retorno @direc; }~</src>
+	<tipo>"direccion"</tipo>
+	</Func>

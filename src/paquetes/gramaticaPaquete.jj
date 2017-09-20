@@ -30,6 +30,7 @@ TOKEN:
     |<TOKEN_FIN:"\""("fin")"\""> {System.out.println(image);}
     |<TOKEN_USQL:"\""("usql")"\""> {System.out.println(image);}
     |<TOKEN_REPORTE:"\""("reporte")"\""> {System.out.println(image);}
+    |<TOKEN_ARBOL:"\""("arbol")"\""> {System.out.println(image);}
     |<TOKEN_USR:"\""("usr")"\""> {System.out.println(image);}
     |<TOKEN_PASS:"\""("pass")"\""> {System.out.println(image);}
     
@@ -89,16 +90,17 @@ void PAQUETE():
 {Token t;
 String cod;}
 {
-  <TOKEN_PAQUETE><DOSPUNTOS>(<TOKEN_FIN>
-    {memoria.paquetePly="FIN";}|
+  <TOKEN_PAQUETE><DOSPUNTOS> ((<TOKEN_FIN>
+    {memoria.paquetePly="FIN";})|
 
-    ((<TOKEN_USQL> {memoria.paquetePly="USQL";}|<TOKEN_REPORTE>{memoria.paquetePly="REPORTE";})<COMA>
+    ((<TOKEN_USQL> {memoria.paquetePly="USQL";}
+    |<TOKEN_REPORTE>{memoria.paquetePly="REPORTE";}
+    |<TOKEN_ARBOL>{memoria.paquetePly="ARBOL";})<COMA>
      <TOKEN_INSTRUCCION><DOSPUNTOS>t=<CODIGO> {
                                                 cod = t.image;
                                                 cod = cod.substring(1, cod.length()-1);
                                                 memoria.codigoPly = cod; 
                                               }
-    )
-  )
+    ))
 }
 

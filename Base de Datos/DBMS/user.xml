@@ -1,0 +1,29 @@
+<usr>
+	<nombre>"admin"</nombre>
+	<pass>"admin"</pass>
+	<tipo>"admin"</tipo>
+	<estado>"inactivo"</estado>
+	<permiso>
+	</permiso>
+</usr><usr>
+	<nombre>"usuario1"</nombre>
+	<pass>"cambiopass"</pass>
+	<tipo>"user"</tipo>
+	<estado>"inactivo"</estado>
+	<permiso>
+	</permiso>
+</usr><usr>
+	<nombre>"usuario3"</nombre>
+	<pass>"123"</pass>
+	<tipo>"user"</tipo>
+	<estado>"inactivo"</estado>
+	<permiso>
+	</permiso>
+</usr><usr>
+	<nombre>"usuario4"</nombre>
+	<pass>"123"</pass>
+	<tipo>"user"</tipo>
+	<estado>"inactivo"</estado>
+	<permiso>
+	</permiso>
+</usr>

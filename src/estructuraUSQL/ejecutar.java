@@ -82,7 +82,7 @@ public class ejecutar {
                             //Escribir en Tabla de Metodos
                             memoria.tablaMetodo.get(i).insertMetodo(sim);
                         } catch (usql.ParseException ex) {
-                            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+                           // Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
                         }
 
                     }
@@ -97,7 +97,7 @@ public class ejecutar {
                             memoria.tablaMetodo.get(i).insertMetodo(sim);
                             //g.CREAR_FUNCION();
                         } catch (usql.ParseException ex) {
-                            Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+                            //Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                 }

@@ -62,21 +62,7 @@ public class server extends Thread {
                 + "\n----------------------------------- aqui termina\n";
                 
                 System.out.println(mensajeRecibido);
-                String variable= memoria.respuestaPly;
-                variable= variable.replace("Ó","O");
-                variable= variable.replace("Á","A");
-                variable= variable.replace("É","E");
-                variable= variable.replace("Í","I");
-                variable= variable.replace("Ú","U");
-                variable= variable.replace("ó","o");
-                variable= variable.replace("á","a");
-                variable= variable.replace("é","e");
-                variable= variable.replace("í","i");
-                variable= variable.replace("ú","u");
-                variable= variable.replace("[","{");
-                variable= variable.replace("]","}");  
-                variable= variable.replace("ñ","n");
-                
+                String variable= memoria.respuestaPly;                
                 String[] partes = variable.split("\n");
 
                 PrintWriter pw = new PrintWriter(socket.getOutputStream(), true);
