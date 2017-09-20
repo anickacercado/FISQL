@@ -85,7 +85,7 @@ public class LecturaBD {
             try {
                 memoria.arbolUsuario = gu.S();
             } catch (xml.usuario.ParseException ex) {
-                Logger.getLogger(LecturaBD.class.getName()).log(Level.SEVERE, null, ex);
+                //Logger.getLogger(LecturaBD.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         arbolUsuario = memoria.arbolUsuario;
@@ -99,7 +99,7 @@ public class LecturaBD {
                 memoria.arbolMaestro = gm.S();
                 leerRegistroBD();
             } catch (xml.maestro.ParseException ex) {
-                Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
+                //Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         arbolMaestro = memoria.arbolMaestro;
@@ -129,8 +129,7 @@ public class LecturaBD {
                     leerTipo(arbolDataBase);
                     memoria.arbolMaestro.get(i).setDatabase(arbolDataBase);
                 } catch (ParseException ex) {
-                    Logger.getLogger(LecturaBD.class
-                            .getName()).log(Level.SEVERE, null, ex);
+                   // Logger.getLogger(LecturaBD.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
@@ -154,8 +153,7 @@ public class LecturaBD {
                                 arbolProcedure = gm.S();
                                 adb.get(i).setProcedure(arbolProcedure);
                             } catch (xml.metodo.ParseException ex) {
-                                Logger.getLogger(LecturaBD.class
-                                        .getName()).log(Level.SEVERE, null, ex);
+                                //Logger.getLogger(LecturaBD.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             break;
                         case "FUNCTION":
@@ -164,8 +162,7 @@ public class LecturaBD {
                                 arbolFunction = gf.S();
                                 adb.get(i).setFunction(arbolFunction);
                             } catch (xml.funcion.ParseException ex) {
-                                Logger.getLogger(LecturaBD.class
-                                        .getName()).log(Level.SEVERE, null, ex);
+                                //Logger.getLogger(LecturaBD.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             break;
                         case "OBJECT":
@@ -174,8 +171,7 @@ public class LecturaBD {
                                 arbolObject = go.S();
                                 adb.get(i).setObject(arbolObject);
                             } catch (xml.objeto.ParseException ex) {
-                                Logger.getLogger(LecturaBD.class
-                                        .getName()).log(Level.SEVERE, null, ex);
+                                //Logger.getLogger(LecturaBD.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             break;
                         case "TABLE":
@@ -186,8 +182,7 @@ public class LecturaBD {
                             try {
                                 gt.S();                                                                                                                                                                                                                                                                                                              
                             } catch (xml.tabla.ParseException ex) {
-                                Logger.getLogger(LecturaBD.class
-                                        .getName()).log(Level.SEVERE, null, ex);
+                                //Logger.getLogger(LecturaBD.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             break;
                         default:

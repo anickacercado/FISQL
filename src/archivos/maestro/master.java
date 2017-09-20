@@ -41,7 +41,7 @@ public class master {
                 }
             }
         }
-        cadena += "]";
+        cadena += "],";
         for (int i = 0; i < 3; i++) {
             if (i == 2) {
                 cadena += database.get(i).ARBOL();
