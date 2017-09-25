@@ -2,6 +2,8 @@
 /* JavaCCOptions:KEEP_LINE_COL=null */
 package usql;
 
+import archivos.memoria;
+
 /**
  * This exception is thrown when parse errors are encountered.
  * You can explicitly create objects of this exception type by
@@ -54,6 +56,7 @@ public class ParseException extends Exception {
   /** Constructor with message. */
   public ParseException(String message) {
     super(message);
+    memoria.addError("ERROR", message, 0, 0);
   }
 
 

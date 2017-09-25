@@ -1,0 +1,9 @@
+<Procedure>
+	<path>"C:\DBMS\bd_clases\procedure.xml"</path>
+	</Procedure>
+<Function>
+	<path>"C:\DBMS\bd_clases\function.xml"</path>
+	</Function>
+<Object>
+	<path>"C:\DBMS\bd_clases\object.xml"</path>
+	</Object>

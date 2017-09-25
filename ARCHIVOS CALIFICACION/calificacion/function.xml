@@ -1,0 +1,33 @@
+<Func>
+	<nombre>"t_direccion_to_text"</nombre>
+	<params>
+	<t_direccion>"direc"</t_direccion>
+	</params>
+	<src>~crear funcion t_direccion_to_text (t_direccion @direc) text{   retorno "" +@direc.calle + " calle, " + @direc.avenida + " avenida, " + @direc.nombre + @direc.descripcion;  }~</src>
+	<tipo>"CADENA"</tipo>
+	</Func>
+<Func>
+	<nombre>"getdpiestudiante"</nombre>
+	<params>
+	<ENTERO>"parcarnet"</ENTERO>
+	</params>
+	<src>~crear funcion getdpiestudiante (integer @parcarnet) integer {  si(@estudiante1.carnet == @parcarnet){   retorno @estudiante1.dpi;     }     si(@estudiante2.carnet == @parcarnet){   retorno @estudiante2.dpi;     }     si(@estudiante3.carnet == @parcarnet){   retorno @estudiante3.dpi;     }     si(@estudiante4.carnet == @parcarnet){   retorno @estudiante4.dpi;     }     si(@estudiante5.carnet == @parcarnet){   retorno @estudiante5.dpi;     }     si(@estudiante6.carnet == @parcarnet){   retorno @estudiante7.dpi;     }     si(@estudiante7.carnet == @parcarnet){   retorno @estudiante7.dpi;     }     si(@estudiante8.carnet == @parcarnet){   retorno @estudiante8.dpi;     }     si(@estudiante9.carnet == @parcarnet){   retorno @estudiante9.dpi;     }     si(@estudiante10.carnet == @parcarnet){   retorno @estudiante10.dpi;     }  si(@estudiante11.carnet == @parcarnet){   retorno @estudiante10.dpi;     }  si(@estudiante12.carnet == @parcarnet){   retorno @estudiante10.dpi;     }  si(@estudiante13.carnet == @parcarnet){   retorno @estudiante10.dpi;     }  si(@estudiante14.carnet == @parcarnet){   retorno @estudiante10.dpi;     }  si(@estudiante15.carnet == @parcarnet){   retorno @estudiante10.dpi;     }    retorno -1;  }~</src>
+	<tipo>"ENTERO"</tipo>
+	</Func>
+<Func>
+	<nombre>"getdatosestudiante"</nombre>
+	<params>
+	<ENTERO>"parcarnet"</ENTERO>
+	</params>
+	<src>~crear funcion getdatosestudiante (integer @parcarnet) text {  declarar @datos text = "no existe";   si(@estudiante1.carnet == @parcarnet){   @datos = @estudiante1.dpi + " " + @estudiante1.carnet + " " + @estudiante1.nombre;     }     si(@estudiante2.carnet == @parcarnet){   @datos = @estudiante2.dpi + " " + @estudiante2.carnet + " " + @estudiante2.nombre;     }     si(@estudiante3.carnet == @parcarnet){   @datos = @estudiante3.dpi + " " + @estudiante3.carnet + " " + @estudiante3.nombre;     }     si(@estudiante4.carnet == @parcarnet){   @datos = @estudiante4.dpi + " " + @estudiante4.carnet + " " + @estudiante4.nombre;     }     si(@estudiante5.carnet == @parcarnet){   @datos = @estudiante5.dpi + " " + @estudiante5.carnet + " " + @estudiante5.nombre;     }     si(@estudiante6.carnet == @parcarnet){   @datos = @estudiante6.dpi + " " + @estudiante6.carnet + " " + @estudiante6.nombre;     }     si(@estudiante7.carnet == @parcarnet){   @datos = @estudiante7.dpi + " " + @estudiante7.carnet + " " + @estudiante7.nombre;     }     si(@estudiante8.carnet == @parcarnet){   @datos = @estudiante8.dpi + " " + @estudiante8.carnet + " " + @estudiante8.nombre;     }     si(@estudiante9.carnet == @parcarnet){   @datos = @estudiante9.dpi + " " + @estudiante9.carnet + " " + @estudiante9.nombre;     }  si(@estudiante10.carnet == @parcarnet){   @datos = @estudiante10.dpi + " " + @estudiante10.carnet + " " + @estudiante10.nombre;     }  si(@estudiante11.carnet == @parcarnet){   @datos = @estudiante11.dpi + " " + @estudiante11.carnet + " " + @estudiante11.nombre;     }  si(@estudiante12.carnet == @parcarnet){   @datos = @estudiante12.dpi + " " + @estudiante12.carnet + " " + @estudiante12.nombre;     }  si(@estudiante13.carnet == @parcarnet){   @datos = @estudiante13.dpi + " " + @estudiante13.carnet + " " + @estudiante13.nombre;     }  si(@estudiante14.carnet == @parcarnet){   @datos = @estudiante14.dpi + " " + @estudiante14.carnet + " " + @estudiante14.nombre;     }  si(@estudiante15.carnet == @parcarnet){   @datos = @estudiante15.dpi + " " + @estudiante15.carnet + " " + @estudiante15.nombre;     }   retorno @datos; }~</src>
+	<tipo>"CADENA"</tipo>
+	</Func>
+<Func>
+	<nombre>"fibonaccidireccion"</nombre>
+	<params>
+	<ENTERO>"carnetfibonacci"</ENTERO>
+	<ENTERO>"carnetdireccion"</ENTERO>
+	</params>
+	<src>~crear funcion fibonaccidireccion(integer @carnetfibonacci , integer @carnetdireccion) integer{    si (@carnetfibonacci == @carnetdireccion){   si ( @estudiante1.carnet == @carnetdireccion ){    retorno @estudiante1.direccion;   }   si ( @estudiante2.carnet == @carnetdireccion ){    retorno @estudiante2.direccion;   }   si ( @estudiante3.carnet == @carnetdireccion ){    retorno @estudiante3.direccion;   }   si ( @estudiante4.carnet == @carnetdireccion ){    retorno @estudiante4.direccion;   }   si ( @estudiante5.carnet == @carnetdireccion ){    retorno @estudiante5.direccion;   }   si ( @estudiante6.carnet == @carnetdireccion ){    retorno @estudiante6.direccion;   }   si ( @estudiante7.carnet == @carnetdireccion ){    retorno @estudiante7.direccion;   }   si ( @estudiante8.carnet == @carnetdireccion ){    retorno @estudiante8.direccion;   }   si ( @estudiante9.carnet == @carnetdireccion ){    retorno @estudiante9.direccion;   }   si ( @estudiante10.carnet == @carnetdireccion ){    retorno @estudiante10.direccion;   }   si ( @estudiante11.carnet == @carnetdireccion ){    retorno @estudiante11.direccion;   }   si ( @estudiante12.carnet == @carnetdireccion ){    retorno @estudiante12.direccion;   }   si ( @estudiante13.carnet == @carnetdireccion ){    retorno @estudiante13.direccion;   }   si ( @estudiante14.carnet == @carnetdireccion ){    retorno @estudiante14.direccion;   }   si ( @estudiante15.carnet == @carnetdireccion ){    retorno @estudiante15.direccion;   }  }  sino{   retorno fibonaccidireccion(@carnetfibonacci + 1 , @carnetdireccion );  }   }~</src>
+	<tipo>"ENTERO"</tipo>
+	</Func>

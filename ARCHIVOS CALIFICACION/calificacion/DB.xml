@@ -1,0 +1,207 @@
+<Procedure>
+	<path>"C:\DBMS\calificacion\procedure.xml"</path>
+	</Procedure>
+<Function>
+	<path>"C:\DBMS\calificacion\function.xml"</path>
+	</Function>
+<Object>
+	<path>"C:\DBMS\calificacion\object.xml"</path>
+	</Object>
+<Table>
+	<nombre>"estudiante"</nombre>
+	<path>"C:\DBMS\calificacion\estudiante.xml"</path>
+	<contador>"34"</contador>
+	<rows>
+<field>
+	<ENTERO>"carnet"</ENTERO>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"N"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"Y"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<CADENA>"dpi"</CADENA>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"N"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<CADENA>"nombre"</CADENA>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"Y"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<CADENA>"direccion"</CADENA>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"N"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<DATE>"fh_nac"</DATE>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"Y"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<DATETIME>"fh_creacion"</DATETIME>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"Y"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+	</rows>
+	</Table>
+<Table>
+	<nombre>"curso"</nombre>
+	<path>"C:\DBMS\calificacion\curso.xml"</path>
+	<contador>"8"</contador>
+	<rows>
+<field>
+	<ENTERO>"codigo_curso"</ENTERO>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"N"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"Y"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<CADENA>"nombre"</CADENA>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"Y"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<ENTERO>"creditos"</ENTERO>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"Y"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<ENTERO>"creditos_prerrequisito"</ENTERO>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"N"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+	</rows>
+	</Table>
+<Table>
+	<nombre>"prerrequisito"</nombre>
+	<path>"C:\DBMS\calificacion\prerrequisito.xml"</path>
+	<contador>"6"</contador>
+	<rows>
+<field>
+	<ENTERO>"codigo_curso"</ENTERO>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"Y"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"curso"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<ENTERO>"prerrequisito"</ENTERO>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"Y"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"curso"</llave_foranea>
+	</property>
+	</field>
+	</rows>
+	</Table>
+<Table>
+	<nombre>"asignacion"</nombre>
+	<path>"C:\DBMS\calificacion\asignacion.xml"</path>
+	<contador>"28"</contador>
+	<rows>
+<field>
+	<ENTERO>"codigo_curso"</ENTERO>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"Y"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"curso"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<ENTERO>"carnet"</ENTERO>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"Y"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"estudiante"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<DATETIME>"fh_asignacion"</DATETIME>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"Y"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<CADENA>"estado"</CADENA>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"N"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<ENTERO>"nota"</ENTERO>
+	<property>
+	<nulo>"Y"</nulo>
+	<no_nulo>"N"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+	</rows>
+	</Table>

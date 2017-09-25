@@ -8,6 +8,7 @@ package estructuraUSQL;
 import DDL.alter;
 import DDL.eliminar;
 import DML.insert;
+import archivos.LecturaBD;
 import archivos.memoria;
 import consola.principal;
 import java.text.DateFormat;
@@ -25,6 +26,7 @@ public class ejecutarAmbito {
     Date date = new Date();
     DateFormat hourFormat = new SimpleDateFormat("HH:mm:ss");
     ArrayList<simbolo> tablaSimbolo = new ArrayList<simbolo>();
+    LecturaBD lectura= new LecturaBD();
 
     public ejecutarAmbito(ArrayList<simbolo> tablaSimbolo) {
         this.tablaSimbolo = tablaSimbolo;
@@ -132,12 +134,12 @@ public class ejecutarAmbito {
                     case "CREAR":
                         EjecucionCreate ec = (EjecucionCreate) tablaSimbolo.get(i).valor;
                         ec.ejecucion();
-                        principal.imprimir(hourFormat.format(date) + " INSTRUCCIÓN CREAR OBJETO BD");
+                        principal.imprimir(hourFormat.format(date) + " INSTRUCCIÓN CREAR OBJETO BD");        
                         break;
                     case "INSERT":
                         insert ins = (insert) tablaSimbolo.get(i).valor;
                         ins.ejecucion();
-                        principal.imprimir(hourFormat.format(date) + " INSTRUCCIÓN INSERTAR");
+                        //principal.imprimir(hourFormat.format(date) + " INSTRUCCIÓN INSERTAR");
                         break;
                     case "ALTER":
                         alter alt = (alter) tablaSimbolo.get(i).valor;

@@ -108,6 +108,11 @@ public class principal extends javax.swing.JFrame {
     public static String getText(){
         return jTextArea1.getText();
     }
+    
+    public static void limpiarConsola() {
+        jTextArea1.setText(">>" );
+    }
+    
 
     //Probar gramatica
     private void testUsuario() {

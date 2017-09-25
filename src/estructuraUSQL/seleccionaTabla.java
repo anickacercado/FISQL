@@ -37,14 +37,16 @@ public class seleccionaTabla {
         String nombre_campo = "";
         String codigo = "";
         //String codigo = "\n <html> \n <body> ";
-        codigo += "\n<table>";
+        codigo += "\n<table class=\"table  table-sm table-hover table-responsive\">";
+        codigo += "\n<thead>";
         codigo += "\n<tr>";
         for (int i = 0; i < lista_columna.size(); i++) {
             nombre_campo = lista_columna.get(i).tabla + " " + lista_columna.get(i).objeto + " " + lista_columna.get(i).atributo;
-            codigo += "\n<td>" + nombre_campo + "</td>";
+            codigo += "\n<th>" + nombre_campo + "</th>";
         }
         codigo += "\n</tr>";
-
+        codigo += "\n</thead>";
+        codigo += "\n<tbody>";
         try {
             for (int i = 0; i < size(); i++) {
                 codigo += "\n<tr>";
@@ -57,6 +59,7 @@ public class seleccionaTabla {
             }
         } catch (Exception exp) {
         }
+        codigo += "\n</tbody>";
         codigo += "\n</table>";
         //codigo += "\n </body> \n </html>";
         this.codigo = codigo;
@@ -163,8 +166,9 @@ public class seleccionaTabla {
                     }
                 }
             }
-        } {
-        memoria.addError("ERROR BD ", "No existe tabla en SELECCIONAR O UPDATE ", 0, 0);
+        }
+        {
+            memoria.addError("ERROR BD ", "No existe tabla en SELECCIONAR O UPDATE ", 0, 0);
         }
     }
 
@@ -221,14 +225,42 @@ public class seleccionaTabla {
 
         if (!objeto.equals("") && tabla.equals("") && atributo.equals("")) {
             for (columna col : this.lista_columna) {
-                if (col.atributo.equals(atributo)) {
-                    return col.exp.get(memoria.posicion);
-                } else if (col.objeto.equals(objeto)) {
+                if (col.objeto.equals(objeto)) {
                     return col.exp.get(memoria.posicion);
                 }
             }
         }
         return null;
+    }
+
+    public int filtrarTabla(String tabla, String objeto, String atributo) {
+        if (!tabla.equals("") && !objeto.equals("") && !atributo.equals("")) {
+            for (int i = 0; i < lista_columna.size(); i++) {
+                columna col = lista_columna.get(i);
+                if (col.tabla.equals(tabla) && col.objeto.equals(objeto) && col.atributo.equals(atributo)) {
+                    return i;
+                }
+            }
+        }
+
+        if (!tabla.equals("") && !objeto.equals("")) {
+            for (int i = 0; i < lista_columna.size(); i++) {
+                columna col = lista_columna.get(i);
+                if (col.tabla.equals(tabla) && col.objeto.equals(objeto)) {
+                    return i;
+                }
+            }
+        }
+
+        if (!objeto.equals("") && tabla.equals("") && atributo.equals("")) {
+            for (int i = 0; i < lista_columna.size(); i++) {
+                columna col = lista_columna.get(i);
+                if (col.objeto.equals(objeto)) {
+                    return i;
+                }
+            }
+        }
+        return 1000;
     }
 
     public void actualizaCol(String nombre, expresion exp) {

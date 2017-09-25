@@ -1,0 +1,110 @@
+options {
+IGNORE_CASE = true;
+STATIC = false;
+    OUTPUTOKEN_DIRECTORY="C://Users//anick//Documents//NetBeansProjects//[Compi2]Proyecto1_201212859//FISQL//src//gramatica_HTML//";  
+}
+
+PARSER_BEGIN(ghtml)
+package gramatica_HTML;
+import archivos.memoria;
+
+public class ghtml {
+  public static void main(String args[]) throws ParseException {
+    ghtml parser = new ghtml(System.in);
+    parser.S();
+  }
+}
+PARSER_END(ghtml)
+
+TOKEN:
+{   
+  
+  <TOKEN_HTML_ABRE: ("<html>")> {System.out.println(image);}
+  |<TOKEN_HTML_CIERRA: ("</html>")> {System.out.println(image);}
+  |<TOKEN_HEAD_ABRE: ("<head>")> {System.out.println(image);}
+  |<TOKEN_HEAD_CIERRA: ("</head>")> {System.out.println(image);}
+  |<TOKEN_HEADER_ABRE: ("<header>")> {System.out.println(image);}
+  |<TOKEN_HEADER_CIERRA: ("</header>")> {System.out.println(image);}
+  |<TOKEN_TABLE_ABRE: ("<table>")> {System.out.println(image);}
+  |<TOKEN_TABLE_CIERRA: ("</table>")> {System.out.println(image);}
+  |<TOKEN_TH_ABRE: ("<th>")> {System.out.println(image);}
+  |<TOKEN_TH_CIERRA: ("</th>")> {System.out.println(image);}
+  |<TOKEN_TR_ABRE: ("<tr>")> {System.out.println(image);}
+  |<TOKEN_TR_CIERRA: ("</tr>")> {System.out.println(image);}
+  |<TOKEN_TD_ABRE: ("<td>")> {System.out.println(image);}
+  |<TOKEN_TD_CIERRA: ("</td>")> {System.out.println(image);}
+  |<TOKEN_DIV_ABRE: ("<div>")> {System.out.println(image);}
+  |<TOKEN_DIV_CIERRA: ("</div>")> {System.out.println(image);}
+  |<TOKEN_USQL_ABRE: ("<usql>")> {System.out.println(image);}
+  |<TOKEN_USQL_CIERRA: ("</usql>")> {System.out.println(image);}
+  |<TOKEN_BODY_ABRE: ("<body>")> {System.out.println(image);}
+  |<TOKEN_BODY_CIERRA: ("</body>")> {System.out.println(image);}
+
+
+  |<ID: (["a"-"z","A"-"Z"])(["a"-"z","A"-"Z","0"-"9","_"])*> {System.out.println(image);}
+  |<CADENA:"\"" (~["\""])*"\""> {System.out.println(image);}
+  |<CODIGO:"\u00b0" (~["\u00b0"])* "\u00b0"> {System.out.println(image);}
+}
+
+SKIP: 
+{
+  " "
+| "\n"
+| "\r"
+| "\t"
+}
+
+void S():
+{}
+{ <TOKEN_HTML_ABRE>
+  (<TOKEN_HEAD_ABRE> (LISTA_ID())? <TOKEN_HEAD_CIERRA>)?
+  (<TOKEN_BODY_ABRE>  (LISTA_CUERPO())? <TOKEN_BODY_CIERRA>)?
+  <TOKEN_HTML_CIERRA>
+}
+
+
+void LISTA_CUERPO():
+{}
+{ 
+   CUERPO() 
+  (LISTA_CUERPO())?
+}
+
+void CUERPO():
+{
+String codigo;
+Token cod;
+}
+{
+    (
+     (TABLE())
+    |(<TOKEN_HEADER_ABRE> (LISTA_ID())? <TOKEN_HEADER_CIERRA>)
+    |(<TOKEN_DIV_ABRE> (LISTA_ID())? <TOKEN_DIV_CIERRA>)
+    |(<TOKEN_USQL_ABRE> cod=<CODIGO> <TOKEN_USQL_CIERRA> { 
+                                                          codigo = cod.image;
+                                                          codigo = codigo.substring(1, codigo.length()-1);
+                                                          memoria.codigoHTML += codigo + " "; 
+                                                         })
+    )
+}
+
+void TABLE():
+{}
+{
+    <TOKEN_TABLE_ABRE>
+    (CUERPO_TABLA())?
+    <TOKEN_TABLE_CIERRA>
+}
+
+void CUERPO_TABLA():
+{}
+{
+    <TOKEN_TH_ABRE> (LISTA_ID())? <TOKEN_TH_ABRE>
+    |<TOKEN_TR_ABRE> (LISTA_ID())?  <TOKEN_TR_ABRE>
+    |<TOKEN_TD_ABRE> (LISTA_ID())?  <TOKEN_TD_ABRE>
+    
+}
+
+void LISTA_ID():
+{}
+{ <ID>  (LISTA_ID())?}

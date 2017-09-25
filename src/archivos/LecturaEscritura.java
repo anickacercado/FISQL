@@ -12,9 +12,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -114,4 +117,15 @@ public class LecturaEscritura {
         }
     }
 
+    public void escribirExiste(String Path, String Cadena){
+        File TextFile = new File(Path);
+        FileWriter TextOut;
+        try {
+            TextOut = new FileWriter(TextFile, true);
+            TextOut.write(Cadena);
+            TextOut.close();
+        } catch (IOException ex) {
+            Logger.getLogger(LecturaEscritura.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

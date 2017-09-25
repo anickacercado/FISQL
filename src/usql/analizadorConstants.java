@@ -73,133 +73,135 @@ public interface analizadorConstants {
   /** RegularExpression Id. */
   int TOKEN_NULO = 31;
   /** RegularExpression Id. */
-  int TOKEN_NO_NULO = 32;
+  int TOKEN_UNICO = 32;
   /** RegularExpression Id. */
-  int TOKEN_AUTOINCREMETABLE = 33;
+  int TOKEN_NO_NULO = 33;
   /** RegularExpression Id. */
-  int TOKEN_LLAVE_PRIMARIA = 34;
+  int TOKEN_AUTOINCREMETABLE = 34;
   /** RegularExpression Id. */
-  int TOKEN_LLAVE_FORANEA = 35;
+  int TOKEN_LLAVE_PRIMARIA = 35;
   /** RegularExpression Id. */
-  int TOKEN_OBJETO = 36;
+  int TOKEN_LLAVE_FORANEA = 36;
   /** RegularExpression Id. */
-  int TOKEN_PROCEDIMIENTO = 37;
+  int TOKEN_OBJETO = 37;
   /** RegularExpression Id. */
-  int TOKEN_FUNCION = 38;
+  int TOKEN_PROCEDIMIENTO = 38;
   /** RegularExpression Id. */
-  int TOKEN_RETORNO = 39;
+  int TOKEN_FUNCION = 39;
   /** RegularExpression Id. */
-  int TOKEN_USUARIO = 40;
+  int TOKEN_RETORNO = 40;
   /** RegularExpression Id. */
-  int TOKEN_COLOCAR = 41;
+  int TOKEN_USUARIO = 41;
   /** RegularExpression Id. */
-  int TOKEN_PASSWORD = 42;
+  int TOKEN_COLOCAR = 42;
   /** RegularExpression Id. */
-  int TOKEN_USAR = 43;
+  int TOKEN_PASSWORD = 43;
   /** RegularExpression Id. */
-  int TOKEN_ALTERAR = 44;
+  int TOKEN_USAR = 44;
   /** RegularExpression Id. */
-  int TOKEN_AGREGAR = 45;
+  int TOKEN_ALTERAR = 45;
   /** RegularExpression Id. */
-  int TOKEN_QUITAR = 46;
+  int TOKEN_AGREGAR = 46;
   /** RegularExpression Id. */
-  int TOKEN_CAMBIAR = 47;
+  int TOKEN_QUITAR = 47;
   /** RegularExpression Id. */
-  int TOKEN_ELIMINAR = 48;
+  int TOKEN_CAMBIAR = 48;
   /** RegularExpression Id. */
-  int TOKEN_INSERTAR = 49;
+  int TOKEN_ELIMINAR = 49;
   /** RegularExpression Id. */
-  int TOKEN_VALORES = 50;
+  int TOKEN_INSERTAR = 50;
   /** RegularExpression Id. */
-  int TOKEN_ACTUALIZAR = 51;
+  int TOKEN_VALORES = 51;
   /** RegularExpression Id. */
-  int TOKEN_DONDE = 52;
+  int TOKEN_ACTUALIZAR = 52;
   /** RegularExpression Id. */
-  int TOKEN_BORRAR = 53;
+  int TOKEN_DONDE = 53;
   /** RegularExpression Id. */
-  int TOKEN_SELECCIONAR = 54;
+  int TOKEN_BORRAR = 54;
   /** RegularExpression Id. */
-  int TOKEN_DE = 55;
+  int TOKEN_SELECCIONAR = 55;
   /** RegularExpression Id. */
-  int TOKEN_ORDENAR = 56;
+  int TOKEN_DE = 56;
   /** RegularExpression Id. */
-  int TOKEN_ASC = 57;
+  int TOKEN_ORDENAR = 57;
   /** RegularExpression Id. */
-  int TOKEN_DESC = 58;
+  int TOKEN_ASC = 58;
   /** RegularExpression Id. */
-  int TOKEN_OTORGAR = 59;
+  int TOKEN_DESC = 59;
   /** RegularExpression Id. */
-  int TOKEN_DENEGAR = 60;
+  int TOKEN_OTORGAR = 60;
   /** RegularExpression Id. */
-  int TOKEN_DECLARAR = 61;
+  int TOKEN_DENEGAR = 61;
   /** RegularExpression Id. */
-  int TOKEN_SI = 62;
+  int TOKEN_DECLARAR = 62;
   /** RegularExpression Id. */
-  int TOKEN_SINO = 63;
+  int TOKEN_SI = 63;
   /** RegularExpression Id. */
-  int TOKEN_SELECCIONA = 64;
+  int TOKEN_SINO = 64;
   /** RegularExpression Id. */
-  int TOKEN_CASO = 65;
+  int TOKEN_SELECCIONA = 65;
   /** RegularExpression Id. */
-  int TOKEN_DEFECTO = 66;
+  int TOKEN_CASO = 66;
   /** RegularExpression Id. */
-  int TOKEN_PARA = 67;
+  int TOKEN_DEFECTO = 67;
   /** RegularExpression Id. */
-  int TOKEN_MIENTRAS = 68;
+  int TOKEN_PARA = 68;
   /** RegularExpression Id. */
-  int TOKEN_DETENER = 69;
+  int TOKEN_MIENTRAS = 69;
   /** RegularExpression Id. */
-  int TOKEN_IMPRIMIR = 70;
+  int TOKEN_DETENER = 70;
   /** RegularExpression Id. */
-  int TOKEN_FECHA = 71;
+  int TOKEN_IMPRIMIR = 71;
   /** RegularExpression Id. */
-  int TOKEN_FECHA_HORA = 72;
+  int TOKEN_FECHA = 72;
   /** RegularExpression Id. */
-  int TOKEN_CONTAR = 73;
+  int TOKEN_FECHA_HORA = 73;
   /** RegularExpression Id. */
-  int TOKEN_BACKUP_USQL = 74;
+  int TOKEN_CONTAR = 74;
   /** RegularExpression Id. */
-  int TOKEN_BACKUP_COMPLETO = 75;
+  int TOKEN_BACKUP_USQL = 75;
   /** RegularExpression Id. */
-  int TOKEN_RESTAURAR_USQL = 76;
+  int TOKEN_BACKUP_COMPLETO = 76;
   /** RegularExpression Id. */
-  int TOKEN_RESTAURAR_COMPLETO = 77;
+  int TOKEN_RESTAURAR_USQL = 77;
   /** RegularExpression Id. */
-  int TOKEN_TEXT = 78;
+  int TOKEN_RESTAURAR_COMPLETO = 78;
   /** RegularExpression Id. */
-  int TOKEN_INTEGER = 79;
+  int TOKEN_TEXT = 79;
   /** RegularExpression Id. */
-  int TOKEN_DOUBLE = 80;
+  int TOKEN_INTEGER = 80;
   /** RegularExpression Id. */
-  int TOKEN_BOOL = 81;
+  int TOKEN_DOUBLE = 81;
   /** RegularExpression Id. */
-  int TOKEN_DATE = 82;
+  int TOKEN_BOOL = 82;
   /** RegularExpression Id. */
-  int TOKEN_DATETIME = 83;
+  int TOKEN_DATE = 83;
   /** RegularExpression Id. */
-  int TOKEN_FALSO = 84;
+  int TOKEN_DATETIME = 84;
   /** RegularExpression Id. */
-  int TOKEN_VERDADERO = 85;
+  int TOKEN_FALSO = 85;
   /** RegularExpression Id. */
-  int CADENA = 86;
+  int TOKEN_VERDADERO = 86;
   /** RegularExpression Id. */
-  int ENTERO = 87;
+  int CADENA = 87;
   /** RegularExpression Id. */
-  int NUMERO = 88;
+  int ENTERO = 88;
   /** RegularExpression Id. */
-  int DECIMAL = 89;
+  int NUMERO = 89;
   /** RegularExpression Id. */
-  int ID = 90;
+  int DECIMAL = 90;
   /** RegularExpression Id. */
-  int VARIABLE = 91;
+  int ID = 91;
   /** RegularExpression Id. */
-  int DATE = 92;
+  int VARIABLE = 92;
   /** RegularExpression Id. */
-  int DATETIME = 93;
+  int DATE = 93;
   /** RegularExpression Id. */
-  int COMENTARIO_LINEA = 98;
+  int DATETIME = 94;
   /** RegularExpression Id. */
-  int COMENTARIO_MULTI = 99;
+  int COMENTARIO_LINEA = 99;
+  /** RegularExpression Id. */
+  int COMENTARIO_MULTI = 100;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -238,6 +240,7 @@ public interface analizadorConstants {
     "\"base_datos\"",
     "\"tabla\"",
     "\"nulo\"",
+    "\"unico\"",
     "\"no nulo\"",
     "\"autoincrementable\"",
     "\"llave_primaria\"",

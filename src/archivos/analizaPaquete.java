@@ -9,6 +9,7 @@ import archivos.usuario.permisos;
 import archivos.usuario.user;
 import consola.principal;
 import estructuraUSQL.analizar;
+import gramatica_HTML.ghtml;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,6 +42,7 @@ public class analizaPaquete {
         switch (memoria.paquetePly) {
             case "LOGIN":
                 login();
+                memoria.limpiar();  
                 break;
             case "FIN":
                 arbol();
@@ -48,12 +50,15 @@ public class analizaPaquete {
                 break;
             case "USQL":
                 usql();
+                memoria.limpiar();  
                 break;
             case "REPORTE":
                 reporte();
+                memoria.limpiar();  
                 break;
             case "ARBOL":
                 arbol();
+                memoria.limpiar();  
                 break;
             default:
                 break;
@@ -79,32 +84,38 @@ public class analizaPaquete {
     }
 
     public void usql() {
+        String comilla= String.valueOf((char)148);
+        String carac= String.valueOf((char)155);
         String datos = "";
         String ejecucion = "";
         String mensaje = "";
         String historial = "";
 
+        memoria.cod_client=memoria.codigoPly;
         memoria.cod_client_sin_saltos = memoria.codigoPly;
         analizar a = new analizar();
         a.iniciarEjecucion();
 
-        if (memoria.lista_de_select != null && memoria.lista_de_select.size() != 0) {
-            datos = memoria.lista_de_select.get(memoria.lista_de_select.size() - 1).codigo;
+          for(int i=0; i<memoria.lista_de_select.size();i++) {
+            datos += memoria.lista_de_select.get(i).codigo + " ";
         }
+
 
         for (int i = 0; i < memoria.tablaErroresUSQL.size(); i++) {
             ejecucion += "\n TIPO: " + memoria.tablaErroresUSQL.get(i).getTipo()
                     + " DESCRIPCION: " + memoria.tablaErroresUSQL.get(i).getDescripcion()
                     + " LINEA: " + memoria.tablaErroresUSQL.get(i).getLinea()
                     + " COLUMNA: " + memoria.tablaErroresUSQL.get(i).getColumna();
+                    ejecucion = ejecucion.replace(comilla, "\\\"").replace(".", "").replace(carac, "");
+            System.out.println(ejecucion);
         }
 
         mensaje = principal.getText();
 
         respuesta = "["
                 + "\n \"paquete\":" + "\"usql\"" + ","
-                + "\n \"datos\":   \"" + datos.replace("\"", "\\\"").replace("\n", "\\n") + "\","
-                + "\n \"ejecucion\": \"" + ejecucion.replace("\"", "\\\"").replace("\n", "\\n") + "\","
+                + "\n \"datos\":   \"" + datos.replace("\"", "\\\"") + "\","
+                + "\n \"ejecucion\": \"" + ejecucion.replace("\"", "\\\"").replace("\r\n", "\\n").replace("\n", "\\n") + "\","
                 + "\n \"mensaje\":  \"" + mensaje.replace("\"", "\\\"").replace("\n", "\\n") + "\","
                 + "\n \"historial\": \"" + historial.replace("\"", "\\\"").replace("\n", "\\n") + "\""
                 + "]";
@@ -114,18 +125,27 @@ public class analizaPaquete {
 
     public void reporte() {
         String instruccion = "";
+        
+        ghtml g = new ghtml(new java.io.StringReader(memoria.codigoPly));
+        try {
+            g.S();
+        } catch (gramatica_HTML.ParseException ex) {
+            //Logger.getLogger(probarGramatica.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
+        }
 
-        memoria.cod_client_sin_saltos = memoria.codigoPly;
+        memoria.cod_client_sin_saltos = memoria.codigoHTML;
+        memoria.cod_client=memoria.codigoHTML;
         analizar a = new analizar();
         a.iniciarEjecucion();
 
-        if (memoria.lista_de_select != null) {
-            instruccion = memoria.lista_de_select.get(memoria.lista_de_select.size() - 1).codigo;
+        for(int i=0; i<memoria.lista_de_select.size();i++) {
+            instruccion += memoria.lista_de_select.get(i).codigo + " ";
         }
 
         respuesta = "["
                 + "\n\"paquete\": \"reporte\","
-                + "\n\"datos\":" + "\"" + instruccion+ "\""
+                + "\n\"datos\":" + "\"" + instruccion.replace("\"", "\\\"").replace("\n", "\n\\n")+ "\""
                 + "]";
         memoria.respuestaPly = limpiar_cadena(respuesta);
     }

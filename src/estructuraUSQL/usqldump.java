@@ -8,18 +8,21 @@ package estructuraUSQL;
 import archivos.LecturaEscritura;
 import archivos.memoria;
 import java.io.File;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author anick
  */
 public class usqldump {
-    
-    LecturaEscritura le= new LecturaEscritura();
-    
-    public void ejecucion(){
-        String Path= memoria.backup + "\\" + memoria.use_db + ".umdp";
+
+    LecturaEscritura le = new LecturaEscritura();
+
+    public void ejecucion() {
+        String Path = memoria.backup + "\\" + memoria.use_db + ".umdp";
         le.Crear(Path);
-        le.Escritura(Path, "\n  " + memoria.cod_client );   
-    }     
+        le.escribirExiste(Path, "\n  " + memoria.cod_client);
+    }
 }

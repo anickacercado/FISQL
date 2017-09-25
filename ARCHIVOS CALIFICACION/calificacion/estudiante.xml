@@ -1,0 +1,272 @@
+	<Row>
+	<carnet>"201403001"</carnet>
+	<dpi>"2950130000101"</dpi>
+	<nombre>"juan pablo ruiz guerra"</nombre>
+	<direccion>"14 av 11-25 zona 5, guatemala"</direccion>
+	<fh_nac>"19-01-1996"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403002"</carnet>
+	<dpi>"2950130001101"</dpi>
+	<nombre>"jose luis torres polanco"</nombre>
+	<direccion>"12 av 1-78 zona 1, guatemala"</direccion>
+	<fh_nac>"07-02-1990"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403003"</carnet>
+	<dpi>"2950130002101"</dpi>
+	<nombre>"carlos alberto villeda"</nombre>
+	<direccion>"km 8.5 carretera al atlantico, residenciales vista azul, casa 27, guatemala"</direccion>
+	<fh_nac>"29-12-1994"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403004"</carnet>
+	<dpi>"2950130003101"</dpi>
+	<nombre>"ana patricia bonilla fernandez"</nombre>
+	<direccion>"4 av 18-46 zona 1, guatemala"</direccion>
+	<fh_nac>"02-03-2017"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403005"</carnet>
+	<dpi>"2950130004101"</dpi>
+	<nombre>"maria camila hernandez"</nombre>
+	<direccion>"5 calle 2-05 zona 2, mixco"</direccion>
+	<fh_nac>"19-01-1995"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403006"</carnet>
+	<dpi>"2950130005101"</dpi>
+	<nombre>"gabriel jesus mazariegos"</nombre>
+	<direccion>"6 av 16-72 zona 13, guatemala"</direccion>
+	<fh_nac>"07-09-1995"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403007"</carnet>
+	<dpi>"2950130006101"</dpi>
+	<nombre>"alba maritza carrillo lopez"</nombre>
+	<direccion>"17 av 11-25 zona 21, guatemala"</direccion>
+	<fh_nac>"30-11-1989"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403008"</carnet>
+	<dpi>"2950130007101"</dpi>
+	<nombre>"fernanda nicole carrera salazar"</nombre>
+	<direccion>"11 av 9-25 zona 6, guatemala"</direccion>
+	<fh_nac>"20-01-1991"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403009"</carnet>
+	<dpi>"2950130008101"</dpi>
+	<nombre>"jose gustavo bran orellana"</nombre>
+	<direccion>"14 av 11-25 zona 5"</direccion>
+	<fh_nac>"01-04-1993"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403010"</carnet>
+	<dpi>"2950130009101"</dpi>
+	<nombre>"hugo manuel pineda"</nombre>
+	<direccion>"17 av 1-20 zona 7, mixco"</direccion>
+	<fh_nac>"01-01-1994"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403011"</carnet>
+	<dpi>"2950130010101"</dpi>
+	<nombre>"victor alejandro perez"</nombre>
+	<direccion>"13 av 15-15 zona 3, guatemala"</direccion>
+	<fh_nac>"09-10-1996"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403012"</carnet>
+	<dpi>"2950130011101"</dpi>
+	<nombre>"joaquin alberto gutierrez"</nombre>
+	<direccion>"14 av 14-62 zona 2, guatemala"</direccion>
+	<fh_nac>"27-02-1993"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403013"</carnet>
+	<dpi>"2950130012101"</dpi>
+	<nombre>"jorge luis barrera fernandez"</nombre>
+	<direccion>"14 av 12-32 zona 6, guatemala"</direccion>
+	<fh_nac>"21-12-1996"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403014"</carnet>
+	<dpi>"2950130013101"</dpi>
+	<nombre>"katerine rodriguez lopez"</nombre>
+	<direccion>"km 18 residenciales villas de san jose, casa 86, san jose pinula"</direccion>
+	<fh_nac>"23-05-1995"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403015"</carnet>
+	<dpi>"2950130014101"</dpi>
+	<nombre>"felix estuardo perez"</nombre>
+	<direccion>"10 av 3-87 zona 8, san miguel petapa"</direccion>
+	<fh_nac>"11-07-1995"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403016"</carnet>
+	<dpi>"2950130015101"</dpi>
+	<nombre>"ricardo perez hernandez"</nombre>
+	<direccion>"7 av 1-48 zona 1, guatemala"</direccion>
+	<fh_nac>"02-11-1996"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403017"</carnet>
+	<dpi>"2950130000101"</dpi>
+	<nombre>"repetido - error"</nombre>
+	<direccion>"7 av 1-48 zona 1, guatemala"</direccion>
+	<fh_nac>"02-11-1996"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403001"</carnet>
+	<dpi>"2950130000101"</dpi>
+	<nombre>"juan pablo ruiz guerra"</nombre>
+	<direccion>"14 av 11-25 zona 5, guatemala"</direccion>
+	<fh_nac>"19-01-1996"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403002"</carnet>
+	<dpi>"2950130001101"</dpi>
+	<nombre>"jose luis torres polanco"</nombre>
+	<direccion>"12 av 1-78 zona 1, guatemala"</direccion>
+	<fh_nac>"07-02-1990"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403003"</carnet>
+	<dpi>"2950130002101"</dpi>
+	<nombre>"carlos alberto villeda"</nombre>
+	<direccion>"km 8.5 carretera al atlantico, residenciales vista azul, casa 27, guatemala"</direccion>
+	<fh_nac>"29-12-1994"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403004"</carnet>
+	<dpi>"2950130003101"</dpi>
+	<nombre>"ana patricia bonilla fernandez"</nombre>
+	<direccion>"4 av 18-46 zona 1, guatemala"</direccion>
+	<fh_nac>"02-03-2017"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403005"</carnet>
+	<dpi>"2950130004101"</dpi>
+	<nombre>"maria camila hernandez"</nombre>
+	<direccion>"5 calle 2-05 zona 2, mixco"</direccion>
+	<fh_nac>"19-01-1995"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403006"</carnet>
+	<dpi>"2950130005101"</dpi>
+	<nombre>"gabriel jesus mazariegos"</nombre>
+	<direccion>"6 av 16-72 zona 13, guatemala"</direccion>
+	<fh_nac>"07-09-1995"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403007"</carnet>
+	<dpi>"2950130006101"</dpi>
+	<nombre>"alba maritza carrillo lopez"</nombre>
+	<direccion>"17 av 11-25 zona 21, guatemala"</direccion>
+	<fh_nac>"30-11-1989"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403008"</carnet>
+	<dpi>"2950130007101"</dpi>
+	<nombre>"fernanda nicole carrera salazar"</nombre>
+	<direccion>"11 av 9-25 zona 6, guatemala"</direccion>
+	<fh_nac>"20-01-1991"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403009"</carnet>
+	<dpi>"2950130008101"</dpi>
+	<nombre>"jose gustavo bran orellana"</nombre>
+	<direccion>"14 av 11-25 zona 5"</direccion>
+	<fh_nac>"01-04-1993"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403010"</carnet>
+	<dpi>"2950130009101"</dpi>
+	<nombre>"hugo manuel pineda"</nombre>
+	<direccion>"17 av 1-20 zona 7, mixco"</direccion>
+	<fh_nac>"01-01-1994"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403011"</carnet>
+	<dpi>"2950130010101"</dpi>
+	<nombre>"victor alejandro perez"</nombre>
+	<direccion>"13 av 15-15 zona 3, guatemala"</direccion>
+	<fh_nac>"09-10-1996"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403012"</carnet>
+	<dpi>"2950130011101"</dpi>
+	<nombre>"joaquin alberto gutierrez"</nombre>
+	<direccion>"14 av 14-62 zona 2, guatemala"</direccion>
+	<fh_nac>"27-02-1993"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403013"</carnet>
+	<dpi>"2950130012101"</dpi>
+	<nombre>"jorge luis barrera fernandez"</nombre>
+	<direccion>"14 av 12-32 zona 6, guatemala"</direccion>
+	<fh_nac>"21-12-1996"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403014"</carnet>
+	<dpi>"2950130013101"</dpi>
+	<nombre>"katerine rodriguez lopez"</nombre>
+	<direccion>"km 18 residenciales villas de san jose, casa 86, san jose pinula"</direccion>
+	<fh_nac>"23-05-1995"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403015"</carnet>
+	<dpi>"2950130014101"</dpi>
+	<nombre>"felix estuardo perez"</nombre>
+	<direccion>"10 av 3-87 zona 8, san miguel petapa"</direccion>
+	<fh_nac>"11-07-1995"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403016"</carnet>
+	<dpi>"2950130015101"</dpi>
+	<nombre>"ricardo perez hernandez"</nombre>
+	<direccion>"7 av 1-48 zona 1, guatemala"</direccion>
+	<fh_nac>"02-11-1996"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>
+	<Row>
+	<carnet>"201403017"</carnet>
+	<dpi>"2950130000101"</dpi>
+	<nombre>"repetido - error"</nombre>
+	<direccion>"7 av 1-48 zona 1, guatemala"</direccion>
+	<fh_nac>"02-11-1996"</fh_nac>
+	<fh_creacion>"17-08-2017 00:00:00"</fh_creacion>
+	</Row>

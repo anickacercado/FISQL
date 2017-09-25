@@ -1,0 +1,45 @@
+USAR world;
+# Paso 1
+BigBang ();
+
+# Paso 2
+# A. Todos los países registrados
+consultarMundo(sumar(multiplicar(2,5), 90)); # 100
+
+# B. Idiomas oficiales de cada país
+consultarMundo(potencia(10,2) * 2); # 200
+
+# C. Lenguas de Guatemala
+consultarMundo(restar(dividir(2000,2),400)/2); # 300
+imprimir(restar(dividir(2000,2),400)/2);
+
+# D. Ciudades de Guatemala
+consultarMundo(400); # 400
+
+# E. Top 10 países con mayor población en el mundo
+consultarMundo(multiplicar(sumar(4,16) * 5,5)); # 500
+
+# F. Top 10 idiomas más hablados en el mundo
+consultarMundo(sumar(30*10, 30*10)); # 600
+
+# G. Top 10 países con mayor expectativa de vida
+consultarMundo(multiplicar(sumar(4,16) * 5,5)); # 700
+
+# H. Países de la región de Centro América 
+ALTERAR TABLA country AGREGAR (text voz_popular);
+consultarMundo(100 + 4 * 100 + 600 / 2); # 800
+
+
+# I. Top 3 países con mayor población en Centro América
+ALTERAR OBJETO Mundo AGREGAR (text nombre);
+consultarMundo(800 / 2 + 10 ^ 2 + 500); # 900
+
+# K. Cantidad de países donde el idioma español sea el idioma oficial
+consultarMundo(600 / 2 + 10 ^ 2); # 1100
+
+-- L. Destruir África, salvando a los 3 países con menor población
+ALTERAR TABLA country QUITAR voz_popular;
+consultarMundo(1000 + 50 * 4); # 1200
+
+# J. Trasladar a los 5 países de América con menor expectativa de vida al continente de Europa
+consultarMundo(1000); # 1000

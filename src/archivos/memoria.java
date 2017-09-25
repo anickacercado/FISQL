@@ -7,6 +7,7 @@ package archivos;
 
 import archivos.maestro.master;
 import archivos.usuario.user;
+import consola.principal;
 import errores.error;
 import estructuraUSQL.seleccionaTabla;
 import estructuraUSQL.variable;
@@ -93,14 +94,15 @@ public class memoria {
     public static String usrPly = "";
     public static String passPly = "";
     public static String respuestaPly = "";
+    public static String codigoHTML = "";
 
     public static void limpiar() {
+        principal.limpiarConsola();
         posicion = 0;
         tipoDetransaccion = 0;
         lista_de_select = new ArrayList<seleccionaTabla>();
         mensaje_consola = new ArrayList<String>();
         tablaVariables = new ArrayList<variable>();
-        tablaMetodo = new ArrayList<tablaMetodo>();
         DETENER = false;
         RETORNA = false;
         tablaErroresUSQL = new ArrayList<error>();
@@ -108,7 +110,6 @@ public class memoria {
         Insert_db_actual = "";
         Insert_table_actual = "";
 
-        use_db = "";
         cod_client_sin_saltos = "";
         cod_client = "";
         posIni = 0;
@@ -117,6 +118,7 @@ public class memoria {
         codigoPly = "";
         usrPly = "";
         passPly = "";
+        codigoHTML = "";
     }
 
 }

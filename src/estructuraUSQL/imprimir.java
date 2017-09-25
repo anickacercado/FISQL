@@ -51,7 +51,7 @@ public class imprimir {
             imp= String.valueOf(exp.entero);
             principal.imprimir(hourFormat.format(date) + " Imprimir Salida -->" + imp);
         }
-        else if (exp.tipo.equals("DECIMAL")) {
+        else if (exp.tipo.equals("DOUBLE")) {
             imp= String.valueOf(exp.decimal);
             principal.imprimir(hourFormat.format(date) + " Imprimir Salida -->" + imp);
         }

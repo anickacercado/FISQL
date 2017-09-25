@@ -153,7 +153,7 @@ public class LecturaBD {
                                 arbolProcedure = gm.S();
                                 adb.get(i).setProcedure(arbolProcedure);
                             } catch (xml.metodo.ParseException ex) {
-                                //Logger.getLogger(LecturaBD.class.getName()).log(Level.SEVERE, null, ex);
+                                Logger.getLogger(LecturaBD.class.getName()).log(Level.SEVERE, null, ex);
                             }
                             break;
                         case "FUNCTION":

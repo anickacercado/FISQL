@@ -75,6 +75,7 @@ TOKEN:
     |<TOKEN_BASE_DATOS:("base_datos")> {System.out.println(image);}
     |<TOKEN_TABLA:("tabla")> {System.out.println(image);}
     |<TOKEN_NULO:("nulo")> {System.out.println(image);}
+    |<TOKEN_UNICO:("unico")> {System.out.println(image);}
     |<TOKEN_NO_NULO:("no nulo")> {System.out.println(image);}
     |<TOKEN_AUTOINCREMETABLE:("autoincrementable")> {System.out.println(image);}
     |<TOKEN_LLAVE_PRIMARIA:("llave_primaria")> {System.out.println(image);}
@@ -134,7 +135,7 @@ TOKEN:
     |<CADENA:"\"" (~["\""])*"\""> {System.out.println(image);}
     |<ENTERO: (["0"-"9"])+ > {System.out.println(image);}
     |<#NUMERO: ["0"-"9"]>
-    |<DECIMAL: (<NUMERO>)+(".")((<NUMERO>))> {System.out.println(image);}
+    |<DECIMAL: (<NUMERO>)+(".")(<NUMERO>)+> {System.out.println(image);}
     |<ID: (["a"-"z","A"-"Z"])(["a"-"z","A"-"Z","0"-"9","_"])*> {System.out.println(image);}
     |<VARIABLE: "@"(["a"-"z","A"-"Z"])(["a"-"z","A"-"Z","0"-"9","_"])*> {System.out.println(image);}
     |<DATE: (("0"["1"-"9"])|(["1"-"2"]["0"-"9"])| ("3" ["0"-"1"] )) "-" (("0"["1"-"9"])| "1"["0"-"2"]) "-" ["0"-"9"]["0"-"9"]["0"-"9"]["0"-"9"]>{System.out.println(image);}
@@ -169,29 +170,23 @@ ArrayList<simbolo> LISTA_SENTENCIA_GLOBAL():
 }
 { 
     (
-     rsim=CREAR()					{lsim.add(rsim);}
+          rsim=CREAR()					{lsim.add(rsim);}
 	 |rsim=USAR_BD()				{lsim.add(rsim);}
 	 |rsim=ALTERAR()				{lsim.add(rsim);}
 	 |rsim=ELIMINAR()				{lsim.add(rsim);}
 	 |rsim=INSERTAR()				{lsim.add(rsim);}
 	 |rsim=ACTUALIZAR()				{lsim.add(rsim);}
 	 |rsim=BORRAR()					{lsim.add(rsim);}
-	 |rsim=SELECCIONAR()<PYCOMA>	{lsim.add(rsim);}
-	 |rsim=OTORGAR()   {lsim.add(rsim);}
-	 |rsim=DENEGAR()   {lsim.add(rsim);}
+	 |rsim=OTORGAR()                                {lsim.add(rsim);}
+	 |rsim=DENEGAR()                                {lsim.add(rsim);}
 	 |lsim=DECLARAR()
-	 |rsim=BACKUP()	   {lsim.add(rsim);}
-	 |rsim=RESTAURAR() {lsim.add(rsim);}
-	 |rsim=LLAMADA_METODO_FUNCION() {lsim.add(rsim);}
-         | rsim=ASIGNAR()			 {lsim.add(rsim);}
-         | rsim=MIENTRAS()			 {lsim.add(rsim);}
-         | rsim=SI()                             {lsim.add(rsim);}
-         | rsim=PARA()			         {lsim.add(rsim);}
-         | rsim=SELECCIONA()			 {lsim.add(rsim);}
-
+	 |rsim=BACKUP()                                 {lsim.add(rsim);}
+	 |rsim=RESTAURAR()                              {lsim.add(rsim);}
+	 |rsim=LLAMADA_METODO_FUNCION()                 {lsim.add(rsim);}
+         |rsim=ASIGNAR()                                {lsim.add(rsim);}
+         |rsim=SELECCIONAR()<PYCOMA>                    {lsim.add(rsim);}
      )
     (lsim2=LISTA_SENTENCIA_GLOBAL())?
-	
 		{
 			for(int i=0; i < lsim2.size(); i++){
 				lsim.add(lsim2.get(i));
@@ -210,29 +205,33 @@ ArrayList<simbolo> LISTA_SENTENCIA_LOCAL():
     (
     rsim=RETORNO() 				 {lsim.add(rsim);}
 	| rsim=INSERTAR() 			 {lsim.add(rsim);}
-	| rsim=ACTUALIZAR() 		 {lsim.add(rsim);}
+	| rsim=ACTUALIZAR()                      {lsim.add(rsim);}
 	| rsim=BORRAR() 			 {lsim.add(rsim);}
-	| rsim=SELECCIONAR()<PYCOMA> {lsim.add(rsim);}
+	| rsim=SELECCIONAR()<PYCOMA>             {lsim.add(rsim);}
 	| lsim=DECLARAR()			 
 	| rsim=ASIGNAR()			 {lsim.add(rsim);}
-	| rsim=SI()					 {lsim.add(rsim);}
+	| rsim=SI()				 {lsim.add(rsim);}
 	| rsim=SELECCIONA()			 {lsim.add(rsim);}		 
 	| rsim=PARA()				 {lsim.add(rsim);}
-	| rsim=MIENTRAS()			     {lsim.add(rsim);}
-	| rsim=DETENER()				 {lsim.add(rsim);}
-	| rsim=LLAMADA_METODO_FUNCION()  {lsim.add(rsim);}
+	| rsim=MIENTRAS()			 {lsim.add(rsim);}
+	| rsim=DETENER()		         {lsim.add(rsim);}
+	| rsim=LLAMADA_METODO_FUNCION()          {lsim.add(rsim);}
+        | rsim=CREAR()					{lsim.add(rsim);}
+      
     ) 
     (lsim2=LISTA_SENTENCIA_LOCAL())? 
-		
 		{
 			for(int i=0; i < lsim2.size(); i++){
 				lsim.add(lsim2.get(i));
 			}
 			return lsim;
 		}
-
-		
 }
+
+
+
+
+
 
 simbolo CREAR():
 {Token t;
@@ -311,7 +310,8 @@ void COMPLEMENTO_PARAMETRO_TABLA():
     |<TOKEN_NO_NULO>    {no_nulo="Y";}
     |<TOKEN_AUTOINCREMETABLE>   {autoincrementable="Y";}
     |<TOKEN_LLAVE_PRIMARIA> {llave_primaria="Y";}
-    |<TOKEN_LLAVE_FORANEA> t=<ID> {llave_foranea=t.image;}
+    |<TOKEN_LLAVE_FORANEA> t=<ID> <ID> {llave_foranea=t.image;}
+    |<TOKEN_UNICO>  {}
 }
 
 
@@ -636,7 +636,7 @@ simbolo SELECCIONAR():
     Token t=null,tipo=null;
 }
 {
-        t=<TOKEN_SELECCIONAR> (lista_columna=LLAMADA_TABLA() | <POR> {todaColumna=true;})
+        t=<TOKEN_SELECCIONAR> (lista_columna=LLAMADA_TABLA() {todaColumna=false;} | <POR> {todaColumna=true;})
        <TOKEN_DE> lista_tabla=LISTA_ID() (<TOKEN_DONDE> expresion=CONDICION())? (<TOKEN_ORDENAR> tabla_ordenar=LLAMADA_TABLA() (tipo=<TOKEN_ASC>|tipo=<TOKEN_DESC>) {tieneOrdenar=true;})? 
 	
         {
@@ -810,7 +810,7 @@ ArrayList<caso> lista_caso = new ArrayList<caso>();
 caso def= null;}
 {
     t=<TOKEN_SELECCIONA> <PAR_ABRE> exp=CONDICION() <PAR_CIERRA> <LLAVE_ABRE> lista_caso=LISTA_CASO() (def=DEFECTO())? <LLAVE_CIERRA>	
-	 {
+	{
         ambito ambito = new ambito("SELECCIONA", new ArrayList<simbolo>());
         for(caso ca: lista_caso){
             for(simbolo sim: ca.ambito.tablaSimbolo){
@@ -824,7 +824,7 @@ caso def= null;}
 		
         selecciona sele = new selecciona(exp,lista_caso,def,ambito);
         return new simbolo(t.beginLine, t.beginColumn,"SELECCIONA", "SELECCIONA","SELECCIONA",sele.ambito,sele);
-	 }	
+	}	
 }
 
 ArrayList<caso> LISTA_CASO():

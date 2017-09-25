@@ -81,11 +81,11 @@ public class create {
             if (memoria.arbolMaestro.get(i).getNombre().equals(nombre_bd)) {
                 tempData = memoria.arbolMaestro.get(i).getDatabase();
                 for (int j = 0; j < tempData.size(); j++) {
-                    if (tempData.get(j).getTipo().equals("PROCEDURE")) {
-                        tempProc = tempData.get(j).getProcedure();
+                    if (tempData.get(j).getTipo().equals("PROCEDURE")){
                         if (tempData.get(j).existProcedure(nombre_proc) == false) {
                             procedure p = new procedure(nombre_proc, para, codigo);
-                            tempProc.add(p);
+                            //tempData.get(j).addProcedure(p);
+                            memoria.arbolMaestro.get(i).getDatabase().get(j).addProcedure(p);
                         }
                     }
                 }
@@ -101,10 +101,10 @@ public class create {
             tempData = memoria.arbolMaestro.get(i).getDatabase();
             for (int j = 0; j < tempData.size(); j++) {
                 if (tempData.get(j).getTipo().equals("FUNCTION")) {
-                    tempFunc = tempData.get(j).getFunction();
-                    if (tempData.get(j).existFunction(nombre_func) == false) {
+                    if (tempData.get(j).existFunction(nombre_func) == false) {            
                         function f = new function(nombre_func, para, codigo, retorno);
-                        tempFunc.add(f);
+                        //tempFunc = tempData.get(j).getFunction();
+                        memoria.arbolMaestro.get(i).getDatabase().get(j).addFunction(f);
                     }
                 }
             }

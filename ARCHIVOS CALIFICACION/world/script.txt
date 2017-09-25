@@ -1,0 +1,548 @@
+CREAR BASE_DATOS world;
+usar world;
+
+CREAR OBJETO Mundo (INTEGER ciudades, INTEGER paises, INTEGER idiomas);
+
+CREAR FUNCION genesis () INTEGER {
+
+    DECLARAR @tablasCreadas integer = 0;
+    IMPRIMIR("Crando la tabla city...");
+    IMPRIMIR("Fecha y hora de cracin: ");
+    IMPRIMIR("23-09-2017 12:35:58");
+    
+	
+	CREAR TABLA city (
+        integer id No Nulo LLAVE_PRIMARIA,
+        text name No Nulo,
+        text countrycode No Nulo,
+        text district No Nulo,
+        integer population No Nulo
+    );
+	
+    @tablasCreadas = @tablasCreadas + 1;
+
+    IMPRIMIR("Crando la tabla country...");
+    IMPRIMIR("Fecha y hora de cracin: ");
+    IMPRIMIR("23-09-2017 12:35:58");
+    
+	
+	CREAR TABLA country (
+        text code No Nulo LLAVE_PRIMARIA,
+        text name No Nulo,
+        text continent No Nulo,
+        text region No Nulo,
+        integer surfacearea No Nulo,
+        integer indepyear,
+        integer population No Nulo,
+        double lifeexpectancy,
+        double gnp,
+        double gnpold,
+        text localname No Nulo,
+        text governmentform No Nulo,
+        text headofstate,
+        integer capital LLAVE_FORANEA city id,
+        text code2 No Nulo
+    );
+    
+	@tablasCreadas = @tablasCreadas + 1;
+
+    IMPRIMIR("Crando la tabla countrylanguage...");
+    IMPRIMIR("Fecha y hora de cracin: ");
+    IMPRIMIR("23-09-2017 12:35:58");
+   
+   CREAR TABLA countrylanguage (
+        text countrycode No Nulo LLAVE_FORANEA country code,
+        text language No Nulo,
+        bool isofficial No Nulo,
+        double percentage No Nulo
+    );
+    @tablasCreadas = @tablasCreadas + 1;
+
+    RETORNO @tablasCreadas;
+}
+
+CREAR PROCEDIMIENTO BigBang () {
+    DECLARAR @resultado integer=0;
+    
+	@resultado = genesis ();
+    SI(@resultado == 3){
+        IMPRIMIR("Las tablas se crearon correctamente y estn listas para ser pobladas.");
+        poblarTablas();
+    }SINO{
+        IMPRIMIR(morir());
+    }
+}
+
+CREAR FUNCION crearCiudades () INTEGER {
+    IMPRIMIR("Llenando la tabla city...");
+    IMPRIMIR("Fecha y hora de inicio: ");
+    IMPRIMIR("23-09-2017 12:35:58");
+
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (5, "Amsterdam", "NLD", "Noord-Holland", 731200);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (35, "Alger", "DZA", "Alger", 2168000);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (69, "Buenos Aires", "ARG", "Distrito Federal", 2982146);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (135, "Canberra", "AUS", "Capital Region", 322723);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (150, "Dhaka", "BGD", "Dhaka", 3612850);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (185, "Belmopan", "BLZ", "Cayo", 7105);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (211, "Braslia", "BRA", "Distrito Federal", 1969868);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (456, "London", "GBR", "England", 7285000);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (554, "Santiago de Chile", "CHL", "Santiago", 4703954);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (584, "San Jo", "CRI", "San Jos", 339131);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (587, "Santo Domingo de Guzm n", "DOM", "Distrito Nacional", 1609966);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (608, "Cairo", "EGY", "Kairo", 6789479);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (645, "San Salvador", "SLV", "San Salvador", 415346);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (653, "Madrid", "ESP", "Madrid", 2879052);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (716, "Pretoria", "ZAF", "Gauteng", 658630);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (756, "Addis Abeba", "ETH", "Addis Abeba", 2495000);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (764, "Suva", "FJI", "Central", 77366);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (766, "Manila", "PHL", "National Capital Reg", 1581082);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (921, "Agaa", "GUM", "-", 1139);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (922, "Ciudad de Guatemala", "GTM", "Guatemala", 823301);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (923, "Mixco", "GTM", "Guatemala", 209791);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (924, "Villa Nueva", "GTM", "Guatemala", 101295);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (925, "Quetzaltenango", "GTM", "Quetzaltenango", 90801);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (933, "Tegucigalpa", "HND", "Distrito Central", 813900);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (939, "Jakarta", "IDN", "Jakarta Raya", 9604900);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (1109, "New Delhi", "IND", "Delhi", 301297);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (1380, "Teheran", "IRN", "Teheran", 6758845);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (1464, "Roma", "ITA", "Latium", 2643581);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (1532, "Tokyo", "JPN", "Tokyo-to", 7980230);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (1881, "Nairobi", "KEN", "Nairobi", 2290000);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (1891, "Peking", "CHN", "Peking", 7472000);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (2257, "Santafde Bogot ", "COL", "Santafde Bogot ", 6260862);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (2298, "Kinshasa", "COD", "Kinshasa", 5064000);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (2413, "La Habana", "CUB", "La Habana", 2256000);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (2486, "Rabat", "MAR", "Rabat-Sal-Zammour-Z", 623457);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (2515, "Ciudad de Mxico", "MEX", "Distrito Federal", 8591309);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (2734, "Managua", "NIC", "Managua", 959000);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (2754, "Abuja", "NGA", "Federal Capital Dist", 350100);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (2831, "Islamabad", "PAK", "Islamabad", 524500);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (2882, "Ciudad de Panam ", "PAN", "Panam ", 471373);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (2884, "Port Moresby", "PNG", "National Capital Dis", 247000);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (2890, "Lima", "PER", "Lima", 6464693);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (2928, "Warszawa", "POL", "Mazowieckie", 1615369);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (2974, "Paris", "FRA", "×le-de-France", 2125246);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (3016, "Papeete", "PYF", "Tahiti", 25553);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (3018, "Bucuresti", "ROM", "Bukarest", 2016131);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (3068, "Berlin", "DEU", "Berliini", 3386667);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (3161, "Honiara", "SLB", "Honiara", 50100);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (3169, "Apia", "WSM", "Upolu", 35900);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (3225, "Khartum", "SDN", "Khartum", 947483);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (3306, "Dodoma", "TZA", "Dodoma", 189000);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (3358, "Ankara", "TUR", "Ankara", 3038159);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (3426, "Kyiv", "UKR", "Kiova", 2624000);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (3493, "Nouma", "NCL", "-", 76293);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (3499, "Wellington", "NZL", "Wellington", 166700);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (3537, "Port-Vila", "VUT", "Shefa", 33700);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (3580, "Moscow", "RUS", "Moscow (City)", 8389200);
+    INSERTAR EN TABLA city (id, name, countrycode, district, population) VALORES (3770, "Hanoi", "VNM", "Hanoi", 1410000);
+
+    RETORNO 58;
+}
+
+CREAR FUNCION crearPaises () INTEGER {
+    IMPRIMIR("Llenando la tabla country...");
+    IMPRIMIR("Fecha y hora de inicio: ");
+   
+    INSERTAR EN TABLA country  ("NLD", "Netherlands", "Europe", "Western Europe", 41526, 1581, 1586400, 78.30, 371362.00, 360478.00, "Nederland", "Constitutional Monarchy", "Beatrix", 5, "NL");
+    INSERTAR EN TABLA country  ("DZA", "Algeria", "Africa", "Northern Africa", 238174, 1962, 3147100, 69.69, 49982.00, 46966.00, "Al-Jazair/Algrie", "Republic", "Abdelaziz Bouteflika", 35, "DZ");
+    INSERTAR EN TABLA country  ("ARG", "Argentina", "South America", "South America", 2780400, 1816, 37032000, 75.09, 340238.00, 323310.00, "Argentina", "Federal Republic", "Fernando de la Ra", 69, "AR");
+    INSERTAR EN TABLA country  ("AUS", "Australia", "Oceania", "Australia and New Zealand", 7741220, 1901, 18886000, 79.80, 351182.00, 392911.00, "Australia", "Constitutional Monarchy, Federation", "Elisabeth II", 135, "AU");
+    INSERTAR EN TABLA country  ("BGD", "Bangladesh", "Asia", "Southern and Central Asia", 143998, 1971, 129155000, 60.20, 32852.00, 31966.00, "Bangladesh", "Republic", "Shahabuddin Ahmad", 150, "BD");
+    INSERTAR EN TABLA country  ("BLZ", "Belize", "North America", "Central America", 22696, 1981, 241000, 70.90, 630.00, 616.00, "Belize", "Constitutional Monarchy", "Elisabeth II", 185, "BZ");
+    INSERTAR EN TABLA country  ("BRA", "Brazil", "South America", "South America", 8547403, 1822, 170115000, 62.90, 776739.00, 804108.00, "Brasil", "Federal Republic", "Fernando Henrique Cardoso", 211, "BR");
+    INSERTAR EN TABLA country  ("GBR", "United Kingdom", "Europe", "British Islands", 242900, 1066, 59623400, 77.69, 1378330.00, 1296830.00, "United Kingdom", "Constitutional Monarchy", "Elisabeth II", 456, "GB");
+    INSERTAR EN TABLA country  ("CHL", "Chile", "South America", "South America", 756626, 1810, 15211000, 75.69, 72949.00, 75780.00, "Chile", "Republic", "Ricardo Lagos Escobar", 554, "CL");
+    INSERTAR EN TABLA country  ("CRI", "Costa Rica", "North America", "Central America", 51100, 1821, 4023000, 75.80, 10226.00, 9757.00, "Costa Rica", "Republic", "Miguel ngel Rodrguez Echeverra", 584, "CR");
+    INSERTAR EN TABLA country  ("DOM", "Dominican Republic", "North America", "Caribbean", 48511, 1844, 8495000, 73.19, 15846.00, 15076.00, "Repblica Dominicana", "Republic", "Hiplito Meja Domnguez", 587, "DO");
+    INSERTAR EN TABLA country  ("EGY", "Egypt", "Africa", "Northern Africa", 1001449, 1922, 68470000, 63.29, 82710.00, 75617.00, "Misr", "Republic", "Hosni Mubarak", 608, "EG");
+    INSERTAR EN TABLA country  ("SLV", "El Salvador", "North America", "Central America", 21041, 1841, 6276000, 69.69, 11863.00, 11203.00, "El Salvador", "Republic", "Francisco Guillermo Flores Prez", 645, "SV");
+    INSERTAR EN TABLA country  ("ESP", "Spain", "Europe", "Southern Europe", 505992, 1492, 39441700, 78.80, 553233.00, 532031.00, "Espaa", "Constitutional Monarchy", "Juan Carlos I", 653, "ES");
+    INSERTAR EN TABLA country  ("ZAF", "South Africa", "Africa", "Southern Africa", 1221037, 1910, 40377000, 51.09, 116729.00, 129092.00, "South Africa", "Republic", "Thabo Mbeki", 716, "ZA");
+    INSERTAR EN TABLA country  ("ETH", "Ethiopia", "Africa", "Eastern Africa", 1104300, 1000, 62565000, 45.20, 6353.00, 6180.00, "YeItyopiya", "Republic", "Negasso Gidada", 756, "ET");
+    INSERTAR EN TABLA country  ("FJI", "Fiji Islands", "Oceania", "Melanesia", 18274, 1970, 817000, 67.90, 1536.00, 2149.00, "Fiji Islands", "Republic", "Josefa Iloilo", 764, "FJ");
+    INSERTAR EN TABLA country  ("PHL", "Philippines", "Asia", "Southeast Asia", 300000, 1946, 75967000, 67.50, 65107.00, 82239.00, "Pilipinas", "Republic", "Gloria Macapagal-Arroyo", 766, "PH");
+    INSERTAR EN TABLA country  ("GUM", "Guam", "Oceania", "Micronesia", 549, 0, 168000, 77.80, 1197.00, 1136.00, "Guam", "US Territory", "George W. Bush", 921, "GU");
+    INSERTAR EN TABLA country  ("GTM", "Guatemala", "North America", "Central America", 108889, 1821, 11385000, 66.19, 19008.00, 17797.00, "Guatemala", "Republic", "Alfonso Portillo Cabrera", 922, "GT");
+    INSERTAR EN TABLA country  ("HND", "Honduras", "North America", "Central America", 112088, 1838, 6485000, 69.90, 5333.00, 4697.00, "Honduras", "Republic", "Carlos Roberto Flores Facuss", 933, "HN");
+    INSERTAR EN TABLA country  ("IDN", "Indonesia", "Asia", "Southeast Asia", 1904569, 1945, 212107000, 68.00, 84982.00, 215002.00, "Indonesia", "Republic", "Abdurrahman Wahid", 939, "ID");
+    INSERTAR EN TABLA country  ("IND", "India", "Asia", "Southern and Central Asia", 3287263, 1947, 1013662000, 62.5, 447114.00, 430572.00, "Bharat/India", "Federal Republic", "Kocheril Raman Narayanan", 1109, "IN");
+    INSERTAR EN TABLA country  ("IRN", "Iran", "Asia", "Southern and Central Asia", 1648195, 1906, 67702000, 69.69, 195746.00, 160151.00, "Iran", "Islamic Republic", "Ali Mohammad Khatami-Ardakani", 1380, "IR");
+    INSERTAR EN TABLA country  ("ITA", "Italy", "Europe", "Southern Europe", 301316, 1861, 57680000, 79.00, 1161755.00, 1145372.00, "Italia", "Republic", "Carlo Azeglio Ciampi", 1464, "IT");
+    INSERTAR EN TABLA country  ("JPN", "Japan", "Asia", "Eastern Asia", 377829, 660, 126714000, 80.69, 3787042.00, 4192638.00, "Nihon/Nippon", "Constitutional Monarchy", "Akihito", 1532, "JP");
+    INSERTAR EN TABLA country  ("KEN", "Kenya", "Africa", "Eastern Africa", 580367, 1963, 30080000, 48.0, 9217.00, 10241.00, "Kenya", "Republic", "Daniel arap Moi", 1881, "KE");
+    INSERTAR EN TABLA country  ("CHN", "China", "Asia", "Eastern Asia", 9572900, 1523, 1277558000, 71.40, 982268.00, 917719.00, "Zhongquo", "People Republic", "Jiang Zemin", 1891, "CN");
+    INSERTAR EN TABLA country  ("COL", "Colombia", "South America", "South America", 1138914, 1810, 42321000, 70.30, 102896.00, 105116.00, "Colombia", "Republic", "Andrs Pastrana Arango", 2257, "CO");
+    INSERTAR EN TABLA country  ("COD", "Congo, The Democratic Republic of the", "Africa", "Central Africa", 2344858, 1960, 51654000, 48.79, 6964.00, 2474.00, "Rpublique Dmocratique du Congo", "Republic", "Joseph Kabila", 2298, "CD");
+    INSERTAR EN TABLA country  ("CUB", "Cuba", "North America", "Caribbean", 110861, 1902, 11201000, 76.19, 17843.00, 18862.00, "Cuba", "Socialistic Republic", "Fidel Castro Ruz", 2413, "CU");
+    INSERTAR EN TABLA country  ("MAR", "Morocco", "Africa", "Northern Africa", 446550, 1956, 28351000, 69.09, 36124.00, 33514.00, "Al-Maghrib", "Constitutional Monarchy", "Mohammed VI", 2486, "MA");
+    INSERTAR EN TABLA country  ("MEX", "Mexico", "North America", "Central America", 1958201, 1810, 98881000, 71.50, 414972.00, 401461.00, "Mxico", "Federal Republic", "Vicente Fox Quesada", 2515, "MX");
+    INSERTAR EN TABLA country  ("NIC", "Nicaragua", "North America", "Central America", 130000, 1838, 5074000, 68.69, 1988.00, 2023.00, "Nicaragua", "Republic", "Arnoldo Alem n Lacayo", 2734, "NI");
+    INSERTAR EN TABLA country  ("NGA", "Nigeria", "Africa", "Western Africa", 923768, 1960, 111506000, 51.59, 65707.00, 58623.00, "Nigeria", "Federal Republic", "Olusegun Obasanjo", 2754, "NG");
+    INSERTAR EN TABLA country  ("PAK", "Pakistan", "Asia", "Southern and Central Asia", 796095, 1947, 156483000, 61.09, 61289.00, 58549.00, "Pakistan", "Republic", "Mohammad Rafiq Tarar", 2831, "PK");
+    INSERTAR EN TABLA country  ("PAN", "Panama", "North America", "Central America", 75517, 1903, 2856000, 75.5, 9131.00, 8700.00, "Panam ", "Republic", "Mireya Elisa Moscoso Rodrguez", 2882, "PA");
+    INSERTAR EN TABLA country  ("PNG", "Papua New Guinea", "Oceania", "Melanesia", 462840, 1975, 4807000, 63.09, 4988.00, 6328.00, "Papua New Guinea/Papua Niugini", "Constitutional Monarchy", "Elisabeth II", 2884, "PG");
+    INSERTAR EN TABLA country  ("PER", "Peru", "South America", "South America", 1285216, 1821, 25662000, 70.00, 64140.00, 65186.00, "Per/Piruw", "Republic", "Valentin Paniagua Corazao", 2890, "PE");
+    INSERTAR EN TABLA country  ("POL", "Poland", "Europe", "Eastern Europe", 323250, 1918, 38653600, 73.19, 151697.00, 135636.00, "Polska", "Republic", "Aleksander Kwasniewski", 2928, "PL");
+    INSERTAR EN TABLA country  ("FRA", "France", "Europe", "Western Europe", 551500, 843, 59225700, 78.80, 1424285.00, 1392448.00, "France", "Republic", "Jacques Chirac", 2974, "FR");
+    INSERTAR EN TABLA country  ("PYF", "French Polynesia", "Oceania", "Polynesia", 4000, 0, 235000, 74.80, 818.00, 781.00, "Polynsie franaise", "Nonmetropolitan Territory of France", "Jacques Chirac", 3016, "PF");
+    INSERTAR EN TABLA country  ("ROM", "Romania", "Europe", "Eastern Europe", 238391, 1878, 22455500, 69.90, 38158.00, 34843.00, "Romnia", "Republic", "Ion Iliescu", 3018, "RO");
+    INSERTAR EN TABLA country  ("DEU", "Germany", "Europe", "Western Europe", 357022, 1955, 82164700, 77.40, 2133367.00, 2102826.00, "Deutschland", "Federal Republic", "Johannes Rau", 3068, "DE");
+    INSERTAR EN TABLA country  ("SLB", "Solomon Islands", "Oceania", "Melanesia", 28896, 1978, 444000, 71.30, 182.00, 220.00, "Solomon Islands", "Constitutional Monarchy", "Elisabeth II", 3161, "SB");
+    INSERTAR EN TABLA country  ("WSM", "Samoa", "Oceania", "Polynesia", 2831, 1962, 180000, 69.19, 141.00, 157.00, "Samoa", "Parlementary Monarchy", "Malietoa Tanumafili II", 3169, "WS");
+    INSERTAR EN TABLA country  ("SDN", "Sudan", "Africa", "Northern Africa", 2505813, 1956, 29490000, 56.59, 10162.00, 0.0, "As-Sudan", "Islamic Republic", "Omar Hassan Ahmad al-Bashir", 3225, "SD");
+    INSERTAR EN TABLA country  ("TZA", "Tanzania", "Africa", "Eastern Africa", 883749, 1961, 33517000, 52.29, 8005.00, 7388.00, "Tanzania", "Republic", "Benjamin William Mkapa", 3306, "TZ");
+    INSERTAR EN TABLA country  ("TUR", "Turkey", "Asia", "Middle East", 774815, 1923, 66591000, 71.0, 210721.00, 189122.00, "Trkiye", "Republic", "Ahmet Necdet Sezer", 3358, "TR");
+    INSERTAR EN TABLA country  ("UKR", "Ukraine", "Europe", "Eastern Europe", 603700, 1991, 50456000, 66.0, 42168.00, 49677.00, "Ukrajina", "Republic", "Leonid Kutsma", 3426, "UA");
+    INSERTAR EN TABLA country  ("NCL", "New Caledonia", "Oceania", "Melanesia", 18575, 0, 214000, 72.80, 3563.00, 0.0, "Nouvelle-Caldonie", "Nonmetropolitan Territory of France", "Jacques Chirac", 3493, "NC");
+    INSERTAR EN TABLA country  ("NZL", "New Zealand", "Oceania", "Australia and New Zealand", 270534, 1907, 3862000, 77.80, 54669.00, 64960.00, "New Zealand/Aotearoa", "Constitutional Monarchy", "Elisabeth II", 3499, "NZ");
+    INSERTAR EN TABLA country  ("VUT", "Vanuatu", "Oceania", "Melanesia", 12189, 1980, 190000, 60.59, 261.00, 246.00, "Vanuatu", "Republic", "John Bani", 3537, "VU");
+    INSERTAR EN TABLA country  ("RUS", "Russian Federation", "Europe", "Eastern Europe", 17075400, 1991, 146934000, 67.19, 276608.00, 442989.00, "Rossija", "Federal Republic", "Vladimir Putin", 3580, "RU");
+    INSERTAR EN TABLA country  ("VNM", "Vietnam", "Asia", "Southeast Asia", 331689, 1945, 79832000, 69.30, 21929.00, 22834.00, "Vit Nam", "Socialistic Republic", "Trn Duc Luong", 3770, "VN");
+    INSERTAR EN TABLA country  ("ATA", "Antarctica", "Antarctica", "Antarctica", 13120000, 0, 0, 0.0, 0.00, 0.0, "-", "Co-administrated", "", 5, "AQ");
+    INSERTAR EN TABLA country  ("BVT", "Bouvet Island", "Antarctica", "Antarctica", 59, 0, 0, 0.0, 0.00, 0.0, "Bouvetya", "Dependent Territory of Norway", "Harald V", 5, "BV");
+    INSERTAR EN TABLA country  ("SGS", "South Georgia and the South Sandwich Islands", "Antarctica", "Antarctica", 3903, 0, 0, 0.0, 0.00, 0.0, "South Georgia and the South Sandwich Islands", "Dependent Territory of the UK", "Elisabeth II", 5, "GS");
+    INSERTAR EN TABLA country  ("HMD", "Heard Island and McDonald Islands", "Antarctica", "Antarctica", 359, 0, 0, 0.0, 0.00, 0.0, "Heard and McDonald Islands", "Territory of Australia", "Elisabeth II", 5, "HM");
+    INSERTAR EN TABLA country  ("ATF", "French Southern territories", "Antarctica", "Antarctica", 7780, 0, 0, 0.0, 0.00, 0.0, "Terres australes franaises", "Nonmetropolitan Territory of France", "Jacques Chirac", 5, "TF");
+
+    RETORNO  60;
+}
+
+CREAR FUNCION crearIdiomas () INTEGER {
+    IMPRIMIR("Llenando la tabla countrylanguage...");
+    IMPRIMIR("Fecha y hora de inicio: ");
+    IMPRIMIR("23-09-2017 12:35:58");
+
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("NLD", "Dutch", verdadero, 95.59);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("DZA", "Arabic", verdadero, 86.0);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("ARG", "Spanish", verdadero, 96.80);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("AUS", "English", verdadero, 81.19);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("BGD", "Bengali", verdadero, 97.69);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("BLZ", "English", verdadero, 50.79);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("BRA", "Portuguese", verdadero, 97.5);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("GBR", "English", verdadero, 97.30);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("CHL", "Spanish", verdadero, 89.69);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("CRI", "Spanish", verdadero, 97.5);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("DOM", "Spanish", verdadero, 98.0);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("EGY", "Arabic", verdadero, 98.80);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("SLV", "Spanish", verdadero, 100.0);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("ESP", "Spanish", verdadero, 74.40);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("ZAF", "Zulu", verdadero, 22.70);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("FJI", "Fijian", verdadero, 50.79);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("PHL", "Pilipino", verdadero, 29.29);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("GUM", "English", verdadero, 37.5);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("GTM", "Spanish", verdadero, 64.69);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("HND", "Spanish", verdadero, 97.19);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("IND", "Hindi", verdadero, 39.90);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("IRN", "Persian", verdadero, 45.70);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("ITA", "Italian", verdadero, 94.09);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("JPN", "Japanese", verdadero, 99.09);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("CHN", "Chinese", verdadero, 92.0);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("COL", "Spanish", verdadero, 99.0);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("CUB", "Spanish", verdadero, 100.0);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("MAR", "Arabic", verdadero, 65.0);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("MEX", "Spanish", verdadero, 92.09);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("NIC", "Spanish", verdadero, 97.59);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("PAN", "Spanish", verdadero, 76.80);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("PER", "Spanish", verdadero, 79.80);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("POL", "Polish", verdadero, 97.59);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("FRA", "French", verdadero, 93.59);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("ROM", "Romanian", verdadero, 90.69);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("DEU", "German", verdadero, 91.30);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("SDN", "Arabic", verdadero, 49.40);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("TUR", "Turkish", verdadero, 87.59);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("UKR", "Ukrainian", verdadero, 64.69);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("NZL", "English", verdadero, 87.0);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("VUT", "Bislama", verdadero, 56.59);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("RUS", "Russian", verdadero, 86.59);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("VNM", "Vietnamese", verdadero, 86.80);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("ZAF", "Xhosa", verdadero, 17.70);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("GUM", "Chamorro", verdadero, 29.60);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("GTM", "Quich", falso, 10.10);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("PER", "Ketsua", verdadero, 16.39);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("PYF", "French", verdadero, 40.79);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("WSM", "Samoan", verdadero, 47.5);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("TZA", "Swahili", verdadero, 8.80);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("NCL", "French", verdadero, 34.29);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("VUT", "English", verdadero, 28.29);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("ZAF", "Afrikaans", verdadero, 14.30);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("GTM", "Cakchiquel", falso, 8.89);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("IDN", "Malay", verdadero, 12.10);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("PER", "Aimar ", verdadero, 2.29);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("ROM", "Romani", verdadero, 0.69);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("WSM", "English", verdadero, 0.60);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("VUT", "French", verdadero, 14.19);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("GTM", "Kekch", falso, 4.90);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("ZAF", "English", verdadero, 8.5);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("GTM", "Mam", falso, 2.70);
+    INSERTAR EN TABLA countrylanguage (countrycode, language, isofficial, percentage) VALORES ("PAK", "Urdu", verdadero, 7.59);
+
+    RETORNO 63;
+}
+
+CREAR PROCEDIMIENTO poblarTablas () {
+    
+    
+	DECLARAR @miMundo Mundo;
+    @miMundo.ciudades = crearCiudades();
+    @miMundo.paises = crearPaises ();
+    @miMundo.idiomas = crearIdiomas ();
+
+    SI(@miMundo.ciudades != 0) {
+        IMPRIMIR("Ahora hay ");
+		IMPRIMIR(@miMundo.ciudades);
+		IMPRIMIR(" filas en la tabla city. :-)");
+    } SINO {
+        IMPRIMIR(morir());
+    }
+
+    SI(@miMundo.paises != 0){
+        IMPRIMIR("Ahora hay ");
+		IMPRIMIR(@miMundo.paises);
+		IMPRIMIR(" filas en la tabla city. :-)");
+    } SINO {
+        IMPRIMIR(morir());
+    }
+
+    SI(@miMundo.idiomas != 0) {
+        IMPRIMIR("Ahora hay ");
+		IMPRIMIR(@miMundo.idiomas);
+		IMPRIMIR(" filas en la tabla city. :-)");
+    } SINO {
+        IMPRIMIR(morir());
+    }
+}
+
+CREAR FUNCION morir () text {
+     RETORNO "Algo sali mal, no te puedo seguir calificando... :-( ";
+}
+
+CREAR FUNCION sumar (INTEGER @a, INTEGER @b) INTEGER {
+    RETORNO @a + @b;
+}
+
+CREAR FUNCION restar (INTEGER @a, INTEGER @b) INTEGER {
+    DECLARAR @resultado INTEGER=0;
+    @resultado = @a - @b;
+    RETORNO @resultado;
+}
+
+CREAR FUNCION multiplicar (INTEGER @a, INTEGER @b) INTEGER {
+    RETORNO @a * @b;
+}
+
+CREAR FUNCION dividir (INTEGER @a, INTEGER @b) INTEGER {
+    DECLARAR @resultado INTEGER=0;
+    @resultado = @a / @b;
+    RETORNO @resultado;
+}
+
+CREAR FUNCION potencia (INTEGER @a, INTEGER @b) INTEGER {
+    RETORNO @a ^ @b;
+}
+
+CREAR PROCEDIMIENTO consultarMundo(INTEGER @tipo) {
+
+	DECLARAR @miMundo Mundo;
+    @miMundo.ciudades = 58;
+    @miMundo.paises = 60;
+    @miMundo.idiomas = 63;
+
+    SELECCIONA (@tipo) {
+        CASO 100 :
+            SI(@miMundo.paises != 0) {
+                SELECCIONAR * DE country;
+            } SINO {
+                IMPRIMIR(morir());
+            }
+            DETENER;
+        CASO 200 :
+            SI(@miMundo.idiomas != 0 && @miMundo.paises != 0) {
+                SELECCIONAR countrylanguage.countrycode, country.name, countrylanguage.language, countrylanguage.percentage
+                DE countrylanguage, country 
+                DONDE countrylanguage.countrycode == country.code && countrylanguage.isofficial == verdadero;
+            } SINO {
+                IMPRIMIR(morir());
+            }
+            DETENER;
+        CASO 300 :
+            SI(@miMundo.idiomas != 0 && @miMundo.paises != 0) {
+                SELECCIONAR countrylanguage.language, countrylanguage.percentage
+                DE countrylanguage 
+                DONDE countrylanguage.countrycode == "GTM";
+            } SINO {
+                IMPRIMIR(morir());
+            }
+            DETENER;
+        CASO 400 :
+            SI(@miMundo.ciudades != 0 && @miMundo.paises != 0) {            
+                SELECCIONAR id, name, district, population 
+                DE city 
+                DONDE city.countrycode == "GTM"; 
+            } SINO {
+                IMPRIMIR(morir());
+            }
+            DETENER;
+        CASO 500 :
+            SI(@miMundo.idiomas != 0 && @miMundo.ciudades != 0 && @miMundo.paises != 0) {          
+                SELECCIONAR country.population, country.code, country.name, city.name, countrylanguage.language  
+                DE country, city, countrylanguage
+                DONDE country.code == city.countrycode && country.code == countrylanguage.countrycode;
+
+                DECLARAR @temporal INTEGER = 60;
+                SI( @temporal > 10) {
+                    DECLARAR @a INTEGER = 0;
+                    MIENTRAS( @a < 10 ) {
+                        IMPRIMIR("Solo se necesitan 10 de " + @temporal + " y vamos por el " + @a);
+                        @a = @a + 1;
+                    }
+                }
+            } SINO {
+                IMPRIMIR(morir());
+            }
+            DETENER;
+        CASO 600 :
+            SI(@miMundo.idiomas != 0 && @miMundo.ciudades != 0 && @miMundo.paises != 0) {          
+                SELECCIONAR country.population, countrylanguage.language
+                DE country, city, countrylanguage
+                DONDE country.code == city.countrycode && country.code == countrylanguage.countrycode;
+                 IMPRIMIR("Solo tomar en cuenta los primeros 10");
+            } SINO {
+                IMPRIMIR(morir());
+            }          
+            DETENER;
+        CASO 700 :
+            SI(@miMundo.paises != 0) {
+                SI( 1 != 0 )  {
+                    ACTUALIZAR TABLA country (headofstate) VALORES ("Jimmy Morales") DONDE  country.code == "JPN";
+                }
+
+                SI( 0 == 0) {
+                    IMPRIMIR("El pais no existe!!!!!");
+                }       
+
+                SELECCIONAR code, name, lifeexpectancy, headofstate 
+                DE country ;
+
+                DECLARAR @temporal INTEGER = 60;
+                SI( @temporal > 10) {
+                    PARA( DECLARAR @a INTEGER = 0; @a < 10; ++){
+                        IMPRIMIR("Solo se necesitan 10 de " + @temporal + " y vamos por el " + @a);
+                    }
+                }
+            } SINO {
+                IMPRIMIR(morir());
+            }           
+            DETENER;
+        CASO 800 :
+            SI(@miMundo.paises != 0) {
+                IMPRIMIR("Actualizando la tabla de paises...");
+
+                SI( 1 != 0) {
+                    ACTUALIZAR TABLA country (voz_popular) VALORES ("Jimmy se va!!!!!") DONDE  country.code == "GTM";
+                } SINO {
+                    IMPRIMIR(morir() + ". Qu pas, el pas si debe existir...");
+                }
+
+                SELECCIONAR code, name, region, voz_popular 
+                DE country 
+                DONDE country.region == "Central America" && country.code != "MEX";
+            } SINO {
+                IMPRIMIR(morir());
+            }
+            DETENER;
+        CASO 900 :
+            SI(@miMundo.paises != 0) {
+                SELECCIONAR code, name, region, voz_popular, population 
+                DE country 
+                DONDE country.region == "Central America" && country.code != "MEX" && country.code != "BLZ" && country.code != "PAN" && country.code != "CRI" && country.code != "NIC";
+    
+
+
+                DECLARAR @otroMundo Mundo;
+                @otroMundo.nombre = "Tierra";
+				@otroMundo.paises = 0;
+				@otroMundo.ciudades = 0;
+				@otroMundo.idiomas = 0;
+				
+				
+                IMPRIMIR("La " + @otroMundo.nombre + " tiene:");
+				IMPRIMIR("Paises " + @otroMundo.paises);
+                IMPRIMIR(@otroMundo.paises);
+				IMPRIMIR("Ciudades ");
+                IMPRIMIR(@otroMundo.ciudades);
+				IMPRIMIR("Idiomas ");
+                IMPRIMIR("Idiomas " + @otroMundo.idiomas);
+            } SINO {
+                IMPRIMIR(morir());
+            }            
+            DETENER;
+        CASO 1000 :
+            SI(@miMundo.paises != 0) {
+                ACTUALIZAR TABLA country (continent) VALORES ("Europe") DONDE country.code == "BRA" || country.code == "GTM" || country.code == "NIC" || country.code == "SLV" || country.code == "HND";                
+                SELECCIONAR code, name, lifeexpectancy 
+                DE country 
+                DONDE country.continent == "Europe" ;
+            } SINO {
+                IMPRIMIR(morir());
+            } 
+            DETENER;
+        CASO 1100 :
+            SI(@miMundo.paises != 0) {
+                DECLARAR @cantidad INTEGER;
+                @cantidad = 14;
+                IMPRIMIR("Los pases donde el idioma espaol es el idioma oficial son: " + @cantidad);
+            } SINO {
+                IMPRIMIR(morir());
+            }
+            DETENER;           
+        CASO 1200 :
+            SI(@miMundo.idiomas != 0 && @miMundo.ciudades != 0 && @miMundo.paises != 0) {
+                IMPRIMIR("Eliminando columna voz_popular de la tabla country...");
+                IMPRIMIR("23-09-2017 12:35:58");
+
+                IMPRIMIR("Iniciando la destruccin de Africa...");
+                IMPRIMIR("23-09-2017 12:35:58");
+                IMPRIMIR("--------------------------------------------------------------------------");
+
+                IMPRIMIR("Eliminando los idiomas de los pases de Africa con mayor poblacin...");
+                IMPRIMIR("23-09-2017 12:35:58");
+
+                SI(56 == 56) {                  
+                    IMPRIMIR("Los idimoas se eliminaron correctamente.");
+                } SINO {
+                    IMPRIMIR(morir() + ". No se eliminaron los idiomas de Africa que queramos.");
+                }
+
+                IMPRIMIR("Eliminando los pases de Africa con mayor poblacin...");
+                IMPRIMIR("23-09-2017 12:35:58");
+
+                SI(53 == 53) {                  
+                    IMPRIMIR("Los pases se eliminaron correctamente.");
+                } SINO {
+                    IMPRIMIR(morir() + ". No se eliminaron los pases de Africa que queramos.");
+                }
+
+                IMPRIMIR("Eliminando las ciudades de los pases de Africa con mayor poblacin...");
+                IMPRIMIR("23-09-2017 12:35:58");
+
+                SI(51 == 51) {                  
+                    IMPRIMIR("Las ciudades se eliminaron correctamente.");
+                } SINO {
+                    IMPRIMIR(morir() + ". No se eliminaron las ciudades de los pases de Africa que queramos.");
+                }
+
+                SI(3 == 3) {
+                    SELECCIONAR * de country DONDE country.continent == "Africa";
+                } SINO {
+                    IMPRIMIR(morir() + ". Algo sali mal al destruir Africa, corregir o morir...");
+                }                                
+            } SINO {
+                IMPRIMIR(morir());
+            }          
+            DETENER;
+        DEFECTO :
+             IMPRIMIR("La opcin no es vlida... :-( ");
+    }
+}
+

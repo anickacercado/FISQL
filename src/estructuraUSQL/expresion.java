@@ -184,7 +184,7 @@ public class expresion {
         if (tipo.equals("ENTERO")) {
             this.entero = Integer.parseInt(valor.toString());
             this.cadena = valor.toString();
-        } else if (tipo.equals("DECIMAL")) {
+        } else if (tipo.equals("DOUBLE")) {
             this.decimal = Double.parseDouble(valor.toString());
             this.cadena = valor.toString();
         } else if (tipo.equals("CADENA")) {
@@ -274,7 +274,7 @@ public class expresion {
             temp = resNot(expDer);
         } else if (nodo.tipo.equals("ENTERO")) {
             temp = new expresion(nodo);
-        } else if (nodo.tipo.equals("DECIMAL")) {
+        } else if (nodo.tipo.equals("DOUBLE")) {
             temp = new expresion(nodo);
         } else if (nodo.tipo.equals("CADENA")) {
             temp = new expresion(nodo);
@@ -325,7 +325,7 @@ public class expresion {
                 case "ENTERO":
                     temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.entero > expDer.entero);
                     break;
-                case "DECIMAL":
+                case "DOUBLE":
                     temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.entero > expDer.decimal);
                     break;
                 case "BOOL":
@@ -335,12 +335,12 @@ public class expresion {
                     memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " > " + expDer.tipo, fila, columna);
                     break;
             }
-        } else if (expIzq.tipo.equals("DECIMAL")) {
+        } else if (expIzq.tipo.equals("DOUBLE")) {
             switch (expDer.tipo) {
                 case "ENTERO":
                     temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.decimal > expDer.entero);
                     break;
-                case "DECIMAL":
+                case "DOUBLE":
                     temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.decimal > expDer.decimal);
                     break;
                 case "BOOL":
@@ -355,7 +355,7 @@ public class expresion {
                 case "ENTERO":
                     temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.entero > expDer.entero);
                     break;
-                case "DECIMAL":
+                case "DOUBLE":
                     temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.entero > expDer.decimal);
                     break;
                 case "BOOL":
@@ -394,7 +394,7 @@ public class expresion {
                 case "ENTERO":
                     temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.entero < expDer.entero);
                     break;
-                case "DECIMAL":
+                case "DOUBLE":
                     temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.entero < expDer.decimal);
                     break;
                 case "BOOL":
@@ -404,12 +404,12 @@ public class expresion {
                     memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " < " + expDer.tipo, fila, columna);
                     break;
             }
-        } else if (expIzq.tipo.equals("DECIMAL")) {
+        } else if (expIzq.tipo.equals("DOUBLE")) {
             switch (expDer.tipo) {
                 case "ENTERO":
                     temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.decimal < expDer.entero);
                     break;
-                case "DECIMAL":
+                case "DOUBLE":
                     temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.decimal < expDer.decimal);
                     break;
                 case "BOOL":
@@ -424,7 +424,7 @@ public class expresion {
                 case "ENTERO":
                     temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.entero < expDer.entero);
                     break;
-                case "DECIMAL":
+                case "DOUBLE":
                     temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.entero < expDer.decimal);
                     break;
                 case "BOOL":
@@ -463,7 +463,7 @@ public class expresion {
                 case "ENTERO":
                     temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.entero == expDer.entero);
                     break;
-                case "DECIMAL":
+                case "DOUBLE":
                     temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.entero == expDer.decimal);
                     break;
                 case "BOOL":
@@ -473,12 +473,12 @@ public class expresion {
                     memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " = " + expDer.tipo, fila, columna);
                     break;
             }
-        } else if (expIzq.tipo.equals("DECIMAL")) {
+        } else if (expIzq.tipo.equals("DOUBLE")) {
             switch (expDer.tipo) {
                 case "ENTERO":
                     temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.decimal == expDer.entero);
                     break;
-                case "DECIMAL":
+                case "DOUBLE":
                     temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.decimal == expDer.decimal);
                     break;
                 case "BOOL":
@@ -502,7 +502,7 @@ public class expresion {
                 case "ENTERO":
                     temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.entero == expDer.entero);
                     break;
-                case "DECIMAL":
+                case "DOUBLE":
                     temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.entero == expDer.decimal);
                     break;
                 case "BOOL":
@@ -541,7 +541,7 @@ public class expresion {
                 case "ENTERO":
                     temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.entero != expDer.entero);
                     break;
-                case "DECIMAL":
+                case "DOUBLE":
                     temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.entero != expDer.decimal);
                     break;
                 case "BOOL":
@@ -551,12 +551,12 @@ public class expresion {
                     memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " != " + expDer.tipo, fila, columna);
                     break;
             }
-        } else if (expIzq.tipo.equals("DECIMAL")) {
+        } else if (expIzq.tipo.equals("DOUBLE")) {
             switch (expDer.tipo) {
                 case "ENTERO":
                     temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.decimal != expDer.entero);
                     break;
-                case "DECIMAL":
+                case "DOUBLE":
                     temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.decimal != expDer.decimal);
                     break;
                 case "BOOL":
@@ -580,7 +580,7 @@ public class expresion {
                 case "ENTERO":
                     temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.entero != expDer.entero);
                     break;
-                case "DECIMAL":
+                case "DOUBLE":
                     temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.entero != expDer.decimal);
                     break;
                 case "BOOL":
@@ -693,8 +693,8 @@ public class expresion {
                 case "ENTERO":
                     temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.entero + expDer.entero);
                     break;
-                case "DECIMAL":
-                    temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.entero + expDer.decimal);
+                case "DOUBLE":
+                    temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.entero + expDer.decimal);
                     break;
                 case "CADENA":
                     temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, String.valueOf(expIzq.entero) + expDer.cadena);
@@ -706,19 +706,19 @@ public class expresion {
                     memoria.addError("ERROR SEMANTICO", expIzq.tipo + " + " + expDer.tipo, fila, columna);
                     break;
             }
-        } else if (expIzq.tipo.equals("DECIMAL")) {
+        } else if (expIzq.tipo.equals("DOUBLE")) {
             switch (expDer.tipo) {
                 case "ENTERO":
-                    temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.decimal + expDer.entero);
+                    temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.decimal + expDer.entero);
                     break;
-                case "DECIMAL":
-                    temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.decimal + expDer.decimal);
+                case "DOUBLE":
+                    temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.decimal + expDer.decimal);
                     break;
                 case "CADENA":
                     temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, String.valueOf(expIzq.decimal) + expDer.cadena);
                     break;
                 case "BOOL":
-                    temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.decimal + expDer.entero);
+                    temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.decimal + expDer.entero);
                     break;
                 default:
                     memoria.addError("ERROR SEMANTICO", expIzq.tipo + " + " + expDer.tipo, fila, columna);
@@ -729,7 +729,7 @@ public class expresion {
                 case "ENTERO":
                     temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.cadena + String.valueOf(expDer.entero));
                     break;
-                case "DECIMAL":
+                case "DOUBLE":
                     temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.cadena + String.valueOf(expDer.decimal));
                     break;
                 case "CADENA":
@@ -744,8 +744,8 @@ public class expresion {
                 case "ENTERO":
                     temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.entero + expDer.entero);
                     break;
-                case "DECIMAL":
-                    temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.entero + expDer.decimal);
+                case "DOUBLE":
+                    temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.entero + expDer.decimal);
                     break;
                 case "BOOL":
                     temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.bool || expDer.bool);
@@ -783,8 +783,8 @@ public class expresion {
         expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
         if (expDer.tipo.equals("ENTERO")) {
             temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, -expDer.entero);
-        } else if (expDer.tipo.equals("DECIMAL")) {
-            temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, -expDer.decimal);
+        } else if (expDer.tipo.equals("DOUBLE")) {
+            temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, -expDer.decimal);
         } else if (expDer.tipo.equals("BOOL")) {
             temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, -expDer.entero);
         } else {
@@ -800,8 +800,8 @@ public class expresion {
                 case "ENTERO":
                     temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.entero - expDer.entero);
                     break;
-                case "DECIMAL":
-                    temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.entero - expDer.decimal);
+                case "DOUBLE":
+                    temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.entero - expDer.decimal);
                     break;
                 case "BOOL":
                     temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.entero - expDer.entero);
@@ -810,16 +810,16 @@ public class expresion {
                     memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " - " + expDer.tipo, fila, columna);
                     break;
             }
-        } else if (expIzq.tipo.equals("DECIMAL")) {
+        } else if (expIzq.tipo.equals("DOUBLE")) {
             switch (expDer.tipo) {
                 case "ENTERO":
-                    temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.decimal - expDer.entero);
+                    temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.decimal - expDer.entero);
                     break;
-                case "DECIMAL":
-                    temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.decimal - expDer.decimal);
+                case "DOUBLE":
+                    temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.decimal - expDer.decimal);
                     break;
                 case "BOOL":
-                    temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.decimal - expDer.entero);
+                    temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.decimal - expDer.entero);
                     break;
                 default:
                     memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " - " + expDer.tipo, fila, columna);
@@ -830,8 +830,8 @@ public class expresion {
                 case "ENTERO":
                     temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.entero - expDer.entero);
                     break;
-                case "DECIMAL":
-                    temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.entero - expDer.decimal);
+                case "DOUBLE":
+                    temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.entero - expDer.decimal);
                     break;
                 default:
                     memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " - " + expDer.tipo, fila, columna);
@@ -848,8 +848,8 @@ public class expresion {
                 case "ENTERO":
                     temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.entero * expDer.entero);
                     break;
-                case "DECIMAL":
-                    temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.entero * expDer.decimal);
+                case "DOUBLE":
+                    temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.entero * expDer.decimal);
                     break;
                 case "BOOL":
                     temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.entero * expDer.entero);
@@ -858,16 +858,16 @@ public class expresion {
                     memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " * " + expDer.tipo, fila, columna);
                     break;
             }
-        } else if (expIzq.tipo.equals("DECIMAL")) {
+        } else if (expIzq.tipo.equals("DOUBLE")) {
             switch (expDer.tipo) {
                 case "ENTERO":
-                    temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.decimal * expDer.entero);
+                    temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.decimal * expDer.entero);
                     break;
-                case "DECIMAL":
-                    temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.decimal * expDer.decimal);
+                case "DOUBLE":
+                    temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.decimal * expDer.decimal);
                     break;
                 case "BOOL":
-                    temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.decimal * expDer.entero);
+                    temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.decimal * expDer.entero);
                     break;
                 default:
                     memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " * " + expDer.tipo, fila, columna);
@@ -878,8 +878,8 @@ public class expresion {
                 case "ENTERO":
                     temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.entero * expDer.entero);
                     break;
-                case "DECIMAL":
-                    temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.entero * expDer.decimal);
+                case "DOUBLE":
+                    temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.entero * expDer.decimal);
                     break;
                 case "BOOL":
                     temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.bool && expDer.bool);
@@ -897,28 +897,28 @@ public class expresion {
         if (expIzq.tipo.equals("ENTERO")) {
             switch (expDer.tipo) {
                 case "ENTERO":
-                    temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.entero / expDer.entero);
+                    temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.entero / expDer.entero);
                     break;
-                case "DECIMAL":
-                    temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.entero / expDer.decimal);
+                case "DOUBLE":
+                    temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.entero / expDer.decimal);
                     break;
                 case "BOOL":
-                    temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.entero / expDer.entero);
+                    temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.entero / expDer.entero);
                     break;
                 default:
                     memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " / " + expDer.tipo, fila, columna);
                     break;
             }
-        } else if (expIzq.tipo.equals("DECIMAL")) {
+        } else if (expIzq.tipo.equals("DOUBLE")) {
             switch (expDer.tipo) {
                 case "ENTERO":
-                    temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.decimal / expDer.entero);
+                    temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.decimal / expDer.entero);
                     break;
-                case "DECIMAL":
-                    temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.decimal / expDer.decimal);
+                case "DOUBLE":
+                    temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.decimal / expDer.decimal);
                     break;
                 case "BOOL":
-                    temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.decimal / expDer.entero);
+                    temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.decimal / expDer.entero);
                     break;
                 default:
                     memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " / " + expDer.tipo, fila, columna);
@@ -927,10 +927,10 @@ public class expresion {
         } else if (expIzq.tipo.equals("BOOL")) {
             switch (expDer.tipo) {
                 case "ENTERO":
-                    temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.entero / expDer.entero);
+                    temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.entero / expDer.entero);
                     break;
-                case "DECIMAL":
-                    temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.entero / expDer.decimal);
+                case "DOUBLE":
+                    temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.entero / expDer.decimal);
                     break;
                 default:
                     memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " / " + expDer.tipo, fila, columna);
@@ -949,8 +949,8 @@ public class expresion {
                     int v = (int) p;
                     temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, v);
                     break;
-                case "DECIMAL":
-                    temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, Math.pow(expIzq.entero, expDer.decimal));
+                case "DOUBLE":
+                    temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, Math.pow(expIzq.entero, expDer.decimal));
                     break;
                 case "BOOL":
                     double pb = Math.pow(expIzq.entero, expDer.entero);
@@ -961,16 +961,16 @@ public class expresion {
                     memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " ^ " + expDer.tipo, fila, columna);
                     break;
             }
-        } else if (expIzq.tipo.equals("DECIMAL")) {
+        } else if (expIzq.tipo.equals("DOUBLE")) {
             switch (expDer.tipo) {
                 case "ENTERO":
-                    temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, Math.pow(expIzq.decimal, expDer.entero));
+                    temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, Math.pow(expIzq.decimal, expDer.entero));
                     break;
-                case "DECIMAL":
-                    temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, Math.pow(expIzq.decimal, expDer.decimal));
+                case "DOUBLE":
+                    temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, Math.pow(expIzq.decimal, expDer.decimal));
                     break;
                 case "BOOL":
-                    temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, Math.pow(expIzq.decimal, expDer.entero));
+                    temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, Math.pow(expIzq.decimal, expDer.entero));
                     break;
                 default:
                     memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " ^ " + expDer.tipo, fila, columna);
@@ -983,8 +983,8 @@ public class expresion {
                     int v = (int) p;
                     temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, v);
                     break;
-                case "DECIMAL":
-                    temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, Math.pow(expIzq.entero, expDer.decimal));
+                case "DOUBLE":
+                    temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, Math.pow(expIzq.entero, expDer.decimal));
                     break;
                 default:
                     memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " ^ " + expDer.tipo, fila, columna);
@@ -998,8 +998,8 @@ public class expresion {
         expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
         if (expIzq.tipo.equals("ENTERO")) {
             temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.entero + 1);
-        } else if (expIzq.tipo.equals("DECIMAL")) {
-            temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.decimal + 1);
+        } else if (expIzq.tipo.equals("DOUBLE")) {
+            temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.decimal + 1);
         } else {
             memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " ++ ", fila, columna);
         }
@@ -1010,8 +1010,8 @@ public class expresion {
         expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
         if (expIzq.tipo.equals("ENTERO")) {
             temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.entero - 1);
-        } else if (expIzq.tipo.equals("DECIMAL")) {
-            temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.decimal - 1);
+        } else if (expIzq.tipo.equals("DOUBLE")) {
+            temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.decimal - 1);
         } else {
             memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " -- ", fila, columna);
         }

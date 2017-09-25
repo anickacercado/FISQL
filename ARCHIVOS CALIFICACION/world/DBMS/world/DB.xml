@@ -1,0 +1,270 @@
+<Procedure>
+	<path>"C:\DBMS\world\procedure.xml"</path>
+	</Procedure>
+<Function>
+	<path>"C:\DBMS\world\function.xml"</path>
+	</Function>
+<Object>
+	<path>"C:\DBMS\world\object.xml"</path>
+	</Object>
+<Table>
+	<nombre>"city"</nombre>
+	<path>"C:\DBMS\world\city.xml"</path>
+	<contador>"290"</contador>
+	<rows>
+<field>
+	<ENTERO>"id"</ENTERO>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"Y"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"Y"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<CADENA>"name"</CADENA>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"Y"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<CADENA>"countrycode"</CADENA>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"Y"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<CADENA>"district"</CADENA>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"Y"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<ENTERO>"population"</ENTERO>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"Y"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+	</rows>
+	</Table>
+<Table>
+	<nombre>"country"</nombre>
+	<path>"C:\DBMS\world\country.xml"</path>
+	<contador>"300"</contador>
+	<rows>
+<field>
+	<CADENA>"code"</CADENA>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"Y"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"Y"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<CADENA>"name"</CADENA>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"Y"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<CADENA>"continent"</CADENA>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"Y"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<CADENA>"region"</CADENA>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"Y"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<ENTERO>"surfacearea"</ENTERO>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"Y"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<ENTERO>"indepyear"</ENTERO>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"N"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<ENTERO>"population"</ENTERO>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"Y"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<DOUBLE>"lifeexpectancy"</DOUBLE>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"N"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<DOUBLE>"gnp"</DOUBLE>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"N"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<DOUBLE>"gnpold"</DOUBLE>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"N"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<CADENA>"localname"</CADENA>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"Y"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<CADENA>"governmentform"</CADENA>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"Y"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<CADENA>"headofstate"</CADENA>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"N"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<ENTERO>"capital"</ENTERO>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"N"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"city"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<CADENA>"code2"</CADENA>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"Y"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+	</rows>
+	</Table>
+<Table>
+	<nombre>"countrylanguage"</nombre>
+	<path>"C:\DBMS\world\countrylanguage.xml"</path>
+	<contador>"315"</contador>
+	<rows>
+<field>
+	<CADENA>"countrycode"</CADENA>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"Y"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"country"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<CADENA>"language"</CADENA>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"Y"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<BOOL>"isofficial"</BOOL>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"Y"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+<field>
+	<DOUBLE>"percentage"</DOUBLE>
+	<property>
+	<nulo>"N"</nulo>
+	<no_nulo>"Y"</no_nulo>
+	<autoincrementable>"N"</autoincrementable>
+	<llave_primaria>"N"</llave_primaria>
+	<llave_foranea>"N"</llave_foranea>
+	</property>
+	</field>
+	</rows>
+	</Table>

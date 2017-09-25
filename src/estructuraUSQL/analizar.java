@@ -35,7 +35,8 @@ public class analizar {
         try {
             g.S().ejecucion();
         } catch (usql.ParseException ex) {
-            memoria.addError("ERROR SINTACTICO", "CADENA ERRONEA", 0, 0);
+            memoria.addError("ERROR DEFINICION", ex.getMessage(), 0, 0);
+            System.out.println(ex.getMessage());
         }
     }
 

@@ -1,0 +1,196 @@
+	<Row>
+	<codigo_curso>"772"</codigo_curso>
+	<carnet>"201403002"</carnet>
+	<fh_asignacion>"17-01-2017 00:00:00"</fh_asignacion>
+	<estado>"a"</estado>
+	<nota>"NULL"</nota>
+	</Row>
+	<Row>
+	<codigo_curso>"772"</codigo_curso>
+	<carnet>"201403003"</carnet>
+	<fh_asignacion>"17-01-2017 00:00:00"</fh_asignacion>
+	<estado>"r"</estado>
+	<nota>"NULL"</nota>
+	</Row>
+	<Row>
+	<codigo_curso>"772"</codigo_curso>
+	<carnet>"201403004"</carnet>
+	<fh_asignacion>"17-01-2017 00:00:00"</fh_asignacion>
+	<estado>"a"</estado>
+	<nota>"NULL"</nota>
+	</Row>
+	<Row>
+	<codigo_curso>"772"</codigo_curso>
+	<carnet>"201403006"</carnet>
+	<fh_asignacion>"17-01-2017 00:00:00"</fh_asignacion>
+	<estado>"a"</estado>
+	<nota>"NULL"</nota>
+	</Row>
+	<Row>
+	<codigo_curso>"772"</codigo_curso>
+	<carnet>"201403008"</carnet>
+	<fh_asignacion>"17-01-2017 00:00:00"</fh_asignacion>
+	<estado>"r"</estado>
+	<nota>"NULL"</nota>
+	</Row>
+	<Row>
+	<codigo_curso>"772"</codigo_curso>
+	<carnet>"201403009"</carnet>
+	<fh_asignacion>"17-01-2017 00:00:00"</fh_asignacion>
+	<estado>"r"</estado>
+	<nota>"NULL"</nota>
+	</Row>
+	<Row>
+	<codigo_curso>"772"</codigo_curso>
+	<carnet>"201403010"</carnet>
+	<fh_asignacion>"17-01-2017 00:00:00"</fh_asignacion>
+	<estado>"a"</estado>
+	<nota>"NULL"</nota>
+	</Row>
+	<Row>
+	<codigo_curso>"772"</codigo_curso>
+	<carnet>"201403011"</carnet>
+	<fh_asignacion>"17-01-2017 00:00:00"</fh_asignacion>
+	<estado>"r"</estado>
+	<nota>"NULL"</nota>
+	</Row>
+	<Row>
+	<codigo_curso>"772"</codigo_curso>
+	<carnet>"201403012"</carnet>
+	<fh_asignacion>"17-01-2017 00:00:00"</fh_asignacion>
+	<estado>"r"</estado>
+	<nota>"NULL"</nota>
+	</Row>
+	<Row>
+	<codigo_curso>"772"</codigo_curso>
+	<carnet>"201403013"</carnet>
+	<fh_asignacion>"17-01-2017 00:00:00"</fh_asignacion>
+	<estado>"a"</estado>
+	<nota>"NULL"</nota>
+	</Row>
+	<Row>
+	<codigo_curso>"772"</codigo_curso>
+	<carnet>"201403015"</carnet>
+	<fh_asignacion>"17-01-2017 00:00:00"</fh_asignacion>
+	<estado>"a"</estado>
+	<nota>"NULL"</nota>
+	</Row>
+	<Row>
+	<codigo_curso>"777"</codigo_curso>
+	<carnet>"201403002"</carnet>
+	<fh_asignacion>"17-01-2017 00:00:00"</fh_asignacion>
+	<estado>"a"</estado>
+	<nota>"NULL"</nota>
+	</Row>
+	<Row>
+	<codigo_curso>"777"</codigo_curso>
+	<carnet>"201403004"</carnet>
+	<fh_asignacion>"17-01-2017 00:00:00"</fh_asignacion>
+	<estado>"a"</estado>
+	<nota>"NULL"</nota>
+	</Row>
+	<Row>
+	<codigo_curso>"777"</codigo_curso>
+	<carnet>"201403006"</carnet>
+	<fh_asignacion>"17-01-2017 00:00:00"</fh_asignacion>
+	<estado>"a"</estado>
+	<nota>"NULL"</nota>
+	</Row>
+	<Row>
+	<codigo_curso>"777"</codigo_curso>
+	<carnet>"201403008"</carnet>
+	<fh_asignacion>"17-01-2017 00:00:00"</fh_asignacion>
+	<estado>"r"</estado>
+	<nota>"NULL"</nota>
+	</Row>
+	<Row>
+	<codigo_curso>"777"</codigo_curso>
+	<carnet>"201403007"</carnet>
+	<fh_asignacion>"17-01-2017 00:00:00"</fh_asignacion>
+	<estado>"r"</estado>
+	<nota>"NULL"</nota>
+	</Row>
+	<Row>
+	<codigo_curso>"777"</codigo_curso>
+	<carnet>"201403010"</carnet>
+	<fh_asignacion>"17-01-2017 00:00:00"</fh_asignacion>
+	<estado>"r"</estado>
+	<nota>"NULL"</nota>
+	</Row>
+	<Row>
+	<codigo_curso>"777"</codigo_curso>
+	<carnet>"201403014"</carnet>
+	<fh_asignacion>"17-01-2017 00:00:00"</fh_asignacion>
+	<estado>"r"</estado>
+	<nota>"NULL"</nota>
+	</Row>
+	<Row>
+	<codigo_curso>"777"</codigo_curso>
+	<carnet>"201403012"</carnet>
+	<fh_asignacion>"17-01-2017 00:00:00"</fh_asignacion>
+	<estado>"r"</estado>
+	<nota>"NULL"</nota>
+	</Row>
+	<Row>
+	<codigo_curso>"777"</codigo_curso>
+	<carnet>"201403013"</carnet>
+	<fh_asignacion>"17-01-2017 00:00:00"</fh_asignacion>
+	<estado>"a"</estado>
+	<nota>"NULL"</nota>
+	</Row>
+	<Row>
+	<codigo_curso>"777"</codigo_curso>
+	<carnet>"201403015"</carnet>
+	<fh_asignacion>"17-01-2017 00:00:00"</fh_asignacion>
+	<estado>"a"</estado>
+	<nota>"NULL"</nota>
+	</Row>
+	<Row>
+	<codigo_curso>"781"</codigo_curso>
+	<carnet>"201403002"</carnet>
+	<fh_asignacion>"12-07-2017 00:00:00"</fh_asignacion>
+	<estado>"a"</estado>
+	<nota>"NULL"</nota>
+	</Row>
+	<Row>
+	<codigo_curso>"781"</codigo_curso>
+	<carnet>"201403004"</carnet>
+	<fh_asignacion>"12-07-2017 00:00:00"</fh_asignacion>
+	<estado>"r"</estado>
+	<nota>"NULL"</nota>
+	</Row>
+	<Row>
+	<codigo_curso>"781"</codigo_curso>
+	<carnet>"201403006"</carnet>
+	<fh_asignacion>"12-07-2017 00:00:00"</fh_asignacion>
+	<estado>"r"</estado>
+	<nota>"NULL"</nota>
+	</Row>
+	<Row>
+	<codigo_curso>"781"</codigo_curso>
+	<carnet>"201403013"</carnet>
+	<fh_asignacion>"12-07-2017 00:00:00"</fh_asignacion>
+	<estado>"r"</estado>
+	<nota>"NULL"</nota>
+	</Row>
+	<Row>
+	<codigo_curso>"781"</codigo_curso>
+	<carnet>"201403015"</carnet>
+	<fh_asignacion>"12-07-2017 00:00:00"</fh_asignacion>
+	<estado>"r"</estado>
+	<nota>"NULL"</nota>
+	</Row>
+	<Row>
+	<codigo_curso>"281"</codigo_curso>
+	<carnet>"201403002"</carnet>
+	<fh_asignacion>"17-01-2018 00:00:00"</fh_asignacion>
+	<estado>"c"</estado>
+	<nota>"NULL"</nota>
+	</Row>
+	<Row>
+	<codigo_curso>"281"</codigo_curso>
+	<carnet>"201403004"</carnet>
+	<fh_asignacion>"17-01-2018 00:00:00"</fh_asignacion>
+	<estado>"c"</estado>
+	<nota>"NULL"</nota>
+	</Row>

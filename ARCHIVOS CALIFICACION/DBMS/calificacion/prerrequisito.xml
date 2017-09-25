@@ -1,0 +1,12 @@
+	<Row>
+	<codigo_curso>"781"</codigo_curso>
+	<prerrequisito>"772"</prerrequisito>
+	</Row>
+	<Row>
+	<codigo_curso>"781"</codigo_curso>
+	<prerrequisito>"777"</prerrequisito>
+	</Row>
+	<Row>
+	<codigo_curso>"281"</codigo_curso>
+	<prerrequisito>"781"</prerrequisito>
+	</Row>

@@ -73,7 +73,7 @@ void PROC():
         (
         <TOKEN_PROC_ABRE> 
             <TOKEN_NOMBRE_ABRE> t=<CADENA> <TOKEN_NOMBRE_CIERRA>
-                <TOKEN_PARAMS_ABRE> LISTA_PARAMS() <TOKEN_PARAMS_CIERRA>    
+                <TOKEN_PARAMS_ABRE> (LISTA_PARAMS())? <TOKEN_PARAMS_CIERRA>    
             <TOKEN_SRC_ABRE> cod=<CODIGO> <TOKEN_SRC_CIERRA>
         <TOKEN_PROC_CIERRA>
         ) 

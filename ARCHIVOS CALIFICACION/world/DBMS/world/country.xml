@@ -1,0 +1,1020 @@
+	<Row>
+	<code>"nld"</code>
+	<name>"netherlands"</name>
+	<continent>"europe"</continent>
+	<region>"western europe"</region>
+	<surfacearea>"41526"</surfacearea>
+	<indepyear>"1581"</indepyear>
+	<population>"1586400"</population>
+	<lifeexpectancy>"78.30"</lifeexpectancy>
+	<gnp>"371362.00"</gnp>
+	<gnpold>"360478.00"</gnpold>
+	<localname>"nederland"</localname>
+	<governmentform>"constitutional monarchy"</governmentform>
+	<headofstate>"beatrix"</headofstate>
+	<capital>"5"</capital>
+	<code2>"nl"</code2>
+	</Row>
+	<Row>
+	<code>"dza"</code>
+	<name>"algeria"</name>
+	<continent>"africa"</continent>
+	<region>"northern africa"</region>
+	<surfacearea>"238174"</surfacearea>
+	<indepyear>"1962"</indepyear>
+	<population>"3147100"</population>
+	<lifeexpectancy>"69.69"</lifeexpectancy>
+	<gnp>"49982.00"</gnp>
+	<gnpold>"46966.00"</gnpold>
+	<localname>"al-jazair/algrie"</localname>
+	<governmentform>"republic"</governmentform>
+	<headofstate>"abdelaziz bouteflika"</headofstate>
+	<capital>"35"</capital>
+	<code2>"dz"</code2>
+	</Row>
+	<Row>
+	<code>"arg"</code>
+	<name>"argentina"</name>
+	<continent>"south america"</continent>
+	<region>"south america"</region>
+	<surfacearea>"2780400"</surfacearea>
+	<indepyear>"1816"</indepyear>
+	<population>"37032000"</population>
+	<lifeexpectancy>"75.09"</lifeexpectancy>
+	<gnp>"340238.00"</gnp>
+	<gnpold>"323310.00"</gnpold>
+	<localname>"argentina"</localname>
+	<governmentform>"federal republic"</governmentform>
+	<headofstate>"fernando de la ra"</headofstate>
+	<capital>"69"</capital>
+	<code2>"ar"</code2>
+	</Row>
+	<Row>
+	<code>"aus"</code>
+	<name>"australia"</name>
+	<continent>"oceania"</continent>
+	<region>"australia and new zealand"</region>
+	<surfacearea>"7741220"</surfacearea>
+	<indepyear>"1901"</indepyear>
+	<population>"18886000"</population>
+	<lifeexpectancy>"79.80"</lifeexpectancy>
+	<gnp>"351182.00"</gnp>
+	<gnpold>"392911.00"</gnpold>
+	<localname>"australia"</localname>
+	<governmentform>"constitutional monarchy, federation"</governmentform>
+	<headofstate>"elisabeth ii"</headofstate>
+	<capital>"135"</capital>
+	<code2>"au"</code2>
+	</Row>
+	<Row>
+	<code>"bgd"</code>
+	<name>"bangladesh"</name>
+	<continent>"asia"</continent>
+	<region>"southern and central asia"</region>
+	<surfacearea>"143998"</surfacearea>
+	<indepyear>"1971"</indepyear>
+	<population>"129155000"</population>
+	<lifeexpectancy>"60.20"</lifeexpectancy>
+	<gnp>"32852.00"</gnp>
+	<gnpold>"31966.00"</gnpold>
+	<localname>"bangladesh"</localname>
+	<governmentform>"republic"</governmentform>
+	<headofstate>"shahabuddin ahmad"</headofstate>
+	<capital>"150"</capital>
+	<code2>"bd"</code2>
+	</Row>
+	<Row>
+	<code>"blz"</code>
+	<name>"belize"</name>
+	<continent>"north america"</continent>
+	<region>"central america"</region>
+	<surfacearea>"22696"</surfacearea>
+	<indepyear>"1981"</indepyear>
+	<population>"241000"</population>
+	<lifeexpectancy>"70.90"</lifeexpectancy>
+	<gnp>"630.00"</gnp>
+	<gnpold>"616.00"</gnpold>
+	<localname>"belize"</localname>
+	<governmentform>"constitutional monarchy"</governmentform>
+	<headofstate>"elisabeth ii"</headofstate>
+	<capital>"185"</capital>
+	<code2>"bz"</code2>
+	</Row>
+	<Row>
+	<code>"bra"</code>
+	<name>"brazil"</name>
+	<continent>"europe"</continent>
+	<region>"south america"</region>
+	<surfacearea>"8547403"</surfacearea>
+	<indepyear>"1822"</indepyear>
+	<population>"170115000"</population>
+	<lifeexpectancy>"62.90"</lifeexpectancy>
+	<gnp>"776739.00"</gnp>
+	<gnpold>"804108.00"</gnpold>
+	<localname>"brasil"</localname>
+	<governmentform>"federal republic"</governmentform>
+	<headofstate>"fernando henrique cardoso"</headofstate>
+	<capital>"211"</capital>
+	<code2>"br"</code2>
+	</Row>
+	<Row>
+	<code>"gbr"</code>
+	<name>"united kingdom"</name>
+	<continent>"europe"</continent>
+	<region>"british islands"</region>
+	<surfacearea>"242900"</surfacearea>
+	<indepyear>"1066"</indepyear>
+	<population>"59623400"</population>
+	<lifeexpectancy>"77.69"</lifeexpectancy>
+	<gnp>"1378330.00"</gnp>
+	<gnpold>"1296830.00"</gnpold>
+	<localname>"united kingdom"</localname>
+	<governmentform>"constitutional monarchy"</governmentform>
+	<headofstate>"elisabeth ii"</headofstate>
+	<capital>"456"</capital>
+	<code2>"gb"</code2>
+	</Row>
+	<Row>
+	<code>"chl"</code>
+	<name>"chile"</name>
+	<continent>"south america"</continent>
+	<region>"south america"</region>
+	<surfacearea>"756626"</surfacearea>
+	<indepyear>"1810"</indepyear>
+	<population>"15211000"</population>
+	<lifeexpectancy>"75.69"</lifeexpectancy>
+	<gnp>"72949.00"</gnp>
+	<gnpold>"75780.00"</gnpold>
+	<localname>"chile"</localname>
+	<governmentform>"republic"</governmentform>
+	<headofstate>"ricardo lagos escobar"</headofstate>
+	<capital>"554"</capital>
+	<code2>"cl"</code2>
+	</Row>
+	<Row>
+	<code>"cri"</code>
+	<name>"costa rica"</name>
+	<continent>"north america"</continent>
+	<region>"central america"</region>
+	<surfacearea>"51100"</surfacearea>
+	<indepyear>"1821"</indepyear>
+	<population>"4023000"</population>
+	<lifeexpectancy>"75.80"</lifeexpectancy>
+	<gnp>"10226.00"</gnp>
+	<gnpold>"9757.00"</gnpold>
+	<localname>"costa rica"</localname>
+	<governmentform>"republic"</governmentform>
+	<headofstate>"miguel ngel rodrguez echeverra"</headofstate>
+	<capital>"584"</capital>
+	<code2>"cr"</code2>
+	</Row>
+	<Row>
+	<code>"dom"</code>
+	<name>"dominican republic"</name>
+	<continent>"north america"</continent>
+	<region>"caribbean"</region>
+	<surfacearea>"48511"</surfacearea>
+	<indepyear>"1844"</indepyear>
+	<population>"8495000"</population>
+	<lifeexpectancy>"73.19"</lifeexpectancy>
+	<gnp>"15846.00"</gnp>
+	<gnpold>"15076.00"</gnpold>
+	<localname>"repblica dominicana"</localname>
+	<governmentform>"republic"</governmentform>
+	<headofstate>"hiplito meja domnguez"</headofstate>
+	<capital>"587"</capital>
+	<code2>"do"</code2>
+	</Row>
+	<Row>
+	<code>"egy"</code>
+	<name>"egypt"</name>
+	<continent>"africa"</continent>
+	<region>"northern africa"</region>
+	<surfacearea>"1001449"</surfacearea>
+	<indepyear>"1922"</indepyear>
+	<population>"68470000"</population>
+	<lifeexpectancy>"63.29"</lifeexpectancy>
+	<gnp>"82710.00"</gnp>
+	<gnpold>"75617.00"</gnpold>
+	<localname>"misr"</localname>
+	<governmentform>"republic"</governmentform>
+	<headofstate>"hosni mubarak"</headofstate>
+	<capital>"608"</capital>
+	<code2>"eg"</code2>
+	</Row>
+	<Row>
+	<code>"slv"</code>
+	<name>"el salvador"</name>
+	<continent>"north america"</continent>
+	<region>"central america"</region>
+	<surfacearea>"21041"</surfacearea>
+	<indepyear>"1841"</indepyear>
+	<population>"6276000"</population>
+	<lifeexpectancy>"69.69"</lifeexpectancy>
+	<gnp>"11863.00"</gnp>
+	<gnpold>"11203.00"</gnpold>
+	<localname>"el salvador"</localname>
+	<governmentform>"republic"</governmentform>
+	<headofstate>"francisco guillermo flores prez"</headofstate>
+	<capital>"645"</capital>
+	<code2>"sv"</code2>
+	</Row>
+	<Row>
+	<code>"esp"</code>
+	<name>"spain"</name>
+	<continent>"europe"</continent>
+	<region>"southern europe"</region>
+	<surfacearea>"505992"</surfacearea>
+	<indepyear>"1492"</indepyear>
+	<population>"39441700"</population>
+	<lifeexpectancy>"78.80"</lifeexpectancy>
+	<gnp>"553233.00"</gnp>
+	<gnpold>"532031.00"</gnpold>
+	<localname>"espaa"</localname>
+	<governmentform>"constitutional monarchy"</governmentform>
+	<headofstate>"juan carlos i"</headofstate>
+	<capital>"653"</capital>
+	<code2>"es"</code2>
+	</Row>
+	<Row>
+	<code>"zaf"</code>
+	<name>"south africa"</name>
+	<continent>"africa"</continent>
+	<region>"southern africa"</region>
+	<surfacearea>"1221037"</surfacearea>
+	<indepyear>"1910"</indepyear>
+	<population>"40377000"</population>
+	<lifeexpectancy>"51.09"</lifeexpectancy>
+	<gnp>"116729.00"</gnp>
+	<gnpold>"129092.00"</gnpold>
+	<localname>"south africa"</localname>
+	<governmentform>"republic"</governmentform>
+	<headofstate>"thabo mbeki"</headofstate>
+	<capital>"716"</capital>
+	<code2>"za"</code2>
+	</Row>
+	<Row>
+	<code>"eth"</code>
+	<name>"ethiopia"</name>
+	<continent>"africa"</continent>
+	<region>"eastern africa"</region>
+	<surfacearea>"1104300"</surfacearea>
+	<indepyear>"1000"</indepyear>
+	<population>"62565000"</population>
+	<lifeexpectancy>"45.20"</lifeexpectancy>
+	<gnp>"6353.00"</gnp>
+	<gnpold>"6180.00"</gnpold>
+	<localname>"yeityopiya"</localname>
+	<governmentform>"republic"</governmentform>
+	<headofstate>"negasso gidada"</headofstate>
+	<capital>"756"</capital>
+	<code2>"et"</code2>
+	</Row>
+	<Row>
+	<code>"fji"</code>
+	<name>"fiji islands"</name>
+	<continent>"oceania"</continent>
+	<region>"melanesia"</region>
+	<surfacearea>"18274"</surfacearea>
+	<indepyear>"1970"</indepyear>
+	<population>"817000"</population>
+	<lifeexpectancy>"67.90"</lifeexpectancy>
+	<gnp>"1536.00"</gnp>
+	<gnpold>"2149.00"</gnpold>
+	<localname>"fiji islands"</localname>
+	<governmentform>"republic"</governmentform>
+	<headofstate>"josefa iloilo"</headofstate>
+	<capital>"764"</capital>
+	<code2>"fj"</code2>
+	</Row>
+	<Row>
+	<code>"phl"</code>
+	<name>"philippines"</name>
+	<continent>"asia"</continent>
+	<region>"southeast asia"</region>
+	<surfacearea>"300000"</surfacearea>
+	<indepyear>"1946"</indepyear>
+	<population>"75967000"</population>
+	<lifeexpectancy>"67.50"</lifeexpectancy>
+	<gnp>"65107.00"</gnp>
+	<gnpold>"82239.00"</gnpold>
+	<localname>"pilipinas"</localname>
+	<governmentform>"republic"</governmentform>
+	<headofstate>"gloria macapagal-arroyo"</headofstate>
+	<capital>"766"</capital>
+	<code2>"ph"</code2>
+	</Row>
+	<Row>
+	<code>"gum"</code>
+	<name>"guam"</name>
+	<continent>"oceania"</continent>
+	<region>"micronesia"</region>
+	<surfacearea>"549"</surfacearea>
+	<indepyear>"0"</indepyear>
+	<population>"168000"</population>
+	<lifeexpectancy>"77.80"</lifeexpectancy>
+	<gnp>"1197.00"</gnp>
+	<gnpold>"1136.00"</gnpold>
+	<localname>"guam"</localname>
+	<governmentform>"us territory"</governmentform>
+	<headofstate>"george w. bush"</headofstate>
+	<capital>"921"</capital>
+	<code2>"gu"</code2>
+	</Row>
+	<Row>
+	<code>"gtm"</code>
+	<name>"guatemala"</name>
+	<continent>"north america"</continent>
+	<region>"central america"</region>
+	<surfacearea>"108889"</surfacearea>
+	<indepyear>"1821"</indepyear>
+	<population>"11385000"</population>
+	<lifeexpectancy>"66.19"</lifeexpectancy>
+	<gnp>"19008.00"</gnp>
+	<gnpold>"17797.00"</gnpold>
+	<localname>"guatemala"</localname>
+	<governmentform>"republic"</governmentform>
+	<headofstate>"alfonso portillo cabrera"</headofstate>
+	<capital>"922"</capital>
+	<code2>"gt"</code2>
+	</Row>
+	<Row>
+	<code>"hnd"</code>
+	<name>"honduras"</name>
+	<continent>"europe"</continent>
+	<region>"central america"</region>
+	<surfacearea>"112088"</surfacearea>
+	<indepyear>"1838"</indepyear>
+	<population>"6485000"</population>
+	<lifeexpectancy>"69.90"</lifeexpectancy>
+	<gnp>"5333.00"</gnp>
+	<gnpold>"4697.00"</gnpold>
+	<localname>"honduras"</localname>
+	<governmentform>"republic"</governmentform>
+	<headofstate>"carlos roberto flores facuss"</headofstate>
+	<capital>"933"</capital>
+	<code2>"hn"</code2>
+	</Row>
+	<Row>
+	<code>"idn"</code>
+	<name>"indonesia"</name>
+	<continent>"asia"</continent>
+	<region>"southeast asia"</region>
+	<surfacearea>"1904569"</surfacearea>
+	<indepyear>"1945"</indepyear>
+	<population>"212107000"</population>
+	<lifeexpectancy>"68.00"</lifeexpectancy>
+	<gnp>"84982.00"</gnp>
+	<gnpold>"215002.00"</gnpold>
+	<localname>"indonesia"</localname>
+	<governmentform>"republic"</governmentform>
+	<headofstate>"abdurrahman wahid"</headofstate>
+	<capital>"939"</capital>
+	<code2>"id"</code2>
+	</Row>
+	<Row>
+	<code>"ind"</code>
+	<name>"india"</name>
+	<continent>"asia"</continent>
+	<region>"southern and central asia"</region>
+	<surfacearea>"3287263"</surfacearea>
+	<indepyear>"1947"</indepyear>
+	<population>"1013662000"</population>
+	<lifeexpectancy>"62.5"</lifeexpectancy>
+	<gnp>"447114.00"</gnp>
+	<gnpold>"430572.00"</gnpold>
+	<localname>"bharat/india"</localname>
+	<governmentform>"federal republic"</governmentform>
+	<headofstate>"kocheril raman narayanan"</headofstate>
+	<capital>"1109"</capital>
+	<code2>"in"</code2>
+	</Row>
+	<Row>
+	<code>"irn"</code>
+	<name>"iran"</name>
+	<continent>"asia"</continent>
+	<region>"southern and central asia"</region>
+	<surfacearea>"1648195"</surfacearea>
+	<indepyear>"1906"</indepyear>
+	<population>"67702000"</population>
+	<lifeexpectancy>"69.69"</lifeexpectancy>
+	<gnp>"195746.00"</gnp>
+	<gnpold>"160151.00"</gnpold>
+	<localname>"iran"</localname>
+	<governmentform>"islamic republic"</governmentform>
+	<headofstate>"ali mohammad khatami-ardakani"</headofstate>
+	<capital>"1380"</capital>
+	<code2>"ir"</code2>
+	</Row>
+	<Row>
+	<code>"ita"</code>
+	<name>"italy"</name>
+	<continent>"europe"</continent>
+	<region>"southern europe"</region>
+	<surfacearea>"301316"</surfacearea>
+	<indepyear>"1861"</indepyear>
+	<population>"57680000"</population>
+	<lifeexpectancy>"79.00"</lifeexpectancy>
+	<gnp>"1161755.00"</gnp>
+	<gnpold>"1145372.00"</gnpold>
+	<localname>"italia"</localname>
+	<governmentform>"republic"</governmentform>
+	<headofstate>"carlo azeglio ciampi"</headofstate>
+	<capital>"1464"</capital>
+	<code2>"it"</code2>
+	</Row>
+	<Row>
+	<code>"jpn"</code>
+	<name>"japan"</name>
+	<continent>"asia"</continent>
+	<region>"eastern asia"</region>
+	<surfacearea>"377829"</surfacearea>
+	<indepyear>"660"</indepyear>
+	<population>"126714000"</population>
+	<lifeexpectancy>"80.69"</lifeexpectancy>
+	<gnp>"3787042.00"</gnp>
+	<gnpold>"4192638.00"</gnpold>
+	<localname>"nihon/nippon"</localname>
+	<governmentform>"constitutional monarchy"</governmentform>
+	<headofstate>"akihito"</headofstate>
+	<capital>"1532"</capital>
+	<code2>"jp"</code2>
+	</Row>
+	<Row>
+	<code>"ken"</code>
+	<name>"kenya"</name>
+	<continent>"africa"</continent>
+	<region>"eastern africa"</region>
+	<surfacearea>"580367"</surfacearea>
+	<indepyear>"1963"</indepyear>
+	<population>"30080000"</population>
+	<lifeexpectancy>"48.0"</lifeexpectancy>
+	<gnp>"9217.00"</gnp>
+	<gnpold>"10241.00"</gnpold>
+	<localname>"kenya"</localname>
+	<governmentform>"republic"</governmentform>
+	<headofstate>"daniel arap moi"</headofstate>
+	<capital>"1881"</capital>
+	<code2>"ke"</code2>
+	</Row>
+	<Row>
+	<code>"chn"</code>
+	<name>"china"</name>
+	<continent>"asia"</continent>
+	<region>"eastern asia"</region>
+	<surfacearea>"9572900"</surfacearea>
+	<indepyear>"1523"</indepyear>
+	<population>"1277558000"</population>
+	<lifeexpectancy>"71.40"</lifeexpectancy>
+	<gnp>"982268.00"</gnp>
+	<gnpold>"917719.00"</gnpold>
+	<localname>"zhongquo"</localname>
+	<governmentform>"people republic"</governmentform>
+	<headofstate>"jiang zemin"</headofstate>
+	<capital>"1891"</capital>
+	<code2>"cn"</code2>
+	</Row>
+	<Row>
+	<code>"col"</code>
+	<name>"colombia"</name>
+	<continent>"south america"</continent>
+	<region>"south america"</region>
+	<surfacearea>"1138914"</surfacearea>
+	<indepyear>"1810"</indepyear>
+	<population>"42321000"</population>
+	<lifeexpectancy>"70.30"</lifeexpectancy>
+	<gnp>"102896.00"</gnp>
+	<gnpold>"105116.00"</gnpold>
+	<localname>"colombia"</localname>
+	<governmentform>"republic"</governmentform>
+	<headofstate>"andrs pastrana arango"</headofstate>
+	<capital>"2257"</capital>
+	<code2>"co"</code2>
+	</Row>
+	<Row>
+	<code>"cod"</code>
+	<name>"congo, the democratic republic of the"</name>
+	<continent>"africa"</continent>
+	<region>"central africa"</region>
+	<surfacearea>"2344858"</surfacearea>
+	<indepyear>"1960"</indepyear>
+	<population>"51654000"</population>
+	<lifeexpectancy>"48.79"</lifeexpectancy>
+	<gnp>"6964.00"</gnp>
+	<gnpold>"2474.00"</gnpold>
+	<localname>"rpublique dmocratique du congo"</localname>
+	<governmentform>"republic"</governmentform>
+	<headofstate>"joseph kabila"</headofstate>
+	<capital>"2298"</capital>
+	<code2>"cd"</code2>
+	</Row>
+	<Row>
+	<code>"cub"</code>
+	<name>"cuba"</name>
+	<continent>"north america"</continent>
+	<region>"caribbean"</region>
+	<surfacearea>"110861"</surfacearea>
+	<indepyear>"1902"</indepyear>
+	<population>"11201000"</population>
+	<lifeexpectancy>"76.19"</lifeexpectancy>
+	<gnp>"17843.00"</gnp>
+	<gnpold>"18862.00"</gnpold>
+	<localname>"cuba"</localname>
+	<governmentform>"socialistic republic"</governmentform>
+	<headofstate>"fidel castro ruz"</headofstate>
+	<capital>"2413"</capital>
+	<code2>"cu"</code2>
+	</Row>
+	<Row>
+	<code>"mar"</code>
+	<name>"morocco"</name>
+	<continent>"africa"</continent>
+	<region>"northern africa"</region>
+	<surfacearea>"446550"</surfacearea>
+	<indepyear>"1956"</indepyear>
+	<population>"28351000"</population>
+	<lifeexpectancy>"69.09"</lifeexpectancy>
+	<gnp>"36124.00"</gnp>
+	<gnpold>"33514.00"</gnpold>
+	<localname>"al-maghrib"</localname>
+	<governmentform>"constitutional monarchy"</governmentform>
+	<headofstate>"mohammed vi"</headofstate>
+	<capital>"2486"</capital>
+	<code2>"ma"</code2>
+	</Row>
+	<Row>
+	<code>"mex"</code>
+	<name>"mexico"</name>
+	<continent>"north america"</continent>
+	<region>"central america"</region>
+	<surfacearea>"1958201"</surfacearea>
+	<indepyear>"1810"</indepyear>
+	<population>"98881000"</population>
+	<lifeexpectancy>"71.50"</lifeexpectancy>
+	<gnp>"414972.00"</gnp>
+	<gnpold>"401461.00"</gnpold>
+	<localname>"mxico"</localname>
+	<governmentform>"federal republic"</governmentform>
+	<headofstate>"vicente fox quesada"</headofstate>
+	<capital>"2515"</capital>
+	<code2>"mx"</code2>
+	</Row>
+	<Row>
+	<code>"nic"</code>
+	<name>"nicaragua"</name>
+	<continent>"north america"</continent>
+	<region>"central america"</region>
+	<surfacearea>"130000"</surfacearea>
+	<indepyear>"1838"</indepyear>
+	<population>"5074000"</population>
+	<lifeexpectancy>"68.69"</lifeexpectancy>
+	<gnp>"1988.00"</gnp>
+	<gnpold>"2023.00"</gnpold>
+	<localname>"nicaragua"</localname>
+	<governmentform>"republic"</governmentform>
+	<headofstate>"arnoldo alem n lacayo"</headofstate>
+	<capital>"2734"</capital>
+	<code2>"ni"</code2>
+	</Row>
+	<Row>
+	<code>"nga"</code>
+	<name>"nigeria"</name>
+	<continent>"africa"</continent>
+	<region>"western africa"</region>
+	<surfacearea>"923768"</surfacearea>
+	<indepyear>"1960"</indepyear>
+	<population>"111506000"</population>
+	<lifeexpectancy>"51.59"</lifeexpectancy>
+	<gnp>"65707.00"</gnp>
+	<gnpold>"58623.00"</gnpold>
+	<localname>"nigeria"</localname>
+	<governmentform>"federal republic"</governmentform>
+	<headofstate>"olusegun obasanjo"</headofstate>
+	<capital>"2754"</capital>
+	<code2>"ng"</code2>
+	</Row>
+	<Row>
+	<code>"pak"</code>
+	<name>"pakistan"</name>
+	<continent>"asia"</continent>
+	<region>"southern and central asia"</region>
+	<surfacearea>"796095"</surfacearea>
+	<indepyear>"1947"</indepyear>
+	<population>"156483000"</population>
+	<lifeexpectancy>"61.09"</lifeexpectancy>
+	<gnp>"61289.00"</gnp>
+	<gnpold>"58549.00"</gnpold>
+	<localname>"pakistan"</localname>
+	<governmentform>"republic"</governmentform>
+	<headofstate>"mohammad rafiq tarar"</headofstate>
+	<capital>"2831"</capital>
+	<code2>"pk"</code2>
+	</Row>
+	<Row>
+	<code>"pan"</code>
+	<name>"panama"</name>
+	<continent>"north america"</continent>
+	<region>"central america"</region>
+	<surfacearea>"75517"</surfacearea>
+	<indepyear>"1903"</indepyear>
+	<population>"2856000"</population>
+	<lifeexpectancy>"75.5"</lifeexpectancy>
+	<gnp>"9131.00"</gnp>
+	<gnpold>"8700.00"</gnpold>
+	<localname>"panam "</localname>
+	<governmentform>"republic"</governmentform>
+	<headofstate>"mireya elisa moscoso rodrguez"</headofstate>
+	<capital>"2882"</capital>
+	<code2>"pa"</code2>
+	</Row>
+	<Row>
+	<code>"png"</code>
+	<name>"papua new guinea"</name>
+	<continent>"oceania"</continent>
+	<region>"melanesia"</region>
+	<surfacearea>"462840"</surfacearea>
+	<indepyear>"1975"</indepyear>
+	<population>"4807000"</population>
+	<lifeexpectancy>"63.09"</lifeexpectancy>
+	<gnp>"4988.00"</gnp>
+	<gnpold>"6328.00"</gnpold>
+	<localname>"papua new guinea/papua niugini"</localname>
+	<governmentform>"constitutional monarchy"</governmentform>
+	<headofstate>"elisabeth ii"</headofstate>
+	<capital>"2884"</capital>
+	<code2>"pg"</code2>
+	</Row>
+	<Row>
+	<code>"per"</code>
+	<name>"peru"</name>
+	<continent>"south america"</continent>
+	<region>"south america"</region>
+	<surfacearea>"1285216"</surfacearea>
+	<indepyear>"1821"</indepyear>
+	<population>"25662000"</population>
+	<lifeexpectancy>"70.00"</lifeexpectancy>
+	<gnp>"64140.00"</gnp>
+	<gnpold>"65186.00"</gnpold>
+	<localname>"per/piruw"</localname>
+	<governmentform>"republic"</governmentform>
+	<headofstate>"valentin paniagua corazao"</headofstate>
+	<capital>"2890"</capital>
+	<code2>"pe"</code2>
+	</Row>
+	<Row>
+	<code>"pol"</code>
+	<name>"poland"</name>
+	<continent>"europe"</continent>
+	<region>"eastern europe"</region>
+	<surfacearea>"323250"</surfacearea>
+	<indepyear>"1918"</indepyear>
+	<population>"38653600"</population>
+	<lifeexpectancy>"73.19"</lifeexpectancy>
+	<gnp>"151697.00"</gnp>
+	<gnpold>"135636.00"</gnpold>
+	<localname>"polska"</localname>
+	<governmentform>"republic"</governmentform>
+	<headofstate>"aleksander kwasniewski"</headofstate>
+	<capital>"2928"</capital>
+	<code2>"pl"</code2>
+	</Row>
+	<Row>
+	<code>"fra"</code>
+	<name>"france"</name>
+	<continent>"europe"</continent>
+	<region>"western europe"</region>
+	<surfacearea>"551500"</surfacearea>
+	<indepyear>"843"</indepyear>
+	<population>"59225700"</population>
+	<lifeexpectancy>"78.80"</lifeexpectancy>
+	<gnp>"1424285.00"</gnp>
+	<gnpold>"1392448.00"</gnpold>
+	<localname>"france"</localname>
+	<governmentform>"republic"</governmentform>
+	<headofstate>"jacques chirac"</headofstate>
+	<capital>"2974"</capital>
+	<code2>"fr"</code2>
+	</Row>
+	<Row>
+	<code>"pyf"</code>
+	<name>"french polynesia"</name>
+	<continent>"oceania"</continent>
+	<region>"polynesia"</region>
+	<surfacearea>"4000"</surfacearea>
+	<indepyear>"0"</indepyear>
+	<population>"235000"</population>
+	<lifeexpectancy>"74.80"</lifeexpectancy>
+	<gnp>"818.00"</gnp>
+	<gnpold>"781.00"</gnpold>
+	<localname>"polynsie franaise"</localname>
+	<governmentform>"nonmetropolitan territory of france"</governmentform>
+	<headofstate>"jacques chirac"</headofstate>
+	<capital>"3016"</capital>
+	<code2>"pf"</code2>
+	</Row>
+	<Row>
+	<code>"rom"</code>
+	<name>"romania"</name>
+	<continent>"europe"</continent>
+	<region>"eastern europe"</region>
+	<surfacearea>"238391"</surfacearea>
+	<indepyear>"1878"</indepyear>
+	<population>"22455500"</population>
+	<lifeexpectancy>"69.90"</lifeexpectancy>
+	<gnp>"38158.00"</gnp>
+	<gnpold>"34843.00"</gnpold>
+	<localname>"romnia"</localname>
+	<governmentform>"republic"</governmentform>
+	<headofstate>"ion iliescu"</headofstate>
+	<capital>"3018"</capital>
+	<code2>"ro"</code2>
+	</Row>
+	<Row>
+	<code>"deu"</code>
+	<name>"germany"</name>
+	<continent>"europe"</continent>
+	<region>"western europe"</region>
+	<surfacearea>"357022"</surfacearea>
+	<indepyear>"1955"</indepyear>
+	<population>"82164700"</population>
+	<lifeexpectancy>"77.40"</lifeexpectancy>
+	<gnp>"2133367.00"</gnp>
+	<gnpold>"2102826.00"</gnpold>
+	<localname>"deutschland"</localname>
+	<governmentform>"federal republic"</governmentform>
+	<headofstate>"johannes rau"</headofstate>
+	<capital>"3068"</capital>
+	<code2>"de"</code2>
+	</Row>
+	<Row>
+	<code>"slb"</code>
+	<name>"solomon islands"</name>
+	<continent>"oceania"</continent>
+	<region>"melanesia"</region>
+	<surfacearea>"28896"</surfacearea>
+	<indepyear>"1978"</indepyear>
+	<population>"444000"</population>
+	<lifeexpectancy>"71.30"</lifeexpectancy>
+	<gnp>"182.00"</gnp>
+	<gnpold>"220.00"</gnpold>
+	<localname>"solomon islands"</localname>
+	<governmentform>"constitutional monarchy"</governmentform>
+	<headofstate>"elisabeth ii"</headofstate>
+	<capital>"3161"</capital>
+	<code2>"sb"</code2>
+	</Row>
+	<Row>
+	<code>"wsm"</code>
+	<name>"samoa"</name>
+	<continent>"oceania"</continent>
+	<region>"polynesia"</region>
+	<surfacearea>"2831"</surfacearea>
+	<indepyear>"1962"</indepyear>
+	<population>"180000"</population>
+	<lifeexpectancy>"69.19"</lifeexpectancy>
+	<gnp>"141.00"</gnp>
+	<gnpold>"157.00"</gnpold>
+	<localname>"samoa"</localname>
+	<governmentform>"parlementary monarchy"</governmentform>
+	<headofstate>"malietoa tanumafili ii"</headofstate>
+	<capital>"3169"</capital>
+	<code2>"ws"</code2>
+	</Row>
+	<Row>
+	<code>"sdn"</code>
+	<name>"sudan"</name>
+	<continent>"africa"</continent>
+	<region>"northern africa"</region>
+	<surfacearea>"2505813"</surfacearea>
+	<indepyear>"1956"</indepyear>
+	<population>"29490000"</population>
+	<lifeexpectancy>"56.59"</lifeexpectancy>
+	<gnp>"10162.00"</gnp>
+	<gnpold>"0.0"</gnpold>
+	<localname>"as-sudan"</localname>
+	<governmentform>"islamic republic"</governmentform>
+	<headofstate>"omar hassan ahmad al-bashir"</headofstate>
+	<capital>"3225"</capital>
+	<code2>"sd"</code2>
+	</Row>
+	<Row>
+	<code>"tza"</code>
+	<name>"tanzania"</name>
+	<continent>"africa"</continent>
+	<region>"eastern africa"</region>
+	<surfacearea>"883749"</surfacearea>
+	<indepyear>"1961"</indepyear>
+	<population>"33517000"</population>
+	<lifeexpectancy>"52.29"</lifeexpectancy>
+	<gnp>"8005.00"</gnp>
+	<gnpold>"7388.00"</gnpold>
+	<localname>"tanzania"</localname>
+	<governmentform>"republic"</governmentform>
+	<headofstate>"benjamin william mkapa"</headofstate>
+	<capital>"3306"</capital>
+	<code2>"tz"</code2>
+	</Row>
+	<Row>
+	<code>"tur"</code>
+	<name>"turkey"</name>
+	<continent>"asia"</continent>
+	<region>"middle east"</region>
+	<surfacearea>"774815"</surfacearea>
+	<indepyear>"1923"</indepyear>
+	<population>"66591000"</population>
+	<lifeexpectancy>"71.0"</lifeexpectancy>
+	<gnp>"210721.00"</gnp>
+	<gnpold>"189122.00"</gnpold>
+	<localname>"trkiye"</localname>
+	<governmentform>"republic"</governmentform>
+	<headofstate>"ahmet necdet sezer"</headofstate>
+	<capital>"3358"</capital>
+	<code2>"tr"</code2>
+	</Row>
+	<Row>
+	<code>"ukr"</code>
+	<name>"ukraine"</name>
+	<continent>"europe"</continent>
+	<region>"eastern europe"</region>
+	<surfacearea>"603700"</surfacearea>
+	<indepyear>"1991"</indepyear>
+	<population>"50456000"</population>
+	<lifeexpectancy>"66.0"</lifeexpectancy>
+	<gnp>"42168.00"</gnp>
+	<gnpold>"49677.00"</gnpold>
+	<localname>"ukrajina"</localname>
+	<governmentform>"republic"</governmentform>
+	<headofstate>"leonid kutsma"</headofstate>
+	<capital>"3426"</capital>
+	<code2>"ua"</code2>
+	</Row>
+	<Row>
+	<code>"ncl"</code>
+	<name>"new caledonia"</name>
+	<continent>"oceania"</continent>
+	<region>"melanesia"</region>
+	<surfacearea>"18575"</surfacearea>
+	<indepyear>"0"</indepyear>
+	<population>"214000"</population>
+	<lifeexpectancy>"72.80"</lifeexpectancy>
+	<gnp>"3563.00"</gnp>
+	<gnpold>"0.0"</gnpold>
+	<localname>"nouvelle-caldonie"</localname>
+	<governmentform>"nonmetropolitan territory of france"</governmentform>
+	<headofstate>"jacques chirac"</headofstate>
+	<capital>"3493"</capital>
+	<code2>"nc"</code2>
+	</Row>
+	<Row>
+	<code>"nzl"</code>
+	<name>"new zealand"</name>
+	<continent>"oceania"</continent>
+	<region>"australia and new zealand"</region>
+	<surfacearea>"270534"</surfacearea>
+	<indepyear>"1907"</indepyear>
+	<population>"3862000"</population>
+	<lifeexpectancy>"77.80"</lifeexpectancy>
+	<gnp>"54669.00"</gnp>
+	<gnpold>"64960.00"</gnpold>
+	<localname>"new zealand/aotearoa"</localname>
+	<governmentform>"constitutional monarchy"</governmentform>
+	<headofstate>"elisabeth ii"</headofstate>
+	<capital>"3499"</capital>
+	<code2>"nz"</code2>
+	</Row>
+	<Row>
+	<code>"vut"</code>
+	<name>"vanuatu"</name>
+	<continent>"oceania"</continent>
+	<region>"melanesia"</region>
+	<surfacearea>"12189"</surfacearea>
+	<indepyear>"1980"</indepyear>
+	<population>"190000"</population>
+	<lifeexpectancy>"60.59"</lifeexpectancy>
+	<gnp>"261.00"</gnp>
+	<gnpold>"246.00"</gnpold>
+	<localname>"vanuatu"</localname>
+	<governmentform>"republic"</governmentform>
+	<headofstate>"john bani"</headofstate>
+	<capital>"3537"</capital>
+	<code2>"vu"</code2>
+	</Row>
+	<Row>
+	<code>"rus"</code>
+	<name>"russian federation"</name>
+	<continent>"europe"</continent>
+	<region>"eastern europe"</region>
+	<surfacearea>"17075400"</surfacearea>
+	<indepyear>"1991"</indepyear>
+	<population>"146934000"</population>
+	<lifeexpectancy>"67.19"</lifeexpectancy>
+	<gnp>"276608.00"</gnp>
+	<gnpold>"442989.00"</gnpold>
+	<localname>"rossija"</localname>
+	<governmentform>"federal republic"</governmentform>
+	<headofstate>"vladimir putin"</headofstate>
+	<capital>"3580"</capital>
+	<code2>"ru"</code2>
+	</Row>
+	<Row>
+	<code>"vnm"</code>
+	<name>"vietnam"</name>
+	<continent>"asia"</continent>
+	<region>"southeast asia"</region>
+	<surfacearea>"331689"</surfacearea>
+	<indepyear>"1945"</indepyear>
+	<population>"79832000"</population>
+	<lifeexpectancy>"69.30"</lifeexpectancy>
+	<gnp>"21929.00"</gnp>
+	<gnpold>"22834.00"</gnpold>
+	<localname>"vit nam"</localname>
+	<governmentform>"socialistic republic"</governmentform>
+	<headofstate>"trn duc luong"</headofstate>
+	<capital>"3770"</capital>
+	<code2>"vn"</code2>
+	</Row>
+	<Row>
+	<code>"ata"</code>
+	<name>"antarctica"</name>
+	<continent>"antarctica"</continent>
+	<region>"antarctica"</region>
+	<surfacearea>"13120000"</surfacearea>
+	<indepyear>"0"</indepyear>
+	<population>"0"</population>
+	<lifeexpectancy>"0.0"</lifeexpectancy>
+	<gnp>"0.00"</gnp>
+	<gnpold>"0.0"</gnpold>
+	<localname>"-"</localname>
+	<governmentform>"co-administrated"</governmentform>
+	<headofstate>""</headofstate>
+	<capital>"5"</capital>
+	<code2>"aq"</code2>
+	</Row>
+	<Row>
+	<code>"bvt"</code>
+	<name>"bouvet island"</name>
+	<continent>"antarctica"</continent>
+	<region>"antarctica"</region>
+	<surfacearea>"59"</surfacearea>
+	<indepyear>"0"</indepyear>
+	<population>"0"</population>
+	<lifeexpectancy>"0.0"</lifeexpectancy>
+	<gnp>"0.00"</gnp>
+	<gnpold>"0.0"</gnpold>
+	<localname>"bouvetya"</localname>
+	<governmentform>"dependent territory of norway"</governmentform>
+	<headofstate>"harald v"</headofstate>
+	<capital>"5"</capital>
+	<code2>"bv"</code2>
+	</Row>
+	<Row>
+	<code>"sgs"</code>
+	<name>"south georgia and the south sandwich islands"</name>
+	<continent>"antarctica"</continent>
+	<region>"antarctica"</region>
+	<surfacearea>"3903"</surfacearea>
+	<indepyear>"0"</indepyear>
+	<population>"0"</population>
+	<lifeexpectancy>"0.0"</lifeexpectancy>
+	<gnp>"0.00"</gnp>
+	<gnpold>"0.0"</gnpold>
+	<localname>"south georgia and the south sandwich islands"</localname>
+	<governmentform>"dependent territory of the uk"</governmentform>
+	<headofstate>"elisabeth ii"</headofstate>
+	<capital>"5"</capital>
+	<code2>"gs"</code2>
+	</Row>
+	<Row>
+	<code>"hmd"</code>
+	<name>"heard island and mcdonald islands"</name>
+	<continent>"antarctica"</continent>
+	<region>"antarctica"</region>
+	<surfacearea>"359"</surfacearea>
+	<indepyear>"0"</indepyear>
+	<population>"0"</population>
+	<lifeexpectancy>"0.0"</lifeexpectancy>
+	<gnp>"0.00"</gnp>
+	<gnpold>"0.0"</gnpold>
+	<localname>"heard and mcdonald islands"</localname>
+	<governmentform>"territory of australia"</governmentform>
+	<headofstate>"elisabeth ii"</headofstate>
+	<capital>"5"</capital>
+	<code2>"hm"</code2>
+	</Row>
+	<Row>
+	<code>"atf"</code>
+	<name>"french southern territories"</name>
+	<continent>"antarctica"</continent>
+	<region>"antarctica"</region>
+	<surfacearea>"7780"</surfacearea>
+	<indepyear>"0"</indepyear>
+	<population>"0"</population>
+	<lifeexpectancy>"0.0"</lifeexpectancy>
+	<gnp>"0.00"</gnp>
+	<gnpold>"0.0"</gnpold>
+	<localname>"terres australes franaises"</localname>
+	<governmentform>"nonmetropolitan territory of france"</governmentform>
+	<headofstate>"jacques chirac"</headofstate>
+	<capital>"5"</capital>
+	<code2>"tf"</code2>
+	</Row>

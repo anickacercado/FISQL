@@ -1,0 +1,7 @@
+<DB>
+	<nombre>"calificacion"</nombre>
+	<path>"C:\DBMS\calificacion\DB.xml"</path>
+</DB><DB>
+	<nombre>"bd_clases"</nombre>
+	<path>"C:\DBMS\bd_clases\DB.xml"</path>
+</DB>

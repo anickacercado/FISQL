@@ -6,6 +6,7 @@
 package compi2.proyecto1_201212859;
 
 import consola.principal;
+import consola.probarGramatica;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -24,5 +25,7 @@ public class Compi2Proyecto1_201212859 {
         // TODO code application logic here      
          principal p= new principal();
          p.setVisible(true);
+         probarGramatica pg= new probarGramatica();
+         pg.setVisible(true);
     }    
 }

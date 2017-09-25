@@ -40,14 +40,14 @@ public class select {
     }
 
     public void ejecucion() {
-        memoria.tipoDetransaccion=1;
+        memoria.tipoDetransaccion = 1;
         memoria.select_union = new seleccionaTabla();
         memoria.select_union = pivote();
         memoria.posicion = 0;
         memoria.select = new seleccionaTabla();
         hacerEncabezados();
 
-        if (expresion!=null) {
+        if (expresion != null) {
             for (int i = 0; i < memoria.select_union.size(); i++) {
                 expresion exp = expresion.resCondicion();
                 if (exp.tipo.equals("BOOL")) {
@@ -57,11 +57,29 @@ public class select {
                 }
                 memoria.posicion++;
             }
+        } else {
+            memoria.select = memoria.select_union;
         }
-        else {memoria.select=memoria.select_union;}
-        memoria.select.HTML();       
+
+        filtrar();
+        memoria.select.HTML();
         //GENERAR EL HTML DE LA TABLA
         memoria.lista_de_select.add(memoria.select);
+    }
+
+    private void filtrar() {
+        ArrayList<columna> listaTemp = new ArrayList<columna>();
+        int getColumna = 0;
+        if (!this.todaColumna) {
+            for (int i = 0; i < lista_columna.size(); i++) {
+                getColumna = memoria.select.filtrarTabla(lista_columna.get(i).tabla, lista_columna.get(i).columna, lista_columna.get(i).objeto);
+                if (getColumna != 1000) {
+                    columna col = memoria.select.lista_columna.get(getColumna);
+                    listaTemp.add(col);
+                }
+            }
+            memoria.select.lista_columna = listaTemp;
+        }
     }
 
     private void hacerEncabezados() {

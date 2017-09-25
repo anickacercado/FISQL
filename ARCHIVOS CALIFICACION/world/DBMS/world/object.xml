@@ -1,0 +1,9 @@
+<Obj>
+	<nombre>"mundo"</nombre>
+	<attr>
+	<ENTERO>"ciudades"</ENTERO>
+	<ENTERO>"paises"</ENTERO>
+	<ENTERO>"idiomas"</ENTERO>
+	<CADENA>"nombre"</CADENA>
+	</attr>
+	</Obj>
